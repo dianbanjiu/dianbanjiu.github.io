@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>实用工具 on 半点 - 一分不足，半分满足</title>
+    <link>https://www.dianbanjiu.com/tags/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/</link>
+    <description>Recent content in 实用工具 on 半点 - 一分不足，半分满足</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>dianbanjiu@gmail.com</copyright>
+    <lastBuildDate>Sat, 07 Nov 2020 13:31:23 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux 安装后</title>
+      <link>https://www.dianbanjiu.com/post/linux-%E5%AE%89%E8%A3%85%E5%90%8E/</link>
+      <pubDate>Sat, 07 Nov 2020 13:31:23 +0800</pubDate>
+      
+      <guid>https://www.dianbanjiu.com/post/linux-%E5%AE%89%E8%A3%85%E5%90%8E/</guid>
+      <description>之前因为各种奇奇怪怪的想法重装了 n 次电脑，不过因为一直都是在 Linux 的圈内，所以就记录一下在基本的安装完成之后，我都还干了些什么。 以下操作均基于 Manjaro</description>
+    </item>
+    
+  </channel>
+</rss>

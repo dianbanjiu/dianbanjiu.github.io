@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Android Studio on 半点 - 一分不足，半分满足</title>
+    <link>https://www.dianbanjiu.com/tags/android-studio/</link>
+    <description>Recent content in Android Studio on 半点 - 一分不足，半分满足</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>dianbanjiu@gmail.com</copyright>
+    <lastBuildDate>Wed, 20 Nov 2019 09:17:07 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/android-studio/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>为 Android Studio 配置 Flutter</title>
+      <link>https://www.dianbanjiu.com/post/%E4%B8%BA-android-studio-%E9%85%8D%E7%BD%AE-flutter/</link>
+      <pubDate>Wed, 20 Nov 2019 09:17:07 +0800</pubDate>
+      
+      <guid>https://www.dianbanjiu.com/post/%E4%B8%BA-android-studio-%E9%85%8D%E7%BD%AE-flutter/</guid>
+      <description>Android SDK 在国内是有官方镜像源的，可以直接下载就可以，如果在配置了代理之后再下载的话，反而很容易拖慢下载速度，甚至导致下载失败。 Android Studio 现在可能都会直</description>
+    </item>
+    
+  </channel>
+</rss>

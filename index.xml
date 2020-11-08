@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>半点 - 一分不足，半分满足</title>
+    <link>https://www.dianbanjiu.com/</link>
+    <description>Recent content on 半点 - 一分不足，半分满足</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>dianbanjiu@gmail.com</copyright>
+    <lastBuildDate>Sat, 07 Nov 2020 13:31:23 +0800</lastBuildDate>
+    
+        <atom:link href="https://www.dianbanjiu.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Posts</title>
+      <link>https://www.dianbanjiu.com/post/</link>
+      <pubDate>Sat, 07 Nov 2020 13:31:23 +0800</pubDate>
+      
+      <guid>https://www.dianbanjiu.com/post/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>关于我</title>
+      <link>https://www.dianbanjiu.com/about/</link>
+      <pubDate>Wed, 21 Aug 2019 19:42:58 +0800</pubDate>
+      
+      <guid>https://www.dianbanjiu.com/about/</guid>
+      
+        <description>&lt;h3 id=&#34;关于我&#34;&gt;关于我&lt;/h3&gt;
+&lt;p&gt;现在是一只刚刚从大学毕业的社会人，喜欢代码，喜欢宅，但是不死不肥。&lt;/p&gt;
+&lt;h3 id=&#34;关于-blog&#34;&gt;关于 Blog&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Blog 系统：Hugo&lt;/li&gt;
+&lt;li&gt;主题：&lt;a href=&#34;https://github.com/xianmin/hugo-theme-jane&#34;&gt;hugo-theme-jane&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;编辑器：VScode&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;写这个 blog 的初衷是脑子里有些东西，不会经常用到，但是又想在自己需要的时候能快速找到，现在虽然有很多的写作平台可以做到记录这件事，但是因为审查、网络和需要登录的缘故，所以还是决定在 github page 上搭建了自己的 blog，这样可以免去很多的麻烦。&lt;/p&gt;
+&lt;p&gt;这个 blog 没有什么具体的定位，就是想到啥写啥。至于文笔啥的，你可能看两篇我的博文就能看出来，烂的一匹，当然想说的意思还是表达出来了，也不难理解。&lt;/p&gt;
+&lt;h3 id=&#34;联系我&#34;&gt;联系我：&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;email&lt;/strong&gt;：dianbanjiu@gmail.com&lt;br&gt;
+&lt;strong&gt;telegram&lt;/strong&gt;：&lt;a href=&#34;https://t.me/dianbanjiu&#34;&gt;https://t.me/dianbanjiu&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;关注我&#34;&gt;关注我：&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;GitHub&lt;/strong&gt;： &lt;a href=&#34;https://github.com/dianbanjiu&#34;&gt;https://github.com/dianbanjiu&lt;/a&gt;&lt;/p&gt;
+</description>
+      
+    </item>
+    
+  </channel>
+</rss>

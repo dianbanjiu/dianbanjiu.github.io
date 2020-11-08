@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Macos on 半点 - 一分不足，半分满足</title>
+    <link>https://www.dianbanjiu.com/tags/macos/</link>
+    <description>Recent content in Macos on 半点 - 一分不足，半分满足</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>dianbanjiu@gmail.com</copyright>
+    <lastBuildDate>Thu, 30 Jul 2020 22:38:35 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/macos/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title> Bash, Cannot Set LC_CTYPE to Default, No Such File or Directory</title>
+      <link>https://www.dianbanjiu.com/post/-bash-cannot-set-lc_ctype-to-default-no-such-file-or-directory/</link>
+      <pubDate>Thu, 30 Jul 2020 22:38:35 +0800</pubDate>
+      
+      <guid>https://www.dianbanjiu.com/post/-bash-cannot-set-lc_ctype-to-default-no-such-file-or-directory/</guid>
+      <description>最近使用 MacOS 的终端通过 ssh 连接 Linux 服务器的过程中，出现了一点问题，每次连接上之后，都会出现 -bash, cannot change locale, No such file or directory，整段错误代码没记住，</description>
+    </item>
+    
+  </channel>
+</rss>

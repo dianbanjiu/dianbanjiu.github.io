@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>效率 on 半点 - 一分不足，半分满足</title>
+    <link>https://www.dianbanjiu.com/tags/%E6%95%88%E7%8E%87/</link>
+    <description>Recent content in 效率 on 半点 - 一分不足，半分满足</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>dianbanjiu@gmail.com</copyright>
+    <lastBuildDate>Sun, 19 Jul 2020 12:30:35 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/%E6%95%88%E7%8E%87/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用这些插件让你的 Firefox 变得更好用</title>
+      <link>https://www.dianbanjiu.com/post/%E4%BD%BF%E7%94%A8%E8%BF%99%E4%BA%9B%E6%8F%92%E4%BB%B6%E8%AE%A9%E4%BD%A0%E7%9A%84-firefox-%E5%8F%98%E5%BE%97%E6%9B%B4%E5%A5%BD%E7%94%A8/</link>
+      <pubDate>Sun, 19 Jul 2020 12:30:35 +0800</pubDate>
+      
+      <guid>https://www.dianbanjiu.com/post/%E4%BD%BF%E7%94%A8%E8%BF%99%E4%BA%9B%E6%8F%92%E4%BB%B6%E8%AE%A9%E4%BD%A0%E7%9A%84-firefox-%E5%8F%98%E5%BE%97%E6%9B%B4%E5%A5%BD%E7%94%A8/</guid>
+      <description>在 Linux 下我最喜欢用的浏览器一个是 chromium，另一个是 Firefox。但是因为各种网络原因，我最终还是把 Firefox 作为了我的主力浏览器。之所以喜欢</description>
+    </item>
+    
+  </channel>
+</rss>

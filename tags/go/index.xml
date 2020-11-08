@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>go on 半点 - 一分不足，半分满足</title>
+    <link>https://www.dianbanjiu.com/tags/go/</link>
+    <description>Recent content in go on 半点 - 一分不足，半分满足</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>dianbanjiu@gmail.com</copyright>
+    <lastBuildDate>Wed, 22 Apr 2020 22:50:05 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>从零开始配置 Golang 开发环境</title>
+      <link>https://www.dianbanjiu.com/post/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E9%85%8D%E7%BD%AE-golang-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</link>
+      <pubDate>Wed, 22 Apr 2020 22:50:05 +0800</pubDate>
+      
+      <guid>https://www.dianbanjiu.com/post/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E9%85%8D%E7%BD%AE-golang-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</guid>
+      <description>安装 go 安装 go 的运行环境是第一步。 Windows/Linux/MacOS 用户都可以从 golang.org 下载安装包安装。 Windows Windows 用户双击下载好的安装包，然后就可以开始熟悉的下一步了。 Linux Linux 用户下载好之后</description>
+    </item>
+    
+    <item>
+      <title>Golang 对指定关键词进行排序</title>
+      <link>https://www.dianbanjiu.com/post/golang-%E5%AF%B9%E6%8C%87%E5%AE%9A%E5%85%B3%E9%94%AE%E8%AF%8D%E8%BF%9B%E8%A1%8C%E6%8E%92%E5%BA%8F/</link>
+      <pubDate>Fri, 20 Dec 2019 16:14:03 +0800</pubDate>
+      
+      <guid>https://www.dianbanjiu.com/post/golang-%E5%AF%B9%E6%8C%87%E5%AE%9A%E5%85%B3%E9%94%AE%E8%AF%8D%E8%BF%9B%E8%A1%8C%E6%8E%92%E5%BA%8F/</guid>
+      <description>之前在处理以结构体作为切片类型的问题里，如果可以对切片进行排序，则可以使问题简化许多。因为结构体有很多字段，既有字符字段又有数值字段，可以考</description>
+    </item>
+    
+    <item>
+      <title>使用 Go 从键盘获取带有空格的字符串</title>
+      <link>https://www.dianbanjiu.com/post/%E4%BD%BF%E7%94%A8-go-%E4%BB%8E%E9%94%AE%E7%9B%98%E8%8E%B7%E5%8F%96%E5%B8%A6%E6%9C%89%E7%A9%BA%E6%A0%BC%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2/</link>
+      <pubDate>Sun, 17 Nov 2019 21:09:05 +0800</pubDate>
+      
+      <guid>https://www.dianbanjiu.com/post/%E4%BD%BF%E7%94%A8-go-%E4%BB%8E%E9%94%AE%E7%9B%98%E8%8E%B7%E5%8F%96%E5%B8%A6%E6%9C%89%E7%A9%BA%E6%A0%BC%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2/</guid>
+      <description>最近在使用 golang 从键盘获取输入的时候，发现无论使用 fmt.Scan()，fmt.Scanf() 还是 fmt.Scanln() 获取一个字符串的时候，只要字符串里含有空格，</description>
+    </item>
+    
+    <item>
+      <title>Goalnd 基础配置</title>
+      <link>https://www.dianbanjiu.com/post/goalnd-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Wed, 30 Oct 2019 10:22:53 +0800</pubDate>
+      
+      <guid>https://www.dianbanjiu.com/post/goalnd-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/</guid>
+      <description>首先先设置一下 goproxy 和 go module。在系统的环境变量当中添加以下两句（zsh 的配置环境在 ~/.zshrc，bash 的在 ~/.bashrc）: 1</description>
+    </item>
+    
+    <item>
+      <title>链表</title>
+      <link>https://www.dianbanjiu.com/post/%E9%93%BE%E8%A1%A8/</link>
+      <pubDate>Fri, 18 Oct 2019 03:38:42 +0800</pubDate>
+      
+      <guid>https://www.dianbanjiu.com/post/%E9%93%BE%E8%A1%A8/</guid>
+      <description>链表通常是由大于等于零个具有相同属性的节点连接而成的一串数据，每个节点一般都会包含数据域跟指针域两部分。 比较常用的链表有三种，分别是单(向)</description>
+    </item>
+    
+  </channel>
+</rss>
