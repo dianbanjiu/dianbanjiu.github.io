@@ -1,22 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on 半点 - 一分不足，半分满足</title>
+    <title>Posts on 点半九</title>
     <link>https://www.dianbanjiu.com/post/</link>
-    <description>Recent content in Posts on 半点 - 一分不足，半分满足</description>
+    <description>Recent content in Posts on 点半九</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>dianbanjiu@gmail.com</copyright>
     <lastBuildDate>Sat, 07 Nov 2020 13:31:23 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/post/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>实用网站聚合 Loading...</title>
-      <link>https://www.dianbanjiu.com/post/website/</link>
-      <pubDate>Wed, 28 Aug 2019 19:05:08 +0800</pubDate>
-      
-      <guid>https://www.dianbanjiu.com/post/website/</guid>
-      <description>博客 阮一峰的网络日志：很多高质量的博文，每周五的「科技爱好者周刊」是我的最爱。 酷壳：左耳朵耗子陈皓的博客，文章更新不频繁，但是质量很高。 贤民</description>
-    </item>
-    
     <item>
       <title>Linux 安装后</title>
       <link>https://www.dianbanjiu.com/post/linux-%E5%AE%89%E8%A3%85%E5%90%8E/</link>
@@ -186,6 +177,15 @@
       
       <guid>https://www.dianbanjiu.com/post/%E4%B8%BA-android-studio-%E9%85%8D%E7%BD%AE-flutter/</guid>
       <description>Android SDK 在国内是有官方镜像源的，可以直接下载就可以，如果在配置了代理之后再下载的话，反而很容易拖慢下载速度，甚至导致下载失败。 Android Studio 现在可能都会直</description>
+    </item>
+    
+    <item>
+      <title>使用 Go 从键盘获取带有空格的字符串</title>
+      <link>https://www.dianbanjiu.com/post/%E4%BD%BF%E7%94%A8-go-%E4%BB%8E%E9%94%AE%E7%9B%98%E8%8E%B7%E5%8F%96%E5%B8%A6%E6%9C%89%E7%A9%BA%E6%A0%BC%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2/</link>
+      <pubDate>Sun, 17 Nov 2019 21:09:05 +0800</pubDate>
+      
+      <guid>https://www.dianbanjiu.com/post/%E4%BD%BF%E7%94%A8-go-%E4%BB%8E%E9%94%AE%E7%9B%98%E8%8E%B7%E5%8F%96%E5%B8%A6%E6%9C%89%E7%A9%BA%E6%A0%BC%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2/</guid>
+      <description>最近在使用 golang 从键盘获取输入的时候，发现无论使用 fmt.Scan()，fmt.Scanf() 还是 fmt.Scanln() 获取一个字符串的时候，只要字符串里含有空格，</description>
     </item>
     
   </channel>

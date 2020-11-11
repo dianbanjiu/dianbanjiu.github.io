@@ -1,16 +1,59 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>半点 - 一分不足，半分满足</title>
+    <title>点半九</title>
     <link>https://www.dianbanjiu.com/</link>
-    <description>Recent content on 半点 - 一分不足，半分满足</description>
+    <description>Recent content on 点半九</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>dianbanjiu@gmail.com</copyright>
-    <lastBuildDate>Sat, 07 Nov 2020 13:31:23 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 10 Nov 2020 00:20:33 +0800</lastBuildDate>
     
         <atom:link href="https://www.dianbanjiu.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>关于</title>
+      <link>https://www.dianbanjiu.com/something/</link>
+      <pubDate>Wed, 11 Nov 2020 19:42:58 +0800</pubDate>
+      
+      <guid>https://www.dianbanjiu.com/something/</guid>
+      
+        <description>&lt;h2 id=&#34;-关于我&#34;&gt;🌝 关于我&lt;/h2&gt;
+&lt;p&gt;我就是我，不一样的花火。&lt;/p&gt;
+&lt;h2 id=&#34;-在哪里可以找到我&#34;&gt;🔍 在哪里可以找到我&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Email&lt;/strong&gt;: &lt;a href=&#34;mailto:dianbanjiu@gmail.com&#34;&gt;dianbanjiu@gmail.com&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Telegram&lt;/strong&gt;：&lt;a href=&#34;https://t.me/dianbanjiu&#34;&gt;https://t.me/dianbanjiu&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Github&lt;/strong&gt;：&lt;a href=&#34;https://github.com/dianbanjiu&#34;&gt;dianbanjiu&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;-关于-blog&#34;&gt;🌚 关于 Blog&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Blog 系统：Hugo&lt;/li&gt;
+&lt;li&gt;主题：&lt;a href=&#34;https://github.com/xianmin/hugo-theme-jane&#34;&gt;hugo-theme-jane&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;编辑器：VScode&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这个 Blog 并不是什么严肃的 Blog，内容都很简单，主要是平时遇到的一些问题，然后整理出来的。总之就是没什么干货。&lt;/p&gt;
+&lt;h2 id=&#34;-收藏夹&#34;&gt;🤩 收藏夹&lt;/h2&gt;
+&lt;p&gt;这里是一些我比较喜欢的站点和工具，你也可以点进来看看有没有你喜欢的。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.dianbanjiu.com/favorite/website&#34;&gt;喜欢的站点&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.dianbanjiu.com/favorite/tools&#34;&gt;喜欢的工具&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;-留言板&#34;&gt;📋 留言板&lt;/h2&gt;
+&lt;p&gt;这个博客的评论系统并没有集成通知系统（后面我可能会自己尝试去做一个简单的通知系统，虽然本来也不会有什么人给我留言就是了），所以如果你有什么想说的，建议在 &lt;a href=&#34;https://www.dianbanjiu.com/boards&#34;&gt;留言板&lt;/a&gt; 留言。&lt;/p&gt;
+</description>
+      
+    </item>
+    
+    <item>
+      <title>Favorites</title>
+      <link>https://www.dianbanjiu.com/favorite/</link>
+      <pubDate>Tue, 10 Nov 2020 00:20:33 +0800</pubDate>
+      
+      <guid>https://www.dianbanjiu.com/favorite/</guid>
+      
+        <description></description>
+      
+    </item>
     
     <item>
       <title>Posts</title>
@@ -20,32 +63,6 @@
       <guid>https://www.dianbanjiu.com/post/</guid>
       
         <description></description>
-      
-    </item>
-    
-    <item>
-      <title>关于我</title>
-      <link>https://www.dianbanjiu.com/about/</link>
-      <pubDate>Wed, 21 Aug 2019 19:42:58 +0800</pubDate>
-      
-      <guid>https://www.dianbanjiu.com/about/</guid>
-      
-        <description>&lt;h3 id=&#34;关于我&#34;&gt;关于我&lt;/h3&gt;
-&lt;p&gt;现在是一只刚刚从大学毕业的社会人，喜欢代码，喜欢宅，但是不死不肥。&lt;/p&gt;
-&lt;h3 id=&#34;关于-blog&#34;&gt;关于 Blog&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Blog 系统：Hugo&lt;/li&gt;
-&lt;li&gt;主题：&lt;a href=&#34;https://github.com/xianmin/hugo-theme-jane&#34;&gt;hugo-theme-jane&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;编辑器：VScode&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;写这个 blog 的初衷是脑子里有些东西，不会经常用到，但是又想在自己需要的时候能快速找到，现在虽然有很多的写作平台可以做到记录这件事，但是因为审查、网络和需要登录的缘故，所以还是决定在 github page 上搭建了自己的 blog，这样可以免去很多的麻烦。&lt;/p&gt;
-&lt;p&gt;这个 blog 没有什么具体的定位，就是想到啥写啥。至于文笔啥的，你可能看两篇我的博文就能看出来，烂的一匹，当然想说的意思还是表达出来了，也不难理解。&lt;/p&gt;
-&lt;h3 id=&#34;联系我&#34;&gt;联系我：&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;email&lt;/strong&gt;：dianbanjiu@gmail.com&lt;br&gt;
-&lt;strong&gt;telegram&lt;/strong&gt;：&lt;a href=&#34;https://t.me/dianbanjiu&#34;&gt;https://t.me/dianbanjiu&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&#34;关注我&#34;&gt;关注我：&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;GitHub&lt;/strong&gt;： &lt;a href=&#34;https://github.com/dianbanjiu&#34;&gt;https://github.com/dianbanjiu&lt;/a&gt;&lt;/p&gt;
-</description>
       
     </item>
     

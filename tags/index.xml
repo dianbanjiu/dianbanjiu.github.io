@@ -1,13 +1,40 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on 半点 - 一分不足，半分满足</title>
+    <title>Tags on 点半九</title>
     <link>https://www.dianbanjiu.com/tags/</link>
-    <description>Recent content in Tags on 半点 - 一分不足，半分满足</description>
+    <description>Recent content in Tags on 点半九</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>dianbanjiu@gmail.com</copyright>
-    <lastBuildDate>Sat, 07 Nov 2020 13:31:23 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 10 Nov 2020 00:20:33 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>tools</title>
+      <link>https://www.dianbanjiu.com/tags/tools/</link>
+      <pubDate>Tue, 10 Nov 2020 00:20:33 +0800</pubDate>
+      
+      <guid>https://www.dianbanjiu.com/tags/tools/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>实用</title>
+      <link>https://www.dianbanjiu.com/tags/%E5%AE%9E%E7%94%A8/</link>
+      <pubDate>Tue, 10 Nov 2020 00:20:33 +0800</pubDate>
+      
+      <guid>https://www.dianbanjiu.com/tags/%E5%AE%9E%E7%94%A8/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>我的</title>
+      <link>https://www.dianbanjiu.com/tags/%E6%88%91%E7%9A%84/</link>
+      <pubDate>Tue, 10 Nov 2020 00:20:33 +0800</pubDate>
+      
+      <guid>https://www.dianbanjiu.com/tags/%E6%88%91%E7%9A%84/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Linux</title>
       <link>https://www.dianbanjiu.com/tags/linux/</link>
@@ -158,33 +185,6 @@
       <pubDate>Thu, 02 Jan 2020 12:44:45 +0800</pubDate>
       
       <guid>https://www.dianbanjiu.com/tags/gparted/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Android</title>
-      <link>https://www.dianbanjiu.com/tags/android/</link>
-      <pubDate>Tue, 24 Dec 2019 14:40:22 +0800</pubDate>
-      
-      <guid>https://www.dianbanjiu.com/tags/android/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>scrcpy</title>
-      <link>https://www.dianbanjiu.com/tags/scrcpy/</link>
-      <pubDate>Tue, 24 Dec 2019 14:40:22 +0800</pubDate>
-      
-      <guid>https://www.dianbanjiu.com/tags/scrcpy/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>sort</title>
-      <link>https://www.dianbanjiu.com/tags/sort/</link>
-      <pubDate>Fri, 20 Dec 2019 16:14:03 +0800</pubDate>
-      
-      <guid>https://www.dianbanjiu.com/tags/sort/</guid>
       <description></description>
     </item>
     
