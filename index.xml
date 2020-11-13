@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>dianbanjiu@gmail.com</copyright>
-    <lastBuildDate>Tue, 10 Nov 2020 00:20:33 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 13 Nov 2020 23:30:39 +0800</lastBuildDate>
     
         <atom:link href="https://www.dianbanjiu.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Posts</title>
+      <link>https://www.dianbanjiu.com/post/</link>
+      <pubDate>Fri, 13 Nov 2020 23:30:39 +0800</pubDate>
+      
+      <guid>https://www.dianbanjiu.com/post/</guid>
+      
+        <description></description>
+      
+    </item>
     
     <item>
       <title>关于</title>
@@ -39,7 +50,7 @@
 &lt;p&gt;&lt;a href=&#34;https://www.dianbanjiu.com/favorite/websites&#34;&gt;喜欢的站点&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.dianbanjiu.com/favorite/tools&#34;&gt;喜欢的工具&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;-留言板&#34;&gt;📋 留言板&lt;/h2&gt;
-&lt;p&gt;这个博客的评论系统并没有集成通知系统（后面我可能会自己尝试去做一个简单的通知系统，虽然本来也不会有什么人给我留言就是了），所以如果你有什么想说的，建议在 &lt;a href=&#34;https://www.dianbanjiu.com/boards&#34;&gt;留言板&lt;/a&gt; 留言。&lt;/p&gt;
+&lt;p&gt;这个博客的评论系统并没有集成通知系统，所以如果你有什么想说的，建议在 &lt;a href=&#34;https://www.dianbanjiu.com/boards&#34;&gt;留言板&lt;/a&gt; 留言。尽管这个留言板就是文章下面的评论框，但是相对来说这个页面还是更容易找一些，在这里留言看到的几率也大一些。&lt;/p&gt;
 </description>
       
     </item>
@@ -50,17 +61,6 @@
       <pubDate>Tue, 10 Nov 2020 00:20:33 +0800</pubDate>
       
       <guid>https://www.dianbanjiu.com/favorite/</guid>
-      
-        <description></description>
-      
-    </item>
-    
-    <item>
-      <title>Posts</title>
-      <link>https://www.dianbanjiu.com/post/</link>
-      <pubDate>Sat, 07 Nov 2020 13:31:23 +0800</pubDate>
-      
-      <guid>https://www.dianbanjiu.com/post/</guid>
       
         <description></description>
       
