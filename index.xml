@@ -13,6 +13,18 @@
     
     
     <item>
+      <title>留言板</title>
+      <link>https://www.dianbanjiu.com/%E7%95%99%E8%A8%80%E6%9D%BF/</link>
+      <pubDate>Sat, 14 Nov 2020 00:09:48 +0800</pubDate>
+      
+      <guid>https://www.dianbanjiu.com/%E7%95%99%E8%A8%80%E6%9D%BF/</guid>
+      
+        <description>&lt;p&gt;你可以在这里留下任何你想留下的东西。&lt;/p&gt;
+</description>
+      
+    </item>
+    
+    <item>
       <title>Posts</title>
       <link>https://www.dianbanjiu.com/post/</link>
       <pubDate>Fri, 13 Nov 2020 23:30:39 +0800</pubDate>
@@ -50,7 +62,7 @@
 &lt;p&gt;&lt;a href=&#34;https://www.dianbanjiu.com/favorite/websites&#34;&gt;喜欢的站点&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.dianbanjiu.com/favorite/tools&#34;&gt;喜欢的工具&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;-留言板&#34;&gt;📋 留言板&lt;/h2&gt;
-&lt;p&gt;这个博客的评论系统并没有集成通知系统，所以如果你有什么想说的，建议在 &lt;a href=&#34;https://www.dianbanjiu.com/boards&#34;&gt;留言板&lt;/a&gt; 留言。尽管这个留言板就是文章下面的评论框，但是相对来说这个页面还是更容易找一些，在这里留言看到的几率也大一些。&lt;/p&gt;
+&lt;p&gt;这个博客的评论系统并没有集成通知系统，所以如果你有什么想说的，建议在 &lt;a href=&#34;https://www.dianbanjiu.com/%E7%95%99%E8%A8%80%E6%9D%BF&#34;&gt;留言板&lt;/a&gt; 留言。尽管这个留言板就是文章下面的评论框，但是相对来说这个页面还是更容易找一些，在这里留言看到的几率也大一些。&lt;/p&gt;
 </description>
       
     </item>
