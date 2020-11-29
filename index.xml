@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>dianbanjiu@gmail.com</copyright>
-    <lastBuildDate>Fri, 13 Nov 2020 23:30:39 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 29 Nov 2020 11:56:26 +0800</lastBuildDate>
     
         <atom:link href="https://www.dianbanjiu.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Posts</title>
+      <link>https://www.dianbanjiu.com/post/</link>
+      <pubDate>Sun, 29 Nov 2020 11:56:26 +0800</pubDate>
+      
+      <guid>https://www.dianbanjiu.com/post/</guid>
+      
+        <description></description>
+      
+    </item>
     
     <item>
       <title>留言板</title>
@@ -21,17 +32,6 @@
       
         <description>&lt;p&gt;你可以在这里留下任何你想留下的东西。&lt;/p&gt;
 </description>
-      
-    </item>
-    
-    <item>
-      <title>Posts</title>
-      <link>https://www.dianbanjiu.com/post/</link>
-      <pubDate>Fri, 13 Nov 2020 23:30:39 +0800</pubDate>
-      
-      <guid>https://www.dianbanjiu.com/post/</guid>
-      
-        <description></description>
       
     </item>
     

@@ -31,7 +31,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.77.0" />
+<meta name="generator" content="Hugo 0.78.2" />
 
 
 <link rel="canonical" href="https://www.dianbanjiu.com/post/linux-%E5%AE%89%E8%A3%85%E5%90%8E/" />
@@ -66,7 +66,7 @@
 <meta itemprop="description" content="之前因为各种奇奇怪怪的想法重装了 n 次电脑，不过因为一直都是在 Linux 的圈内，所以就记录一下在基本的安装完成之后，我都还干了些什么。 以下操作均基于 Manjaro">
 <meta itemprop="datePublished" content="2020-11-07T13:31:23+08:00" />
 <meta itemprop="dateModified" content="2020-01-02T13:31:23+08:00" />
-<meta itemprop="wordCount" content="1004">
+<meta itemprop="wordCount" content="1062">
 
 
 
@@ -609,6 +609,8 @@ $ ./SetDpi.sh <span class="m">126</span> Deepin-TIM    <span class="c1"># 调整
 </div><h3 id="蓝牙配置">蓝牙配置</h3>
 <p>在电脑启动后开启蓝牙，可以在电脑启动之后直接连接到蓝牙。</p>
 <p>编辑 <code>/etc/bluetooth/main.conf</code>，找到 <code>AutoEnable</code> 字段，取消前面的注释，并将对应的值修改为 <code>true</code>。</p>
+<h3 id="jetbrains-配置">Jetbrains 配置</h3>
+<p>Jetbrains 系列的软件在 Linux 下默认的字体显示非常辣眼睛，需要同时安装对应的 <code>-jre</code> 支持才行。如 Goland 就需要安装 <code>goland-jre</code>。</p>
 
     </div>
 
