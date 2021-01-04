@@ -1,0 +1,57 @@
+#!/bin/bash
+###
+### Blog -- 创建/发布 hugo 博文
+###
+### Usage:
+###   ./blog <option> [message]
+###
+### Options:
+###   -h  --help 打印帮助信息
+###   create 创建一篇新的博文，需要指定博文标题
+###   post 发布博文，可以添加 commit 信息，默认为 "new post"
+
+option=$1
+message=$2
+
+create(){
+    if [[ $message == "" ]]; then
+      echo 你丫得给我起个名啊
+      exit 1
+    fi
+    postLocal=post/$message.md
+    hugo new "$postLocal"
+    code "content/$postLocal"
+}
+
+post(){
+    git add .
+    if [[ $message == "" ]];then
+      message="new post"
+    fi
+    git commit -m "$message"
+    git push origin master
+    
+    hugo
+    cd public
+    git add .
+    git commit -m "$message"
+    git push origin master 
+
+    rsync -r ./content ~/Store/Nutstore/我的坚果云
+}
+
+help(){
+    sed -rn 's/^### ?//;T;p' "$0"
+}
+
+case $option in
+"create")
+  create
+  ;;
+"post")
+  post
+  ;;
+*)
+  help
+  ;;
+esac
