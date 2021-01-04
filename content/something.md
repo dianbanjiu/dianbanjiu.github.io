@@ -30,7 +30,3 @@ contentCopyright: false
 [喜欢的站点](https://www.dianbanjiu.com/favorite/websites)  
 
 [喜欢的工具](https://www.dianbanjiu.com/favorite/tools)  
-
-## 📋 留言板
-这个博客的评论系统并没有集成通知系统，所以如果你有什么想说的，建议在 [留言板](https://www.dianbanjiu.com/留言板) 留言。尽管这个留言板就是文章下面的评论框，但是相对来说这个页面还是更容易找一些，在这里留言看到的几率也大一些。   
-
