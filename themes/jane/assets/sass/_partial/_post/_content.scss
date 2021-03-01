@@ -44,7 +44,9 @@
 
   > table {
       border: none;
-      width: 100%;
+      width: auto;
+      overflow: auto;
+      display: block;
 
     td {
       background-color: #e6fffc;
