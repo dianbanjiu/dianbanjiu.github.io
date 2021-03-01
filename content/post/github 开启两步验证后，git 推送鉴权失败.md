@@ -4,7 +4,6 @@ date: 2019-10-03T11:05:02+08:00
 lastmod: 2019-10-03T11:05:02+08:00
 tags: ["Linux", "git", "github", "两步验证"]
 author: "dianbanjiu"
-toc: false
 ---
 
 最近开启了 Github 的两步验证，然后在桌面上使用 git 向 Github 推送文件的时候总是出现`鉴权失败`的问题，在排除了密码错误的原因之后，觉得应该就是两步验证的锅了。  

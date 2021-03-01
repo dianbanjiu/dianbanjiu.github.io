@@ -3,7 +3,6 @@ title: "在 Github Pages 上部署 Hugo"
 date: 2021-01-07T00:33:09+08:00
 tags: ["blog","hugo"]
 author: "dianbanjiu"
-toc: false
 ---
 
 其实在 github pages（以下简称 pages）上部署 hugo 的过程很简单，如何保证这些文件的迁移才是有点麻烦的事，不过最关键的问题其实在于你是否有足够的精力写下去。  

@@ -4,7 +4,6 @@ date: 2020-07-19T22:46:28+08:00
 lastmod: 2020-07-19T22:46:28+08:00
 tags: ["git"]
 author: "dianbanjiu"
-toc: false
 ---
 
 git 提交信息 commit 在项目中追踪代码改动原因非常有用，特别是在团队合作中，一个简洁有效的 commit 可以帮助进行 merge 的人快速了解本次代码改动的必要性。为了保证提交信息的可读性，多行 commit 几乎是不可避免的。下面就来说一下如何实现多行 commit。  

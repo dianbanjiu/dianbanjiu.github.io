@@ -4,7 +4,6 @@ date: 2020-06-11T23:18:16+08:00
 lastmod: 2020-06-11T23:18:16+08:00
 tags: ["hugo"]
 author: "dianbanjiu"
-toc: false
 ---
 
 ![](https://pixabay.com/get/57e8d2454c57a514eade867dce21357d083edbec5259784a702e7a.jpg)  

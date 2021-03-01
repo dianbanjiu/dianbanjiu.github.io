@@ -4,7 +4,6 @@ date: 2019-10-30T10:22:53+08:00
 lastmod: 2019-10-30T10:22:53+08:00
 tags: ["goland", "go", "go module"]
 author: "dianbanjiu"
-toc: false
 ---
 
 首先先设置一下 goproxy 和 go module。在系统的环境变量当中添加以下两句（zsh 的配置环境在 ~/.zshrc，bash 的在 ~/.bashrc）:  

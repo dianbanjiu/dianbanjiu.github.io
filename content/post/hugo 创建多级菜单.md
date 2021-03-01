@@ -4,7 +4,6 @@ date: 2019-12-21T15:05:02+08:00
 lastmod: 2019-12-21T15:05:02+08:00
 tags: ["hugo"]
 author: "dianbanjiu"
-toc: false
 ---
 
 hugo 的多级多级菜单相较于单级菜单，仅仅是多了一个 `parent` 参数。  

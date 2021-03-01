@@ -4,7 +4,6 @@ date: 2020-04-22T22:50:05+08:00
 lastmod: 2020-04-22T22:50:05+08:00
 tags: ["go"]
 author: "dianbanjiu"
-toc: false
 ---
 
 ## 安装 go

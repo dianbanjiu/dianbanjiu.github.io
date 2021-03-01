@@ -4,7 +4,6 @@ date: 2019-08-31T18:52:53+08:00
 lastmod: 2019-08-31T18:52:53+08:00
 tags: ["pandoc"]
 author: "dianbanjiu"
-toc: false
 ---
 
 我在转换文档方面的需求很简单，只要能把各种不同类型的文档转换成 PDF 文件就可以了。我的电脑系统是 Arch Linux，没有装 LibreOffice 或者 OpenOffice，因为这两个在格式方面的问题太多了，不如 PDF 来的痛快（关键是 Okular + PDF 真的很舒服），所以我大多数时候都是把 word 或者 markdown 之类的文件转换成 PDF 文件来看。鉴于我的这些需求，我想到了 [pandoc](https://pandoc.org/)。  

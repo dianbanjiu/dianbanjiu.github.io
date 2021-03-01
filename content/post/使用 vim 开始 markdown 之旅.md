@@ -4,7 +4,6 @@ date: 2020-05-03T23:14:39+08:00
 lastmod: 2020-05-03T23:14:39+08:00
 tags: ["vim","markdown"]
 author: "dianbanjiu"
-toc: false
 ---
 
 ![img](https://i.imgur.com/GUHdWtf.jpg)  

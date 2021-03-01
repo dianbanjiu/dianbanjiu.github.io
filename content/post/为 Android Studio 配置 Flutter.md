@@ -4,7 +4,6 @@ date: 2019-11-20T09:17:07+08:00
 lastmod: 2019-11-20T09:17:07+08:00
 tags: ["Android Studio", "Flutter"]
 author: "dianbanjiu"
-toc: false
 ---
 
 Android SDK 在国内是有官方镜像源的，可以直接下载就可以，如果在配置了代理之后再下载的话，反而很容易拖慢下载速度，甚至导致下载失败。  

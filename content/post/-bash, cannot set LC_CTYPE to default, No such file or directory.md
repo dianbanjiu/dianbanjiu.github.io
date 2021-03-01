@@ -4,7 +4,6 @@ date: 2020-07-30T22:38:35+08:00
 lastmod: 2020-07-30T22:38:35+08:00
 tags: ["Linux", "Macos"]
 author: "dianbanjiu"
-toc: false
 ---
 
 最近使用 MacOS 的终端通过 ssh 连接 Linux 服务器的过程中，出现了一点问题，每次连接上之后，都会出现 `-bash, cannot change locale, No such file or directory`，整段错误代码没记住，但大概就是这么个意思。  

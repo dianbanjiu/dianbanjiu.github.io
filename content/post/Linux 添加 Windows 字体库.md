@@ -4,7 +4,6 @@ date: 2020-05-27T23:02:52+08:00
 lastmod: 2020-05-27T23:02:52+08:00
 tags: ["linux","windows","字体"]
 author: "dianbanjiu"
-toc: false
 ---
 
 如果你有尝试过在 Linux 下打开 Windows 制作的 word 文档，或者在 Windows 下打开 Linux 制作的 word 文档，你可能会惊喜的发现在两个平台下同一个 word 文件的样式截然不同，这对于一些对格式要求比较严格的情况还是比较麻烦的。不过在 Linux 下还是有很简单的解决办法的。  

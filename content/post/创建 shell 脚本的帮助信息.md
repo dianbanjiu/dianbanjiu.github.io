@@ -4,7 +4,6 @@ date: 2020-07-22T23:28:50+08:00
 lastmod: 2020-07-22T23:28:50+08:00
 tags: ["linux", "shell"]
 author: "dianbanjiu"
-toc: false
 ---
 
 原文链接 [英]：[https://samizdat.dev/help-message-for-shell-scripts/](https://samizdat.dev/help-message-for-shell-scripts/)  

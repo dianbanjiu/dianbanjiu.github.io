@@ -4,7 +4,6 @@ date: 2020-07-27T00:23:54+08:00
 lastmod: 2020-07-27T00:23:54+08:00
 tags: ["shell", "Linux"]
 author: "dianbanjiu"
-toc: false
 ---
 
 最近为了结合 gilab runner 自动化打包，写了不少的 shell 脚本，虽然都是比较简单的内容，但还是踩了不少的坑。最近的一个就是有关字符串的问题。  

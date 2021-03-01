@@ -4,7 +4,6 @@ date: 2019-10-06T08:26:21+08:00
 lastmod: 2019-10-06T08:26:21+08:00
 tags: ["Linux", "p7zip", "unarchiver"]
 author: "dianbanjiu"
-toc: false
 ---
 
 在 Linux 下，除了最常用的 tar 归档命令之外，还有两个很好用的压缩/解压缩的工具，一个是 `unarchiver`，另一个是 `p7zip`。  

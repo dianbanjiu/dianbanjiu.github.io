@@ -4,7 +4,6 @@ date: 2019-12-24T14:40:22+08:00
 lastmod: 2020-9-19T14:40:22+08:00
 tags: ["Linux", "Android", "scrcpy"]
 author: "dianbanjiu"
-toc: false
 ---
 
 最近发现了一个可以在 Linux 下使用的手机投屏软件软件 —— **scrcpy**，同时也支持 Windows 和 MacOS，但是因为我用的是 Manjaro Linux，所以下面只会介绍 Manjaro 下的情况。其他的系统可以参照 [scrcpy](https://github.com/Genymobile/scrcpy)    

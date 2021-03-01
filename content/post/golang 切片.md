@@ -4,7 +4,6 @@ date: 2020-03-15T11:59:22+08:00
 lastmod: 2020-03-15T11:59:22+08:00
 tags: ["golang"]
 author: "dianbanjiu"
-toc: false
 ---
 
 最近在使用 golang 创建子集的时候，遇到了一些问题，下面是代码：  
