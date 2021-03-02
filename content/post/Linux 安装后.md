@@ -8,19 +8,12 @@ author: "dianbanjiu"
 
 之前因为各种奇奇怪怪的想法重装了 n 次电脑，不过因为一直都是在 Linux 的圈内，所以就记录一下在基本的安装完成之后，我都还干了些什么。
 
-以下操作均基于 Manjaro Linux 20.2 Nibia 进行。
-
 ## 配置源
 
 在连接网络之后，第一件事就是先配置软件源，要不之后安装软件的过程会极慢。
 
 1. 更改主源
-
-```shell
-$ sudo pacman-mirrors -i -c China -m rank
-```
-
-选择清华、中科大、上交大镜像源，保存。
+编辑 `/etc/pacman.d/mirrorlist`，搜索 `China` 字段，选择清华、中科大、上交大镜像源，保存。
 
 2. 添加 archlinuxcn 源
 
@@ -43,35 +36,39 @@ $ sudo pacman -Syyu archlinuxcn-keyring
 
 | 软件                                                                                | 备注                              |
 | ----------------------------------------------------------------------------------- | --------------------------------- |
-| firefox、chromium                                                                   | 浏览器                            |
+| chromium                                                                   | 浏览器                            |
 | nutstore                                                                            | 坚果云，同步云盘                  |
 | tmux                                                                                | 终端复用工具                      |
+|git | 版本管理工具|
 | visual-studio-code-bin                                                              | 文本编辑器                        |
-| gimp                                                                                | 图片编辑工具                      |
 | tree                                                                                | 树形目录查看                      |
-| goland                                                                              | go IDE，继承自 IDEA               |
+| goland gland-jre                                                                              | go IDE，继承自 IDEA               |
 | spotify                                                                             | 流音乐媒体                        |
 | keepassxc                                                                           | 密码管理工具                      |
 | jdk11-openjdk                                                                       | jdk                               |
 | java11-openjfx                                                                      | goland 的 markdown 预览依赖此程序 |
 | docker                                                                              | 容器                              |
 | obs-studio                                                                          | 录屏                              |
-| flameshot                                                                           | 截屏                              |
+| spectacle                                                                           | KDE 官方的截屏工具                              |
 | yay                                                                                 | aur 包安管理                      |
-| go                                                                                  | go 语言                           |
-| fcitx5 fcitx5-chinese-addons fcitx5-gtk fcitx5-material-color fcitx5-qt fcitx5-rime | fcitx5 输入法框架                 |
+| go                                                                                  | go 语言开发环境                           |
+| fcitx5 fcitx5-chinese-addons fcitx5-gtk fcitx5-material-color fcitx5-qt fcitx5-rime fcitx5-configtool | fcitx5 输入法框架                 |
 | telegram-desktop                                                                    | IM 工具                           |
 | hugo                                                                                | hugo 博客命令行工具               |
-| nodejs npm                                                                          |
-| scrcpy                                                                              | 手机投屏                          |
-| virtualbox virtualbox-ext-oracle virtualbox-ext-vnc virtualbox-guest-iso            | 虚拟机                            |
+| nodejs npm                                                                          | nodejs 开发环境
+| scrcpy                                                                              | 连接手机与电脑，在电脑上使用手机                          |
 | plasma-browser-integration                                                          | plasma 桌面的浏览器集成插件       |
 | translate-shell                                                                     | 终端翻译工具                      |
-| postman                                                                             | api 测试工具                      |
+| postman-bin                                                                             | api 测试工具                      |
 | kgpg                                                                                | kde 的 gnupg 图形界面             |
+|ark|KDE 官方的压缩文件查看器|
+|unzip unrar p7zip| 几种常用的压缩格式|
+|kate|KDE 官方的文本编辑器|
+|gnome-keyring|钥匙串管理，vscode 连接 github 需要使用到|
 
+一行命令安装上面所有应用。  
 ```shell
-$ sudo pacman -S nutstore vim tmux visual-studio-code-bin gimp tree goland spotify keepassxc jdk11-openjdk java11-openjfx docker obs-studio flameshot yay go fcitx5 fcitx5-chinese-addons fcitx5-gtk fcitx5-material-color fcitx5-qt fcitx5-rime unoconv telegram-desktop hugo nodejs npm golangci-lint scrcpy virtualbox virtualbox-ext-oracle virtualbox-ext-vnc virtualbox-guest-iso plasma-browser-integration translate-shell
+$ sudo pacman -S git zsh nutstore vim tmux visual-studio-code-bin tree goland goland-jre spotify keepassxc jdk11-openjdk java11-openjfx docker obs-studio spectacle yay go fcitx5 fcitx5-chinese-addons fcitx5-gtk fcitx5-material-color fcitx5-qt fcitx5-rime fcitx5-configtool telegram-desktop hugo nodejs npm scrcpy plasma-browser-integration translate-shell postman-bin kgpg ark unarchiver unzip unrar p7zip kate gnome-keyring
 ```
 
 ## 环境配置
@@ -93,15 +90,17 @@ $ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTO
 安装完成之后编辑 `~/.zshrc`，修改 plugins 字段。
 
 ```shell
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting extract)
 ```
 
-### 配置 vbox 和 docker
+`extract` 插件可以简化命令行解压时复杂的参数，只需 `x 压缩包`，即可将压缩包解压到当前目录下。  
 
-使用下面的命令将 vbox 和 docker 添加到当前用户组下，之后就可以通过普通用户身份直接使用。
+### 配置 docker
+
+使用下面的命令将当前用户添加到 docker 组中，之后就可以通过当前用户身份直接使用 docker。
 
 ```
-$ sudo usermod -aG vboxusers,docker username
+$ sudo usermod -aG docker username
 ```
 
 编辑 `/etc/docker/daemon.json`，添加国内镜像源
@@ -114,7 +113,7 @@ $ sudo usermod -aG vboxusers,docker username
 
 阿里也提供了 docker 镜像源服务，但是需要使用个人帐号获取对应的链接，[点此访问](https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors)。
 
-配置完成之后需要重启一次系统，让用户添加操作生效。
+配置完成之后需要重新登录/重启一次系统，让用户添加操作生效。
 
 ### go 开发配置
 
@@ -124,7 +123,7 @@ $ sudo usermod -aG vboxusers,docker username
 $ go get -u golang.org/x/tools/cmd/goimports
 ```
 
-在 .zshrc 添加以下内容切换 goproxy,加速依赖下载。
+在 .zshrc 添加以下内容切换 goproxy,加速依赖获取。
 
 ```shell
 export GO111MODULE=on
