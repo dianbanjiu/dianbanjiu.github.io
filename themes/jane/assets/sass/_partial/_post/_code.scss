@@ -5,9 +5,9 @@
 // normal <code> style
 code {
   padding: 3px 7px;
-  background: transparent;
   border-radius: 4px;
   color: #16a596;
+  background-color: #e6fffc;
 }
 
 code, pre {
@@ -27,6 +27,7 @@ code, pre {
   code {
     padding: 0;     /* remove normal code padding */
     color: inherit;
+    background: transparent;
   }
 
   pre {

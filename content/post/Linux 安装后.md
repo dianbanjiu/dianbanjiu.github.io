@@ -1,7 +1,6 @@
 ---
 title: "Linux 安装后"
-date: 2020-11-07T13:31:23+08:00
-lastmod: 2020-01-02T13:31:23+08:00
+date: 2021-03-02T23:20:23+08:00
 tags: ["Linux", "实用工具"]
 author: "dianbanjiu"
 ---
