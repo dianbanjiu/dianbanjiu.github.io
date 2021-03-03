@@ -1,9 +1,7 @@
 ---
 title: "关于"
-date: 2020-11-11T19:42:58+08:00
-lastmod: 2019-08-21T19:42:58+08:00
+date: 2021-03-03T23:04:58+08:00
 author: "dianbanjiu"
-comment: false
 toc: false
 contentCopyright: false
 ---
@@ -18,11 +16,9 @@ contentCopyright: false
 
 
 ## 🌚 关于 Blog
-- Blog 系统：Hugo  
-- 主题：[hugo-theme-jane](https://github.com/xianmin/hugo-theme-jane)  
-- 编辑器：VScode  
+本博客使用 [hugo](https://gohugo.io/) 进行驱动，主题是 [hugo-theme-jane](https://github.com/xianmin/hugo-theme-jane)。
 
-这个 Blog 并不是什么严肃的 Blog，内容都很简单，主要是平时遇到的一些问题，然后整理出来的。总之就是没什么干货。  
+之前的博客内容偏向于计算机技术以及一些工具的使用，后期什么内容都可能夹杂，就是想到什么就会写点什么。~~虽然大多数时候都想不到什么~~  
 
 ## 🤩 收藏夹
 这里是一些我比较喜欢的站点和工具，你也可以点进来看看有没有你喜欢的。  
