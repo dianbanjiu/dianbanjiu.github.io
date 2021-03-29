@@ -15,7 +15,7 @@ rssLimit = 20             # Limit Entry Count to Rss file # 限制 Rss 文章输
 # googleAnalytics = "UA-146793229-1"      # UA-XXXXXXXX-X
 copyright = "dianbanjiu@gmail.com"            # default: author.name ↓        # 默认为下面配置的author.name ↓
 enableGitInfo = true
-
+headPic = true
 # Highlight options.
 # See https://gohugo.io/content-management/syntax-highlighting/
 PygmentsCodeFences = true # Enable syntax highlighting with GitHub flavoured code fences

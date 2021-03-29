@@ -65,6 +65,17 @@
 
   .post-summary {
     margin-bottom: 1em;
+    .head-pic{
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+      max-width: 100%;
+      box-shadow: 10px 10px 10px rgba(0,0,0,.5);
+      /*考虑浏览器兼容性*/
+      -moz-box-shadow: 10px 10px 10px rgba(0,0,0,.5);
+      -webkit-box-shadow: 10px 10px 10px rgba(0,0,0,.5);
+      margin-bottom: 6px;
+    }
   }
 
   .read-more {

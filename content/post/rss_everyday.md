@@ -1,6 +1,6 @@
 ---
 title: "Rss_Everyday"
-date: 2021-03-20T13:48:10+08:00
+date: 2021-03-20
 tags: ["rss"]
 draft: false
 ---
