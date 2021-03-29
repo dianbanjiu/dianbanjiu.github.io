@@ -52,7 +52,11 @@
     </div>
     {{ else }}
     <div class="post-summary">
+      {{ if eq .Params.headPic nil }}
+      {{ else if eq .Params.headPic "" }}
+      {{ else }}
       <img class="head-pic" src="{{ .Params.headPic }}" alt="">
+      {{ end }}
       {{ .Summary }}
     </div>
     <!-- <div class="read-more">
