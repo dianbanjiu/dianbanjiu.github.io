@@ -21,8 +21,6 @@ contentCopyright: false
 之前的博客内容偏向于计算机技术以及一些工具的使用，后期什么内容都可能夹杂，就是想到什么就会写点什么。~~虽然大多数时候都想不到什么~~  
 
 ## 🤩 收藏夹
-这里是一些我比较喜欢的站点和工具，你也可以点进来看看有没有你喜欢的。  
+这里是一些我比较喜欢的站点和工具，你也可以来看看有没有你喜欢的。(收藏夹页面位于 notion，访问速度可能会比较慢)    
 
-[喜欢的站点](https://www.dianbanjiu.com/favorite/websites)  
-
-[喜欢的工具](https://www.dianbanjiu.com/favorite/tools)  
+[收藏夹](https://www.notion.so/9b1ca951adde4480a33441bcba121d44)  
