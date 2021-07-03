@@ -4,7 +4,7 @@ date: {{ .Date }}
 lastmod: {{ .Date }}
 tags: []
 author: "dianbanjiu"
-comment: false
+comment: true
 headPic: ""
 ---
 

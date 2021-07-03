@@ -4,7 +4,7 @@ date: 2021-06-28T21:42:16+08:00
 lastmod: 2021-06-28T21:42:16+08:00
 tags: ["gitlab","docker"]
 author: "dianbanjiu"
-comment: false
+comment: true
 headPic: "https://cdn.pixabay.com/photo/2021/06/22/16/39/arch-6356637_960_720.jpg"
 ---
 

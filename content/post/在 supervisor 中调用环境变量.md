@@ -4,7 +4,7 @@ date: 2021-07-02T22:29:31+08:00
 lastmod: 2021-07-02T22:29:31+08:00
 tags: ["supervisor"]
 author: "dianbanjiu"
-comment: false
+comment: true
 headPic: ""
 ---
 > 以前总觉得写东西就得上纲上线，一篇不整个几千字都不敢发出来。现在想想，我又不是奔着出书的目的去的，我只是纯粹的想记录一些东西，又何必限制于篇幅呢  

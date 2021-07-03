@@ -11,10 +11,9 @@ theme = "jane"
 hasCJKLanguage = true     # has chinese/japanese/korean ? # 自动检测是否包含 中文\日文\韩文
 paginate = 5              # Number of articles displayed on the homepage  # 首页每页显示的文章数
 rssLimit = 20             # Limit Entry Count to Rss file # 限制 Rss 文章输出数量
-# disqusShortname = ""      # disqus_shortname
 # googleAnalytics = "UA-146793229-1"      # UA-XXXXXXXX-X
 copyright = "dianbanjiu@gmail.com"            # default: author.name ↓        # 默认为下面配置的author.name ↓
-enableGitInfo = true
+# enableGitInfo = true
 headPic = true
 # Highlight options.
 # See https://gohugo.io/content-management/syntax-highlighting/
@@ -78,7 +77,7 @@ defaultContentLanguage = "zh-cn"           # Default language to use
   customJS = []             # if ['custom.js'], load '/static/js/custom.js' file
   # [params.utteranc]         # utteranc is a comment system based on GitHub issues. see https://utteranc.es
   #   enable = true
-  #   repo = "dianbanjiu/blogComments"    # The repo to store comments
+  #   repo = "GuangzheJiang/blog-comment"    # The repo to store comments
   #   issueTerm = "pathname"
 
 # 底部的今日一词
@@ -89,4 +88,4 @@ defaultContentLanguage = "zh-cn"           # Default language to use
 [params.search.google]
    enable = true
    id = "007945664711532393264:pegdabljepx"
-   title = "博文搜索"
+   title = "搜索"
