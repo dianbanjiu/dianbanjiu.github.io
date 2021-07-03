@@ -9,6 +9,9 @@ contentCopyright: false
 ## 🌝 关于我
 我就是我，不一样的花火。  
 
+## 我的作品
+[进击的 RSS](https://github.com/GuangzheJiang/rss_everyday)：使用 github action 定时推送你喜欢的内容到 telegram channel。  
+
 ## 🔍 在哪里可以找到我
 1. **Email**: dianbanjiu@gmail.com  
 2. **Telegram**：[https://t.me/dianbanjiu](https://t.me/dianbanjiu)  
