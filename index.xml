@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>点半九</title><link>https://www.dianbanjiu.com/</link><description>Recent content on 点半九</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>dianbanjiu@gmail.com</copyright><lastBuildDate>Fri, 02 Jul 2021 22:29:31 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/index.xml" rel="self" type="application/rss+xml"/><item><title>Posts</title><link>https://www.dianbanjiu.com/post/</link><pubDate>Fri, 02 Jul 2021 22:29:31 +0800</pubDate><guid>https://www.dianbanjiu.com/post/</guid><description/></item><item><title>关于</title><link>https://www.dianbanjiu.com/something/</link><pubDate>Wed, 03 Mar 2021 23:04:58 +0800</pubDate><guid>https://www.dianbanjiu.com/something/</guid><description>&lt;h2 id="-关于我">🌝 关于我&lt;/h2>
 &lt;p>我就是我，不一样的花火。&lt;/p>
+&lt;h2 id="我的作品">我的作品&lt;/h2>
+&lt;p>&lt;a href="https://github.com/GuangzheJiang/rss_everyday">进击的 RSS&lt;/a>：使用 github action 定时推送你喜欢的内容到 telegram channel。&lt;/p>
 &lt;h2 id="-在哪里可以找到我">🔍 在哪里可以找到我&lt;/h2>
 &lt;ol>
 &lt;li>&lt;strong>Email&lt;/strong>: &lt;a href="mailto:dianbanjiu@gmail.com">dianbanjiu@gmail.com&lt;/a>&lt;/li>
