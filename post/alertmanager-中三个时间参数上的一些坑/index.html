@@ -1,0 +1,252 @@
+<!doctype html><html lang=zh-cn itemscope itemtype=http://schema.org/WebPage>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<title>关于 Alertmanager 中 group_interval 与 repeat_interval 上的一些坑 - 点半九</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name=MobileOptimized content="width">
+<meta name=HandheldFriendly content="true">
+<meta name=applicable-device content="pc,mobile">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=mobile-web-app-capable content="yes">
+<meta name=author content="dianbanjiu">
+<meta name=description content="Alertmanager 中有三个关于告警时间的参数： group_wait：alertmanager 在接收到一条新的告警（第一次出现的告警）时，将这条告警发送给 receiver 之">
+<meta name=generator content="Hugo 0.87.0">
+<link rel=canonical href=https://www.dianbanjiu.com/post/alertmanager-%E4%B8%AD%E4%B8%89%E4%B8%AA%E6%97%B6%E9%97%B4%E5%8F%82%E6%95%B0%E4%B8%8A%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91/>
+<link rel=icon href=/favicon.svg>
+<link rel=stylesheet href=/sass/jane.min.84931acb6cb47fefdee7f38222f1f8032481751b22824847279be870aeb7989b.css integrity="sha256-hJMay2y0f+/e5/OCIvH4AySBdRsigkhHJ5vocK63mJs=" media=screen crossorigin=anonymous>
+<meta property="og:title" content="关于 Alertmanager 中 group_interval 与 repeat_interval 上的一些坑">
+<meta property="og:description" content="Alertmanager 中有三个关于告警时间的参数： group_wait：alertmanager 在接收到一条新的告警（第一次出现的告警）时，将这条告警发送给 receiver 之">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.dianbanjiu.com/post/alertmanager-%E4%B8%AD%E4%B8%89%E4%B8%AA%E6%97%B6%E9%97%B4%E5%8F%82%E6%95%B0%E4%B8%8A%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2021-07-14T23:56:01+08:00">
+<meta property="article:modified_time" content="2021-07-14T23:56:01+08:00">
+<meta itemprop=name content="关于 Alertmanager 中 group_interval 与 repeat_interval 上的一些坑">
+<meta itemprop=description content="Alertmanager 中有三个关于告警时间的参数： group_wait：alertmanager 在接收到一条新的告警（第一次出现的告警）时，将这条告警发送给 receiver 之"><meta itemprop=datePublished content="2021-07-14T23:56:01+08:00">
+<meta itemprop=dateModified content="2021-07-14T23:56:01+08:00">
+<meta itemprop=wordCount content="921">
+<meta itemprop=keywords content="prometheus,alertmanager,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="关于 Alertmanager 中 group_interval 与 repeat_interval 上的一些坑">
+<meta name=twitter:description content="Alertmanager 中有三个关于告警时间的参数： group_wait：alertmanager 在接收到一条新的告警（第一次出现的告警）时，将这条告警发送给 receiver 之"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>点半九</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<li class=mobile-menu-item>
+<a class=menu-item-link href=https://www.dianbanjiu.com/>主页</a>
+</li><li class=mobile-menu-item>
+<a class=menu-item-link href=https://www.dianbanjiu.com/tags>标签</a>
+</li><li class=mobile-menu-item>
+<a class=menu-item-link href=https://www.dianbanjiu.com/something>关于</a>
+</li>
+<li class=mobile-menu-item>
+<a id=openSearchMobile class="mobile-menu-item-link menu-item-search" href=#>
+<i class=iconfont><svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="18" height="18" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M973.81454219 973.81454219a91.78207815 91.78207815.0 01-129.80999631.0L682.0297247 811.83972101a425.48527711 425.48527711.0 01-230.35931791 68.16531768 428.3346319 428.3346319.0 11428.3346319-428.3346319A425.48527711 425.48527711.0 01811.83972101 682.0297247l162.02961656 161.97482118a91.83687354 91.83687354.0 01-.05479538 129.80999631zm-522.1441354-828.1209266a305.97679241 305.97679241.0 100 611.95358361 305.97679241 305.97679241.0 000-611.95358361z"/></svg>
+</i>
+</a>
+</li>
+</ul>
+</nav>
+<link rel=stylesheet href=/lib/photoswipe/photoswipe.min.css>
+<link rel=stylesheet href=/lib/photoswipe/default-skin/default-skin.min.css>
+<div class=pswp tabindex=-1 role=dialog aria-hidden=true>
+<div class=pswp__bg></div>
+<div class=pswp__scroll-wrap>
+<div class=pswp__container>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+</div>
+<div class="pswp__ui pswp__ui--hidden">
+<div class=pswp__top-bar>
+<div class=pswp__counter></div>
+<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+<div class=pswp__preloader>
+<div class=pswp__preloader__icn>
+<div class=pswp__preloader__cut>
+<div class=pswp__preloader__donut></div>
+</div>
+</div>
+</div>
+</div>
+<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+<div class=pswp__share-tooltip></div>
+</div>
+<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+</button>
+<div class=pswp__caption>
+<div class=pswp__caption__center></div>
+</div>
+</div>
+</div>
+</div>
+<div class=modal-dialog>
+<div class=modal-content>
+<div id=closeSearch title=Close class=close>X</div>
+<div class=modal-header>
+<div class=modal-title>搜索</div>
+</div>
+<div class=modal-body>
+<script>(function(){var c='007945664711532393264:pegdabljepx',a=document.createElement('script'),b;a.type='text/javascript',a.async=!0,a.src=(document.location.protocol=='https:'?'https:':'http:')+'//cse.google.com/cse.js?cx='+c,b=document.getElementsByTagName('script')[0],b.parentNode.insertBefore(a,b)})()</script>
+<gcse:search></gcse:search>
+</div>
+</div>
+</div>
+<header id=header class="header container">
+<div class=logo-wrapper>
+<a href=/ class=logo>
+点半九
+</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=https://www.dianbanjiu.com/>主页</a>
+</li>
+<li class=menu-item>
+<a class=menu-item-link href=https://www.dianbanjiu.com/tags>标签</a>
+</li>
+<li class=menu-item>
+<a class=menu-item-link href=https://www.dianbanjiu.com/something>关于</a>
+</li>
+<li class=menu-item>
+<a id=openSearch class="menu-item-link menu-item-search" href=#>
+<i class=iconfont><svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="18" height="18" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M973.81454219 973.81454219a91.78207815 91.78207815.0 01-129.80999631.0L682.0297247 811.83972101a425.48527711 425.48527711.0 01-230.35931791 68.16531768 428.3346319 428.3346319.0 11428.3346319-428.3346319A425.48527711 425.48527711.0 01811.83972101 682.0297247l162.02961656 161.97482118a91.83687354 91.83687354.0 01-.05479538 129.80999631zm-522.1441354-828.1209266a305.97679241 305.97679241.0 100 611.95358361 305.97679241 305.97679241.0 000-611.95358361z"/></svg>
+</i>
+</a>
+</li>
+</ul>
+</nav>
+</header>
+<div id=mobile-panel>
+<main id=main class="main bg-llight">
+<div class=content-wrapper>
+<div id=content class="content container">
+<article class="post bg-white">
+<header class=post-header>
+<h1 class=post-title>关于 Alertmanager 中 group_interval 与 repeat_interval 上的一些坑</h1>
+<div class=post-meta><svg t="1614696813308" class="icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" p-id="2029" width="15" height="15" style="vertical-align:middle"><path d="M8e2 960H224c-52.928.0-96-43.072-96-96V224c0-52.928 43.072-96 96-96h448c17.696.0 32 14.336 32 32s-14.304 32-32 32H224c-17.632.0-32 14.368-32 32v640c0 17.664 14.368 32 32 32h576c17.664.0 32-14.336 32-32V352c0-17.664 14.304-32 32-32s32 14.336 32 32v512c0 52.928-43.072 96-96 96zM612 448a31.912 31.912.0 01-22.624-9.376c-12.512-12.512-12.512-32.736.0-45.248L907.392 75.36c12.512-12.512 32.736-12.512 45.248.0s12.512 32.736.0 45.248L634.624 438.624C628.384 444.896 620.192 448 612 448zm-132 0H288c-17.664.0-32-14.336-32-32s14.336-32 32-32h192c17.664.0 32 14.336 32 32s-14.336 32-32 32zm192 192H288c-17.664.0-32-14.304-32-32s14.336-32 32-32h384c17.696.0 32 14.304 32 32s-14.304 32-32 32z" fill="#8a8a8a" p-id="2030"/></svg>
+<span style=vertical-align:middle>
+<time datetime=2021-07-14 class=post-time>
+更新于
+2021-07-14
+</time>
+</span>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>文章目录</h2>
+<div class=post-toc-content>
+<nav id=TableOfContents></nav>
+</div>
+</div>
+<div class=post-content>
+<p>Alertmanager 中有三个关于告警时间的参数：</p>
+<ol>
+<li>group_wait：alertmanager 在接收到一条新的告警（第一次出现的告警）时，将这条告警发送给 receiver 之前需要等待的时间</li>
+<li>group_interval：对于一条已经出现过的告警，alertmanager 检查会每隔 group_interval 时间检查一次告警</li>
+<li>repeat_interval： 对于一条已经出现过的告警，每隔 repeat_interval 会重新发送给 receiver</li>
+</ol>
+<p>这三个参数的基础含义比较简单，但是在最近的使用中，我发现当我按照如下格式设置这三个参数时：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>group_wait</span><span class=p>:</span><span class=w> </span><span class=l>15m</span><span class=w>
+</span><span class=w></span><span class=nt>group_interval</span><span class=p>:</span><span class=w> </span><span class=l>5m</span><span class=w>
+</span><span class=w></span><span class=nt>repeat_interval</span><span class=p>:</span><span class=w> </span><span class=l>15m</span><span class=w>
+</span></code></pre></td></tr></table>
+</div>
+</div><p>我将会每隔 20m 收到一次告警，如果我将 repeat_interval 设置为 20m，那我将会每 25m 收到一次告警&mldr;<br>
+这种现象好像跟这三个参数在 alertmanager 文档中的说明不太一样啊。在搜寻无果之后，我在 alertmanager 的 github 仓库上提了一个 issue，官方给出了一个比较合理的解释。</p>
+<p><a href=https://github.com/prometheus/alertmanager/issues/2647>点此查看此 issue</a></p>
+<p>我根据 Issue 的回答简单总结了一下这三个参数的含义：</p>
+<blockquote>
+<p>Alertmanager 在收到一条新的告警之后，会等待 group_wait 时间，对这条新的告警做一些分组、更新、静默的操作。当第一条告警经过 group_wait 时间之后，Alertmanager 会每隔 group_interval 时间检查一次这条告警，判断是否需要对这条告警进行一些操作，当 Alertmanager 经过 n 次 group_interval 的检查后，n*group_interval 恰好大于 repeat_interval 的时候，Alertmanager 才会将这条告警再次发送给对应的 receiver。</p>
+</blockquote>
+<p>结合我上面的例子，第一条告警在发送给 alertmanager 15m 后会第一次发送给 receiver，接着 Alertmanager 会每隔 5m 检查一次这条告警，在第 4 次检查的时候，到上次告警发出的时间刚好经过了 5*4=20>15，所以第二次告警会在第一条告警发出后的 20m 后再次发出，此后每条重复告警都会每隔 20m 发送一次。</p>
+<p>这也就意味着在上面的例子中，当你的 15m&lt;repeat_interval&lt;20m 时，任意两条重复告警的间隔都是 20m。</p>
+<p>此外还有一个问题：在上面的例子中，如果 alertmanager 是每隔 5m 检查一次告警，那为什么不是恰好在 15m 的时候发出这条告警？关于这个问题，在 Issue 中尚未给出比较明确的答复。</p>
+<p>根据目前的情况，这个问题有两个暂时解决方案：</p>
+<ol>
+<li>调整 repeat_interval 的值：同样结合上面的例子，如果你想每隔 20m 收到一次重复告警，那就把 repeat_interval 设置为 [15m,20m) 之间的任意一个时间</li>
+<li>调整 group_interval 的值：既然 alertmanager 会每隔 group_interval 检查一次已有的告警，那就尽可能将它的时间调的低一些，比如将其设置为 1m，这样你最多在你设置的 repeat_interval+1m 左右就可以收到重复告警</li>
+</ol>
+</div>
+<footer class=post-footer>
+<div class=post-tags>
+<a href=https://www.dianbanjiu.com/tags/prometheus/>prometheus</a>
+<a href=https://www.dianbanjiu.com/tags/alertmanager/>alertmanager</a>
+</div>
+<nav class=post-nav>
+<a class=prev href=/post/%E5%88%A9%E7%94%A8-swagger-ui-%E7%94%9F%E6%88%90%E6%BC%82%E4%BA%AE%E7%9A%84%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3/>
+<i class=iconfont><svg class="icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18" height="18"><path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417l277.93508-310.326815c11.338233-12.190647 11.035334-32.285311-.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"/></svg>
+</i>
+<span class="prev-text nav-default">利用 Swagger UI 生成漂亮的接口文档</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a>
+<a class=next href=/post/whats-the-difference-between-git-merge-and-git-rebase/>
+<span class="next-text nav-default">What's the Difference Between Git Merge and Git Rebase</span>
+<span class="prev-text nav-mobile">下一篇</span>
+<i class=iconfont><svg class="icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18" height="18"><path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697c-11.777231-11.500939-30.216186-10.304694-41.178865 2.712784z"/></svg>
+</i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=copyright>
+<span class=copyright-year>
+&copy;
+2019 -
+2021
+<span class=heart>
+<i class=iconfont><svg class="icon" viewBox="0 0 1025 1024" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="14" height="14"><path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7.0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1.0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2.0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3.1-42.5-8-83.6-24-122.2z" fill="#8a8a8a"/></svg>
+</i>
+</span><span class=author>
+dianbanjiu@gmail.com
+</span></span>
+<span id=jinrishici-sentence>正在加载今日诗词....</span>
+<script src=https://sdk.jinrishici.com/v2/browser/jinrishici.js></script>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class=iconfont><svg t="1614615598714" class="icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" p-id="1398" xmlns:xlink="http://www.w3.org/1999/xlink" width="70" height="70"><defs><style/></defs><path d="M896.816 426.264 725.48 305.344C701.432 194.784 637.992 96.504 533.376 7.4A30.92 30.92.0 00513.296.0h-6.232a30.96 30.96.0 00-20.088 7.4C384.128 94.944 321.384 191.456 296.432 299.688L127.168 419.184a30.96 30.96.0 00-13.112 25.472l.728 137.392a30.88 30.88.0 0012.888 24.984 30.76 30.76.0 0027.792 4.296L300.8 563.36c10.92 45.008 27.272 85.904 50.28 126.2a30.992 30.992.0 0026.904 15.664h6.712c61.488.0 240.232 1.032 256.504 1.208h.272a31.008 31.008.0 0026.856-15.544c22.504-39.144 38.84-78.712 49.944-122.088l150.216 49.608a31.128 31.128.0 0027.8-4.24 31.008 31.008.0 0012.888-24.984l.752-137.456a30.88 30.88.0 00-13.112-25.464zM510.176 69.424c43.456 39.232 77.912 79.672 103.864 122.12H406.256c25.968-42.44 60.448-82.88 103.92-122.12zM288.448 502.24l-111.944 36.904-.408-78.664 109.016-76.976c-.696 13.416-1.576 26.776-1.224 40.536.696 27.784 2.584 53.6 5.688 78.04-.376.128-.752.04-1.128.16zm334.784 142.128c-47.496-.304-168.536-1.032-226.856-1.088-33.032-63.584-48.296-130.792-50.56-220.816-1.528-60.592 8.68-116.352 29.904-168.976h268.904c21.208 52.616 31.432 108.384 29.952 168.96-2.312 90.384-17.824 157.912-51.344 221.92zm224.248-98.136-111.92-36.952c-1.936-.664-3.84-.48-5.784-.72 3.664-26.376 5.96-54.272 6.744-84.552.304-12.176-.6-23.96-1.12-35.856l112.504 79.424-.424 78.656zM661.712 769.056c-4.536-12.216-16.176-21.352-29.28-20.144l-237.16 1.992a31.064 31.064.0 00-28.576 19.664L311.76 910.44a30.904 30.904.0 003.688 29.4c6.168 8.528 16.152 13.616 26.76 12.832l88.704-4.656 59.168 65.704A31.008 31.008.0 00513.096 1024a30.976 30.976.0 0023.024-10.28l59.088-65.704 88.824 4.656c9.976.792 20.384-4.232 26.584-12.584a30.992 30.992.0 004.024-29.16l-52.928-141.872zM583.728 885.4a31.224 31.224.0 00-24.656 10.224l-45.976 51.064-46.024-51.064a31.04 31.04.0 00-23.016-10.288c-.528.0-1.072.0-1.624.064l-55.416 2.904 29.688-75.624 194.552-1.632 28.848 77.312-56.376-2.96z" fill="#838384" p-id="1399"/></svg>
+</i>
+</div>
+</div>
+<script type=text/javascript src=/lib/jquery/jquery-3.2.1.min.js></script>
+<script type=text/javascript src=/lib/slideout/slideout-1.0.1.min.js></script>
+<script type=text/javascript src=/js/main.638251f4230630f0335d8c6748e53a96f94b72670920b60c09a56fdc8bece214.js integrity="sha256-Y4JR9CMGMPAzXYxnSOU6lvlLcmcJILYMCaVv3Ivs4hQ=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/load-photoswipe.js></script>
+<script type=text/javascript src=/lib/photoswipe/photoswipe.min.js></script>
+<script type=text/javascript src=/lib/photoswipe/photoswipe-ui-default.min.js></script>
+<script>$("#openSearch, #openSearchMobile").click(function(){$(".modal-dialog").addClass("visible")}),$("#closeSearch").click(function(){$(".modal-dialog").removeClass("visible")}),$(document).click(function(a){$(a.target).closest(".modal-content, #openSearch, #openSearchMobile").length||$("body").find(".modal-dialog").removeClass("visible")})</script>
+</body>
+</html>
