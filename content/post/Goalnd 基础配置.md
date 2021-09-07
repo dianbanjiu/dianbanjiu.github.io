@@ -2,7 +2,7 @@
 title: "Goalnd 基础配置"
 date: 2019-10-30T10:22:53+08:00
 lastmod: 2019-10-30T10:22:53+08:00
-tags: ["goland", "go", "go module"]
+tags: ["goland", "golang", "go module"]
 author: "dianbanjiu"
 ---
 

@@ -2,7 +2,7 @@
 title: "Golang 对指定关键词进行排序"
 date: 2019-12-20T16:14:03+08:00
 lastmod: 2019-12-20T16:14:03+08:00
-tags: ["go", "sort"]
+tags: ["golang", "sort"]
 author: "dianbanjiu"
 ---
 

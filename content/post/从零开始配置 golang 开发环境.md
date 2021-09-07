@@ -2,7 +2,7 @@
 title: "从零开始配置 Golang 开发环境"
 date: 2020-04-22T22:50:05+08:00
 lastmod: 2020-04-22T22:50:05+08:00
-tags: ["go"]
+tags: ["golang"]
 author: "dianbanjiu"
 ---
 

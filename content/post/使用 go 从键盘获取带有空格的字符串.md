@@ -2,7 +2,7 @@
 title: "使用 Go 从键盘获取带有空格的字符串"
 date: 2019-11-17T21:09:05+08:00
 lastmod: 2019-11-17T21:09:05+08:00
-tags: ["go", "bufio"]
+tags: ["golang", "bufio"]
 author: "dianbanjiu"
 ---
 
