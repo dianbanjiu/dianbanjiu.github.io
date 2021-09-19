@@ -5,7 +5,7 @@ lastmod: 2021-04-10T22:35:17+08:00
 tags: []
 author: "dianbanjiu"
 comment: true
-headPic: "https://cdn.pixabay.com/photo/2016/09/13/11/04/browser-1666982_1280.png"
+headPic: ""
 ---
 
 > 不能扩展的浏览器是没有灵魂的  

@@ -5,7 +5,7 @@ lastmod: 2021-06-28T21:42:16+08:00
 tags: ["gitlab","docker"]
 author: "dianbanjiu"
 comment: true
-headPic: "https://cdn.pixabay.com/photo/2021/06/22/16/39/arch-6356637_960_720.jpg"
+headPic: ""
 ---
 
 > 今天在《也谈钱》的公众号看到一个很有意思的观点：
