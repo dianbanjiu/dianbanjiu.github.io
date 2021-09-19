@@ -6,10 +6,6 @@ tags: ["hugo"]
 author: "dianbanjiu"
 ---
 
-![](https://pixabay.com/get/57e8d2454c57a514eade867dce21357d083edbec5259784a702e7a.jpg)  
-<center style="color:#C0C0C0;font-size:13px; text-decoration:underline">该图片由<a href="https://pixabay.com/zh/users/qimono-1962238/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1876659">Arek Socha</a>在<a href="https://pixabay.com/zh/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1876659">Pixabay</a>上发布</center>
-
-
 这里说的页面不是指 hugo 利用 markdown 文件生成的页面，而是我们自己手动创建的 html 页面。  
 
 这个过程其实并不复杂，但是你需要有一些前端开发的经验，起码的 HTML、CSS、JavaScript 基础你需要了解一些，其次不太推荐使用类似 Vue 这样的 JS 框架，因为 hugo 的页面使用了大量的 golang 模板语法，就是你在主题文件中看到的 `{{}}` 语法，而 Vue 中也有到这个语法，这可能会在无意中给你的开发造成障碍，而且后期再看或者修改这些代码的时候也很有可能会混乱。  
