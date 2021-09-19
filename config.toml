@@ -45,6 +45,11 @@ defaultContentLanguage = "zh-cn"           # Default language to use
   weight = 30
   url = "tags"
 [[menu.main]]
+  name = "归档"
+  weight = 20
+  identifier = "archives"
+  url = "/post/"
+[[menu.main]]
   name = "关于"
   weight = 40
   identifier = "something"
