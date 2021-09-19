@@ -41,14 +41,14 @@ defaultContentLanguage = "zh-cn"           # Default language to use
   identifier = "home"
   url = "/"
 [[menu.main]]
-  name = "标签"
-  weight = 30
-  url = "tags"
-[[menu.main]]
   name = "归档"
   weight = 20
   identifier = "archives"
   url = "/post/"
+[[menu.main]]
+  name = "标签"
+  weight = 30
+  url = "tags"
 [[menu.main]]
   name = "关于"
   weight = 40
@@ -94,3 +94,7 @@ defaultContentLanguage = "zh-cn"           # Default language to use
    enable = true
    id = "007945664711532393264:pegdabljepx"
    title = "搜索"
+
+[markup.goldmark]
+  [markup.goldmark.renderer]
+    unsafe = true

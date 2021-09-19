@@ -15,7 +15,8 @@ contentCopyright: false
 ## 🔍 在哪里可以找到我
 1. **Email**: dianbanjiu@gmail.com  
 2. **Telegram**：[https://t.me/dianbanjiu](https://t.me/dianbanjiu)  
-3. **Github**：[GuangzheJiang](https://github.com/GuangzheJiang)  
+3. **Github**：[GuangzheJiang](https://github.com/GuangzheJiang) 
+4. **QQ**: 1159176517 
 
 
 ## 🌚 关于 Blog
@@ -26,4 +27,4 @@ contentCopyright: false
 ## 🤩 收藏夹
 这里是一些我比较喜欢的站点和工具，你也可以来看看有没有你喜欢的。(收藏夹页面位于 notion，访问速度可能会比较慢)    
 
-[收藏夹](https://www.notion.so/9b1ca951adde4480a33441bcba121d44)  
+[收藏夹](https://www.notion.so/41dbffa6362440899f35d7828b541f76?v=6e20b899dd924a72bed12037ca4d6df6)  
