@@ -159,12 +159,6 @@
 </span>
 </div>
 </header>
-<div class=post-toc id=post-toc>
-<h2 class=post-toc-title>文章目录</h2>
-<div class=post-toc-content>
-<nav id=TableOfContents></nav>
-</div>
-</div>
 <div class=post-content>
 <p>最近开发中涉及到将结果导出到 Excel 文件的功能，我看了一下现有的这些操作 Excel 的开源项目，无论是 Golang 还是 Python，基本上都不支持一次性插入一行数据，只能通过指定 cell 位置来一个个插入，而一个 cell 的位置基本包含这三项（sheet 名，列标，行号），sheet 名好说，毕竟是我自己生成的名字；行号也比较方便拿到；但是列标就有一丢丢蛋疼了，都是由字母拼成的，既然没有现成的实现，就只能自己实时计算了。</p>
 <p><img src=https://imgur.com/6aEufje.png alt="excel 界面示意图"></p>

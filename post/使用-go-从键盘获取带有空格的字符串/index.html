@@ -159,12 +159,6 @@
 </span>
 </div>
 </header>
-<div class=post-toc id=post-toc>
-<h2 class=post-toc-title>文章目录</h2>
-<div class=post-toc-content>
-<nav id=TableOfContents></nav>
-</div>
-</div>
 <div class=post-content>
 <p>最近在使用 golang 从键盘获取输入的时候，发现无论使用 <code>fmt.Scan()</code>，<code>fmt.Scanf()</code> 还是 <code>fmt.Scanln()</code> 获取一个字符串的时候，只要字符串里含有空格，就只能获取到空格以前的数据。</p>
 <p>可以使用 bufio 包来解决这个问题：</p>

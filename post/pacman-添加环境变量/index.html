@@ -159,12 +159,6 @@
 </span>
 </div>
 </header>
-<div class=post-toc id=post-toc>
-<h2 class=post-toc-title>文章目录</h2>
-<div class=post-toc-content>
-<nav id=TableOfContents></nav>
-</div>
-</div>
 <div class=post-content>
 <p>在使用 postman 进行后端接口测试的过程中，我常常会遇到除了登录接口外其他接口都需要 token 来验证的情况，遇到这种状况时，我经常会先转到登录接口，获取返回的 token，然后再把这个 token 复制粘帖到需要的地方，这种方式虽然可行，但是每次都要手动来进行操作，着实有点麻烦。</p>
 <p>所以我就想 postman 有没有什么机制可以把这个 token 分享出来，然后我直接在 token 的位置使用环境变量来调用就可以了呢？</p>
