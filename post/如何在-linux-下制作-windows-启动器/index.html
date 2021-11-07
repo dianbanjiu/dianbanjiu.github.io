@@ -28,7 +28,7 @@
 <meta itemprop=name content="如何在 Linux 下制作 Windows 启动器">
 <meta itemprop=description content="在 Linux 下制作 Windows 启动盘，有三种常用的方式：dd、WoeUSB、Ventoy。 WoeUSB WoeUSB 可以使用 pip3 install WoeUsb-ng 进行安装。 WoeUSB 我以前用的时候还可以，但是这次也不知道"><meta itemprop=datePublished content="2021-11-06T12:24:27+08:00">
 <meta itemprop=dateModified content="2021-11-06T12:24:27+08:00">
-<meta itemprop=wordCount content="934">
+<meta itemprop=wordCount content="933">
 <meta itemprop=keywords content="linux,windows,"><meta name=twitter:card content="summary">
 <meta name=twitter:title content="如何在 Linux 下制作 Windows 启动器">
 <meta name=twitter:description content="在 Linux 下制作 Windows 启动盘，有三种常用的方式：dd、WoeUSB、Ventoy。 WoeUSB WoeUSB 可以使用 pip3 install WoeUsb-ng 进行安装。 WoeUSB 我以前用的时候还可以，但是这次也不知道"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
@@ -171,7 +171,7 @@
 上面之所以需要使用 sudo 来运行，一方面是因为 Ventoy 需要获取你的 PC 上现在都有哪些存储设备，另一方面是因为安装的过程中需要对设备进行格式化。</p>
 <p>安装好 Ventoy 之后，你只需要把各种 ISO 镜像文件扔到安装 Ventoy 的 U 盘中即可。</p>
 <p>如果你现在看一下这个 U 盘的分区结构你可以发现 U 盘上会有两个分区，一大一小，后面很小的那个分区放的就是 Ventoy 的引导文件，前面这个分区是用来放你的镜像文件的，理论上你把前面这个分区用来存放其他文件也是完全没问题的。</p>
-<p>这次电脑成功进入了 Ventoy 的引导界面，但是在我选择了 ISO 文件之后，Ventoy 提示我缺少一些东西 Windows 引导失败（我裂开了）我又重新下载了最新的 Windows10 镜像，还是会出现同样的问题，可能是需要安装一些其他的 Ventoy 插件或者是 Ventoy 对于 AMD 的支持不太好？，但是我没有继续折腾了。</p>
+<p>这次电脑成功进入了 Ventoy 的引导界面，但是在我选择了 ISO 文件之后，Ventoy 提示我缺少一些东西 Windows 引导失败（我裂开了）我又重新下载了最新的 Windows10 镜像，还是会出现同样的问题，可能是需要安装一些其他的 Ventoy 插件或者是 Ventoy 对于 AMD 的支持不太好？但是我没有继续折腾了。</p>
 <h2 id=dd>dd</h2>
 <p>这一 Part 的标题虽然是 dd，但是你也可以直接使用复制粘贴来完成，这个方案相比上面两个稍微麻烦一点，但是并不复杂，而且这也是我唯一测试成功的方案😭</p>
 <p>下面涉及到对磁盘的分区操作，熟悉终端工具的可以直接用 fdisk 跟 mkfs 完成，习惯 GUI 的可以使用 gparted 完成。</p>
