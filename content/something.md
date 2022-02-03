@@ -15,7 +15,7 @@ contentCopyright: false
 ## 🔍 在哪里可以找到我
 1. **Email**: dianbanjiu@gmail.com  
 2. **Telegram**：[https://t.me/dianbanjiu](https://t.me/dianbanjiu)  
-3. **Github**：[GuangzheJiang](https://github.com/GuangzheJiang) 
+3. **Github**：[dianbanjiu](https://github.com/dianbanjiu) 
 4. **QQ**: 1159176517 
 
 
