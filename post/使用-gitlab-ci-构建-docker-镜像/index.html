@@ -15,7 +15,7 @@
 <meta name=mobile-web-app-capable content="yes">
 <meta name=author content="dianbanjiu">
 <meta name=description content="注意：下面示例的 gitlab-runner 是直接装在物理机器上的，并且对应的镜像仓库使用的是 http 协议 1、首先在安装 gitlab runner 的机器上安装 docker 2、创建 /etc/docker/d">
-<meta name=generator content="Hugo 0.92.1">
+<meta name=generator content="Hugo 0.92.2">
 <link rel=canonical href=https://www.dianbanjiu.com/post/%E4%BD%BF%E7%94%A8-gitlab-ci-%E6%9E%84%E5%BB%BA-docker-%E9%95%9C%E5%83%8F/>
 <link rel=icon href=/favicon.svg>
 <link rel=stylesheet href=/sass/jane.min.84931acb6cb47fefdee7f38222f1f8032481751b22824847279be870aeb7989b.css integrity="sha256-hJMay2y0f+/e5/OCIvH4AySBdRsigkhHJ5vocK63mJs=" media=screen crossorigin=anonymous>
@@ -28,7 +28,7 @@
 <meta itemprop=name content="使用 Gitlab Ci 构建 Docker 镜像">
 <meta itemprop=description content="注意：下面示例的 gitlab-runner 是直接装在物理机器上的，并且对应的镜像仓库使用的是 http 协议 1、首先在安装 gitlab runner 的机器上安装 docker 2、创建 /etc/docker/d"><meta itemprop=datePublished content="2022-01-04T20:31:56+08:00">
 <meta itemprop=dateModified content="2022-01-04T20:31:56+08:00">
-<meta itemprop=wordCount content="475">
+<meta itemprop=wordCount content="495">
 <meta itemprop=keywords content="docker,gitlab,gitlab-runner,"><meta name=twitter:card content="summary">
 <meta name=twitter:title content="使用 Gitlab Ci 构建 Docker 镜像">
 <meta name=twitter:description content="注意：下面示例的 gitlab-runner 是直接装在物理机器上的，并且对应的镜像仓库使用的是 http 协议 1、首先在安装 gitlab runner 的机器上安装 docker 2、创建 /etc/docker/d"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
@@ -162,7 +162,8 @@
 <div class=post-content>
 <p>注意：下面示例的 gitlab-runner 是直接装在物理机器上的，并且对应的镜像仓库使用的是 http 协议</p>
 <p>1、首先在安装 gitlab runner 的机器上安装 docker</p>
-<p>2、创建 <code>/etc/docker/daemon.json</code>，内容如下</p>
+<p>2、创建 <code>/etc/docker/daemon.json</code>，内容如下<br>
+如果你的 gitlab 是使用的 HTTPS 协议，可以跳过这一步</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -255,6 +256,12 @@
 <a href=https://www.dianbanjiu.com/tags/gitlab-runner/>gitlab-runner</a>
 </div>
 <nav class=post-nav>
+<a class=prev href=/post/arch-linux-%E6%97%A0%E6%B3%95%E9%85%8D%E5%AF%B9%E8%93%9D%E7%89%99%E8%80%B3%E6%9C%BA/>
+<i class=iconfont><svg class="icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18" height="18"><path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417l277.93508-310.326815c11.338233-12.190647 11.035334-32.285311-.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"/></svg>
+</i>
+<span class="prev-text nav-default">Arch Linux 无法配对蓝牙耳机</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a>
 <a class=next href=/post/%E5%85%B3%E4%BA%8E-windows10-%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD%E7%A1%AC%E7%9B%98/>
 <span class="next-text nav-default">关于 Windows10 无法加载硬盘</span>
 <span class="prev-text nav-mobile">下一篇</span>

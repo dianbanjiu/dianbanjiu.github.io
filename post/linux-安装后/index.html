@@ -15,7 +15,7 @@
 <meta name=mobile-web-app-capable content="yes">
 <meta name=author content="dianbanjiu">
 <meta name=description content="之前因为各种奇奇怪怪的想法重装了 n 次电脑，不过因为一直都是在 Linux 的圈内，所以就记录一下在基本的安装完成之后，我都还干了些什么。 配置源 在连接网络">
-<meta name=generator content="Hugo 0.92.1">
+<meta name=generator content="Hugo 0.92.2">
 <link rel=canonical href=https://www.dianbanjiu.com/post/linux-%E5%AE%89%E8%A3%85%E5%90%8E/>
 <link rel=icon href=/favicon.svg>
 <link rel=stylesheet href=/sass/jane.min.84931acb6cb47fefdee7f38222f1f8032481751b22824847279be870aeb7989b.css integrity="sha256-hJMay2y0f+/e5/OCIvH4AySBdRsigkhHJ5vocK63mJs=" media=screen crossorigin=anonymous>
@@ -28,7 +28,7 @@
 <meta itemprop=name content="Linux 安装后">
 <meta itemprop=description content="之前因为各种奇奇怪怪的想法重装了 n 次电脑，不过因为一直都是在 Linux 的圈内，所以就记录一下在基本的安装完成之后，我都还干了些什么。 配置源 在连接网络"><meta itemprop=datePublished content="2021-03-02T23:20:23+08:00">
 <meta itemprop=dateModified content="2021-03-02T23:20:23+08:00">
-<meta itemprop=wordCount content="1202">
+<meta itemprop=wordCount content="1223">
 <meta itemprop=keywords content="Linux,实用工具,"><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Linux 安装后">
 <meta name=twitter:description content="之前因为各种奇奇怪怪的想法重装了 n 次电脑，不过因为一直都是在 Linux 的圈内，所以就记录一下在基本的安装完成之后，我都还干了些什么。 配置源 在连接网络"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
@@ -369,7 +369,7 @@ $ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git <span class
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span></code></pre></td>
 <td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>$ sudo usermod -aG docker username
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>$ sudo usermod -aG docker $USERNAME
 </code></pre></td></tr></table>
 </div>
 </div><p>编辑 <code>/etc/docker/daemon.json</code>，添加国内镜像源</p>
@@ -404,7 +404,7 @@ $ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git <span class
 </span><span class=lnt>2
 </span></code></pre></td>
 <td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=nb>export</span> <span class=nv>GO111MODULE</span><span class=o>=</span>on
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># export GO111MODULE=on #新版本的 GO 默认开启此功能，可不添加此行</span>
 <span class=nb>export</span> <span class=nv>GOPROXY</span><span class=o>=</span>https://goproxy.cn
 </code></pre></td></tr></table>
 </div>
