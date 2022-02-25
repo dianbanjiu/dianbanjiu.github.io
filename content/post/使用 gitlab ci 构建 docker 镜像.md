@@ -12,7 +12,8 @@ headPic: ""
 
 1、首先在安装 gitlab runner 的机器上安装 docker
 
-2、创建 `/etc/docker/daemon.json`，内容如下
+2、创建 `/etc/docker/daemon.json`，内容如下  
+如果你的 gitlab 是使用的 HTTPS 协议，可以跳过这一步  
 
 ```json
 {
