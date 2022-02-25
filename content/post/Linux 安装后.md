@@ -99,7 +99,7 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting extract)
 使用下面的命令将当前用户添加到 docker 组中，之后就可以通过当前用户身份直接使用 docker。
 
 ```
-$ sudo usermod -aG docker username
+$ sudo usermod -aG docker $USERNAME
 ```
 
 编辑 `/etc/docker/daemon.json`，添加国内镜像源
@@ -125,7 +125,7 @@ $ go get -u golang.org/x/tools/cmd/goimports
 在 .zshrc 添加以下内容切换 goproxy,加速依赖获取。
 
 ```shell
-export GO111MODULE=on
+# export GO111MODULE=on #新版本的 GO 默认开启此功能，可不添加此行
 export GOPROXY=https://goproxy.cn
 ```
 
