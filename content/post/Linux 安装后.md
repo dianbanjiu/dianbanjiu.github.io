@@ -1,6 +1,6 @@
 ---
 title: "Linux 安装后"
-date: 2021-03-02T23:20:23+08:00
+date: 2022-04-05
 tags: ["Linux", "实用工具"]
 author: "dianbanjiu"
 ---
@@ -12,7 +12,7 @@ author: "dianbanjiu"
 在连接网络之后，第一件事就是先配置软件源，要不之后安装软件的过程会极慢。
 
 1. 更改主源
-编辑 `/etc/pacman.d/mirrorlist`，搜索 `China` 字段，选择清华、中科大、上交大镜像源，保存。
+   编辑 `/etc/pacman.d/mirrorlist`，搜索 `China` 字段，选择清华、中科大、上交大镜像源，保存。
 
 2. 添加 archlinuxcn 源
 
@@ -33,41 +33,43 @@ $ sudo pacman -Syyu archlinuxcn-keyring
 
 ## 软件安装
 
-| 软件                                                                                | 备注                              |
-| ----------------------------------------------------------------------------------- | --------------------------------- |
-| chromium                                                                   | 浏览器                            |
-| nutstore                                                                            | 坚果云，同步云盘                  |
-| tmux                                                                                | 终端复用工具                      |
-|git | 版本管理工具|
-| visual-studio-code-bin                                                              | 文本编辑器                        |
-| tree                                                                                | 树形目录查看                      |
-| goland gland-jre                                                                              | go IDE，继承自 IDEA               |
-| spotify                                                                             | 流音乐媒体                        |
-| keepassxc                                                                           | 密码管理工具                      |
-| jdk11-openjdk                                                                       | jdk                               |
-| java11-openjfx                                                                      | goland 的 markdown 预览依赖此程序 |
-| docker                                                                              | 容器                              |
-| obs-studio                                                                          | 录屏                              |
-| spectacle                                                                           | KDE 官方的截屏工具                              |
-| yay                                                                                 | aur 包安管理                      |
-| go                                                                                  | go 语言开发环境                           |
-| fcitx5 fcitx5-chinese-addons fcitx5-gtk fcitx5-material-color fcitx5-qt fcitx5-rime fcitx5-configtool | fcitx5 输入法框架                 |
-| telegram-desktop                                                                    | IM 工具                           |
-| hugo                                                                                | hugo 博客命令行工具               |
-| nodejs npm                                                                          | nodejs 开发环境
-| scrcpy                                                                              | 连接手机与电脑，在电脑上使用手机                          |
-| plasma-browser-integration                                                          | plasma 桌面的浏览器集成插件       |
-| translate-shell                                                                     | 终端翻译工具                      |
-| postman-bin                                                                             | api 测试工具                      |
-| kgpg                                                                                | kde 的 gnupg 图形界面             |
-|ark|KDE 官方的压缩文件查看器|
-|unzip unrar p7zip| 几种常用的压缩格式|
-|kate|KDE 官方的文本编辑器|
-|gnome-keyring|钥匙串管理，vscode 连接 github 需要使用到|
+| 软件                                                                                                  | 备注                                      |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| chromium                                                                                              | 浏览器                                    |
+| nutstore                                                                                              | 坚果云，同步云盘                          |
+| tmux                                                                                                  | 终端复用工具                              |
+| git                                                                                                   | 版本管理工具                              |
+| visual-studio-code-bin                                                                                | 文本编辑器                                |
+| tree                                                                                                  | 树形目录查看                              |
+| goland gland-jre                                                                                      | go IDE，继承自 IDEA                       |
+| spotify                                                                                               | 流音乐媒体                                |
+| keepassxc                                                                                             | 密码管理工具                              |
+| jdk11-openjdk                                                                                         | jdk                                       |
+| java11-openjfx                                                                                        | goland 的 markdown 预览依赖此程序         |
+| docker                                                                                                | 容器                                      |
+| obs-studio                                                                                            | 录屏                                      |
+| spectacle                                                                                             | KDE 官方的截屏工具                        |
+| yay                                                                                                   | aur 包安管理                              |
+| go                                                                                                    | go 语言开发环境                           |
+| fcitx5 fcitx5-chinese-addons fcitx5-gtk fcitx5-material-color fcitx5-qt fcitx5-rime fcitx5-configtool | fcitx5 输入法框架                         |
+| telegram-desktop                                                                                      | IM 工具                                   |
+| hugo                                                                                                  | hugo 博客命令行工具                       |
+| nodejs npm                                                                                            | nodejs 开发环境                           |
+| scrcpy                                                                                                | 连接手机与电脑，在电脑上使用手机          |
+| plasma-browser-integration                                                                            | plasma 桌面的浏览器集成插件               |
+| translate-shell                                                                                       | 终端翻译工具                              |
+| postman-bin                                                                                           | api 测试工具                              |
+| kgpg                                                                                                  | kde 的 gnupg 图形界面                     |
+| ark                                                                                                   | KDE 官方的压缩文件查看器                  |
+| unzip unrar p7zip                                                                                     | 几种常用的压缩格式                        |
+| kate                                                                                                  | KDE 官方的文本编辑器                      |
+| gnome-keyring                                                                                         | 钥匙串管理，vscode 连接 github 需要使用到 |
+| peek                                                                                                  | linux 下一个非常简单的 gif 录制工具       |
 
-一行命令安装上面所有应用。  
+一行命令安装上面所有应用。
+
 ```shell
-$ sudo pacman -S git zsh nutstore vim tmux visual-studio-code-bin tree goland goland-jre spotify keepassxc jdk11-openjdk java11-openjfx docker obs-studio spectacle yay go fcitx5 fcitx5-chinese-addons fcitx5-gtk fcitx5-material-color fcitx5-qt fcitx5-rime fcitx5-configtool telegram-desktop hugo nodejs npm scrcpy plasma-browser-integration translate-shell postman-bin kgpg ark unarchiver unzip unrar p7zip kate gnome-keyring
+$ sudo pacman -S git zsh nutstore vim tmux visual-studio-code-bin tree goland goland-jre spotify keepassxc jdk11-openjdk java11-openjfx docker obs-studio spectacle yay go fcitx5 fcitx5-chinese-addons fcitx5-gtk fcitx5-material-color fcitx5-qt fcitx5-rime fcitx5-configtool telegram-desktop hugo nodejs npm scrcpy plasma-browser-integration translate-shell postman-bin kgpg ark unarchiver unzip unrar p7zip kate gnome-keyring peek
 ```
 
 ## 环境配置
@@ -92,7 +94,9 @@ $ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTO
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting extract)
 ```
 
-`extract` 插件可以简化命令行解压时复杂的参数，只需 `x 压缩包`，即可将压缩包解压到当前目录下。  
+`extract` 插件可以简化命令行解压时复杂的参数，只需 `x 压缩包`，即可将压缩包解压到当前目录下。
+
+一般情况下 `zsh-autosuggestions`会将一些待补全的内容以较浅的颜色进行展示，但是异常情况下可能直接以普通文本的形式展示出来，这可能是因为终端的颜色编码配置不正确，需要在 .zshrc 中添加 `export TERM=xterm-256color`
 
 ### 配置 docker
 
@@ -156,6 +160,6 @@ $ ./SetDpi.sh 126 Deepin-TIM    # 调整 TIM 的 DPI
 
 编辑 `/etc/bluetooth/main.conf`，找到 `AutoEnable` 字段，取消前面的注释，并将对应的值修改为 `true`。
 
-
 ### Jetbrains 配置
-Jetbrains 系列的软件在 Linux 下默认的字体显示非常辣眼睛，需要同时安装对应的 `-jre` 支持才行。如 Goland 就需要安装 `goland-jre`。  
+
+Jetbrains 系列的软件在 Linux 下默认的字体显示非常辣眼睛，需要同时安装对应的 `-jre` 支持才行。如 Goland 就需要安装 `goland-jre`。
