@@ -163,3 +163,6 @@ $ ./SetDpi.sh 126 Deepin-TIM    # 调整 TIM 的 DPI
 ### Jetbrains 配置
 
 Jetbrains 系列的软件在 Linux 下默认的字体显示非常辣眼睛，需要同时安装对应的 `-jre` 支持才行。如 Goland 就需要安装 `goland-jre`。
+
+### 界面美化
+图标推荐： [numix-circle-icon-theme](https://github.com/numixproject/numix-icon-theme-circle)
