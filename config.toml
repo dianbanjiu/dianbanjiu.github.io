@@ -86,8 +86,8 @@ defaultContentLanguage = "zh-cn"           # Default language to use
   #   issueTerm = "pathname"
 
 # 底部的今日一词
-[params.jinrishici]
-  enable = true
+# [params.jinrishici]
+#   enable = true
 
 # 顶部的搜索框
 [params.search.google]
