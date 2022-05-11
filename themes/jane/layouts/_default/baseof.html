@@ -16,10 +16,10 @@
   {{ if or .Site.Params.photoswipe .Site.Params.fancybox }}
     {{ partial "photoswipe.html" . }}
   {{ end }}
-
+<!-- 
   {{ if .Site.Params.search.google.enable }}
     {{ partial "search_google.html" . }}
-  {{ end }}
+  {{ end }} -->
 
   {{ if .Site.Params.forkMeOnGithub }}
     <style>
@@ -57,12 +57,12 @@
       {{ partial "footer.html" . }}
     </footer>
 
-    <div class="back-to-top" id="back-to-top">
+    <!-- <div class="back-to-top" id="back-to-top">
       <i class="iconfont">
         {{/* icon up */}}
         {{ partial "svg/rock.svg" }}
       </i>
-    </div>
+    </div> -->
   </div>
   {{ partial "scripts.html" . }}
 </body>

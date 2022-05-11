@@ -90,10 +90,10 @@ defaultContentLanguage = "zh-cn"           # Default language to use
 #   enable = true
 
 # 顶部的搜索框
-[params.search.google]
-   enable = true
-   id = "007945664711532393264:pegdabljepx"
-   title = "搜索"
+# [params.search.google]
+#    enable = true
+#    id = "007945664711532393264:pegdabljepx"
+#    title = "搜索"
 
 [markup.goldmark]
   [markup.goldmark.renderer]
