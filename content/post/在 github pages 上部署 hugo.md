@@ -140,6 +140,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@master
+        with:
+          fetch-depth: 0
+      - name: Disable quotePath
+        run: git config --global core.quotePath false
       - name: setup hugo
         uses: peaceiris/actions-hugo@v2
         with:
