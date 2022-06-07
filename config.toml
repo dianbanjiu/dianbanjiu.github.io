@@ -13,7 +13,7 @@ paginate = 5              # Number of articles displayed on the homepage  # 首�
 rssLimit = 20             # Limit Entry Count to Rss file # 限制 Rss 文章输出数量
 # googleAnalytics = "UA-146793229-1"      # UA-XXXXXXXX-X
 copyright = "dianbanjiu@gmail.com"            # default: author.name ↓        # 默认为下面配置的author.name ↓
-# enableGitInfo = true
+enableGitInfo = true
 headPic = true
 # Highlight options.
 # See https://gohugo.io/content-management/syntax-highlighting/
@@ -75,8 +75,10 @@ defaultContentLanguage = "zh-cn"           # Default language to use
   toc = true                                                                            # 是否开启目录
   photoswipe = true         # see https://github.com/dimsemenov/PhotoSwipe            # 是否启用PhotoSwipe（图片可点击）
   contentCopyright = '原创内容，如需转载请注明作者和出处，谢谢'
+
 [frontmatter]
   lastmod = [":git", "lastmod", ":fileModTime"]
+
   # Link custom CSS and JS assets
   #   (relative to /static/css and /static/js respectively)
   customCSS = []            # if ['custom.css'], load '/static/css/custom.css' file
