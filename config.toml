@@ -75,7 +75,8 @@ defaultContentLanguage = "zh-cn"           # Default language to use
   toc = true                                                                            # 是否开启目录
   photoswipe = true         # see https://github.com/dimsemenov/PhotoSwipe            # 是否启用PhotoSwipe（图片可点击）
   contentCopyright = '原创内容，如需转载请注明作者和出处，谢谢'
-
+[frontmatter]
+  lastmod = [":git", "lastmod", ":fileModTime"]
   # Link custom CSS and JS assets
   #   (relative to /static/css and /static/js respectively)
   customCSS = []            # if ['custom.css'], load '/static/css/custom.css' file
