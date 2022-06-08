@@ -1,0 +1,93 @@
+<!doctype html><html lang=zh-cn itemscope itemtype=http://schema.org/WebPage><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><title>Github Action 自动修改文章的更新日期 - 点半九</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta name=MobileOptimized content="width"><meta name=HandheldFriendly content="true"><meta name=applicable-device content="pc,mobile"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=mobile-web-app-capable content="yes"><meta name=author content="dianbanjiu"><meta name=description content="我博客写的多是一些偏向于技术或者工具使用方面的文章，随着技术或者工具的更迭，我也需要时不时地更新一下历史文章。在没有使用 action 之前我一直是手动修"><meta name=generator content="Hugo 0.100.1"><link rel=canonical href=https://www.dianbanjiu.com/post/github-action-%E8%87%AA%E5%8A%A8%E4%BF%AE%E6%94%B9%E6%96%87%E7%AB%A0%E7%9A%84%E6%9B%B4%E6%96%B0%E6%97%A5%E6%9C%9F/><link rel=icon href=/favicon.svg><link rel=stylesheet href=/sass/jane.min.84931acb6cb47fefdee7f38222f1f8032481751b22824847279be870aeb7989b.css integrity="sha256-hJMay2y0f+/e5/OCIvH4AySBdRsigkhHJ5vocK63mJs=" media=screen crossorigin=anonymous><meta property="og:title" content="Github Action 自动修改文章的更新日期"><meta property="og:description" content="我博客写的多是一些偏向于技术或者工具使用方面的文章，随着技术或者工具的更迭，我也需要时不时地更新一下历史文章。在没有使用 action 之前我一直是手动修"><meta property="og:type" content="article"><meta property="og:url" content="https://www.dianbanjiu.com/post/github-action-%E8%87%AA%E5%8A%A8%E4%BF%AE%E6%94%B9%E6%96%87%E7%AB%A0%E7%9A%84%E6%9B%B4%E6%96%B0%E6%97%A5%E6%9C%9F/"><meta property="article:section" content="post"><meta property="article:published_time" content="2022-06-08T00:25:49+08:00"><meta property="article:modified_time" content="2022-06-08T13:35:05+08:00"><meta itemprop=name content="Github Action 自动修改文章的更新日期"><meta itemprop=description content="我博客写的多是一些偏向于技术或者工具使用方面的文章，随着技术或者工具的更迭，我也需要时不时地更新一下历史文章。在没有使用 action 之前我一直是手动修"><meta itemprop=datePublished content="2022-06-08T00:25:49+08:00"><meta itemprop=dateModified content="2022-06-08T13:35:05+08:00"><meta itemprop=wordCount content="875"><meta itemprop=keywords content="hugo,github,"><meta name=twitter:card content="summary"><meta name=twitter:title content="Github Action 自动修改文章的更新日期"><meta name=twitter:description content="我博客写的多是一些偏向于技术或者工具使用方面的文章，随着技术或者工具的更迭，我也需要时不时地更新一下历史文章。在没有使用 action 之前我一直是手动修"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>点半九</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><li class=mobile-menu-item><a class=menu-item-link href=https://www.dianbanjiu.com/>主页</a></li><li class=mobile-menu-item><a class=menu-item-link href=https://www.dianbanjiu.com/post/>归档</a></li><li class=mobile-menu-item><a class=menu-item-link href=https://www.dianbanjiu.com/tags>标签</a></li><li class=mobile-menu-item><a class=menu-item-link href=https://www.dianbanjiu.com/something>关于</a></li></ul></nav><link rel=stylesheet href=/lib/photoswipe/photoswipe.min.css><link rel=stylesheet href=/lib/photoswipe/default-skin/default-skin.min.css><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><header id=header class="header container"><div class=logo-wrapper><a href=/ class=logo>点半九</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=https://www.dianbanjiu.com/>主页</a></li><li class=menu-item><a class=menu-item-link href=https://www.dianbanjiu.com/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=https://www.dianbanjiu.com/tags>标签</a></li><li class=menu-item><a class=menu-item-link href=https://www.dianbanjiu.com/something>关于</a></li></ul></nav></header><div id=mobile-panel><main id=main class="main bg-llight"><div class=content-wrapper><div id=content class="content container"><article class="post bg-white"><header class=post-header><h1 class=post-title>Github Action 自动修改文章的更新日期</h1><div class=post-meta><span style=vertical-align:middle><time datetime=2022-06-08 class=post-time>创建于
+2022-06-08</time></span>
+<span style=color:#8a8a8a>|</span>
+<span style=vertical-align:middle><time datetime=2022-06-08 class=post-time>更新于
+2022-06-08</time></span></div></header><div class=post-content><p>我博客写的多是一些偏向于技术或者工具使用方面的文章，随着技术或者工具的更迭，我也需要时不时地更新一下历史文章。在没有使用 action 之前我一直是手动修改文章更新时间，这种方式虽然可行，但是多少有点繁琐。在使用 action 自动部署博客之后，我就想能不能通过 action 自动修改文章的更新时间</p><p>结合官方文档，目前确定了整体的流程，大致需要下面三步</p><h2 id=1修改-archetypesdefaultmd>1、修改 archetypes/default.md</h2><p><strong>archetypes/default.md</strong> 是博客文章的默认模板，当你使用 <code>hugo new post</code> 创建文章的时候，hugo 会把这个模板内容填充到你新建的文章中。你需要在其中新增下面一行，当你创建新文章的时候，默认会把当前日期填充为文章的更新日期</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl>lastmod: {{ .Date }}
+</span></span></code></pre></td></tr></table></div></div><p>当你设置了第二步之后，这里实际展示的数据会根据第二步的设置进行替换</p><h2 id=2修改-configtomlyamljson>2、修改 config.toml/yaml/json</h2><p>修改博客的配置文件，在其中新增下面两行</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-toml data-lang=toml><span class=line><span class=cl><span class=p>[</span><span class=nx>frontmatter</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>  <span class=nx>lastmod</span> <span class=p>=</span> <span class=p>[</span><span class=s2>&#34;:git&#34;</span><span class=p>,</span> <span class=s2>&#34;lastmod&#34;</span><span class=p>,</span> <span class=s2>&#34;:fileModTime&#34;</span><span class=p>]</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li><code>:git</code>: 以文件的提交时间作为更新时间</li><li><code>lastmod</code>: 以文章里面的 lastmod 字段作为更新时间</li><li><code>:fileModTime</code>: 以文件的修改时间作为更新时间</li></ul><p>你可以根据自己的需要设置/组合这些参数，这几个参数的生效顺序就是根据他们在数组中的顺序决定的</p><p>如果你像我一样使用文章 git 提交的时间作为文章更新时间的话，还需要在博客的配置文件中新增下面一行</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-toml data-lang=toml><span class=line><span class=cl><span class=nx>enableGitInfo</span> <span class=p>=</span> <span class=kc>true</span>
+</span></span></code></pre></td></tr></table></div></div><p>关于这部分更多的详细配置，你可以参考延伸阅读<sup id=fnref:1><a href=#fn:1 class=footnote-ref role=doc-noteref>1</a></sup></p><h2 id=3修改-action-配置文件可选>3、修改 action 配置文件（可选）</h2><p>如果你想以文章的 git 提交时间作为文章的更新时间的话，你还需要修改一下 action 的配置文件。下面是我的 action 的配置文件</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Build and Publish Blog</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>on</span><span class=p>:</span><span class=w> 
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>push</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>branches</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=l>blog</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>jobs</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>build</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>runs-on</span><span class=p>:</span><span class=w> </span><span class=l>ubuntu-latest</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>steps</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Checkout</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/checkout@master</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>fetch-depth</span><span class=p>:</span><span class=w> </span><span class=m>0</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Disable quotePath</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=l>git config --global core.quotePath false</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>setup hugo</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>peaceiris/actions-hugo@v2</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>hugo-version</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;latest&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>build hugo</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=l>hugo --gc --minify --cleanDestinationDir</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>deploy hugo</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>peaceiris/actions-gh-pages@v2</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>env</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>ACTIONS_DEPLOY_KEY</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.ACTIONS_DEPLOY_KEY }}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>PUBLISH_BRANCH</span><span class=p>:</span><span class=w> </span><span class=l>master</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>PUBLISH_DIR</span><span class=p>:</span><span class=w> </span><span class=l>./public</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><p>注意上面的 <code>Checkout</code> 和 <code>Disable quotePath</code> 阶段</p><p>其中 <code>Checkout</code> 阶段需要有下面两行，在这里 <strong>fetch-depth</strong> 的默认值是 1，也就是说它默认只会拉取分支最近的一次 commit，这可能会导致一些文章的 <code>GitInfo</code> 变量无法获取到。设置为 0 代表拉取所有分支的所有提交</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>with</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>fetch-depth</span><span class=p>:</span><span class=w> </span><span class=m>0</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><p>默认情况下，当文件名中包含中文的时候，git 会使用引号把文件名括起来，但是这会导致 action 中无法读取 <code>:GitInfo</code> 变量，所以这里需要有 <code>Disable quotePath</code> 阶段</p><p>通过上面这些操作之后，你可以尝试修改一篇历史文章，并提交到 GitHub 上，待 action 成功运行完成之后，你应该就可以看到效果了</p><div class=footnotes role=doc-endnotes><hr><ol><li id=fn:1><p>hugo 日期配置官方文档: <a href=https://gohugo.io/getting-started/configuration/#configure-dates>https://gohugo.io/getting-started/configuration/#configure-dates</a>&#160;<a href=#fnref:1 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li></ol></div></div><footer class=post-footer><div class=post-tags><a href=https://www.dianbanjiu.com/tags/hugo/>hugo</a>
+<a href=https://www.dianbanjiu.com/tags/github/>github</a></div><nav class=post-nav><a class=next href=/post/vscode-%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8-python-%E7%9A%84%E5%87%BD%E6%95%B0%E6%8B%AC%E5%8F%B7/><span class="next-text nav-default">VSCode 自动补全 Python 的函数括号</span>
+<span class="prev-text nav-mobile">下一篇</span>
+<i class=iconfont><svg class="icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18" height="18"><path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697c-11.777231-11.500939-30.216186-10.304694-41.178865 2.712784z"/></svg></i></a></nav></footer></article></div></div></main><footer id=footer class=footer><div class=copyright><span class=copyright-year>&copy;
+2019 -
+2022
+<span class=heart><i class=iconfont><svg class="icon" viewBox="0 0 1025 1024" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="14" height="14"><path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7.0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1.0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2.0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3.1-42.5-8-83.6-24-122.2z" fill="#8a8a8a"/></svg></i></span><span class=author>dianbanjiu@gmail.com</span></span></div></footer></div><script type=text/javascript src=/lib/jquery/jquery-3.2.1.min.js></script>
+<script type=text/javascript src=/lib/slideout/slideout-1.0.1.min.js></script>
+<script type=text/javascript src=/js/main.638251f4230630f0335d8c6748e53a96f94b72670920b60c09a56fdc8bece214.js integrity="sha256-Y4JR9CMGMPAzXYxnSOU6lvlLcmcJILYMCaVv3Ivs4hQ=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/load-photoswipe.js></script>
+<script type=text/javascript src=/lib/photoswipe/photoswipe.min.js></script>
+<script type=text/javascript src=/lib/photoswipe/photoswipe-ui-default.min.js></script></body></html>
