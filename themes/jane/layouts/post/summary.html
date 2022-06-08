@@ -10,14 +10,19 @@
     </h1>
     {{ partial "post/i18nlist.html" . }}
     <div class="post-meta">
-      <!-- <span style="vertical-align: middle;">
+      <span  style="vertical-align: middle;">
         <time datetime="{{ .Date.Format "2006-01-02" }}" class="post-time">
-          <b>创建于:</b> {{ .Date.Format (.Site.Params.dateFormatToUse | default "2006-01-02") }}
+          创建于
+            {{ .Date.Format (.Site.Params.dateFormatToUse | default "2006-01-02") }}
           </time>
+      </span>
+     |
+      <span style="vertical-align: middle;">
         <time datetime="{{ .Date.Format "2006-01-02" }}" class="post-time">
-          <b>更新于:</b> {{ .Lastmod.Format (.Site.Params.dateFormatToUse | default "2006-01-02") }}
+        更新于
+          {{ .Lastmod.Format (.Site.Params.dateFormatToUse | default "2006-01-02") }}
         </time>
-      </span> -->
+      </span>
       {{ with .Params.categories -}}
         <div class="post-category">
           {{ range . }}
