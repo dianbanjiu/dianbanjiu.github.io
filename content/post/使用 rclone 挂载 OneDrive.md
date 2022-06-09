@@ -238,14 +238,15 @@ q) Quit config
 e/n/d/r/c/s/q> q
 ```
 
-## 测试&&挂载
-
+## 测试&&挂载&&卸载
+### 测试
 接着你可以使用下面的命令列出自己 OneDrive 中的所有一级目录，测试一下是否配置成功
 
 ```bash
 $ rclone lsd remote:
 ```
 
+### 挂载
 如果你只想在需要的时候手动挂载 OneDrive，可以使用下面的命令
 
 ```bash
@@ -260,6 +261,12 @@ $ rclone mount testDrive:/ /path/to/mount --allow-non-empty --vfs-cache-mode ful
     - `full` 模式下所有对远程文件的读写都会缓存到磁盘中
     - `off` 模式下所有对远程文件的读写都不会缓存到磁盘中
 - rclone 的挂载命令是一个前台服务，如果你关闭了当前的会话，那挂载进程也会退出。`--daemon` 参数可以将 rclone 的挂载命令作为一个后台服务，这样即使你关闭了当前会话，挂载进程也不会退出
+
+### 卸载
+使用 rclone 挂载的云盘的卸载和普通磁盘的卸载方式一样，可以直接使用 `umount` 来完成  
+```shell
+umount testDrive
+```
 
 ## 开机自启动
 
