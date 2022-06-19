@@ -49,18 +49,15 @@ $ sudo pacman -Syyu archlinuxcn-keyring
 | flameshot | 截图工具 |
 | yay | aur 包安管理 |
 | go | go 语言开发环境 |
-| fcitx fcitx-qt5 | fcitx 输入法框架 |
+| fcitx5 fcitx-im fcitx5-chinese-addons | fcitx 输入法框架 |
 | telegram-desktop | IM 工具 |
 | hugo | hugo 博客命令行工具 |
 | nodejs npm | nodejs 开发环境 |
-| scrcpy | 连接 Android 与 PC，可以在 PC 上直接操作手机 |
 | plasma-browser-integration | plasma 桌面的浏览器集成插件 |
 | translate-shell | 终端翻译工具 |
 | postman-bin | api 测试工具 |
-| kgpg | kde 的 gnupg 图形界面 |
 | ark | KDE 官方的压缩文件查看器 |
 | unzip unrar p7zip | 几种常用的压缩格式 |
-| kate | KDE 官方的文本编辑器 |
 | gnome-keyring | 钥匙串管理，vscode 连接 github 需要使用到 |
 | peek | linux 下一个非常简单的 gif 录制工具 |
 | numix-circle-icon-theme-git | 图标包 |
@@ -68,7 +65,7 @@ $ sudo pacman -Syyu archlinuxcn-keyring
 一行命令安装上面所有应用。
 
 ```
-$ sudo pacman -S git zsh vim tmux visual-studio-code-bin tree goland goland-jre spotify keepassxc jdk11-openjdk java11-openjfx docker obs-studio flameshot yay go fcitx fcitx-qt5 telegram-desktop hugo nodejs npm scrcpy plasma-browser-integration translate-shell postman-bin kgpg ark unarchiver unzip unrar p7zip kate gnome-keyring peek numix-circle-icon-theme-git
+$ sudo pacman -S git zsh vim tmux visual-studio-code-bin tree goland goland-jre spotify keepassxc jdk11-openjdk java11-openjfx docker obs-studio flameshot yay go fcitx5 fcitx5-im fcitx5-chinese-addons telegram-desktop hugo nodejs npm plasma-browser-integration translate-shell postman-bin ark unarchiver unzip unrar p7zip gnome-keyring peek numix-circle-icon-theme-git
 ```
 
 ## 环境配置
@@ -147,12 +144,12 @@ $ go env -w GOPROXY=https://goproxy.cn
 
 ### 输入法配置
 
-/etc/profile 开头添加以下内容，可以避免 fcitx 的一些问题
+/etc/profile 开头添加以下内容，可以避免 fcitx5 的一些问题
 
 ```
-export XMODIFIERS="@im=fcitx"
-export GTK_IM_MODULE="fcitx"
-export QT_IM_MODULE="fcitx"
+export XMODIFIERS="@im=fcitx5"
+export GTK_IM_MODULE="fcitx5"
+export QT_IM_MODULE="fcitx5"
 ```
 
 ### deepin-tim 配置
