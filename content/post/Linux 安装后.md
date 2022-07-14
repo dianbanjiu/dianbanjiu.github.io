@@ -12,21 +12,21 @@ author: "dianbanjiu"
 
 1、编辑 `/etc/pacman.d/mirrorlist`，搜索 `China` 字段，将清华、中科大的镜像源移动到文件的开头
 
-```bash
+```shell
 Server = https://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch
 Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch
 ```
 
 2、archlinuxcn 软件源提供了很多非官方源的常用软件包，在 `/etc/pacman.conf` 的最后添加如下的内容以启用 archlinuxcn 源
 
-```
+```text
 [archlinuxcn]
 Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
 ```
 
 添加完成之后需要安装 `archlinuxcn-keyring` 来导入一些 archlinuxcn 对应的密钥
 
-```
+```shell
 $ sudo pacman -Syyu archlinuxcn-keyring
 ```
 
@@ -49,26 +49,23 @@ $ sudo pacman -Syyu archlinuxcn-keyring
 | flameshot | 截图工具 |
 | yay | aur 包安管理 |
 | go | go 语言开发环境 |
-| fcitx fcitx-qt5 | fcitx 输入法框架 |
+| fcitx5 fcitx5-im fcitx5-chinese-addons | fcitx5 输入法框架 |
 | telegram-desktop | IM 工具 |
 | hugo | hugo 博客命令行工具 |
 | nodejs npm | nodejs 开发环境 |
-| scrcpy | 连接 Android 与 PC，可以在 PC 上直接操作手机 |
 | plasma-browser-integration | plasma 桌面的浏览器集成插件 |
 | translate-shell | 终端翻译工具 |
 | postman-bin | api 测试工具 |
-| kgpg | kde 的 gnupg 图形界面 |
 | ark | KDE 官方的压缩文件查看器 |
 | unzip unrar p7zip | 几种常用的压缩格式 |
-| kate | KDE 官方的文本编辑器 |
 | gnome-keyring | 钥匙串管理，vscode 连接 github 需要使用到 |
 | peek | linux 下一个非常简单的 gif 录制工具 |
 | numix-circle-icon-theme-git | 图标包 |
 
 一行命令安装上面所有应用。
 
-```
-$ sudo pacman -S git zsh vim tmux visual-studio-code-bin tree goland goland-jre spotify keepassxc jdk11-openjdk java11-openjfx docker obs-studio flameshot yay go fcitx fcitx-qt5 telegram-desktop hugo nodejs npm scrcpy plasma-browser-integration translate-shell postman-bin kgpg ark unarchiver unzip unrar p7zip kate gnome-keyring peek numix-circle-icon-theme-git
+```shell
+$ sudo pacman -S git zsh vim tmux visual-studio-code-bin tree goland goland-jre spotify keepassxc jdk11-openjdk java11-openjfx docker obs-studio flameshot yay go fcitx5 fcitx5-im fcitx5-chinese-addons telegram-desktop hugo nodejs npm plasma-browser-integration translate-shell postman-bin ark unarchiver unzip unrar p7zip gnome-keyring peek numix-circle-icon-theme-git
 ```
 
 ## 环境配置
@@ -77,7 +74,7 @@ $ sudo pacman -S git zsh vim tmux visual-studio-code-bin tree goland goland-jre 
 
 如果想要将一些其他的磁盘在系统开机时自动挂载，可以先通过 `blkid` 命令找到磁盘对应的 UUID，接着在 `/etc/fstab` 的末尾按照下面的格式新增一行
 
-```bash
+```text
 UUID=disk_uuid /path/to/mount disk_format defaults 0 0
 ```
 
@@ -90,7 +87,7 @@ UUID=disk_uuid /path/to/mount disk_format defaults 0 0
 
 oh-my-zsh 提供了一套开箱即用的 zsh 配置，并且有很多额外的主题和插件可供选用，可以通过下面的命令来安装 oh-my-zsh 以及 zsh-autosuggestions、zsh-syntax-highlighting 两个插件
 
-```
+```shell
 $ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 $ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 $ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
@@ -100,7 +97,7 @@ $ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTO
 
 安装完成之后编辑 `~/.zshrc`，修改 plugins 字段。
 
-```
+```zshrc
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting extract)
 ```
 
@@ -112,8 +109,8 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting extract)
 
 使用下面的命令将当前用户添加到 docker 组中，之后就可以通过当前用户身份直接使用 docker。
 
-```
-$ sudo usermod -aG docker $USERNAME
+```shell
+sudo usermod -aG docker $USERNAME
 ```
 
 编辑 `/etc/docker/daemon.json`，添加国内镜像源
@@ -128,47 +125,48 @@ $ sudo usermod -aG docker $USERNAME
 
 安装 go 依赖自动导入工具
 
-```
-$ go get -u golang.org/x/tools/cmd/goimports
-```
-
-在 .zshrc 添加以下内容切换 goproxy，加速依赖获取
-
-```
-# export GO111MODULE=on #新版本的 GO 默认开启此功能，可不添加此行
-export GOPROXY=https://goproxy.cn
+```shell
+go get -u golang.org/x/tools/cmd/goimports
 ```
 
-也可以通过 go 提供的命令行工具来完成 GOPROXY 环境变量的设置
-
-```bash
-$ go env -w GOPROXY=https://goproxy.cn
+修改 go 的依赖下载代理  
+```shell
+# go env -w GO111MODULE=on #新版本的 GO 默认开启此功能，可不添加此行
+go env -w GOPROXY=https://goproxy.cn
 ```
 
 ### 输入法配置
 
-/etc/profile 开头添加以下内容，可以避免 fcitx 的一些问题
+/etc/environment 开头添加以下内容，可以避免 fcitx5 的一些问题
 
-```
-export XMODIFIERS="@im=fcitx"
-export GTK_IM_MODULE="fcitx"
-export QT_IM_MODULE="fcitx"
+```text
+GTK_IM_MODULE=fcitx
+QT_IM_MODULE=fcitx
+XMODIFIERS=@im=fcitx
+INPUT_METHOD=fcitx
+SDL_IM_MODULE=fcitx
+GLFW_IM_MODULE=ibus
 ```
 
 ### deepin-tim 配置
 
 安装 deepin 版 tim 之后需要在设置的开机自启动里添加 `/usr/lib/gsd-xsettings` 的自启动脚本。
 
-```
-调整 tim 的 DPI
+调整 tim 的 DPI  
 
+```shell
 $ cd /opt/deepinwine/tools  # TIM 的安装目录
 $ ./SetDpi.sh 126 Deepin-TIM    # 调整 TIM 的 DPI
 ```
 
 ### 蓝牙配置
 
-编辑 `/etc/bluetooth/main.conf`，找到 `AutoEnable` 字段，取消前面的注释，并将对应的值修改为 `true` 就可以在电脑启动的同时开启蓝牙，这样在登录界面就可以直接连接到你的蓝牙外设了
+开机启动蓝牙服务  
+```shell
+sudo systemctl enable bluetooth
+```
+
+接着编辑 `/etc/bluetooth/main.conf`，找到 `AutoEnable` 字段，取消前面的注释，并将对应的值修改为 `true` 就可以在电脑启动的同时开启蓝牙，这样在登录界面就可以直接连接到你的蓝牙外设了
 
 ### Jetbrains 配置
 
