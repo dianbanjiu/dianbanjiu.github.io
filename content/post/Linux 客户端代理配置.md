@@ -6,11 +6,9 @@ tags: ["Linux","shadowsocks","privoxy"]
 author: "dianbanjiu"
 ---
 
-> shadowsocks && shadowsocks -> http
-
 ## 购买服务  
 
-一开始一直使用的是自建的 shadowsocks 服务，使用的是搬瓦工洛杉矶的服务器，所以速度不是很理想，而且还经常被封。后来迁移数据的时候，发现搬瓦工也有单独的 shadowsocks 服务出售，相对于自建来说成本更低，而且也算是个比较放心的选择。  
+最开始是自建的 shadowsocks 服务，使用的搬瓦工洛杉矶的服务器，但是速度不是很理想，而且还经常被封。后来迁移数据的时候，发现搬瓦工也有单独的 shadowsocks 服务出售，相对于自建来说成本更低，相较来说算是个不错的选择。  
 
 费用如下图所示  
 ![Imgur](https://imgur.com/iJGqs6F.png)  
@@ -19,6 +17,27 @@ author: "dianbanjiu"
 速度的话，YouTube 1080p 基本上可以全程无卡顿，至于 2k、4k 的话，也可以，不过会有偶尔的卡顿。  
 
 如果你也想购买他们的服务，可以 [点击此处直达](https://justmysocks.net/members/aff.php?aff=4151)。  
+
+**2022 年 7 月 15 号更新**  
+弃用了 Qv2ray 和 shadowsocks-libev，统一使用 [clash](https://github.com/Dreamacro/clash) 配置代理  
+
+clash 是一个用 go 写的多平台代理工具，我这里使用的是无图形界面的版本，你可以直接从包管理器里面安装，或者从项目的 release 下载  
+```shell
+# Arch Linux
+sudo pacman -S clash
+
+# windows
+scoop install clash
+```  
+
+安装完成之后需要先运行一次 clash 程序下载 `Country.mmdb` 并且初始化 `config.yaml`，这两个文件一般位于用户主目录下面的 `.config/clash` 下面
+
+接着只需要修改 config.yaml 文件，并且添加自己的服务配置信息即可  
+
+一些参数的基础配置可以参考 [此处](https://github.com/dianbanjiu/just/tree/main/clash)  
+
+---
+
 
 **2020 年 9 月 7 日更新**  
 现在 justmysocks 默认的五个连接中的三个已经从 shadowsocks 修改为了 vmess 协议，虽然 shadowsocks-libev 可以安装 v2ray 插件来支持 vmess，但是总的来说配置还是不够直观，而 shadowsocks-qt 也并没有提供插件的计划，所以现在我已经改为使用 `qv2ray` 来作为新的代理工具了。  
