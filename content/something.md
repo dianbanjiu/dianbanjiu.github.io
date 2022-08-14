@@ -14,13 +14,6 @@ contentCopyright: false
 ## 我的作品
 [进击的 RSS](https://github.com/GuangzheJiang/rss_everyday)：使用 github action 定时推送你喜欢的内容到 telegram channel。  
 
-## 🔍 在哪里可以找到我
-1. **Email**: dianbanjiu@outlook.com  
-2. **Telegram**：[https://t.me/dianbanjiu](https://t.me/dianbanjiu)  
-3. **Github**：[dianbanjiu](https://github.com/dianbanjiu) 
-4. **QQ**: 1159176517 
-
-
 ## 🌚 关于 Blog
 本博客使用 [hugo](https://gohugo.io/) 进行驱动，主题是 [hugo-theme-jane](https://github.com/xianmin/hugo-theme-jane)
 
