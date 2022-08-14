@@ -3,13 +3,6 @@
 &lt;p>一个后端工程师，主要技术栈是 Go，偶尔用 Python 或者 Shell 写点小脚本，最喜欢 Linux&lt;/p>
 &lt;h2 id="我的作品">我的作品&lt;/h2>
 &lt;p>&lt;a href="https://github.com/GuangzheJiang/rss_everyday">进击的 RSS&lt;/a>：使用 github action 定时推送你喜欢的内容到 telegram channel。&lt;/p>
-&lt;h2 id="-在哪里可以找到我">🔍 在哪里可以找到我&lt;/h2>
-&lt;ol>
-&lt;li>&lt;strong>Email&lt;/strong>: &lt;a href="mailto:dianbanjiu@outlook.com">dianbanjiu@outlook.com&lt;/a>&lt;/li>
-&lt;li>&lt;strong>Telegram&lt;/strong>：&lt;a href="https://t.me/dianbanjiu">https://t.me/dianbanjiu&lt;/a>&lt;/li>
-&lt;li>&lt;strong>Github&lt;/strong>：&lt;a href="https://github.com/dianbanjiu">dianbanjiu&lt;/a>&lt;/li>
-&lt;li>&lt;strong>QQ&lt;/strong>: 1159176517&lt;/li>
-&lt;/ol>
 &lt;h2 id="-关于-blog">🌚 关于 Blog&lt;/h2>
 &lt;p>本博客使用 &lt;a href="https://gohugo.io/">hugo&lt;/a> 进行驱动，主题是 &lt;a href="https://github.com/xianmin/hugo-theme-jane">hugo-theme-jane&lt;/a>&lt;/p>
 &lt;p>这个博客算是一个我的公开的笔记本，基本上就是我想到什么就写什么&lt;del>虽然大多数时候都想不到什么&lt;/del>&lt;/p>
