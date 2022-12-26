@@ -124,8 +124,9 @@ require (
     "strings": "on"
 }
 ```
-6、（可选）安装 `quicktype.quicktype`，可以转换 JSON 数据为对应的结构体  
-7、（可选）在 VSCode 的配置文件中新增下面的内容，启用由 gopls 支持的语法高亮，具体说明可以参见 https://code.visualstudio.com/api/language-extensions/semantic-highlight-guide  
+6、（可选）安装 `doggy8088.quicktype-refresh`，可以转换 JSON 数据为对应的结构体  
+7、（可选）安装 `mishkinf.goto-next-previous-member`，使用 Ctrl+Arrow Up/Down 在同一个文件相邻的方法间进行跳转  
+8、（可选）在 VSCode 的配置文件中新增下面的内容，启用由 gopls 支持的语法高亮，具体说明可以参见 https://code.visualstudio.com/api/language-extensions/semantic-highlight-guide  
 ```JSON
 "gopls": {
   "ui.semanticTokens": true
