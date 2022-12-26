@@ -20,6 +20,7 @@ jobs:
         uses: peaceiris/actions-hugo@v2
         with:
             hugo-version: 'latest'
+            extended: true
       - name: build hugo
         run: hugo --gc --minify --cleanDestinationDir
       - name: deploy hugo
