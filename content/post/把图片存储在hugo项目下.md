@@ -15,14 +15,10 @@ headPic: ""
 我现在的博客使用的是 hugo，hugo 在 build 站点的时候会把根目录下 static 目录里面的内容直接扔在生成的静态站点的根目录下面，所以可以通过这种方式来引用图片  
 1. 在 static 目录下面创建 img 目录（static 不存在的话手动创建）  
 2. 把图片放在 static/img 下面  
-3. 在引用图片的时候使用 baseUrl/img/picturename.extra 进行引用  
+3. 在引用图片的时候使用 /img/picturename.extra 进行引用  
 
-比如我放了一张名为 doge.png 的图片到 static/img 下面，我的 baseUrl 是 https://dianbanjiu.github.io，那我就可以通过 `![](https://dianbanjiu.github.io/img/doge.png)` 来引用这张图片  
+比如我放了一张名为 doge.png 的图片到 static/img 下面，那就可以通过 `![](/img/doge.png)` 来引用这张图片  
 
-如果配置了自己的域名，也可以使用自己的域名进行访问，比如我给自己的博客配置了 https://www.dianbanjiu.com 的域名，那我就可以通过 `![](https://www.dianbanjiu.com/img/doge.png)` 在博客中引用这张图片  
-
-当图片尚未上传到 github 之前，在本地预览图片时，可以把图片地址修改为本地的地址来访问，比如我在本地预览 hugo 时起的服务地址是 http://localhost:1313，那在预览时把图片的地址改为 `![](http://localhost:1313/img/doge.png)` 即可。但是要记得在把文章上传到 github 之前把地址改回自己的外网域名  
-
-![](https://www.dianbanjiu.com/img/doge.png)  
+![](/img/doge.png)  
 
 我现在的域名是配置了 Cloudflare 加速的，把图片也放在博客目录下之后，相当于也顺便给图片也开了加速，可以说是一举两得了😂
