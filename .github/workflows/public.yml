@@ -23,6 +23,8 @@ jobs:
             extended: true
       - name: build hugo
         run: hugo --gc --minify --cleanDestinationDir
+      - name: create search index
+        run: tar -xf pagefind_extended.tar.gz && chmod u+x pagefind_extended && ./pagefind
       - name: deploy hugo
         uses: peaceiris/actions-gh-pages@v2
         env:

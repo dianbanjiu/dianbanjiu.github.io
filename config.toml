@@ -54,6 +54,11 @@ defaultContentLanguage = "zh-cn"           # Default language to use
   weight = 40
   identifier = "something"
   url = "something"
+[[menu.main]]
+  name = "搜索"
+  weight = 50
+  identifier = "search"
+  url = " search"
 
 
 
