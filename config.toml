@@ -58,7 +58,7 @@ defaultContentLanguage = "zh-cn"           # Default language to use
   name = "搜索"
   weight = 50
   identifier = "search"
-  url = " search"
+  url = "search"
 
 
 
