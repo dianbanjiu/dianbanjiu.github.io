@@ -52,8 +52,8 @@ defaultContentLanguage = "zh-cn"           # Default language to use
 [[menu.main]]
   name = "关于"
   weight = 40
-  identifier = "something"
-  url = "something"
+  identifier = "about"
+  url = "about"
 [[menu.main]]
   name = "搜索"
   weight = 50
