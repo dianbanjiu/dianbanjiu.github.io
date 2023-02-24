@@ -1,4 +1,76 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 点半九</title><link>https://www.dianbanjiu.com/post/</link><description>Recent content in Posts on 点半九</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>dianbanjiu@gmail.com</copyright><lastBuildDate>Mon, 20 Feb 2023 23:25:11 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/post/index.xml" rel="self" type="application/rss+xml"/><item><title>给我的Blog加上搜索功能</title><link>https://www.dianbanjiu.com/post/%E7%BB%99%E6%88%91%E7%9A%84blog%E5%8A%A0%E4%B8%8A%E6%90%9C%E7%B4%A2%E5%8A%9F%E8%83%BD/</link><pubDate>Mon, 20 Feb 2023 23:25:11 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E7%BB%99%E6%88%91%E7%9A%84blog%E5%8A%A0%E4%B8%8A%E6%90%9C%E7%B4%A2%E5%8A%9F%E8%83%BD/</guid><description>&lt;p>之前一直想给博客加上搜索功能，但是看了好几个方案都是不再维护的状态，后来在《阮一峰的网络日志》中看到了 &lt;a href="https://pagefind.app/">pagefind&lt;/a> 这个工具，配置比较简单，而且使用上也算比较方便。因为我是计划新增一个页面专门用来给搜索页面用，下面的介绍也是以新增搜索页面的方式来介绍&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 点半九</title><link>https://www.dianbanjiu.com/post/</link><description>Recent content in Posts on 点半九</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>dianbanjiu@gmail.com</copyright><lastBuildDate>Fri, 24 Feb 2023 23:43:48 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/post/index.xml" rel="self" type="application/rss+xml"/><item><title>在非Apple的系统上安装苹果字体</title><link>https://www.dianbanjiu.com/post/%E5%9C%A8%E9%9D%9Eapple%E7%9A%84%E7%B3%BB%E7%BB%9F%E4%B8%8A%E5%AE%89%E8%A3%85%E8%8B%B9%E6%9E%9C%E5%AD%97%E4%BD%93/</link><pubDate>Fri, 24 Feb 2023 23:43:48 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E5%9C%A8%E9%9D%9Eapple%E7%9A%84%E7%B3%BB%E7%BB%9F%E4%B8%8A%E5%AE%89%E8%A3%85%E8%8B%B9%E6%9E%9C%E5%AD%97%E4%BD%93/</guid><description>&lt;p>这里主要说的是苹果的 SF 字体，在 Linux 上或者 Windows 上的安装流程大同小异&lt;/p>
+&lt;p>首先需要准备解压工具，我这里用到的是 &lt;a href="https://www.7-zip.org/">7-Zip&lt;/a>，Windows 和 Linux 都可以使用自己的包管理器从源里面安装，当然也可以点击前面的链接去官网下载安装包进行安装，具体的安装步骤这里就不赘述了，下面默认你已经安装好了 7-Zip&lt;/p>
+&lt;p>&lt;em>为了方便起见，我下面统一使用了命令行的方式进行解压，如果你用的是 7-Zip 的图形界面进行下面的解压操作也是完全没有任何问题的，只是解压出来的文件位置可能会有一点区别&lt;/em>&lt;/p>
+&lt;p>接着需要在&lt;a href="https://developer.apple.com/fonts/">苹果开发者&lt;/a>平台下载字体，下载无需登录开发者账号，此处我以 SF Pro 为例&lt;/p>
+&lt;p>点击 SF Pro 下面的 &lt;code>Download SF Pro&lt;/code>，下载完成之后你会得到一个名为 &lt;code>SF-Pro.dmg&lt;/code> 的文件，dmg 是苹果的一种打包方式，既然能打包就能解包，7-Zip 刚好就可以做到这件事情&lt;/p>
+&lt;p>打开终端（Terminal/CMD），使用下面的命令解压这个文件&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Windows&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">7z e .&lt;span class="se">\S&lt;/span>F-Pro.dmg
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Linux&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">7z e ./SF-Pro.dmg
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>解压完成之后你应该会得到下面这几个文件&lt;/p>
+&lt;ul>
+&lt;li>.HFS+ Private Directory Data_&lt;/li>
+&lt;li>[HFS+ Private Data]&lt;/li>
+&lt;li>SFProFonts&lt;/li>
+&lt;li>.background.png&lt;/li>
+&lt;li>.DS_Store&lt;/li>
+&lt;li>SF Pro Fonts.pkg&lt;/li>
+&lt;/ul>
+&lt;p>接着继续解压 &lt;code>SF Pro Fonts.pkg&lt;/code> 这个文件&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Windows&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">7z e &lt;span class="s1">&amp;#39;.\SF Pro Fonts.pkg&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Linux&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">7z e &lt;span class="s1">&amp;#39;./SF Pro Fonts.pkg&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>解压完成之后，在当前目录会多出一个叫做 &lt;code>Payload~&lt;/code> 的文件，继续解压这个文件&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Windows&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">7z e .&lt;span class="se">\P&lt;/span>ayload~
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Linux &lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">7z e ./Payload~
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>解压完成之后你会在当前目录下看到一堆 .otf 或者 .ttf 结尾的字体文件&lt;/p>
+&lt;p>Windows 用户可以用文件管理器打开这些字体所在的目录，选中你想安装的字体，点击右键，在右键菜单中选择安装即可。或者也可以打开 设置-&amp;gt;个性化-&amp;gt;字体，把想要安装的字体拖到 &lt;code>拖放以安装&lt;/code> 的框中即可&lt;/p>
+&lt;p>Linux 用户&lt;/p>
+&lt;ul>
+&lt;li>如果是给自己当前用户安装，可以创建 &lt;code>~/.local/share/fonts/&lt;/code> 目录&lt;/li>
+&lt;li>如果是给系统上所有用户安装，需要创建 &lt;code>/usr/local/share/fonts&lt;/code> 目录&lt;/li>
+&lt;/ul>
+&lt;p>在创建好的 fonts 目录下新增 otf 和 ttf 两个文件夹，分别把想要安装的 ttf 字体和 otf 字体复制到对应的目录中，最后使用 &lt;code>fc-cache&lt;/code> 命令刷新一下字体即可&lt;/p></description></item><item><title>给我的Blog加上搜索功能</title><link>https://www.dianbanjiu.com/post/%E7%BB%99%E6%88%91%E7%9A%84blog%E5%8A%A0%E4%B8%8A%E6%90%9C%E7%B4%A2%E5%8A%9F%E8%83%BD/</link><pubDate>Mon, 20 Feb 2023 23:25:11 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E7%BB%99%E6%88%91%E7%9A%84blog%E5%8A%A0%E4%B8%8A%E6%90%9C%E7%B4%A2%E5%8A%9F%E8%83%BD/</guid><description>&lt;p>之前一直想给博客加上搜索功能，但是看了好几个方案都是不再维护的状态，后来在《阮一峰的网络日志》中看到了 &lt;a href="https://pagefind.app/">pagefind&lt;/a> 这个工具，配置比较简单，而且使用上也比较方便。因为我是计划新增一个专门的搜索页面，下面的介绍也是以此为基础来介绍&lt;/p>
 &lt;p>1、在 content 目录下新增一个 search 目录，并在 search 目录中新建一个 index.md 的文件，index.md 的内容如下&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
@@ -91,7 +163,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{{- end }}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>pagefind 默认会把创建好的索引等文件放在 _pagefind 目录下，但是在 GitHub page 上托管的时候，下划线开头的文件可能无法被获取到，导致搜索功能无法使用，我们下面要将 pagefind 的输出修改到其他位置&lt;/p>
+&lt;/div>&lt;p>pagefind 默认会把创建好的索引等文件放在 _pagefind 目录下，但是如果你的服务是托管在 GitHub page 上，通过域名访问你的博客的时候下划线开头的文件可能无法被获取到，导致搜索功能无法使用，所以我们下面将 pagefind 的输出修改到其他位置&lt;/p>
 &lt;p>3、在博客的根目录下创建一个 pagefind.yml 的文件，文件内容如下：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
@@ -107,8 +179,8 @@
 &lt;/div>
 &lt;/div>&lt;ul>
 &lt;li>source 是指定我们通过 hugo 命令生成的博客静态文件的位置，一般都是在 public 目录&lt;/li>
-&lt;li>glob 是指定 pagefind 都需要索引哪些位置的哪些文件的。因为我的博客是放在 content/post 目录中的，生成到 public 之后对应的目录是在 post 中，在搜索的时候我也只想搜索这部分内容，所以需要单独指定一下。此处是可选的&lt;/li>
-&lt;li>bundle_dir 指定了 pagefind 生成的索引等文件在 public 目录的存放位置，我此处将其存放到 public/pagefind 中，如果你想将其修改到 public 下的其他目录中，需要同时修改上面 search.html 文件中 pagefind 的 js 和 css 文件的引入位置&lt;/li>
+&lt;li>glob 是指定 pagefind 都需要索引哪些位置的文件。我的博客文章是放在 content/post 目录中，生成到 public 之后对应的目录是在 post 中，在搜索的时候我也只想搜索 post 目录下的内容，所以需要单独指定一下。此处是可选的&lt;/li>
+&lt;li>bundle_dir 指定了 pagefind 生成的索引等文件在 public 目录的存放位置，为了避免上面提到的问题，我此处将移动到 public/pagefind 中，如果你想将其修改到 public 下的其他目录中，需要同时修改上面 search.html 文件中 pagefind 的 JS 和 CSS 文件的引入位置&lt;/li>
 &lt;/ul>
 &lt;p>4、在博客的配置文件中新增一个搜索路由，以我的 config.toml 文件为例，在文件中新增下面的内容：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
@@ -142,7 +214,7 @@
 &lt;/div>
 &lt;/div>&lt;p>等索引完成之后，打开浏览器访问 http://localhost:1414/search 就可以看到效果了&lt;br>
 &lt;img src="https://www.dianbanjiu.com/img/pagefind_search_show.png" alt="">&lt;/p>
-&lt;p>6、为了保证之后的可用性，我实际使用的是 pagefind 提供的二进制文件，这些预构建的文件在 GitHub 的 &lt;a href="https://github.com/CloudCannon/pagefind/releases">release 页面&lt;/a> 可以下载到，推荐下载带 _extended 的文件，因为它支持对中文的索引。二进制文件和 npx 的使用方式类似&lt;/p>
+&lt;p>6、为了保证之后的可用性，我实际使用的是 pagefind 提供的二进制文件，这些预构建的文件在 GitHub 的 &lt;a href="https://github.com/CloudCannon/pagefind/releases">release 页面&lt;/a> 可以下载到，需要下载带 _extended 的文件，因为它扩展了对中文的索引。二进制文件和 npx 的使用方式类似&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
@@ -162,10 +234,10 @@
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">run&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">tar -xf pagefind_extended.tar.gz &amp;amp;&amp;amp; chmod u+x pagefind_extended &amp;amp;&amp;amp; ./pagefind_extended &amp;amp;&amp;amp; rm -f pagefind_extended&lt;/span>&lt;span class="w">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>推荐在上传文件到 GitHub 的时候上传之前下载的压缩包，并且需要是 linux 系统 x86_64 架构的压缩包，这样可以减少一些不必要的上传带宽（压缩后的文件大概 44M，解压出来的有 222M）。为了方便起见，我这里把压缩包重新命名为 pagefind_extended.tar.gz&lt;/p>
-&lt;p>等构建完成之后清理一下浏览器缓存，重新访问一下博客应该就可以看到搜索按钮和搜索页面了&lt;/p>
-&lt;p>最后有一个点需要注意一下，因为 pagefind 是通过分词的方式来进行搜索的，所以搜索功能只会在命中分词的时候生效，比如我现在有一个词 &lt;code>碳酸危机&lt;/code>，我搜索 &lt;code>碳酸&lt;/code> 或者 &lt;code>危机&lt;/code> 都可以搜到对应的内容，但是直接搜索 &lt;code>碳酸危机&lt;/code> 会得不到任何搜索结果，这就是分词导致的&lt;/p>
-&lt;p>不过这种分词的优势是可以大大减少索引文件的大小，如果采用 hugo 默认的生成 json 文件的方式，其中包含了你所有文章的所有内容，随着文章的增多生成的索引 json 会膨胀的比较快，而 pagefind 这种分词索引的方式只会在有新的分词的时候索引文件的大小才会有些微增加，生成的索引文件膨胀的就会慢很多&lt;/p></description></item><item><title>把图片存储在hugo项目下</title><link>https://www.dianbanjiu.com/post/%E6%8A%8A%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8%E5%9C%A8hugo%E9%A1%B9%E7%9B%AE%E4%B8%8B/</link><pubDate>Sun, 04 Dec 2022 02:50:07 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E6%8A%8A%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8%E5%9C%A8hugo%E9%A1%B9%E7%9B%AE%E4%B8%8B/</guid><description>&lt;p>之前博客的图片一直是放在各种图床上面的，一开始是 imgur，虽然是免费的，但是在国内访问是一个很大的问题，所以后来就迁移到了 sm.ms，迁移完成之后在国内国外网络都可以比较顺畅的访问了&lt;/p>
+&lt;/div>&lt;p>在提交文件到 GitHub 的时候推荐提交 pagefind 对应的压缩包，并且是 Linux 系统 x86_64 架构可执行文件的压缩包，这样可以减少一些不必要的上传带宽（压缩后的文件大概 44M，解压出来的有 222M）。为了方便起见，我这里把压缩包重新命名为 pagefind_extended.tar.gz&lt;/p>
+&lt;p>提交并构建完成之后清理一下浏览器缓存，重新访问一下博客应该就可以看到搜索按钮和搜索页面了&lt;/p>
+&lt;p>最后有一个点需要注意一下，因为 pagefind 是通过分词的方式来进行搜索的，所以搜索功能&lt;strong>只会在命中分词的时候生效&lt;/strong>，比如现在有一个词 &lt;code>碳酸危机&lt;/code>，搜索 &lt;code>碳酸&lt;/code>、&lt;code>危机&lt;/code>或者&lt;code>碳酸 危机&lt;/code> 都可以搜到对应的内容，但是直接搜索 &lt;code>碳酸危机&lt;/code> 会得不到任何搜索结果，这就是分词导致的&lt;/p>
+&lt;p>不过这种分词的优势是可以大大减少索引文件的大小，hugo 默认生成的索引文件包含了每篇文章的全文，随着文章的增多生成的索引文件会膨胀的比较快，而 pagefind 这种通过分词生成索引文件的方式，只会在有新的分词的时候或者新的文章的时候（因为需要记录分词对应的文章的一些信息，比如链接）索引文件的大小才会有些微增加，生成的索引文件膨胀的就会慢很多&lt;/p></description></item><item><title>把图片存储在hugo项目下</title><link>https://www.dianbanjiu.com/post/%E6%8A%8A%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8%E5%9C%A8hugo%E9%A1%B9%E7%9B%AE%E4%B8%8B/</link><pubDate>Sun, 04 Dec 2022 02:50:07 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E6%8A%8A%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8%E5%9C%A8hugo%E9%A1%B9%E7%9B%AE%E4%B8%8B/</guid><description>&lt;p>之前博客的图片一直是放在各种图床上面的，一开始是 imgur，虽然是免费的，但是在国内访问是一个很大的问题，所以后来就迁移到了 sm.ms，迁移完成之后在国内国外网络都可以比较顺畅的访问了&lt;/p>
 &lt;p>不过在迁移的过程中发现一个问题，图片在上传到这些图床之后，他们都会使用自己的规则重新生成一个对外的名字，虽然我理解他们这么做的原因，但是这会极大的增加我以后迁移图床的难度。所以我就开始考虑把所有的图片都放在能够自定义文件名的地方，这样不管是在博客中引用还是以后迁移起来都很简单，只需要使用正则统一修改图片的前缀地址即可。目前采用的是直接把所有图片都放到博客的目录下面，跟博客一同编译&lt;/p>
 &lt;p>我现在的博客使用的是 hugo，hugo 在 build 站点的时候会把根目录下 static 目录里面的内容直接扔在生成的静态站点的根目录下面，所以可以通过这种方式来引用图片&lt;/p>
 &lt;ol>
@@ -1835,10 +1907,4 @@
 &lt;li>下载由 Rufus 提供的 &lt;a href="https://github.com/pbatard/rufus/blob/master/res/uefi/uefi-ntfs.img">uefi-ntfs.img&lt;/a> UEFI 引导镜像&lt;/li>
 &lt;li>复制 uefi-utfs.img 中的所有文件到 U 盘的第二个分区中&lt;/li>
 &lt;/ol>
-&lt;p>待所有文件都写入完成之后，在 BIOS 中将 U 盘移动到启动顺序的第一个，然后启动电脑，应该就可以看到 Windows 的引导界面了。&lt;/p></description></item><item><title>IPhone 无法移动文件到 samba 共享目录</title><link>https://www.dianbanjiu.com/post/iphone-%E6%97%A0%E6%B3%95%E7%A7%BB%E5%8A%A8%E6%96%87%E4%BB%B6%E5%88%B0-samba-%E5%85%B1%E4%BA%AB%E7%9B%AE%E5%BD%95/</link><pubDate>Fri, 15 Oct 2021 00:43:52 +0800</pubDate><guid>https://www.dianbanjiu.com/post/iphone-%E6%97%A0%E6%B3%95%E7%A7%BB%E5%8A%A8%E6%96%87%E4%BB%B6%E5%88%B0-samba-%E5%85%B1%E4%BA%AB%E7%9B%AE%E5%BD%95/</guid><description>&lt;p>为了在局域网设备之间进行文件共享，最近一直在折腾 samba，目前已经基本上算是搞好了。但是在这个过程中也遇到了一个比较蛋疼的事情，就是通过 PC 和 Android 都可以正常向共享目录写入文件，在 IPhone 端虽然可以正常查看共享目录中的文件，但是无法将 IPhone 上的文件移动/复制到共享目录中。每次通过 IPhone 向共享目录中写入文件都会出现下面的报错：&lt;br>
-&lt;img src="https://i.imgur.com/D4PxRwz.png" alt="Imgur">&lt;/p>
-&lt;p>经过我在网上的一番冲浪之后找到了如下的解决方案：&lt;/p>
-&lt;p>在 samba 配置文件的 [global] 中添加 &lt;code>vfs objects = fruit streams_xattr&lt;/code>（当然也可以仅针对某些特定的共享目录单独配置），然后重启 samba 服务，注意是重启 restart，不是重新加载配置文件 reload。仅重新加载配置文件这个规则还是无法生效的。&lt;/p>
-&lt;p>samba 中的 VFS（虚拟文件系统）可以通过一些扩展模块增强 samba 的功能，而上面这行配置启用了 VFS 的两个模块，其中对解决本次问题起主要作用的是 &lt;code>fruit&lt;/code> 模块（可以的，果子🤣），这个模块主要是增强 samba 与 Apple 系统的兼容性。&lt;/p>
-&lt;p>此外，如果从 IPhone 一次性向共享文件写入大量文件的话，可能会出现有些文件写失败的情况，这个问题暂时还没有找到解决方案，不过因为一次性写入大量文件需求也不是很多，暂时并不影响体验。&lt;/p>
-&lt;p>&lt;a href="https://wiki.samba.org/index.php/Virtual_File_System_Modules">https://wiki.samba.org/index.php/Virtual_File_System_Modules&lt;/a>&lt;/p></description></item></channel></rss>
+&lt;p>待所有文件都写入完成之后，在 BIOS 中将 U 盘移动到启动顺序的第一个，然后启动电脑，应该就可以看到 Windows 的引导界面了。&lt;/p></description></item></channel></rss>
