@@ -19,7 +19,7 @@ func Hello(name string) {
 ```
 但是每次手动拼写每个函数名也还是挺麻烦的，最近发现可以先在函数上面打出 `//`，然后按下 `ctrl+space`，补全提示的第一个就是当前的方法名  
 
-![](/img/vscode补全方法名.gif)  
+![vscode补全方法名](/img/vscode补全方法名.gif)  
 
 `ctrl+space` 是 vscode 默认的 `触发建议` 的快捷键
 
@@ -51,4 +51,4 @@ func Hello(name string) {
 ```
 在写完结构体的一个字段之后，如果我想生成名为 form 的 tag，在字段的最后输入 `f 就能看到一个推荐的补全列表，在其中选择需要的即可
 
-![](/img/vscode补全结构体tag.gif)
+![vscode补全结构体tag](/img/vscode补全结构体tag.gif)
