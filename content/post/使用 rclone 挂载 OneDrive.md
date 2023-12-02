@@ -243,7 +243,7 @@ e/n/d/r/c/s/q> q
 接着你可以使用下面的命令列出自己 OneDrive 中的所有一级目录，测试一下是否配置成功
 
 ```bash
-$ rclone lsd remote:
+$ rclone lsd testDrive:
 ```
 
 ### 挂载
