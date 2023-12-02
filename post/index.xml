@@ -1,4 +1,233 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 点半九</title><link>https://www.dianbanjiu.com/post/</link><description>Recent content in Posts on 点半九</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>dianbanjiu@gmail.com</copyright><lastBuildDate>Thu, 23 Nov 2023 17:07:40 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/post/index.xml" rel="self" type="application/rss+xml"/><item><title>Vscode中一些好用的小tips</title><link>https://www.dianbanjiu.com/post/vscode%E4%B8%AD%E4%B8%80%E4%BA%9B%E5%A5%BD%E7%94%A8%E7%9A%84%E5%B0%8Ftips/</link><pubDate>Thu, 23 Nov 2023 17:07:40 +0800</pubDate><guid>https://www.dianbanjiu.com/post/vscode%E4%B8%AD%E4%B8%80%E4%BA%9B%E5%A5%BD%E7%94%A8%E7%9A%84%E5%B0%8Ftips/</guid><description>&lt;p>vscode 目前是我的主力编辑器，日常的一些文字记录/开发都是通过他来完成的。此文会记录一些能够帮助我更舒服使用 vscode 的内容，可能会包含插件、设置、快捷方式等各方面，后续会根据使用情况逐渐进行补全&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 点半九</title><link>https://www.dianbanjiu.com/post/</link><description>Recent content in Posts on 点半九</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>dianbanjiu@gmail.com</copyright><lastBuildDate>Sat, 02 Dec 2023 19:06:33 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/post/index.xml" rel="self" type="application/rss+xml"/><item><title>在vscode中通过文件的形式管理接口</title><link>https://www.dianbanjiu.com/post/%E5%9C%A8vscode%E4%B8%AD%E9%80%9A%E8%BF%87%E6%96%87%E4%BB%B6%E7%9A%84%E5%BD%A2%E5%BC%8F%E7%AE%A1%E7%90%86%E6%8E%A5%E5%8F%A3/</link><pubDate>Sat, 02 Dec 2023 19:06:33 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E5%9C%A8vscode%E4%B8%AD%E9%80%9A%E8%BF%87%E6%96%87%E4%BB%B6%E7%9A%84%E5%BD%A2%E5%BC%8F%E7%AE%A1%E7%90%86%E6%8E%A5%E5%8F%A3/</guid><description>&lt;p>我之前一直使用 postman 来管理接口，postman 功能强大，容易上手，但是随着版本的更新，postman 逐渐发展为了一个在线服务，虽然能够让不同机器间切换时也能有一个统一的体验，但是因为网络原因，特别是在公司的网络策略面前，纯在线服务经常会出现接口无法从服务器上拉取下来的情况。所以我转而开始寻找一些对本地服务有更好支持的接口管理工具，在尝试过多个工具之后，最终选择了 httpyac，目前还在初期的磨合阶段，不过 httpyac 已经基本能满足我一个开发人员对于接口管理&amp;amp;测试方面的所有基础需求了&lt;/p>
+&lt;p>httpyac 支持 vscode 插件(扩展商店搜索 &lt;code>anweber.vscode-httpyac&lt;/code> 安装即可)，通过 .http/.rest 的形式来管理接口文件，这也就意味着你可以把接口文件随项目一起进行版本管理，或者将所有的接口汇总在一个仓库统一管理，也可以选择自己喜欢&amp;amp;可用的云服务进行托管，这样就不会出现 postman 那种拉不到接口的情况出现了&lt;/p>
+&lt;p>下面是 httpyac 的一些简单的使用示例，也是我在日常使用中最主要的几个点&lt;/p>
+&lt;h2 id="发起请求">发起请求&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-http" data-lang="http">&lt;span class="line">&lt;span class="cl">&lt;span class="err">### 获取用户信息
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="nf">GET&lt;/span> &lt;span class="nn">https://www.dianbanjiu.com/user/info?name=John&lt;/span> &lt;span class="kr">HTTP&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="m">1.1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="g">### 新增用户
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="g">POST https://www.dianbanjiu.com/user HTTP/1.1
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="g">Content-Type: application/json
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="g">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="g">{
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="g"> &amp;#34;name&amp;#34;: &amp;#34;John&amp;#34;,
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="g"> &amp;#34;age&amp;#34;: 30,
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="g"> &amp;#34;phone&amp;#34;: &amp;#34;12345678901&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="g">}
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>你可以通过在每行的开头通过 &lt;code>#&lt;/code> 或者 &lt;code>//&lt;/code> 来添加单行注释，也支持通过 &lt;code>/* */&lt;/code> 来添加多行注释&lt;/p>
+&lt;h2 id="定义变量">定义变量&lt;/h2>
+&lt;p>httpyac 支持多种定义变量的形式&lt;/p>
+&lt;ol>
+&lt;li>在接口文件内定义变量&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-http" data-lang="http">&lt;span class="line">&lt;span class="cl">&lt;span class="err">@host=https://www.dianbanjiu.com
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@user=John
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@pass=123456
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol start="2">
+&lt;li>在项目根目录下通过 .env.xx 定义环境文件，xx 为环境名&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">// .env.dev
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">host=https://www.dianbanjiu.com
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">user=John
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">pass=123456
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol start="3">
+&lt;li>在 .vscode/settings.json 中定义环境变量，其中 &lt;code>$share&lt;/code> 是所有环境的共享变量&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;httpyac.environmentVariables&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;$shared&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;foo&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;bar&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;dev&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;host&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;https://www.dianbanjiu.com&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;user&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;user&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;pass&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;pass&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;prd&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;host&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;https://www.dianbanjiu.com&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;user&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;user&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;pass&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;pass&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>定义好变量之后，在接口文件中通过双大括号即可引用&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-http" data-lang="http">&lt;span class="line">&lt;span class="cl">&lt;span class="err">GET {{host}}/user/info?name={{name}}
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>我一般是第1、3结合使用。这里有一个语法糖，如果你定义了 host 变量，在写接口的时候可以忽略前置的域名，直接写路由，如果你在环境变量中域名使用的是其他名字，也可以在接口文件中重新赋值 host 变量来使用这个语法糖&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-http" data-lang="http">&lt;span class="line">&lt;span class="cl">&lt;span class="err"># 环境文件中定义了 dian-api=https://www.dianbanjiu.com
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@host={{dian-api}}
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">GET /user/info?name={{name}}
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="脚本命令">脚本命令&lt;/h2>
+&lt;p>httpyac 支持在接口文件中自定义脚本，可以实现类似 postman 的脚本功能，这也是我之所以选择 httpyac 的最主要原因&lt;/p>
+&lt;p>比如很多接口都需要进行签名，你可以在脚本中使用 nodejs 的 crypto 包来完成&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-http" data-lang="http">&lt;span class="line">&lt;span class="cl">&lt;span class="err">{{
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err"> //pre request script
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err"> const crypto = require(&amp;#39;crypto&amp;#39;);
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err"> const date = new Date();
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err"> const signatureBase64 = crypto.createHmac(&amp;#39;sha256&amp;#39;, &amp;#39;secret&amp;#39;)
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err"> .update(`${request.method}\u2028${request.url}\u2028${date.getTime()}`).digest(&amp;#34;base64&amp;#34;);
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err"> exports.authDate = date.toUTCString();
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err"> exports.authentcation = `Basic ${signatureBase64}`;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">}}
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="nf">GET&lt;/span> &lt;span class="nn">https://www.dianbanjiu.com/user/info?name={{name}}&lt;/span> &lt;span class="kr">HTTP&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="m">1.1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Date&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="l">{{authDate}}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Authentication&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="l">{{authentcation}}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>如果你的接口需要统一设置请求头也可以通过脚本实现，&lt;code>{{+&lt;/code> 开头的脚本会在所有请求之前执行，请求的具体执行流程可以参照下图&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-http" data-lang="http">&lt;span class="line">&lt;span class="cl">&lt;span class="err">{{+
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err"> //pre request script
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err"> const crypto = require(&amp;#39;crypto&amp;#39;);
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err"> const date = new Date();
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err"> const signatureBase64 = crypto.createHmac(&amp;#39;sha256&amp;#39;, &amp;#39;secret&amp;#39;)
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err"> .update(`${request.method}\u2028${request.url}\u2028${date.getTime()}`).digest(&amp;#34;base64&amp;#34;);
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err"> request.headers.authDate = date.toUTCString();
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err"> request.headers.authentcation = `Basic ${signatureBase64}`;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">}}
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="nf">GET&lt;/span> &lt;span class="nn">https://www.dianbanjiu.com/user/info?name={{name}}&lt;/span> &lt;span class="kr">HTTP&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="m">1.1&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://httpyac.github.io/assets/scripting.8a515e08.svg" alt="httpyac接口执行流程">&lt;/p>
+&lt;p>一些需要把整个请求体都作为加密字段的接口，也可以通过脚本实现&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-http" data-lang="http">&lt;span class="line">&lt;span class="cl">&lt;span class="err">{{
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err"> const crypto = require(&amp;#39;crypto&amp;#39;);
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err"> const date = new Date();
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err"> const signatureBase64 = crypto.createHmac(&amp;#39;sha256&amp;#39;, &amp;#39;secret&amp;#39;)
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err"> .update(request.body).digest(&amp;#34;base64&amp;#34;);
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err"> exports.authDate = date.toUTCString();
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err"> exports.authentcation = `Basic ${signatureBase64}`;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">}}
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="nf">GET&lt;/span> &lt;span class="nn">https://www.dianbanjiu.com/user/info?name={{name}}&amp;amp;sign={{authentcation}}&amp;amp;time={{authDate}}&lt;/span> &lt;span class="kr">HTTP&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="m">1.1&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>目前还有一个不大不小的痛点，就是 httpyac 尚不支持导入 curl 或者 postman 导出的文件来转换为 .http/.rest 文件，需要自己一个个接口再从 postman 换过来也是一个不小的工作量&lt;/p>
+&lt;p>至此我在 postman 中会用的 99% 的功能 httpyac 都提供了，此外 httpyac 也提供了断言、hook、debug 等一些其他的高级功能，但是我都未使用过，这里就不多说明了，具体的说明可以参照 &lt;a href="https://httpyac.github.io/">httpyac官网&lt;/a> 了解。还有一些语法糖官网其实也没有说明的很清楚，可能需要去 &lt;a href="https://github.com/AnWeber/vscode-httpyac">httpyac代码仓库的issue&lt;/a> 自行搜索了&lt;/p></description></item><item><title>Vscode中一些好用的小tips</title><link>https://www.dianbanjiu.com/post/vscode%E4%B8%AD%E4%B8%80%E4%BA%9B%E5%A5%BD%E7%94%A8%E7%9A%84%E5%B0%8Ftips/</link><pubDate>Thu, 23 Nov 2023 17:07:40 +0800</pubDate><guid>https://www.dianbanjiu.com/post/vscode%E4%B8%AD%E4%B8%80%E4%BA%9B%E5%A5%BD%E7%94%A8%E7%9A%84%E5%B0%8Ftips/</guid><description>&lt;p>vscode 目前是我的主力编辑器，日常的一些文字记录/开发都是通过他来完成的。此文会记录一些能够帮助我更舒服使用 vscode 的内容，可能会包含插件、设置、快捷方式等各方面，后续会根据使用情况逐渐进行补全&lt;/p>
 &lt;p>&lt;strong>1、补全注释中的方法名&lt;/strong>&lt;br>
 go 的注释风格是以方法名开头的，比如&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
@@ -16,7 +245,7 @@ go 的注释风格是以方法名开头的，比如&lt;/p>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>但是每次手动拼写每个函数名也还是挺麻烦的，最近发现可以先在函数上面打出 &lt;code>//&lt;/code>，然后按下 &lt;code>ctrl+space&lt;/code>，补全提示的第一个就是当前的方法名&lt;/p>
-&lt;p>&lt;img src="https://www.dianbanjiu.com/img/vscode%E8%A1%A5%E5%85%A8%E6%96%B9%E6%B3%95%E5%90%8D.gif" alt="">&lt;/p>
+&lt;p>&lt;img src="https://www.dianbanjiu.com/img/vscode%E8%A1%A5%E5%85%A8%E6%96%B9%E6%B3%95%E5%90%8D.gif" alt="vscode补全方法名">&lt;/p>
 &lt;p>&lt;code>ctrl+space&lt;/code> 是 vscode 默认的 &lt;code>触发建议&lt;/code> 的快捷键&lt;/p>
 &lt;p>&lt;strong>2、补全结构体的tag&lt;/strong>&lt;br>
 写 go 的结构体时，经常需要给结构体加上 tag，目前 vscode-go 是按照固定格式直接一次性给你生成好，但是有时候我想要的并不是模板中设定的，这时候推荐安装 &lt;code>maxnatchanon.go-struct-tag-autogen&lt;/code> 扩展，你可以先提前设定好你可能用到的 tag 以及样式，比如我的设置&lt;/p>
@@ -71,7 +300,7 @@ go 的注释风格是以方法名开头的，比如&lt;/p>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>在写完结构体的一个字段之后，如果我想生成名为 form 的 tag，在字段的最后输入 `f 就能看到一个推荐的补全列表，在其中选择需要的即可&lt;/p>
-&lt;p>&lt;img src="https://www.dianbanjiu.com/img/vscode%E8%A1%A5%E5%85%A8%E7%BB%93%E6%9E%84%E4%BD%93tag.gif" alt="">&lt;/p></description></item><item><title>十一太湖骑行</title><link>https://www.dianbanjiu.com/post/%E5%8D%81%E4%B8%80%E5%A4%AA%E6%B9%96%E9%AA%91%E8%A1%8C/</link><pubDate>Tue, 21 Nov 2023 11:02:41 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E5%8D%81%E4%B8%80%E5%A4%AA%E6%B9%96%E9%AA%91%E8%A1%8C/</guid><description>&lt;p>2023 年的国庆节完成了为期三天的上海到苏州的环太湖骑行 &lt;del>，为什么现在才发出来，当然不是因为太懒了&lt;/del>&lt;/p>
+&lt;p>&lt;img src="https://www.dianbanjiu.com/img/vscode%E8%A1%A5%E5%85%A8%E7%BB%93%E6%9E%84%E4%BD%93tag.gif" alt="vscode补全结构体tag">&lt;/p></description></item><item><title>十一太湖骑行</title><link>https://www.dianbanjiu.com/post/%E5%8D%81%E4%B8%80%E5%A4%AA%E6%B9%96%E9%AA%91%E8%A1%8C/</link><pubDate>Tue, 21 Nov 2023 11:02:41 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E5%8D%81%E4%B8%80%E5%A4%AA%E6%B9%96%E9%AA%91%E8%A1%8C/</guid><description>&lt;p>2023 年的国庆节完成了为期三天的上海到苏州的环太湖骑行 &lt;del>，为什么现在才发出来，当然不是因为太懒了&lt;/del>&lt;/p>
 &lt;p>好消息是，虽然屁股很痛，但是最终我还是成功完成了这趟骑行&lt;/p>
 &lt;p>坏消息是，屁股真的很痛，这场骑行还是有不少可以学习的东西的&lt;/p>
 &lt;p>这趟为期三天，骑行里程 457 公里（167+170+120），是我迄今为止最长最久的一次骑行。不过因为我太懒了，很多东西都没有提前准备好，不过也算是为下次的骑行积攒了一些小小的经验&lt;/p>
@@ -1356,516 +1585,4 @@ go 的注释风格是以方法名开头的，比如&lt;/p>
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">$ git config --global core.quotePath &lt;span class="nb">false&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>参数的一些具体说明可以参考此处： &lt;a href="https://git-scm.com/docs/git-config#Documentation/git-config.txt-corequotePath">https://git-scm.com/docs/git-config#Documentation/git-config.txt-corequotePath&lt;/a>&lt;/p></description></item><item><title>使用 Rclone 挂载 OneDrive</title><link>https://www.dianbanjiu.com/post/%E4%BD%BF%E7%94%A8-rclone-%E6%8C%82%E8%BD%BD-onedrive/</link><pubDate>Wed, 16 Mar 2022 11:47:59 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E4%BD%BF%E7%94%A8-rclone-%E6%8C%82%E8%BD%BD-onedrive/</guid><description>&lt;h2 id="安装">安装&lt;/h2>
-&lt;p>因为 OneDrive 没有提供官方的 Linux 客户端，所以为了方便起见，我选择直接通过 rclone 将 OneDrive 挂载到本地，这样就可以在本地直接对 OneDrive 的文件进行管理&lt;/p>
-&lt;p>首先需要安装 &lt;code>rclone&lt;/code> 程序本体，我使用的是 Arch Linux，可以直接通过 pacman 进行安装&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ sudo pacman -S rclone
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;h2 id="配置">配置&lt;/h2>
-&lt;p>接着就可以使用 &lt;code>rclone&lt;/code>开始配置自己的 OneDrive 了，下面是我实际配置过程的输出&lt;/p>
-&lt;p>开始之前，先说几个需要注意的地方：&lt;/p>
-&lt;ol>
-&lt;li>类似下面的这种选择，可以选择输入前面的序号，如 1，也可以选择输入后面的文字，如 fichier&lt;/li>
-&lt;/ol>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">1 / 1Fichier
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> \ &amp;#34;fichier&amp;#34;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;ol start="2">
-&lt;li>在选择 &lt;code>region&lt;/code> 地区的时候，一定确定好自己要挂载的 OneDrive 是哪个版本的，如果你使用的是世纪互联版本的 OneDrive 那就选择 &lt;code>cn&lt;/code>，否则一般选择 &lt;code>global&lt;/code> 就可以， &lt;code>us&lt;/code> 是美国政府版（应该没人真的是这个吧）&lt;/li>
-&lt;li>在 &lt;code>Use auto config?&lt;/code> 阶段，如果你选择了 &lt;code>Y&lt;/code> ，rclone 会打开一个浏览器页面，需要你登录并授权 OneDrive 的访问权限。有些教程可能会让你使用 &lt;code>rclone authorize&lt;/code> 来单独获取 OneDrive 的 token 及授权，不过两者其实区别不大，唯一的区别就是自动配置模式下可以自动帮你获取到 token，而后者需要你使用另一个命令获取 token，在配置 OneDrive 的时候手动粘贴进去&lt;/li>
-&lt;/ol>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
-&lt;/span>&lt;span class="lnt"> 2
-&lt;/span>&lt;span class="lnt"> 3
-&lt;/span>&lt;span class="lnt"> 4
-&lt;/span>&lt;span class="lnt"> 5
-&lt;/span>&lt;span class="lnt"> 6
-&lt;/span>&lt;span class="lnt"> 7
-&lt;/span>&lt;span class="lnt"> 8
-&lt;/span>&lt;span class="lnt"> 9
-&lt;/span>&lt;span class="lnt"> 10
-&lt;/span>&lt;span class="lnt"> 11
-&lt;/span>&lt;span class="lnt"> 12
-&lt;/span>&lt;span class="lnt"> 13
-&lt;/span>&lt;span class="lnt"> 14
-&lt;/span>&lt;span class="lnt"> 15
-&lt;/span>&lt;span class="lnt"> 16
-&lt;/span>&lt;span class="lnt"> 17
-&lt;/span>&lt;span class="lnt"> 18
-&lt;/span>&lt;span class="lnt"> 19
-&lt;/span>&lt;span class="lnt"> 20
-&lt;/span>&lt;span class="lnt"> 21
-&lt;/span>&lt;span class="lnt"> 22
-&lt;/span>&lt;span class="lnt"> 23
-&lt;/span>&lt;span class="lnt"> 24
-&lt;/span>&lt;span class="lnt"> 25
-&lt;/span>&lt;span class="lnt"> 26
-&lt;/span>&lt;span class="lnt"> 27
-&lt;/span>&lt;span class="lnt"> 28
-&lt;/span>&lt;span class="lnt"> 29
-&lt;/span>&lt;span class="lnt"> 30
-&lt;/span>&lt;span class="lnt"> 31
-&lt;/span>&lt;span class="lnt"> 32
-&lt;/span>&lt;span class="lnt"> 33
-&lt;/span>&lt;span class="lnt"> 34
-&lt;/span>&lt;span class="lnt"> 35
-&lt;/span>&lt;span class="lnt"> 36
-&lt;/span>&lt;span class="lnt"> 37
-&lt;/span>&lt;span class="lnt"> 38
-&lt;/span>&lt;span class="lnt"> 39
-&lt;/span>&lt;span class="lnt"> 40
-&lt;/span>&lt;span class="lnt"> 41
-&lt;/span>&lt;span class="lnt"> 42
-&lt;/span>&lt;span class="lnt"> 43
-&lt;/span>&lt;span class="lnt"> 44
-&lt;/span>&lt;span class="lnt"> 45
-&lt;/span>&lt;span class="lnt"> 46
-&lt;/span>&lt;span class="lnt"> 47
-&lt;/span>&lt;span class="lnt"> 48
-&lt;/span>&lt;span class="lnt"> 49
-&lt;/span>&lt;span class="lnt"> 50
-&lt;/span>&lt;span class="lnt"> 51
-&lt;/span>&lt;span class="lnt"> 52
-&lt;/span>&lt;span class="lnt"> 53
-&lt;/span>&lt;span class="lnt"> 54
-&lt;/span>&lt;span class="lnt"> 55
-&lt;/span>&lt;span class="lnt"> 56
-&lt;/span>&lt;span class="lnt"> 57
-&lt;/span>&lt;span class="lnt"> 58
-&lt;/span>&lt;span class="lnt"> 59
-&lt;/span>&lt;span class="lnt"> 60
-&lt;/span>&lt;span class="lnt"> 61
-&lt;/span>&lt;span class="lnt"> 62
-&lt;/span>&lt;span class="lnt"> 63
-&lt;/span>&lt;span class="lnt"> 64
-&lt;/span>&lt;span class="lnt"> 65
-&lt;/span>&lt;span class="lnt"> 66
-&lt;/span>&lt;span class="lnt"> 67
-&lt;/span>&lt;span class="lnt"> 68
-&lt;/span>&lt;span class="lnt"> 69
-&lt;/span>&lt;span class="lnt"> 70
-&lt;/span>&lt;span class="lnt"> 71
-&lt;/span>&lt;span class="lnt"> 72
-&lt;/span>&lt;span class="lnt"> 73
-&lt;/span>&lt;span class="lnt"> 74
-&lt;/span>&lt;span class="lnt"> 75
-&lt;/span>&lt;span class="lnt"> 76
-&lt;/span>&lt;span class="lnt"> 77
-&lt;/span>&lt;span class="lnt"> 78
-&lt;/span>&lt;span class="lnt"> 79
-&lt;/span>&lt;span class="lnt"> 80
-&lt;/span>&lt;span class="lnt"> 81
-&lt;/span>&lt;span class="lnt"> 82
-&lt;/span>&lt;span class="lnt"> 83
-&lt;/span>&lt;span class="lnt"> 84
-&lt;/span>&lt;span class="lnt"> 85
-&lt;/span>&lt;span class="lnt"> 86
-&lt;/span>&lt;span class="lnt"> 87
-&lt;/span>&lt;span class="lnt"> 88
-&lt;/span>&lt;span class="lnt"> 89
-&lt;/span>&lt;span class="lnt"> 90
-&lt;/span>&lt;span class="lnt"> 91
-&lt;/span>&lt;span class="lnt"> 92
-&lt;/span>&lt;span class="lnt"> 93
-&lt;/span>&lt;span class="lnt"> 94
-&lt;/span>&lt;span class="lnt"> 95
-&lt;/span>&lt;span class="lnt"> 96
-&lt;/span>&lt;span class="lnt"> 97
-&lt;/span>&lt;span class="lnt"> 98
-&lt;/span>&lt;span class="lnt"> 99
-&lt;/span>&lt;span class="lnt">100
-&lt;/span>&lt;span class="lnt">101
-&lt;/span>&lt;span class="lnt">102
-&lt;/span>&lt;span class="lnt">103
-&lt;/span>&lt;span class="lnt">104
-&lt;/span>&lt;span class="lnt">105
-&lt;/span>&lt;span class="lnt">106
-&lt;/span>&lt;span class="lnt">107
-&lt;/span>&lt;span class="lnt">108
-&lt;/span>&lt;span class="lnt">109
-&lt;/span>&lt;span class="lnt">110
-&lt;/span>&lt;span class="lnt">111
-&lt;/span>&lt;span class="lnt">112
-&lt;/span>&lt;span class="lnt">113
-&lt;/span>&lt;span class="lnt">114
-&lt;/span>&lt;span class="lnt">115
-&lt;/span>&lt;span class="lnt">116
-&lt;/span>&lt;span class="lnt">117
-&lt;/span>&lt;span class="lnt">118
-&lt;/span>&lt;span class="lnt">119
-&lt;/span>&lt;span class="lnt">120
-&lt;/span>&lt;span class="lnt">121
-&lt;/span>&lt;span class="lnt">122
-&lt;/span>&lt;span class="lnt">123
-&lt;/span>&lt;span class="lnt">124
-&lt;/span>&lt;span class="lnt">125
-&lt;/span>&lt;span class="lnt">126
-&lt;/span>&lt;span class="lnt">127
-&lt;/span>&lt;span class="lnt">128
-&lt;/span>&lt;span class="lnt">129
-&lt;/span>&lt;span class="lnt">130
-&lt;/span>&lt;span class="lnt">131
-&lt;/span>&lt;span class="lnt">132
-&lt;/span>&lt;span class="lnt">133
-&lt;/span>&lt;span class="lnt">134
-&lt;/span>&lt;span class="lnt">135
-&lt;/span>&lt;span class="lnt">136
-&lt;/span>&lt;span class="lnt">137
-&lt;/span>&lt;span class="lnt">138
-&lt;/span>&lt;span class="lnt">139
-&lt;/span>&lt;span class="lnt">140
-&lt;/span>&lt;span class="lnt">141
-&lt;/span>&lt;span class="lnt">142
-&lt;/span>&lt;span class="lnt">143
-&lt;/span>&lt;span class="lnt">144
-&lt;/span>&lt;span class="lnt">145
-&lt;/span>&lt;span class="lnt">146
-&lt;/span>&lt;span class="lnt">147
-&lt;/span>&lt;span class="lnt">148
-&lt;/span>&lt;span class="lnt">149
-&lt;/span>&lt;span class="lnt">150
-&lt;/span>&lt;span class="lnt">151
-&lt;/span>&lt;span class="lnt">152
-&lt;/span>&lt;span class="lnt">153
-&lt;/span>&lt;span class="lnt">154
-&lt;/span>&lt;span class="lnt">155
-&lt;/span>&lt;span class="lnt">156
-&lt;/span>&lt;span class="lnt">157
-&lt;/span>&lt;span class="lnt">158
-&lt;/span>&lt;span class="lnt">159
-&lt;/span>&lt;span class="lnt">160
-&lt;/span>&lt;span class="lnt">161
-&lt;/span>&lt;span class="lnt">162
-&lt;/span>&lt;span class="lnt">163
-&lt;/span>&lt;span class="lnt">164
-&lt;/span>&lt;span class="lnt">165
-&lt;/span>&lt;span class="lnt">166
-&lt;/span>&lt;span class="lnt">167
-&lt;/span>&lt;span class="lnt">168
-&lt;/span>&lt;span class="lnt">169
-&lt;/span>&lt;span class="lnt">170
-&lt;/span>&lt;span class="lnt">171
-&lt;/span>&lt;span class="lnt">172
-&lt;/span>&lt;span class="lnt">173
-&lt;/span>&lt;span class="lnt">174
-&lt;/span>&lt;span class="lnt">175
-&lt;/span>&lt;span class="lnt">176
-&lt;/span>&lt;span class="lnt">177
-&lt;/span>&lt;span class="lnt">178
-&lt;/span>&lt;span class="lnt">179
-&lt;/span>&lt;span class="lnt">180
-&lt;/span>&lt;span class="lnt">181
-&lt;/span>&lt;span class="lnt">182
-&lt;/span>&lt;span class="lnt">183
-&lt;/span>&lt;span class="lnt">184
-&lt;/span>&lt;span class="lnt">185
-&lt;/span>&lt;span class="lnt">186
-&lt;/span>&lt;span class="lnt">187
-&lt;/span>&lt;span class="lnt">188
-&lt;/span>&lt;span class="lnt">189
-&lt;/span>&lt;span class="lnt">190
-&lt;/span>&lt;span class="lnt">191
-&lt;/span>&lt;span class="lnt">192
-&lt;/span>&lt;span class="lnt">193
-&lt;/span>&lt;span class="lnt">194
-&lt;/span>&lt;span class="lnt">195
-&lt;/span>&lt;span class="lnt">196
-&lt;/span>&lt;span class="lnt">197
-&lt;/span>&lt;span class="lnt">198
-&lt;/span>&lt;span class="lnt">199
-&lt;/span>&lt;span class="lnt">200
-&lt;/span>&lt;span class="lnt">201
-&lt;/span>&lt;span class="lnt">202
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ rclone config
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Current remotes:
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Name &lt;span class="nv">Type&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">====&lt;/span> &lt;span class="o">====&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">e&lt;span class="o">)&lt;/span> Edit existing remote
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">n&lt;span class="o">)&lt;/span> New remote
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">d&lt;span class="o">)&lt;/span> Delete remote
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">r&lt;span class="o">)&lt;/span> Rename remote
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">c&lt;span class="o">)&lt;/span> Copy remote
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">s&lt;span class="o">)&lt;/span> Set configuration password
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">q&lt;span class="o">)&lt;/span> Quit config
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">e/n/d/r/c/s/q&amp;gt; n
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">name&amp;gt; testDrive
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Option Storage.
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Type of storage to configure.
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Enter a string value. Press Enter &lt;span class="k">for&lt;/span> the default &lt;span class="o">(&lt;/span>&lt;span class="s2">&amp;#34;&amp;#34;&lt;/span>&lt;span class="o">)&lt;/span>.
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Choose a number from below, or &lt;span class="nb">type&lt;/span> in your own value.
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="m">1&lt;/span> / 1Fichier
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;fichier&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="m">2&lt;/span> / Alias &lt;span class="k">for&lt;/span> an existing remote
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;alias&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="m">3&lt;/span> / Amazon Drive
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;amazon cloud drive&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="m">4&lt;/span> / Amazon S3 Compliant Storage Providers including AWS, Alibaba, Ceph, Digital Ocean, Dreamhost, IBM COS, Minio, SeaweedFS, and Tencent COS
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;s3&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="m">5&lt;/span> / Backblaze B2
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;b2&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="m">6&lt;/span> / Better checksums &lt;span class="k">for&lt;/span> other remotes
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;hasher&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="m">7&lt;/span> / Box
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;box&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="m">8&lt;/span> / Cache a remote
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;cache&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="m">9&lt;/span> / Citrix Sharefile
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;sharefile&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">10&lt;/span> / Compress a remote
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;compress&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">11&lt;/span> / Dropbox
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;dropbox&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">12&lt;/span> / Encrypt/Decrypt a remote
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;crypt&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">13&lt;/span> / Enterprise File Fabric
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;filefabric&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">14&lt;/span> / FTP Connection
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;ftp&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">15&lt;/span> / Google Cloud Storage &lt;span class="o">(&lt;/span>this is not Google Drive&lt;span class="o">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;google cloud storage&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">16&lt;/span> / Google Drive
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;drive&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">17&lt;/span> / Google Photos
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;google photos&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">18&lt;/span> / Hadoop distributed file system
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;hdfs&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">19&lt;/span> / Hubic
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;hubic&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">20&lt;/span> / In memory object storage system.
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;memory&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">21&lt;/span> / Jottacloud
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;jottacloud&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">22&lt;/span> / Koofr
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;koofr&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">23&lt;/span> / Local Disk
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;local&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">24&lt;/span> / Mail.ru Cloud
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;mailru&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">25&lt;/span> / Mega
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;mega&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">26&lt;/span> / Microsoft Azure Blob Storage
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;azureblob&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">27&lt;/span> / Microsoft OneDrive
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;onedrive&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">28&lt;/span> / OpenDrive
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;opendrive&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">29&lt;/span> / OpenStack Swift &lt;span class="o">(&lt;/span>Rackspace Cloud Files, Memset Memstore, OVH&lt;span class="o">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;swift&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">30&lt;/span> / Pcloud
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;pcloud&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">31&lt;/span> / Put.io
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;putio&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">32&lt;/span> / QingCloud Object Storage
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;qingstor&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">33&lt;/span> / SSH/SFTP Connection
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;sftp&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">34&lt;/span> / Sia Decentralized Cloud
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;sia&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">35&lt;/span> / Sugarsync
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;sugarsync&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">36&lt;/span> / Tardigrade Decentralized Cloud Storage
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;tardigrade&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">37&lt;/span> / Transparently chunk/split large files
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;chunker&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">38&lt;/span> / Union merges the contents of several upstream fs
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;union&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">39&lt;/span> / Uptobox
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;uptobox&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">40&lt;/span> / Webdav
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;webdav&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">41&lt;/span> / Yandex Disk
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;yandex&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">42&lt;/span> / Zoho
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;zoho&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">43&lt;/span> / http Connection
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;http&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">44&lt;/span> / premiumize.me
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;premiumizeme&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">45&lt;/span> / seafile
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;seafile&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Storage&amp;gt; onedrive
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Option client_id.
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">OAuth Client Id.
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Leave blank normally.
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Enter a string value. Press Enter &lt;span class="k">for&lt;/span> the default &lt;span class="o">(&lt;/span>&lt;span class="s2">&amp;#34;&amp;#34;&lt;/span>&lt;span class="o">)&lt;/span>.
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">client_id&amp;gt; &lt;span class="o">{&lt;/span>直接回车就可以&lt;span class="o">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Option client_secret.
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">OAuth Client Secret.
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Leave blank normally.
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Enter a string value. Press Enter &lt;span class="k">for&lt;/span> the default &lt;span class="o">(&lt;/span>&lt;span class="s2">&amp;#34;&amp;#34;&lt;/span>&lt;span class="o">)&lt;/span>.
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">client_secret&amp;gt; &lt;span class="o">{&lt;/span>直接回车就可以&lt;span class="o">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Option region.
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Choose national cloud region &lt;span class="k">for&lt;/span> OneDrive.
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Enter a string value. Press Enter &lt;span class="k">for&lt;/span> the default &lt;span class="o">(&lt;/span>&lt;span class="s2">&amp;#34;global&amp;#34;&lt;/span>&lt;span class="o">)&lt;/span>.
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Choose a number from below, or &lt;span class="nb">type&lt;/span> in your own value.
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="m">1&lt;/span> / Microsoft Cloud Global
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;global&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="m">2&lt;/span> / Microsoft Cloud &lt;span class="k">for&lt;/span> US Government
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;us&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="m">3&lt;/span> / Microsoft Cloud Germany
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;de&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="m">4&lt;/span> / Azure and Office &lt;span class="m">365&lt;/span> operated by 21Vianet in China
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;cn&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">region&amp;gt; global
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Edit advanced config?
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">y&lt;span class="o">)&lt;/span> Yes
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">n&lt;span class="o">)&lt;/span> No &lt;span class="o">(&lt;/span>default&lt;span class="o">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">y/n&amp;gt; n
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Use auto config?
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> * Say Y &lt;span class="k">if&lt;/span> not sure
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> * Say N &lt;span class="k">if&lt;/span> you are working on a remote or headless machine
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">y&lt;span class="o">)&lt;/span> Yes &lt;span class="o">(&lt;/span>default&lt;span class="o">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">n&lt;span class="o">)&lt;/span> No
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">y/n&amp;gt; y
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2022/03/16 10:04:50 NOTICE: If your browser doesn&lt;span class="err">&amp;#39;&lt;/span>t open automatically go to the following link: http://127.0.0.1:53682/auth?state&lt;span class="o">=&lt;/span>qkwpEntUvXPewzviZQXNOHA
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2022/03/16 10:04:50 NOTICE: Log in and authorize rclone &lt;span class="k">for&lt;/span> access
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2022/03/16 10:04:50 NOTICE: Waiting &lt;span class="k">for&lt;/span> code...
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2022/03/16 10:06:03 NOTICE: Got code
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Option config_type.
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Type of connection
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Enter a string value. Press Enter &lt;span class="k">for&lt;/span> the default &lt;span class="o">(&lt;/span>&lt;span class="s2">&amp;#34;onedrive&amp;#34;&lt;/span>&lt;span class="o">)&lt;/span>.
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Choose a number from below, or &lt;span class="nb">type&lt;/span> in an existing value.
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="m">1&lt;/span> / OneDrive Personal or Business
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;onedrive&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="m">2&lt;/span> / Root Sharepoint site
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;sharepoint&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> / Sharepoint site name or URL
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="m">3&lt;/span> &lt;span class="p">|&lt;/span> E.g. mysite or https://contoso.sharepoint.com/sites/mysite
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;url&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="m">4&lt;/span> / Search &lt;span class="k">for&lt;/span> a Sharepoint site
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;search&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="m">5&lt;/span> / Type in driveID &lt;span class="o">(&lt;/span>advanced&lt;span class="o">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;driveid&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="m">6&lt;/span> / Type in SiteID &lt;span class="o">(&lt;/span>advanced&lt;span class="o">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;siteid&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> / Sharepoint server-relative path &lt;span class="o">(&lt;/span>advanced&lt;span class="o">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="m">7&lt;/span> &lt;span class="p">|&lt;/span> E.g. /teams/hr
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\ &lt;/span>&lt;span class="s2">&amp;#34;path&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">config_type&amp;gt; &lt;span class="m">1&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Drive OK?
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Found drive &lt;span class="s2">&amp;#34;root&amp;#34;&lt;/span> of &lt;span class="nb">type&lt;/span> &lt;span class="s2">&amp;#34;personal&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">URL: https://onedrive.live.com/?cid&lt;span class="o">=&lt;/span>j2sy7l2us75j92
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">y&lt;span class="o">)&lt;/span> Yes &lt;span class="o">(&lt;/span>default&lt;span class="o">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">n&lt;span class="o">)&lt;/span> No
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">y/n&amp;gt; y
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">--------------------
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>testDrive&lt;span class="o">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">type&lt;/span> &lt;span class="o">=&lt;/span> onedrive
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">token&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">{&lt;/span>这里就不展示了&lt;span class="o">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">drive_id&lt;/span> &lt;span class="o">=&lt;/span> js7y3isjy29hj725
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">drive_type&lt;/span> &lt;span class="o">=&lt;/span> personal
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">--------------------
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">y&lt;span class="o">)&lt;/span> Yes this is OK &lt;span class="o">(&lt;/span>default&lt;span class="o">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">e&lt;span class="o">)&lt;/span> Edit this remote
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">d&lt;span class="o">)&lt;/span> Delete this remote
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">y/e/d&amp;gt; y
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Current remotes:
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Name &lt;span class="nv">Type&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">====&lt;/span> &lt;span class="o">====&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">testDrive onedrive
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">e&lt;span class="o">)&lt;/span> Edit existing remote
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">n&lt;span class="o">)&lt;/span> New remote
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">d&lt;span class="o">)&lt;/span> Delete remote
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">r&lt;span class="o">)&lt;/span> Rename remote
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">c&lt;span class="o">)&lt;/span> Copy remote
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">s&lt;span class="o">)&lt;/span> Set configuration password
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">q&lt;span class="o">)&lt;/span> Quit config
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">e/n/d/r/c/s/q&amp;gt; q
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;h2 id="测试挂载卸载">测试&amp;amp;&amp;amp;挂载&amp;amp;&amp;amp;卸载&lt;/h2>
-&lt;h3 id="测试">测试&lt;/h3>
-&lt;p>接着你可以使用下面的命令列出自己 OneDrive 中的所有一级目录，测试一下是否配置成功&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ rclone lsd remote:
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;h3 id="挂载">挂载&lt;/h3>
-&lt;p>如果你只想在需要的时候手动挂载 OneDrive，可以使用下面的命令&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ rclone mount testDrive:/ /path/to/mount --allow-non-empty --vfs-cache-mode full --daemon
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;ul>
-&lt;li>&lt;code>testDrive&lt;/code> 是上面在配置 OneDrive 时指定的 name&lt;/li>
-&lt;li>&lt;code>testDrive:&lt;/code> 后面跟着的是你想要挂载到本地的 OneDrive 中的目录或者文件，这里的 &lt;code>/&lt;/code> 代表 OneDrive 中的所有内容&lt;/li>
-&lt;li>&lt;code>/path/to/mount&lt;/code> 是指定你将 OneDrive 挂载到本地的位置。此目录需要提前创建并赋予足够的读写权限&lt;/li>
-&lt;li>&lt;code>--allow-non-empty&lt;/code> 允许将 OneDrive 挂载到一个非空目录中，该参数&lt;strong>可不指定&lt;/strong>&lt;/li>
-&lt;li>&lt;code>--vfs-cache-mode full&lt;/code> 缓存模式，我这里指定的是 &lt;code>full&lt;/code>，默认是 &lt;code>off&lt;/code> 。这里一共支持 4 种模式，我这里就简单说一下这两种的区别
-&lt;ul>
-&lt;li>&lt;code>full&lt;/code> 模式下所有对远程文件的读写都会缓存到磁盘中&lt;/li>
-&lt;li>&lt;code>off&lt;/code> 模式下所有对远程文件的读写都不会缓存到磁盘中&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>rclone 的挂载命令是一个前台服务，如果你关闭了当前的会话，那挂载进程也会退出。&lt;code>--daemon&lt;/code> 参数可以将 rclone 的挂载命令作为一个后台服务，这样即使你关闭了当前会话，挂载进程也不会退出&lt;/li>
-&lt;/ul>
-&lt;h3 id="卸载">卸载&lt;/h3>
-&lt;p>使用 rclone 挂载的云盘的卸载和普通磁盘的卸载方式一样，可以直接使用 &lt;code>umount&lt;/code> 来完成&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">umount testDrive
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;h2 id="开机自启动">开机自启动&lt;/h2>
-&lt;p>当然，如果想要避免每次开机都要手动挂载一次，也可以选择创建开机自启脚本&lt;/p>
-&lt;p>在 &lt;code>~/.config/autostart&lt;/code> 目录下创建一个以 &lt;code>.desktop&lt;/code> 结尾的文件，该文件的内容如下&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;span class="lnt">4
-&lt;/span>&lt;span class="lnt">5
-&lt;/span>&lt;span class="lnt">6
-&lt;/span>&lt;span class="lnt">7
-&lt;/span>&lt;span class="lnt">8
-&lt;/span>&lt;span class="lnt">9
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>Desktop Entry&lt;span class="o">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">Type&lt;/span>&lt;span class="o">=&lt;/span>Application
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">NoDisplay&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nb">true&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">Terminal&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nb">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">Name&lt;/span>&lt;span class="o">=&lt;/span>dianDrive
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">Exec&lt;/span>&lt;span class="o">=&lt;/span>/usr/bin/rclone mount testDrive:/ /path/to/mount --allow-non-empty --vfs-cache-mode full --daemon
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">Icon&lt;/span>&lt;span class="o">=&lt;/span>onedrive
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">Comment&lt;/span>&lt;span class="o">=&lt;/span>Auto mount OneDrive to local.
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">Categories&lt;/span>&lt;span class="o">=&lt;/span>Network&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div></description></item></channel></rss>
+&lt;/div>&lt;p>参数的一些具体说明可以参考此处： &lt;a href="https://git-scm.com/docs/git-config#Documentation/git-config.txt-corequotePath">https://git-scm.com/docs/git-config#Documentation/git-config.txt-corequotePath&lt;/a>&lt;/p></description></item></channel></rss>

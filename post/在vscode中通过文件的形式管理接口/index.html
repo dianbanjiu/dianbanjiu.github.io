@@ -1,0 +1,168 @@
+<!doctype html><html lang=zh-cn itemscope itemtype=http://schema.org/WebPage><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><title>在vscode中通过文件的形式管理接口 - 点半九</title>
+<meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta name=MobileOptimized content="width"><meta name=HandheldFriendly content="true"><meta name=applicable-device content="pc,mobile"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=mobile-web-app-capable content="yes"><meta name=author content="dianbanjiu"><meta name=description content="我之前一直使用 postman 来管理接口，postman 功能强大，容易上手，但是随着版本的更新，postman 逐渐发展为了一个在线服务，虽然能够让不同机器"><meta name=generator content="Hugo 0.120.4"><link rel=canonical href=https://www.dianbanjiu.com/post/%E5%9C%A8vscode%E4%B8%AD%E9%80%9A%E8%BF%87%E6%96%87%E4%BB%B6%E7%9A%84%E5%BD%A2%E5%BC%8F%E7%AE%A1%E7%90%86%E6%8E%A5%E5%8F%A3/><link rel=icon href=/favicon.svg><link rel=stylesheet href=/sass/jane.min.a1264e3ef168929cc1e8e2dd49db9c792db12c19bca13e0688af29035af51fd7.css integrity="sha256-oSZOPvFokpzB6OLdSduceS2xLBm8oT4GiK8pA1r1H9c=" media=screen crossorigin=anonymous><meta property="og:title" content="在vscode中通过文件的形式管理接口"><meta property="og:description" content="我之前一直使用 postman 来管理接口，postman 功能强大，容易上手，但是随着版本的更新，postman 逐渐发展为了一个在线服务，虽然能够让不同机器"><meta property="og:type" content="article"><meta property="og:url" content="https://www.dianbanjiu.com/post/%E5%9C%A8vscode%E4%B8%AD%E9%80%9A%E8%BF%87%E6%96%87%E4%BB%B6%E7%9A%84%E5%BD%A2%E5%BC%8F%E7%AE%A1%E7%90%86%E6%8E%A5%E5%8F%A3/"><meta property="article:section" content="post"><meta property="article:published_time" content="2023-12-02T19:06:33+08:00"><meta property="article:modified_time" content="2023-12-02T20:02:30+08:00"><meta itemprop=name content="在vscode中通过文件的形式管理接口"><meta itemprop=description content="我之前一直使用 postman 来管理接口，postman 功能强大，容易上手，但是随着版本的更新，postman 逐渐发展为了一个在线服务，虽然能够让不同机器"><meta itemprop=datePublished content="2023-12-02T19:06:33+08:00"><meta itemprop=dateModified content="2023-12-02T20:02:30+08:00"><meta itemprop=wordCount content="1249"><meta itemprop=keywords content="vscode,"><meta name=twitter:card content="summary"><meta name=twitter:title content="在vscode中通过文件的形式管理接口"><meta name=twitter:description content="我之前一直使用 postman 来管理接口，postman 功能强大，容易上手，但是随着版本的更新，postman 逐渐发展为了一个在线服务，虽然能够让不同机器"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>点半九</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><li class=mobile-menu-item><a class=menu-item-link href=https://www.dianbanjiu.com/>主页</a></li><li class=mobile-menu-item><a class=menu-item-link href=https://www.dianbanjiu.com/post/>归档</a></li><li class=mobile-menu-item><a class=menu-item-link href=https://www.dianbanjiu.com/tags>标签</a></li><li class=mobile-menu-item><a class=menu-item-link href=https://www.dianbanjiu.com/about>关于</a></li><li class=mobile-menu-item><a class=menu-item-link href=https://www.dianbanjiu.com/search>搜索</a></li></ul></nav><link rel=stylesheet href=/lib/photoswipe/photoswipe.min.css><link rel=stylesheet href=/lib/photoswipe/default-skin/default-skin.min.css><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><header id=header class="header container"><div class=logo-wrapper><a href=/ class=logo>点半九</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=https://www.dianbanjiu.com/>主页</a></li><li class=menu-item><a class=menu-item-link href=https://www.dianbanjiu.com/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=https://www.dianbanjiu.com/tags>标签</a></li><li class=menu-item><a class=menu-item-link href=https://www.dianbanjiu.com/about>关于</a></li><li class=menu-item><a class=menu-item-link href=https://www.dianbanjiu.com/search>搜索</a></li></ul></nav></header><div id=mobile-panel><main id=main class="main bg-llight"><div class=content-wrapper><div id=content class="content container"><article class="post bg-white"><header class=post-header><h1 class=post-title>在vscode中通过文件的形式管理接口</h1><div class=post-meta><span style=vertical-align:middle><time datetime=2023-12-02 class=post-time>创建于
+2023-12-02
+</time></span>|
+<span style=vertical-align:middle><time datetime=2023-12-02 class=post-time>更新于
+2023-12-02</time></span></div></header><div class=post-content><p>我之前一直使用 postman 来管理接口，postman 功能强大，容易上手，但是随着版本的更新，postman 逐渐发展为了一个在线服务，虽然能够让不同机器间切换时也能有一个统一的体验，但是因为网络原因，特别是在公司的网络策略面前，纯在线服务经常会出现接口无法从服务器上拉取下来的情况。所以我转而开始寻找一些对本地服务有更好支持的接口管理工具，在尝试过多个工具之后，最终选择了 httpyac，目前还在初期的磨合阶段，不过 httpyac 已经基本能满足我一个开发人员对于接口管理&测试方面的所有基础需求了</p><p>httpyac 支持 vscode 插件(扩展商店搜索 <code>anweber.vscode-httpyac</code> 安装即可)，通过 .http/.rest 的形式来管理接口文件，这也就意味着你可以把接口文件随项目一起进行版本管理，或者将所有的接口汇总在一个仓库统一管理，也可以选择自己喜欢&可用的云服务进行托管，这样就不会出现 postman 那种拉不到接口的情况出现了</p><p>下面是 httpyac 的一些简单的使用示例，也是我在日常使用中最主要的几个点</p><h2 id=发起请求>发起请求</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-http data-lang=http><span class=line><span class=cl><span class=err>### 获取用户信息
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=nf>GET</span> <span class=nn>https://www.dianbanjiu.com/user/info?name=John</span> <span class=kr>HTTP</span><span class=o>/</span><span class=m>1.1</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=g>### 新增用户
+</span></span></span><span class=line><span class=cl><span class=g>POST https://www.dianbanjiu.com/user HTTP/1.1
+</span></span></span><span class=line><span class=cl><span class=g>Content-Type: application/json
+</span></span></span><span class=line><span class=cl><span class=g>
+</span></span></span><span class=line><span class=cl><span class=g>{
+</span></span></span><span class=line><span class=cl><span class=g>    &#34;name&#34;: &#34;John&#34;,
+</span></span></span><span class=line><span class=cl><span class=g>    &#34;age&#34;: 30,
+</span></span></span><span class=line><span class=cl><span class=g>    &#34;phone&#34;: &#34;12345678901&#34;
+</span></span></span><span class=line><span class=cl><span class=g>}
+</span></span></span></code></pre></td></tr></table></div></div><p>你可以通过在每行的开头通过 <code>#</code> 或者 <code>//</code> 来添加单行注释，也支持通过 <code>/* */</code> 来添加多行注释</p><h2 id=定义变量>定义变量</h2><p>httpyac 支持多种定义变量的形式</p><ol><li>在接口文件内定义变量</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-http data-lang=http><span class=line><span class=cl><span class=err>@host=https://www.dianbanjiu.com
+</span></span></span><span class=line><span class=cl><span class=err>@user=John
+</span></span></span><span class=line><span class=cl><span class=err>@pass=123456
+</span></span></span></code></pre></td></tr></table></div></div><ol start=2><li>在项目根目录下通过 .env.xx 定义环境文件，xx 为环境名</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>// .env.dev
+</span></span><span class=line><span class=cl>host=https://www.dianbanjiu.com
+</span></span><span class=line><span class=cl>user=John
+</span></span><span class=line><span class=cl>pass=123456
+</span></span></code></pre></td></tr></table></div></div><ol start=3><li>在 .vscode/settings.json 中定义环境变量，其中 <code>$share</code> 是所有环境的共享变量</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;httpyac.environmentVariables&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;$shared&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;foo&#34;</span><span class=p>:</span> <span class=s2>&#34;bar&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=p>},</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;dev&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;host&#34;</span><span class=p>:</span> <span class=s2>&#34;https://www.dianbanjiu.com&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;user&#34;</span><span class=p>:</span> <span class=s2>&#34;user&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;pass&#34;</span><span class=p>:</span> <span class=s2>&#34;pass&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=p>},</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;prd&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;host&#34;</span><span class=p>:</span> <span class=s2>&#34;https://www.dianbanjiu.com&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;user&#34;</span><span class=p>:</span> <span class=s2>&#34;user&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;pass&#34;</span><span class=p>:</span> <span class=s2>&#34;pass&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>定义好变量之后，在接口文件中通过双大括号即可引用</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-http data-lang=http><span class=line><span class=cl><span class=err>GET {{host}}/user/info?name={{name}}
+</span></span></span></code></pre></td></tr></table></div></div><p>我一般是第1、3结合使用。这里有一个语法糖，如果你定义了 host 变量，在写接口的时候可以忽略前置的域名，直接写路由，如果你在环境变量中域名使用的是其他名字，也可以在接口文件中重新赋值 host 变量来使用这个语法糖</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-http data-lang=http><span class=line><span class=cl><span class=err># 环境文件中定义了 dian-api=https://www.dianbanjiu.com
+</span></span></span><span class=line><span class=cl><span class=err>@host={{dian-api}}
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err>GET /user/info?name={{name}}
+</span></span></span></code></pre></td></tr></table></div></div><h2 id=脚本命令>脚本命令</h2><p>httpyac 支持在接口文件中自定义脚本，可以实现类似 postman 的脚本功能，这也是我之所以选择 httpyac 的最主要原因</p><p>比如很多接口都需要进行签名，你可以在脚本中使用 nodejs 的 crypto 包来完成</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-http data-lang=http><span class=line><span class=cl><span class=err>{{
+</span></span></span><span class=line><span class=cl><span class=err>  //pre request script
+</span></span></span><span class=line><span class=cl><span class=err>  const crypto = require(&#39;crypto&#39;);
+</span></span></span><span class=line><span class=cl><span class=err>  const date = new Date();
+</span></span></span><span class=line><span class=cl><span class=err>  const signatureBase64 = crypto.createHmac(&#39;sha256&#39;, &#39;secret&#39;)
+</span></span></span><span class=line><span class=cl><span class=err>  .update(`${request.method}\u2028${request.url}\u2028${date.getTime()}`).digest(&#34;base64&#34;);
+</span></span></span><span class=line><span class=cl><span class=err>  exports.authDate = date.toUTCString();
+</span></span></span><span class=line><span class=cl><span class=err>  exports.authentcation = `Basic ${signatureBase64}`;
+</span></span></span><span class=line><span class=cl><span class=err>}}
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=nf>GET</span> <span class=nn>https://www.dianbanjiu.com/user/info?name={{name}}</span> <span class=kr>HTTP</span><span class=o>/</span><span class=m>1.1</span>
+</span></span><span class=line><span class=cl><span class=n>Date</span><span class=o>:</span> <span class=l>{{authDate}}</span>
+</span></span><span class=line><span class=cl><span class=n>Authentication</span><span class=o>:</span> <span class=l>{{authentcation}}</span>
+</span></span></code></pre></td></tr></table></div></div><p>如果你的接口需要统一设置请求头也可以通过脚本实现，<code>{{+</code> 开头的脚本会在所有请求之前执行，请求的具体执行流程可以参照下图</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-http data-lang=http><span class=line><span class=cl><span class=err>{{+
+</span></span></span><span class=line><span class=cl><span class=err>  //pre request script
+</span></span></span><span class=line><span class=cl><span class=err>  const crypto = require(&#39;crypto&#39;);
+</span></span></span><span class=line><span class=cl><span class=err>  const date = new Date();
+</span></span></span><span class=line><span class=cl><span class=err>  const signatureBase64 = crypto.createHmac(&#39;sha256&#39;, &#39;secret&#39;)
+</span></span></span><span class=line><span class=cl><span class=err>  .update(`${request.method}\u2028${request.url}\u2028${date.getTime()}`).digest(&#34;base64&#34;);
+</span></span></span><span class=line><span class=cl><span class=err>  request.headers.authDate = date.toUTCString();
+</span></span></span><span class=line><span class=cl><span class=err>  request.headers.authentcation = `Basic ${signatureBase64}`;
+</span></span></span><span class=line><span class=cl><span class=err>}}
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=nf>GET</span> <span class=nn>https://www.dianbanjiu.com/user/info?name={{name}}</span> <span class=kr>HTTP</span><span class=o>/</span><span class=m>1.1</span>
+</span></span></code></pre></td></tr></table></div></div><p><img src=https://httpyac.github.io/assets/scripting.8a515e08.svg alt=httpyac接口执行流程></p><p>一些需要把整个请求体都作为加密字段的接口，也可以通过脚本实现</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-http data-lang=http><span class=line><span class=cl><span class=err>{{
+</span></span></span><span class=line><span class=cl><span class=err>  const crypto = require(&#39;crypto&#39;);
+</span></span></span><span class=line><span class=cl><span class=err>  const date = new Date();
+</span></span></span><span class=line><span class=cl><span class=err>  const signatureBase64 = crypto.createHmac(&#39;sha256&#39;, &#39;secret&#39;)
+</span></span></span><span class=line><span class=cl><span class=err>  .update(request.body).digest(&#34;base64&#34;);
+</span></span></span><span class=line><span class=cl><span class=err>  exports.authDate = date.toUTCString();
+</span></span></span><span class=line><span class=cl><span class=err>  exports.authentcation = `Basic ${signatureBase64}`;
+</span></span></span><span class=line><span class=cl><span class=err>}}
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=nf>GET</span> <span class=nn>https://www.dianbanjiu.com/user/info?name={{name}}&amp;sign={{authentcation}}&amp;time={{authDate}}</span> <span class=kr>HTTP</span><span class=o>/</span><span class=m>1.1</span>
+</span></span></code></pre></td></tr></table></div></div><p>目前还有一个不大不小的痛点，就是 httpyac 尚不支持导入 curl 或者 postman 导出的文件来转换为 .http/.rest 文件，需要自己一个个接口再从 postman 换过来也是一个不小的工作量</p><p>至此我在 postman 中会用的 99% 的功能 httpyac 都提供了，此外 httpyac 也提供了断言、hook、debug 等一些其他的高级功能，但是我都未使用过，这里就不多说明了，具体的说明可以参照 <a href=https://httpyac.github.io/>httpyac官网</a> 了解。还有一些语法糖官网其实也没有说明的很清楚，可能需要去 <a href=https://github.com/AnWeber/vscode-httpyac>httpyac代码仓库的issue</a> 自行搜索了</p></div><footer class=post-footer><div class=post-tags><a href=https://www.dianbanjiu.com/tags/vscode/>vscode</a></div><nav class=post-nav><a class=next href=/post/vscode%E4%B8%AD%E4%B8%80%E4%BA%9B%E5%A5%BD%E7%94%A8%E7%9A%84%E5%B0%8Ftips/><span class="next-text nav-default">Vscode中一些好用的小tips</span>
+<span class="prev-text nav-mobile">下一篇</span>
+<i class=iconfont><svg class="icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18" height="18"><path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697c-11.777231-11.500939-30.216186-10.304694-41.178865 2.712784z"/></svg></i></a></nav></footer></article></div></div></main><footer id=footer class=footer><div class=copyright><span class=copyright-year>&copy;
+2019 -
+2023
+<span class=heart><i class=iconfont><svg class="icon" viewBox="0 0 1025 1024" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="14" height="14"><path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7.0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1.0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2.0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3.1-42.5-8-83.6-24-122.2z" fill="#8a8a8a"/></svg></i></span><span class=author>dianbanjiu@gmail.com</span></span></div></footer></div><script type=text/javascript src=/lib/jquery/jquery-3.2.1.min.js></script><script type=text/javascript src=/lib/slideout/slideout-1.0.1.min.js></script><script type=text/javascript src=/js/main.638251f4230630f0335d8c6748e53a96f94b72670920b60c09a56fdc8bece214.js integrity="sha256-Y4JR9CMGMPAzXYxnSOU6lvlLcmcJILYMCaVv3Ivs4hQ=" crossorigin=anonymous></script><script type=text/javascript src=/js/load-photoswipe.js></script><script type=text/javascript src=/lib/photoswipe/photoswipe.min.js></script><script type=text/javascript src=/lib/photoswipe/photoswipe-ui-default.min.js></script></body></html>
