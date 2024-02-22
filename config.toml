@@ -92,7 +92,8 @@ defaultContentLanguage = "zh-cn"           # Default language to use
   #   enable = true
   #   repo = "GuangzheJiang/blog-comment"    # The repo to store comments
   #   issueTerm = "pathname"
-
+[params.waline]
+  enable = true
 # 底部的今日一词
 # [params.jinrishici]
 #   enable = true
