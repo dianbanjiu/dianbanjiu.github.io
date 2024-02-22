@@ -1,4 +1,214 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 点半九</title><link>https://www.dianbanjiu.com/post/</link><description>Recent content in Posts on 点半九</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>dianbanjiu@gmail.com</copyright><lastBuildDate>Sat, 02 Dec 2023 19:06:33 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/post/index.xml" rel="self" type="application/rss+xml"/><item><title>在vscode中通过文件的形式管理接口</title><link>https://www.dianbanjiu.com/post/%E5%9C%A8vscode%E4%B8%AD%E9%80%9A%E8%BF%87%E6%96%87%E4%BB%B6%E7%9A%84%E5%BD%A2%E5%BC%8F%E7%AE%A1%E7%90%86%E6%8E%A5%E5%8F%A3/</link><pubDate>Sat, 02 Dec 2023 19:06:33 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E5%9C%A8vscode%E4%B8%AD%E9%80%9A%E8%BF%87%E6%96%87%E4%BB%B6%E7%9A%84%E5%BD%A2%E5%BC%8F%E7%AE%A1%E7%90%86%E6%8E%A5%E5%8F%A3/</guid><description>&lt;p>我之前一直使用 postman 来管理接口，postman 功能强大，容易上手，但是随着版本的更新，postman 逐渐发展为了一个在线服务，虽然能够让不同机器间切换时也能有一个统一的体验，但是因为网络原因，特别是在公司的网络策略面前，纯在线服务经常会出现接口无法从服务器上拉取下来的情况。所以我转而开始寻找一些对本地服务有更好支持的接口管理工具，在尝试过多个工具之后，最终选择了 httpyac，目前还在初期的磨合阶段，不过 httpyac 已经基本能满足我一个开发人员对于接口管理&amp;amp;测试方面的所有基础需求了&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 点半九</title><link>https://www.dianbanjiu.com/post/</link><description>Recent content in Posts on 点半九</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>dianbanjiu@gmail.com</copyright><lastBuildDate>Thu, 22 Feb 2024 00:36:16 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/post/index.xml" rel="self" type="application/rss+xml"/><item><title>搭建memos</title><link>https://www.dianbanjiu.com/post/%E6%90%AD%E5%BB%BAmemos/</link><pubDate>Thu, 22 Feb 2024 00:36:16 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E6%90%AD%E5%BB%BAmemos/</guid><description>&lt;p>最近看到了一个比较有意思的服务 Memos，支持自己部署，所以我也来搞了一个玩玩，下面是大概的流程&lt;/p>
+&lt;h2 id="1安装-docker">1、安装 docker&lt;/h2>
+&lt;p>我服务器使用的是 Centos8，如果你使用的是其他发行版可以参考 &lt;a href="https://docs.docker.com/engine/install/">Docker 官方的说明文档&lt;/a>&lt;/p>
+&lt;p>首先卸载已经安装的旧 docker&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">sudo yum remove docker &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> docker-client &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> docker-client-latest &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> docker-common &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> docker-latest &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> docker-latest-logrotate &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> docker-logrotate &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> docker-engine
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>安装 yum-utils 包&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">sudo yum install -y yum-utils
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>添加 docker 软件源&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>安装最新版的 docker&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">sudo yum install docker-ce
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>启动 docker，并将它设置为开机自启&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">sudo systemctl start docker
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo systemctl &lt;span class="nb">enable&lt;/span> docker
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>确认 docker 启动成功&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">sudo docker info
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="2安装-memos">2、安装 Memos&lt;/h2>
+&lt;p>官网提供了 docker 和 docker-compose 的部署方式，因为只有一个服务，所以我选择直接使用 docker 部署&lt;/p>
+&lt;p>&lt;a href="https://www.usememos.com/docs/install/self-hosting">官方文档链接&lt;/a>&lt;/p>
+&lt;p>先创建一个目录用来存放 Memos 的数据文件&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">mkdir /opt/memos
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>安装 Memos&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">docker run -d &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> --init &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> --name memos &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> --publish 5230:5230 &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> --volume /opt/memos/:/var/opt/memos &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> neosmemo/memos:stable
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>上面命令执行完之后 Memos 就跑起来了，可以使用 http://ip:5230 来测试一下&lt;/p>
+&lt;h2 id="3添加域名解析">3、添加域名解析&lt;/h2>
+&lt;p>添加一条 A 记录，如 memos.dianbanjiu.com 解析到自己服务器的公网 IP 上&lt;/p>
+&lt;ol>
+&lt;li>在 cloudflare 选择自己的站点&lt;/li>
+&lt;li>在侧边栏选择 DNS-&amp;gt;记录&lt;/li>
+&lt;li>选择添加记录按钮，添加一条 A 记录（类型选择 A，名称输入 memos，IPV4 地址填自己的服务器公网 IP）&lt;/li>
+&lt;/ol>
+&lt;p>后续我会把服务改为 https 访问，而我的域名是托管在 cloudflare 上的，所以可以直接用 cloudflare 生成一份 15 年有效期的证书&lt;/p>
+&lt;ol>
+&lt;li>在 cloudflare 选择自己的站点&lt;/li>
+&lt;li>在侧边栏选择 SSL/TLS-&amp;gt;源服务器&lt;/li>
+&lt;li>点击创建证书按钮，根据提示创建即可。推荐生成 pem 格式的私钥&lt;/li>
+&lt;/ol>
+&lt;p>将证书保存为 dianbanjiu.com.pem，将私钥保存为 dianbanjiu.com.key&lt;/p>
+&lt;p>将生成的两个文件上传至服务器的 /etc/nginx/cert 下&lt;/p>
+&lt;h2 id="4安装-nginx">4、安装 nginx&lt;/h2>
+&lt;p>官方软件源里的 nginx 版本可能比较老，可以选择安装 nginx 软件源，以安装最新的 nginx&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">rpm -ivh http://nginx.org/packages/centos/8/x86_64/RPMS/nginx-1.24.0-1.el8.ngx.x86_64.rpm
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>上面的命令会直接安装好 1.24.0 版本的 nginx，这也是当前最新版本&lt;/p>
+&lt;p>启动 nginx 并设置开机自启&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">sudo systemctl start nginx
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo systemctl &lt;span class="nb">enable&lt;/span> nginx
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>在浏览器直接访问 http://ip 应该就可以看到 nginx 的输出了&lt;/p>
+&lt;p>新增 Memos 的 nginx 配置，在 /etc/nginx/conf.d 中新增一个 memos.dianbanjiu.com.conf 文件。文件内容如下&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-nginx" data-lang="nginx">&lt;span class="line">&lt;span class="cl">&lt;span class="k">server&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kn">listen&lt;/span> &lt;span class="mi">443&lt;/span> &lt;span class="s">ssl&lt;/span> &lt;span class="s">http2&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kn">server_name&lt;/span> &lt;span class="s">memos.dianbanjiu.com&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kn">ssl_certificate&lt;/span> &lt;span class="s">/etc/nginx/cert/dianbanjiu.com.pem&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kn">ssl_certificate_key&lt;/span> &lt;span class="s">/etc/nginx/cert/dianbanjiu.com.key&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kn">ssl_prefer_server_ciphers&lt;/span> &lt;span class="no">on&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kn">access_log&lt;/span> &lt;span class="s">/var/log/nginx/memos.access.log&lt;/span> &lt;span class="s">main&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kn">location&lt;/span> &lt;span class="s">/&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kn">proxy_pass&lt;/span> &lt;span class="s">http://127.0.0.1:5230&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kn">proxy_set_header&lt;/span> &lt;span class="s">Host&lt;/span> &lt;span class="nv">$host&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kn">proxy_set_header&lt;/span> &lt;span class="s">X-Real-IP&lt;/span> &lt;span class="nv">$remote_addr&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kn">proxy_set_header&lt;/span> &lt;span class="s">X-Forwarded-For&lt;/span> &lt;span class="nv">$proxy_add_x_forwarded_for&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">server&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kn">listen&lt;/span> &lt;span class="mi">80&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kn">server_name&lt;/span> &lt;span class="s">memos.dianbanjiu.com&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kn">rewrite&lt;/span> &lt;span class="s">^/(.*)&lt;/span>$ &lt;span class="s">https://memos.dianbanjiu.com/&lt;/span>&lt;span class="nv">$1&lt;/span> &lt;span class="s">permanent&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>重新加载 nginx 配置&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">nginx -t &lt;span class="c1">#检查配置文件是否有误&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">nginx -s reload
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>直接通过浏览器访问 &lt;a href="https://memos.dianbanjiu.com">https://memos.dianbanjiu.com&lt;/a> 确认服务是否安装成功&lt;/p>
+&lt;p>如果你是在国内服务器上搭建的 Memos，服务在短暂能访问之后就出现再也无法访问的情况，有可能是因为域名未备案导致被服务商直接拦截了，这种情况下要么去备案并自己修改页面在最下面加上备案信息，要么就只能通过 ip 访问。&lt;/p></description></item><item><title>在vscode中通过文件的形式管理接口</title><link>https://www.dianbanjiu.com/post/%E5%9C%A8vscode%E4%B8%AD%E9%80%9A%E8%BF%87%E6%96%87%E4%BB%B6%E7%9A%84%E5%BD%A2%E5%BC%8F%E7%AE%A1%E7%90%86%E6%8E%A5%E5%8F%A3/</link><pubDate>Sat, 02 Dec 2023 19:06:33 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E5%9C%A8vscode%E4%B8%AD%E9%80%9A%E8%BF%87%E6%96%87%E4%BB%B6%E7%9A%84%E5%BD%A2%E5%BC%8F%E7%AE%A1%E7%90%86%E6%8E%A5%E5%8F%A3/</guid><description>&lt;p>我之前一直使用 postman 来管理接口，postman 功能强大，容易上手，但是随着版本的更新，postman 逐渐发展为了一个在线服务，虽然能够让不同机器间切换时也能有一个统一的体验，但是因为网络原因，特别是在公司的网络策略面前，纯在线服务经常会出现接口无法从服务器上拉取下来的情况。所以我转而开始寻找一些对本地服务有更好支持的接口管理工具，在尝试过多个工具之后，最终选择了 httpyac，目前还在初期的磨合阶段，不过 httpyac 已经基本能满足我一个开发人员对于接口管理&amp;amp;测试方面的所有基础需求了&lt;/p>
 &lt;p>httpyac 支持 vscode 插件(扩展商店搜索 &lt;code>anweber.vscode-httpyac&lt;/code> 安装即可)，通过 .http/.rest 的形式来管理接口文件，这也就意味着你可以把接口文件随项目一起进行版本管理，或者将所有的接口汇总在一个仓库统一管理，也可以选择自己喜欢&amp;amp;可用的云服务进行托管，这样就不会出现 postman 那种拉不到接口的情况出现了&lt;/p>
 &lt;p>下面是 httpyac 的一些简单的使用示例，也是我在日常使用中最主要的几个点&lt;/p>
 &lt;h2 id="发起请求">发起请求&lt;/h2>
@@ -198,7 +408,7 @@
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="nf">GET&lt;/span> &lt;span class="nn">https://www.dianbanjiu.com/user/info?name={{name}}&lt;/span> &lt;span class="kr">HTTP&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="m">1.1&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>&lt;img src="https://httpyac.github.io/assets/scripting.8a515e08.svg" alt="httpyac接口执行流程">&lt;/p>
+&lt;/div>&lt;p>&lt;img alt="httpyac接口执行流程" src="https://httpyac.github.io/assets/scripting.8a515e08.svg">&lt;/p>
 &lt;p>一些需要把整个请求体都作为加密字段的接口，也可以通过脚本实现&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
@@ -245,7 +455,7 @@ go 的注释风格是以方法名开头的，比如&lt;/p>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>但是每次手动拼写每个函数名也还是挺麻烦的，最近发现可以先在函数上面打出 &lt;code>//&lt;/code>，然后按下 &lt;code>ctrl+space&lt;/code>，补全提示的第一个就是当前的方法名&lt;/p>
-&lt;p>&lt;img src="https://www.dianbanjiu.com/img/vscode%E8%A1%A5%E5%85%A8%E6%96%B9%E6%B3%95%E5%90%8D.gif" alt="vscode补全方法名">&lt;/p>
+&lt;p>&lt;img alt="vscode补全方法名" src="https://www.dianbanjiu.com/img/vscode%E8%A1%A5%E5%85%A8%E6%96%B9%E6%B3%95%E5%90%8D.gif">&lt;/p>
 &lt;p>&lt;code>ctrl+space&lt;/code> 是 vscode 默认的 &lt;code>触发建议&lt;/code> 的快捷键&lt;/p>
 &lt;p>&lt;strong>2、补全结构体的tag&lt;/strong>&lt;br>
 写 go 的结构体时，经常需要给结构体加上 tag，目前 vscode-go 是按照固定格式直接一次性给你生成好，但是有时候我想要的并不是模板中设定的，这时候推荐安装 &lt;code>maxnatchanon.go-struct-tag-autogen&lt;/code> 扩展，你可以先提前设定好你可能用到的 tag 以及样式，比如我的设置&lt;/p>
@@ -300,11 +510,11 @@ go 的注释风格是以方法名开头的，比如&lt;/p>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>在写完结构体的一个字段之后，如果我想生成名为 form 的 tag，在字段的最后输入 `f 就能看到一个推荐的补全列表，在其中选择需要的即可&lt;/p>
-&lt;p>&lt;img src="https://www.dianbanjiu.com/img/vscode%E8%A1%A5%E5%85%A8%E7%BB%93%E6%9E%84%E4%BD%93tag.gif" alt="vscode补全结构体tag">&lt;/p></description></item><item><title>十一太湖骑行</title><link>https://www.dianbanjiu.com/post/%E5%8D%81%E4%B8%80%E5%A4%AA%E6%B9%96%E9%AA%91%E8%A1%8C/</link><pubDate>Tue, 21 Nov 2023 11:02:41 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E5%8D%81%E4%B8%80%E5%A4%AA%E6%B9%96%E9%AA%91%E8%A1%8C/</guid><description>&lt;p>2023 年的国庆节完成了为期三天的上海到苏州的环太湖骑行 &lt;del>，为什么现在才发出来，当然不是因为太懒了&lt;/del>&lt;/p>
+&lt;p>&lt;img alt="vscode补全结构体tag" src="https://www.dianbanjiu.com/img/vscode%E8%A1%A5%E5%85%A8%E7%BB%93%E6%9E%84%E4%BD%93tag.gif">&lt;/p></description></item><item><title>十一太湖骑行</title><link>https://www.dianbanjiu.com/post/%E5%8D%81%E4%B8%80%E5%A4%AA%E6%B9%96%E9%AA%91%E8%A1%8C/</link><pubDate>Tue, 21 Nov 2023 11:02:41 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E5%8D%81%E4%B8%80%E5%A4%AA%E6%B9%96%E9%AA%91%E8%A1%8C/</guid><description>&lt;p>2023 年的国庆节完成了为期三天的上海到苏州的环太湖骑行 &lt;del>，为什么现在才发出来，当然不是因为太懒了&lt;/del>&lt;/p>
 &lt;p>好消息是，虽然屁股很痛，但是最终我还是成功完成了这趟骑行&lt;/p>
 &lt;p>坏消息是，屁股真的很痛，这场骑行还是有不少可以学习的东西的&lt;/p>
 &lt;p>这趟为期三天，骑行里程 457 公里（167+170+120），是我迄今为止最长最久的一次骑行。不过因为我太懒了，很多东西都没有提前准备好，不过也算是为下次的骑行积攒了一些小小的经验&lt;/p>
-&lt;p>&lt;img src="https://www.dianbanjiu.com/img/%E9%AA%91%E8%A1%8C%E7%9A%84%E5%8D%81%E5%AD%97%E8%B7%AF%E5%8F%A3.jpeg" alt="">&lt;/p>
+&lt;p>&lt;img src="https://www.dianbanjiu.com/img/%E9%AA%91%E8%A1%8C%E7%9A%84%E5%8D%81%E5%AD%97%E8%B7%AF%E5%8F%A3.jpeg">&lt;/p>
 &lt;ol>
 &lt;li>自行车：这趟旅程我骑的是一辆山地车，理论上骑什么车都不影响这段行程，但是这一路上公路车是真的快啊 &lt;del>流下了羡慕的泪水&lt;/del>。骑行之前最好检查一下车辆状况，提前上好链条油、给车胎补足气，有必要的话也可以找附近的车店做个保养&lt;/li>
 &lt;li>头盔：虽然长途骑行速度不是一般不会很快，但是毕竟全程都在马路边上，头盔一定要带好&lt;/li>
@@ -319,12 +529,12 @@ go 的注释风格是以方法名开头的，比如&lt;/p>
 &lt;li>码表+前车灯+尾灯：如果会骑行到比较晚的话一定要带上前后车灯，而且我因为没啥计划性，天天都在骑夜路🥹。码表我是单纯用来看导航的&lt;/li>
 &lt;li>一点小零食+盐丸+能量胶*n：高强度的骑行需要及时补充能量和电解质，不然很容易出现抽筋无力的情况，如果有运动饮料的话，盐丸可以忽略（我是喝了一路的能量饮料，矿泉水只有在吃东西跟没运动饮料的时候才喝）。但是能量胶一定要多带几条，不然饿着肚子骑行还是很痛苦的，虽然路上有比较多的补给点，但是不能确保每次肚子饿的时候都能遇到卖吃的的地方&lt;/li>
 &lt;/ol>
-&lt;p>&lt;img src="https://www.dianbanjiu.com/img/%E7%8E%AF%E6%B9%96%E8%87%AA%E8%A1%8C%E8%BD%A6%E9%81%93.jpeg" alt="">&lt;/p>
+&lt;p>&lt;img src="https://www.dianbanjiu.com/img/%E7%8E%AF%E6%B9%96%E8%87%AA%E8%A1%8C%E8%BD%A6%E9%81%93.jpeg">&lt;/p>
 &lt;p>上面就是我这次骑行过程中用到的一些装备，如果你跟我一样不是一个喜欢做计划的人，也至少在前一天规划好第二天的骑行路线，而且路程中水和能量补给一定要带充足，其中从苏州到湖州的一段国道基本没有什么补给点，当时喝的跟吃的也不够了，在最后的最后好不容易遇到了一个加油站才又活了过来&lt;/p>
 &lt;p>如果你骑行开始就规划好了自己的落脚点可以提前预约好住的地方，如果像我一样规划好路线然后能骑到哪算哪的话也要提前两到三小时确定并预约好要入住的地方&lt;/p>
 &lt;p>骑行中不要跟他们竞速，毕竟又不是比赛，我也不是只有一天的行程，保存好自己的体力，向着目标前进吧&lt;/p>
 &lt;p>这一路上虽然有痛苦，但是也有美景，还有一些有趣的人&lt;/p>
-&lt;p>&lt;img src="https://www.dianbanjiu.com/img/%E5%A4%AA%E6%B9%96%E4%B8%8A%E7%9A%84%E8%93%9D%E5%A4%A9.jpeg" alt="">&lt;/p>
+&lt;p>&lt;img src="https://www.dianbanjiu.com/img/%E5%A4%AA%E6%B9%96%E4%B8%8A%E7%9A%84%E8%93%9D%E5%A4%A9.jpeg">&lt;/p>
 &lt;p>enjoy&lt;/p></description></item><item><title>Arch Linux更新后没有声音</title><link>https://www.dianbanjiu.com/post/arch-linux%E6%9B%B4%E6%96%B0%E5%90%8E%E6%B2%A1%E6%9C%89%E5%A3%B0%E9%9F%B3/</link><pubDate>Sun, 29 Oct 2023 12:41:20 +0800</pubDate><guid>https://www.dianbanjiu.com/post/arch-linux%E6%9B%B4%E6%96%B0%E5%90%8E%E6%B2%A1%E6%9C%89%E5%A3%B0%E9%9F%B3/</guid><description>&lt;p>在昨晚 &lt;code>pacman -Syu&lt;/code> 之后，今天早上突然发现电脑无法播放声音了&lt;/p>
 &lt;p>我目前使用的音频方案是 pulseaudio+pulseaudio-bluetooth，修改各种配置无果之后，尝试换了一个新的方案 pipewire-pulse+wireplumber&lt;/p>
 &lt;p>首先把电脑声音调整到一个稍小一点的音量，然后 &lt;code>pacman -S pipewire-pulse wireplumber&lt;/code> &lt;br>
@@ -546,7 +756,7 @@ go 的注释风格是以方法名开头的，比如&lt;/p>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>等索引完成之后，打开浏览器访问 http://localhost:1414/search 就可以看到效果了&lt;br>
-&lt;img src="https://www.dianbanjiu.com/img/pagefind_search_show.png" alt="">&lt;/p>
+&lt;img src="https://www.dianbanjiu.com/img/pagefind_search_show.png">&lt;/p>
 &lt;p>6、为了保证之后的可用性，我实际使用的是 pagefind 提供的二进制文件，这些预构建的文件在 GitHub 的 &lt;a href="https://github.com/CloudCannon/pagefind/releases">release 页面&lt;/a> 可以下载到，需要下载带 _extended 的文件，因为它扩展了对中文的索引。二进制文件和 npx 的使用方式类似&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
@@ -579,7 +789,7 @@ go 的注释风格是以方法名开头的，比如&lt;/p>
 &lt;li>在引用图片的时候使用 /img/picturename.extra 进行引用&lt;/li>
 &lt;/ol>
 &lt;p>比如我放了一张名为 doge.png 的图片到 static/img 下面，那就可以通过 &lt;code>![](/img/doge.png)&lt;/code> 来引用这张图片&lt;/p>
-&lt;p>&lt;img src="https://www.dianbanjiu.com/img/doge.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://www.dianbanjiu.com/img/doge.png">&lt;/p>
 &lt;p>我现在的域名是配置了 Cloudflare 加速的，把图片也放在博客目录下之后，相当于也顺便给图片也开了加速，可以说是一举两得了😂&lt;/p></description></item><item><title>同一目录下多 main 文件的 Debug 方法</title><link>https://www.dianbanjiu.com/post/%E5%90%8C%E4%B8%80%E7%9B%AE%E5%BD%95%E4%B8%8B%E5%A4%9A-main-%E6%96%87%E4%BB%B6%E7%9A%84-debug-%E6%96%B9%E6%B3%95/</link><pubDate>Sat, 29 Oct 2022 14:30:45 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E5%90%8C%E4%B8%80%E7%9B%AE%E5%BD%95%E4%B8%8B%E5%A4%9A-main-%E6%96%87%E4%BB%B6%E7%9A%84-debug-%E6%96%B9%E6%B3%95/</guid><description>&lt;p>现在有一个项目包含如下文件&lt;/p>
 &lt;ul>
 &lt;li>go.mod&lt;/li>
@@ -702,9 +912,9 @@ go 的注释风格是以方法名开头的，比如&lt;/p>
 &lt;p>简而言之就是运行/编译项目的时候需要指定 main 包所在的目录，而非指定 main 方法所属的文件。在编译 go 程序的时候单纯指定 main 方法所在的文件，同目录下其他 main 包里的内容是不会被检索和编译的&lt;/p></description></item><item><title>移除默认的 Win+` 快捷键</title><link>https://www.dianbanjiu.com/post/%E7%A7%BB%E9%99%A4%E9%BB%98%E8%AE%A4%E7%9A%84-win+-%E5%BF%AB%E6%8D%B7%E9%94%AE/</link><pubDate>Sat, 17 Sep 2022 02:00:26 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E7%A7%BB%E9%99%A4%E9%BB%98%E8%AE%A4%E7%9A%84-win+-%E5%BF%AB%E6%8D%B7%E9%94%AE/</guid><description>&lt;p>在 Windows 上安装 &lt;code>终端&lt;/code> 之后，&lt;strong>Win+`&lt;/strong> 快捷键会以聚焦模式打开终端（下拉式终端的样子）。这个快捷键可以通过下面的方式来移除&lt;/p>
 &lt;ol>
 &lt;li>打开终端的设置界面，点击左下角的 &lt;strong>打开 JSON 文件&lt;/strong>&lt;br>
-&lt;img src="https://s2.loli.net/2022/09/17/b2GDLoEchN4wknK.png" alt="terminal_setting_interface.png">&lt;/li>
+&lt;img alt="terminal_setting_interface.png" src="https://s2.loli.net/2022/09/17/b2GDLoEchN4wknK.png">&lt;/li>
 &lt;li>在 &lt;code>actions&lt;/code> 数组中新增下面的内容&lt;br>
-&lt;img src="https://s2.loli.net/2022/09/17/k3luvNfP5pa2rjx.png" alt="terminal_setting_file.png">&lt;/li>
+&lt;img alt="terminal_setting_file.png" src="https://s2.loli.net/2022/09/17/k3luvNfP5pa2rjx.png">&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
@@ -720,8 +930,8 @@ go 的注释风格是以方法名开头的，比如&lt;/p>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>最后重启 &lt;code>终端&lt;/code> 即可&lt;/p></description></item><item><title>碳酸危机</title><link>https://www.dianbanjiu.com/post/%E7%A2%B3%E9%85%B8%E5%8D%B1%E6%9C%BA/</link><pubDate>Sun, 14 Aug 2022 16:40:42 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E7%A2%B3%E9%85%B8%E5%8D%B1%E6%9C%BA/</guid><description>&lt;p>&lt;img src="https://s2.loli.net/2022/08/14/evkbZNw5WoJ9QDY.jpg" alt="soda.jpg">&lt;/p>
-&lt;p>这周在 steam 上发现了一个游戏 ——《碳酸危机》。之前有在 B 站看到过创作者关于这个游戏的一些创作经历 &lt;a href="https://www.bilibili.com/video/BV1eb4y117gs?spm_id_from=333.337.search-card.all.click&amp;amp;vd_source=829ba13cbab36c9aad002a9e97b8b575">我的7年游戏开发之路&lt;/a>，当时就比较感兴趣了，不过当时我正沉迷于老头环的交界地，就一直没入手，直到这个周末闲来无事，又恰巧赶上游戏打折，就入手了一份&lt;/p>
+&lt;/div>&lt;p>最后重启 &lt;code>终端&lt;/code> 即可&lt;/p></description></item><item><title>碳酸危机</title><link>https://www.dianbanjiu.com/post/%E7%A2%B3%E9%85%B8%E5%8D%B1%E6%9C%BA/</link><pubDate>Sun, 14 Aug 2022 16:40:42 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E7%A2%B3%E9%85%B8%E5%8D%B1%E6%9C%BA/</guid><description>&lt;p>&lt;img alt="soda.jpg" src="https://s2.loli.net/2022/08/14/evkbZNw5WoJ9QDY.jpg">&lt;/p>
+&lt;p>这周在 steam 上发现了一个游戏 ——《碳酸危机》。之前有在 B 站看到过创作者关于这个游戏的一些创作经历 &lt;a href="https://www.bilibili.com/video/BV1eb4y117gs?spm_id_from=333.337.search-card.all.click&amp;vd_source=829ba13cbab36c9aad002a9e97b8b575">我的7年游戏开发之路&lt;/a>，当时就比较感兴趣了，不过当时我正沉迷于老头环的交界地，就一直没入手，直到这个周末闲来无事，又恰巧赶上游戏打折，就入手了一份&lt;/p>
 &lt;blockquote>
 &lt;p>主角作为一个来历不明，却身负强大的科技装备，帮助人们夺回被外星生物抢走的有糖可乐的故事 &lt;del>（拒绝无糖可乐🤣）&lt;/del>&lt;/p>
 &lt;/blockquote>
@@ -935,7 +1145,7 @@ go 的注释风格是以方法名开头的，比如&lt;/p>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">print&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>不过好在 Pylance 插件其实是支持通过配置项来开启该功能的。在设置中搜索 &lt;code>python.analysis.completefunctionparens&lt;/code> 并启用即可&lt;/p></description></item><item><title>Windows 包管理器 —— Scoop</title><link>https://www.dianbanjiu.com/post/windows-%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8-scoop/</link><pubDate>Thu, 21 Apr 2022 00:08:16 +0800</pubDate><guid>https://www.dianbanjiu.com/post/windows-%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8-scoop/</guid><description>&lt;p>我很喜欢 Linux 软件的安装方式，如果一个软件存在于软件源中，只需一行命令就可以安装好这个软件，而且大多数时候也不用担心下到什么流氓程序。所以当我有了一台 Windows 的电脑之后，我也尝试去寻找 Windows 下是否也有类似的工具，最终，我找到了 Scoop&lt;/p>
+&lt;/div>&lt;p>不过好在 Pylance 插件其实是支持通过配置项来开启该功能的。在设置中搜索 &lt;code>python.analysis.completefunctionparens&lt;/code> 并启用即可&lt;/p></description></item><item><title>Windows 包管理器 —— Scoop</title><link>https://www.dianbanjiu.com/post/windows-%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8--scoop/</link><pubDate>Thu, 21 Apr 2022 00:08:16 +0800</pubDate><guid>https://www.dianbanjiu.com/post/windows-%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8--scoop/</guid><description>&lt;p>我很喜欢 Linux 软件的安装方式，如果一个软件存在于软件源中，只需一行命令就可以安装好这个软件，而且大多数时候也不用担心下到什么流氓程序。所以当我有了一台 Windows 的电脑之后，我也尝试去寻找 Windows 下是否也有类似的工具，最终，我找到了 Scoop&lt;/p>
 &lt;h2 id="安装">安装&lt;/h2>
 &lt;p>官网地址： &lt;a href="https://scoop.sh/">https://scoop.sh/&lt;/a>&lt;/p>
 &lt;p>首先确保系统已经安装好下面两个程序：&lt;/p>
@@ -1126,7 +1336,7 @@ go 的注释风格是以方法名开头的，比如&lt;/p>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>启用 aria2 之后，scoop 默认会打印一些警告信息，虽然很有道理，但是我选择关闭提示&lt;/p>
-&lt;p>&lt;img src="https://i.imgur.com/1pJJ51V.png" alt="https://i.imgur.com/1pJJ51V.png">&lt;/p>
+&lt;p>&lt;img alt="https://i.imgur.com/1pJJ51V.png" src="https://i.imgur.com/1pJJ51V.png">&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
@@ -1148,7 +1358,7 @@ go 的注释风格是以方法名开头的，比如&lt;/p>
 &lt;/div>
 &lt;/div>&lt;h2 id="常见问题">常见问题&lt;/h2>
 &lt;h3 id="在更新下载程序包的时候出现类似-invoke-webrequest--无法连接到远程服务器-的报错">在更新/下载程序包的时候出现类似 &lt;code>Invoke-WebRequest : 无法连接到远程服务器&lt;/code> 的报错&lt;/h3>
-&lt;p>&lt;img src="https://i.imgur.com/psX044t.png" alt="https://i.imgur.com/psX044t.png">&lt;/p>
+&lt;p>&lt;img alt="https://i.imgur.com/psX044t.png" src="https://i.imgur.com/psX044t.png">&lt;/p>
 &lt;p>这很有可能是 scoop 对一些系统目录没有访问权限，而这些程序包的安装又需要对一些系统目录进行操作，这个时候可以 &lt;code>管理员身份&lt;/code> 运行终端，然后重新执行安装/更新命令&lt;/p>
 &lt;h3 id="scoop-安装程序失败之后在-status-命令里面会一直输出错误信息">scoop 安装程序失败之后，在 status 命令里面会一直输出错误信息&lt;/h3>
 &lt;div class="highlight">&lt;div class="chroma">
@@ -1542,47 +1752,4 @@ go 的注释风格是以方法名开头的，比如&lt;/p>
 &lt;p>Jetbrains 系列的软件在 Linux 下默认的字体显示非常辣眼睛，需要同时安装对应的 &lt;code>-jre&lt;/code> 支持才行。如 Goland 就需要安装 &lt;code>goland-jre&lt;/code>&lt;/p>
 &lt;p>如果有在 goland 中预览 markdown 文件的需要，还需要安装 &lt;code>java11-openjfx&lt;/code>&lt;/p>
 &lt;h3 id="界面美化">界面美化&lt;/h3>
-&lt;p>KDE 当前的默认桌面其实已经挺不错的了，此处仅推荐一套图标包 &lt;a href="https://github.com/numixproject/numix-icon-theme-circle">numix-circle-icon-theme&lt;/a>&lt;/p></description></item><item><title>Git 以中文展示修改路径</title><link>https://www.dianbanjiu.com/post/git-%E4%BB%A5%E4%B8%AD%E6%96%87%E5%B1%95%E7%A4%BA%E4%BF%AE%E6%94%B9%E8%B7%AF%E5%BE%84/</link><pubDate>Sun, 20 Mar 2022 14:38:24 +0800</pubDate><guid>https://www.dianbanjiu.com/post/git-%E4%BB%A5%E4%B8%AD%E6%96%87%E5%B1%95%E7%A4%BA%E4%BF%AE%E6%94%B9%E8%B7%AF%E5%BE%84/</guid><description>&lt;p>默认情况下，使用 &lt;code>git status&lt;/code> 来查看更改文件时，如果路径中包含有空格或者一些中文字符时，对应的文件路径会用引号括起来，并且其中的中文字符会以反斜杠 &lt;code>\&lt;/code> 进行转义，就像下面这样：&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;span class="lnt">4
-&lt;/span>&lt;span class="lnt">5
-&lt;/span>&lt;span class="lnt">6
-&lt;/span>&lt;span class="lnt">7
-&lt;/span>&lt;span class="lnt">8
-&lt;/span>&lt;span class="lnt">9
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">$ git status
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">On branch blog
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Your branch is up to date with &lt;span class="s1">&amp;#39;origin/blog&amp;#39;&lt;/span>.
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Untracked files:
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">(&lt;/span>use &lt;span class="s2">&amp;#34;git add &amp;lt;file&amp;gt;...&amp;#34;&lt;/span> to include in what will be committed&lt;span class="o">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;content/post/git \344\273\245\344\270\255\346\226\207\345\261\225\347\244\272\344\277\256\346\224\271\350\267\257\345\276\204.md&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">nothing added to commit but untracked files present &lt;span class="o">(&lt;/span>use &lt;span class="s2">&amp;#34;git add&amp;#34;&lt;/span> to track&lt;span class="o">)&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>虽然这种配置在你的文件名中含有换行回车之类字符的时候可能比较有用（这种文件数量应该很少吧😑），但是在修改文件比较多的情况下就很难知道对应的是哪些文件，想要正常打印出这些中文字符的话可以通过下面的配置项来解决&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">$ git config core.quotePath &lt;span class="nb">false&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>上面的设置是仅对单个项目设置，如果需要针对全局所有的项目关闭这个特性，可以添加 &lt;code>--global&lt;/code> 参数&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">$ git config --global core.quotePath &lt;span class="nb">false&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>参数的一些具体说明可以参考此处： &lt;a href="https://git-scm.com/docs/git-config#Documentation/git-config.txt-corequotePath">https://git-scm.com/docs/git-config#Documentation/git-config.txt-corequotePath&lt;/a>&lt;/p></description></item></channel></rss>
+&lt;p>KDE 当前的默认桌面其实已经挺不错的了，此处仅推荐一套图标包 &lt;a href="https://github.com/numixproject/numix-icon-theme-circle">numix-circle-icon-theme&lt;/a>&lt;/p></description></item></channel></rss>

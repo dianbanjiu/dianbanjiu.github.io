@@ -1,0 +1,120 @@
+<!doctype html><html lang=zh-cn itemscope itemtype=http://schema.org/WebPage><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><title>搭建memos - 点半九</title>
+<meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta name=MobileOptimized content="width"><meta name=HandheldFriendly content="true"><meta name=applicable-device content="pc,mobile"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=mobile-web-app-capable content="yes"><meta name=author content="dianbanjiu"><meta name=description content="最近看到了一个比较有意思的服务 Memos，支持自己部署，所以我也来搞了一个玩玩，下面是大概的流程 1、安装 docker 我服务器使用的是 Centos8，如"><meta name=generator content="Hugo 0.123.1"><link rel=canonical href=https://www.dianbanjiu.com/post/%E6%90%AD%E5%BB%BAmemos/><link rel=icon href=/favicon.svg><link rel=stylesheet href=/sass/jane.min.a1264e3ef168929cc1e8e2dd49db9c792db12c19bca13e0688af29035af51fd7.css integrity="sha256-oSZOPvFokpzB6OLdSduceS2xLBm8oT4GiK8pA1r1H9c=" media=screen crossorigin=anonymous><meta property="og:title" content="搭建memos"><meta property="og:description" content="最近看到了一个比较有意思的服务 Memos，支持自己部署，所以我也来搞了一个玩玩，下面是大概的流程 1、安装 docker 我服务器使用的是 Centos8，如"><meta property="og:type" content="article"><meta property="og:url" content="https://www.dianbanjiu.com/post/%E6%90%AD%E5%BB%BAmemos/"><meta property="article:section" content="post"><meta property="article:published_time" content="2024-02-22T00:36:16+08:00"><meta property="article:modified_time" content="2024-02-22T22:28:26+08:00"><meta itemprop=name content="搭建memos"><meta itemprop=description content="最近看到了一个比较有意思的服务 Memos，支持自己部署，所以我也来搞了一个玩玩，下面是大概的流程 1、安装 docker 我服务器使用的是 Centos8，如"><meta itemprop=datePublished content="2024-02-22T00:36:16+08:00"><meta itemprop=dateModified content="2024-02-22T22:28:26+08:00"><meta itemprop=wordCount content="938"><meta itemprop=keywords content="memos,linux,"><meta name=twitter:card content="summary"><meta name=twitter:title content="搭建memos"><meta name=twitter:description content="最近看到了一个比较有意思的服务 Memos，支持自己部署，所以我也来搞了一个玩玩，下面是大概的流程 1、安装 docker 我服务器使用的是 Centos8，如"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>点半九</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><li class=mobile-menu-item><a class=menu-item-link href=https://www.dianbanjiu.com/>主页</a></li><li class=mobile-menu-item><a class=menu-item-link href=https://www.dianbanjiu.com/post/>归档</a></li><li class=mobile-menu-item><a class=menu-item-link href=https://www.dianbanjiu.com/tags>标签</a></li><li class=mobile-menu-item><a class=menu-item-link href=https://www.dianbanjiu.com/about>关于</a></li><li class=mobile-menu-item><a class=menu-item-link href=https://www.dianbanjiu.com/search>搜索</a></li></ul></nav><link rel=stylesheet href=/lib/photoswipe/photoswipe.min.css><link rel=stylesheet href=/lib/photoswipe/default-skin/default-skin.min.css><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><header id=header class="header container"><div class=logo-wrapper><a href=/ class=logo>点半九</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=https://www.dianbanjiu.com/>主页</a></li><li class=menu-item><a class=menu-item-link href=https://www.dianbanjiu.com/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=https://www.dianbanjiu.com/tags>标签</a></li><li class=menu-item><a class=menu-item-link href=https://www.dianbanjiu.com/about>关于</a></li><li class=menu-item><a class=menu-item-link href=https://www.dianbanjiu.com/search>搜索</a></li></ul></nav></header><div id=mobile-panel><main id=main class="main bg-llight"><div class=content-wrapper><div id=content class="content container"><article class="post bg-white"><header class=post-header><h1 class=post-title>搭建memos</h1><div class=post-meta><span style=vertical-align:middle><time datetime=2024-02-22 class=post-time>创建于
+2024-02-22
+</time></span>|
+<span style=vertical-align:middle><time datetime=2024-02-22 class=post-time>更新于
+2024-02-22</time></span></div></header><div class=post-content><p>最近看到了一个比较有意思的服务 Memos，支持自己部署，所以我也来搞了一个玩玩，下面是大概的流程</p><h2 id=1安装-docker>1、安装 docker</h2><p>我服务器使用的是 Centos8，如果你使用的是其他发行版可以参考 <a href=https://docs.docker.com/engine/install/>Docker 官方的说明文档</a></p><p>首先卸载已经安装的旧 docker</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>sudo yum remove docker <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>    docker-client <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>    docker-client-latest <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>    docker-common <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>    docker-latest <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>    docker-latest-logrotate <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>    docker-logrotate <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>    docker-engine
+</span></span></code></pre></td></tr></table></div></div><p>安装 yum-utils 包</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>sudo yum install -y yum-utils
+</span></span></code></pre></td></tr></table></div></div><p>添加 docker 软件源</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+</span></span></code></pre></td></tr></table></div></div><p>安装最新版的 docker</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>sudo yum install docker-ce
+</span></span></code></pre></td></tr></table></div></div><p>启动 docker，并将它设置为开机自启</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>sudo systemctl start docker
+</span></span><span class=line><span class=cl>sudo systemctl <span class=nb>enable</span> docker
+</span></span></code></pre></td></tr></table></div></div><p>确认 docker 启动成功</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>sudo docker info
+</span></span></code></pre></td></tr></table></div></div><h2 id=2安装-memos>2、安装 Memos</h2><p>官网提供了 docker 和 docker-compose 的部署方式，因为只有一个服务，所以我选择直接使用 docker 部署</p><p><a href=https://www.usememos.com/docs/install/self-hosting>官方文档链接</a></p><p>先创建一个目录用来存放 Memos 的数据文件</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>mkdir /opt/memos
+</span></span></code></pre></td></tr></table></div></div><p>安装 Memos</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>docker run -d <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  --init <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  --name memos <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  --publish 5230:5230 <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  --volume /opt/memos/:/var/opt/memos <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  neosmemo/memos:stable
+</span></span></code></pre></td></tr></table></div></div><p>上面命令执行完之后 Memos 就跑起来了，可以使用 http://ip:5230 来测试一下</p><h2 id=3添加域名解析>3、添加域名解析</h2><p>添加一条 A 记录，如 memos.dianbanjiu.com 解析到自己服务器的公网 IP 上</p><ol><li>在 cloudflare 选择自己的站点</li><li>在侧边栏选择 DNS->记录</li><li>选择添加记录按钮，添加一条 A 记录（类型选择 A，名称输入 memos，IPV4 地址填自己的服务器公网 IP）</li></ol><p>后续我会把服务改为 https 访问，而我的域名是托管在 cloudflare 上的，所以可以直接用 cloudflare 生成一份 15 年有效期的证书</p><ol><li>在 cloudflare 选择自己的站点</li><li>在侧边栏选择 SSL/TLS->源服务器</li><li>点击创建证书按钮，根据提示创建即可。推荐生成 pem 格式的私钥</li></ol><p>将证书保存为 dianbanjiu.com.pem，将私钥保存为 dianbanjiu.com.key</p><p>将生成的两个文件上传至服务器的 /etc/nginx/cert 下</p><h2 id=4安装-nginx>4、安装 nginx</h2><p>官方软件源里的 nginx 版本可能比较老，可以选择安装 nginx 软件源，以安装最新的 nginx</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>rpm -ivh http://nginx.org/packages/centos/8/x86_64/RPMS/nginx-1.24.0-1.el8.ngx.x86_64.rpm
+</span></span></code></pre></td></tr></table></div></div><p>上面的命令会直接安装好 1.24.0 版本的 nginx，这也是当前最新版本</p><p>启动 nginx 并设置开机自启</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>sudo systemctl start nginx
+</span></span><span class=line><span class=cl>sudo systemctl <span class=nb>enable</span> nginx
+</span></span></code></pre></td></tr></table></div></div><p>在浏览器直接访问 http://ip 应该就可以看到 nginx 的输出了</p><p>新增 Memos 的 nginx 配置，在 /etc/nginx/conf.d 中新增一个 memos.dianbanjiu.com.conf 文件。文件内容如下</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-nginx data-lang=nginx><span class=line><span class=cl><span class=k>server</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kn>listen</span>       <span class=mi>443</span> <span class=s>ssl</span> <span class=s>http2</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=kn>server_name</span>  <span class=s>memos.dianbanjiu.com</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kn>ssl_certificate</span> <span class=s>/etc/nginx/cert/dianbanjiu.com.pem</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=kn>ssl_certificate_key</span> <span class=s>/etc/nginx/cert/dianbanjiu.com.key</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=kn>ssl_prefer_server_ciphers</span> <span class=no>on</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kn>access_log</span>  <span class=s>/var/log/nginx/memos.access.log</span>  <span class=s>main</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kn>location</span> <span class=s>/</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=kn>proxy_pass</span> <span class=s>http://127.0.0.1:5230</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=kn>proxy_set_header</span> <span class=s>Host</span> <span class=nv>$host</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=kn>proxy_set_header</span> <span class=s>X-Real-IP</span> <span class=nv>$remote_addr</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=kn>proxy_set_header</span> <span class=s>X-Forwarded-For</span> <span class=nv>$proxy_add_x_forwarded_for</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>server</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=kn>listen</span> <span class=mi>80</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=kn>server_name</span> <span class=s>memos.dianbanjiu.com</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=kn>rewrite</span> <span class=s>^/(.*)</span>$ <span class=s>https://memos.dianbanjiu.com/</span><span class=nv>$1</span> <span class=s>permanent</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>重新加载 nginx 配置</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>nginx -t <span class=c1>#检查配置文件是否有误</span>
+</span></span><span class=line><span class=cl>nginx -s reload
+</span></span></code></pre></td></tr></table></div></div><p>直接通过浏览器访问 <a href=https://memos.dianbanjiu.com>https://memos.dianbanjiu.com</a> 确认服务是否安装成功</p><p>如果你是在国内服务器上搭建的 Memos，服务在短暂能访问之后就出现再也无法访问的情况，有可能是因为域名未备案导致被服务商直接拦截了，这种情况下要么去备案并自己修改页面在最下面加上备案信息，要么就只能通过 ip 访问。</p></div><footer class=post-footer><div class=post-tags><a href=https://www.dianbanjiu.com/tags/memos/>memos</a>
+<a href=https://www.dianbanjiu.com/tags/linux/>linux</a></div><nav class=post-nav><a class=next href=/post/%E5%9C%A8vscode%E4%B8%AD%E9%80%9A%E8%BF%87%E6%96%87%E4%BB%B6%E7%9A%84%E5%BD%A2%E5%BC%8F%E7%AE%A1%E7%90%86%E6%8E%A5%E5%8F%A3/><span class="next-text nav-default">在vscode中通过文件的形式管理接口</span>
+<span class="prev-text nav-mobile">下一篇</span>
+<i class=iconfont><svg class="icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18" height="18"><path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697c-11.777231-11.500939-30.216186-10.304694-41.178865 2.712784z"/></svg></i></a></nav></footer></article></div></div></main><footer id=footer class=footer><div class=copyright><span class=copyright-year>&copy;
+2019 -
+2024
+<span class=heart><i class=iconfont><svg class="icon" viewBox="0 0 1025 1024" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="14" height="14"><path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7.0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1.0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2.0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3.1-42.5-8-83.6-24-122.2z" fill="#8a8a8a"/></svg>
+</i></span><span class=author>dianbanjiu@gmail.com</span></span></div></footer></div><script type=text/javascript src=/lib/jquery/jquery-3.2.1.min.js></script><script type=text/javascript src=/lib/slideout/slideout-1.0.1.min.js></script><script type=text/javascript src=/js/main.638251f4230630f0335d8c6748e53a96f94b72670920b60c09a56fdc8bece214.js integrity="sha256-Y4JR9CMGMPAzXYxnSOU6lvlLcmcJILYMCaVv3Ivs4hQ=" crossorigin=anonymous></script><script type=text/javascript src=/js/load-photoswipe.js></script><script type=text/javascript src=/lib/photoswipe/photoswipe.min.js></script><script type=text/javascript src=/lib/photoswipe/photoswipe-ui-default.min.js></script></body></html>
