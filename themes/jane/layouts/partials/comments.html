@@ -24,17 +24,5 @@
     </div>
   {{ end }}
 
-  {{ if .Site.Params.waline.enable }}
-    <div class="post bg-white" id="waline">
-      <script type="module">
-        import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
-    
-        init({
-          el: '#waline',
-          serverURL: 'https://comment.dianbanjiu.com',
-        });
-      </script>
-    </div>
-  {{end}}
 
 {{- end }}
