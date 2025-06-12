@@ -1,7 +1,7 @@
 ---
 title: "Android 手机投屏到 Linux 下"
 date: 2019-12-24T14:40:22+08:00
-lastmod: 2020-9-19T14:40:22+08:00
+lastmod: 2020-09-19T14:40:22+08:00
 tags: ["Linux", "Android", "scrcpy"]
 author: "dianbanjiu"
 ---
