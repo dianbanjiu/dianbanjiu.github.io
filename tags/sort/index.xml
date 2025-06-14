@@ -1,1 +1,56 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Sort on 点半九</title><link>https://www.dianbanjiu.com/tags/sort/</link><description>Recent content in Sort on 点半九</description><generator>Hugo</generator><language>zh-cn</language><copyright>dianbanjiu@gmail.com</copyright><lastBuildDate>Tue, 07 Sep 2021 22:21:00 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/sort/index.xml" rel="self" type="application/rss+xml"/><item><title>Golang 对指定关键词进行排序</title><link>https://www.dianbanjiu.com/post/golang-%E5%AF%B9%E6%8C%87%E5%AE%9A%E5%85%B3%E9%94%AE%E8%AF%8D%E8%BF%9B%E8%A1%8C%E6%8E%92%E5%BA%8F/</link><pubDate>Fri, 20 Dec 2019 16:14:03 +0800</pubDate><guid>https://www.dianbanjiu.com/post/golang-%E5%AF%B9%E6%8C%87%E5%AE%9A%E5%85%B3%E9%94%AE%E8%AF%8D%E8%BF%9B%E8%A1%8C%E6%8E%92%E5%BA%8F/</guid><description>之前在处理以结构体作为切片类型的问题里，如果可以对切片进行排序，则可以使问题简化许多。因为结构体有很多字段，既有字符字段又有数值字段，可以考</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Sort on 点半九</title><link>https://www.dianbanjiu.com/tags/sort/</link><description>Recent content in Sort on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 20 Dec 2019 16:14:03 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/sort/index.xml" rel="self" type="application/rss+xml"/><item><title>Golang 对指定关键词进行排序</title><link>https://www.dianbanjiu.com/post/golang-%E5%AF%B9%E6%8C%87%E5%AE%9A%E5%85%B3%E9%94%AE%E8%AF%8D%E8%BF%9B%E8%A1%8C%E6%8E%92%E5%BA%8F/</link><pubDate>Fri, 20 Dec 2019 16:14:03 +0800</pubDate><guid>https://www.dianbanjiu.com/post/golang-%E5%AF%B9%E6%8C%87%E5%AE%9A%E5%85%B3%E9%94%AE%E8%AF%8D%E8%BF%9B%E8%A1%8C%E6%8E%92%E5%BA%8F/</guid><description>&lt;p>之前在处理以结构体作为切片类型的问题里，如果可以对切片进行排序，则可以使问题简化许多。因为结构体有很多字段，既有字符字段又有数值字段，可以考虑通过实现 golang sort.Sort 的接口对结构体切片进行排序。&lt;/p>
+&lt;p>假设结构体切片如下：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">type&lt;/span> &lt;span style="color:#a6e22e">Node&lt;/span> &lt;span style="color:#66d9ef">struct&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Data&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Weight&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Length&lt;/span> &lt;span style="color:#66d9ef">float64&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">type&lt;/span> &lt;span style="color:#a6e22e">NodeSlice&lt;/span> []&lt;span style="color:#a6e22e">Node&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">node&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> make(&lt;span style="color:#a6e22e">NodeSlice&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">a&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">Node&lt;/span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Data&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;A&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Weight&lt;/span>: &lt;span style="color:#ae81ff">12&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Length&lt;/span>: &lt;span style="color:#ae81ff">90&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">b&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">Node&lt;/span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Data&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;B&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Weight&lt;/span>: &lt;span style="color:#ae81ff">17&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Length&lt;/span>: &lt;span style="color:#ae81ff">26.2&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">c&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">Node&lt;/span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Data&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;C&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Weight&lt;/span>: &lt;span style="color:#ae81ff">5&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Length&lt;/span>: &lt;span style="color:#ae81ff">1.2&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">d&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">Node&lt;/span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Data&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;D&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Weight&lt;/span>: &lt;span style="color:#ae81ff">8&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Length&lt;/span>: &lt;span style="color:#ae81ff">22&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">node&lt;/span> = append(&lt;span style="color:#a6e22e">node&lt;/span>, &lt;span style="color:#a6e22e">a&lt;/span>, &lt;span style="color:#a6e22e">b&lt;/span>, &lt;span style="color:#a6e22e">c&lt;/span>, &lt;span style="color:#a6e22e">d&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>现在以 Weight 作为关键词来对 node 进行排序。&lt;/p>
+&lt;p>首先需要导入 sort 包，并且需要以 NodeSlice 类型作为接收者 (reciver) 实现 &lt;code>Len()&lt;/code>，&lt;code>Swap(i, j int)&lt;/code>，&lt;code>Less(i,j int)&lt;/code> 三个方法。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">ns&lt;/span> &lt;span style="color:#a6e22e">NodeSlice&lt;/span>) &lt;span style="color:#a6e22e">Len&lt;/span>() &lt;span style="color:#66d9ef">int&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> len(&lt;span style="color:#a6e22e">ns&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">ns&lt;/span> &lt;span style="color:#a6e22e">NodeSlice&lt;/span>) &lt;span style="color:#a6e22e">Swap&lt;/span>(&lt;span style="color:#a6e22e">i&lt;/span>, &lt;span style="color:#a6e22e">j&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">ns&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>], &lt;span style="color:#a6e22e">ns&lt;/span>[&lt;span style="color:#a6e22e">j&lt;/span>] = &lt;span style="color:#a6e22e">ns&lt;/span>[&lt;span style="color:#a6e22e">j&lt;/span>], &lt;span style="color:#a6e22e">ns&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">ns&lt;/span> &lt;span style="color:#a6e22e">NodeSlice&lt;/span>) &lt;span style="color:#a6e22e">Less&lt;/span>(&lt;span style="color:#a6e22e">i&lt;/span>, &lt;span style="color:#a6e22e">j&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span>) &lt;span style="color:#66d9ef">bool&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">ns&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>].&lt;span style="color:#a6e22e">Weight&lt;/span> &amp;lt; &lt;span style="color:#a6e22e">ns&lt;/span>[&lt;span style="color:#a6e22e">j&lt;/span>].&lt;span style="color:#a6e22e">Weight&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后你就可以调用 sort.Sort 来对该类型的切片进行排序了，默认是从小到大：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#a6e22e">node&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">sort&lt;/span>.&lt;span style="color:#a6e22e">Sort&lt;/span>(&lt;span style="color:#a6e22e">node&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#a6e22e">node&lt;/span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>打印结果如下：&lt;/p>
+&lt;blockquote>
+&lt;p>[{A 12 90} {B 17 26.2} {C 5 1.2} {D 8 22}]&lt;br>
+[{C 5 1.2} {D 8 22} {A 12 90} {B 17 26.2}]&lt;/p>&lt;/blockquote>
+&lt;p>如果需要从大到小进行打印，只需要将 &lt;code>sort.Sort(node)&lt;/code> 替换为 &lt;code>sort.Sort(sort.Reverse(node))&lt;/code>。&lt;/p>
+&lt;p>如果需要以其他参数作为关键词进行排序，只需要调整实现的 &lt;code>Less&lt;/code> 方法的关键词即可。&lt;/p></description></item></channel></rss>

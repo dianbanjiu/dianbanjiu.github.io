@@ -1,1 +1,190 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>图 on 点半九</title><link>https://www.dianbanjiu.com/tags/%E5%9B%BE/</link><description>Recent content in 图 on 点半九</description><generator>Hugo</generator><language>zh-cn</language><copyright>dianbanjiu@gmail.com</copyright><lastBuildDate>Tue, 02 Mar 2021 00:34:31 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/%E5%9B%BE/index.xml" rel="self" type="application/rss+xml"/><item><title>求关键路径</title><link>https://www.dianbanjiu.com/post/%E6%B1%82%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84/</link><pubDate>Tue, 12 Nov 2019 21:35:06 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E6%B1%82%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84/</guid><description>基本概念 AOE 网中，每个节点称为一个事件，其中有两个比较特殊的点 一个入度为 0，称为源点， 一个出度为 0，称为汇点。 各节点之间弧的权重 w 表示一个活动</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>图 on 点半九</title><link>https://www.dianbanjiu.com/tags/%E5%9B%BE/</link><description>Recent content in 图 on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 12 Nov 2019 21:35:06 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/%E5%9B%BE/index.xml" rel="self" type="application/rss+xml"/><item><title>求关键路径</title><link>https://www.dianbanjiu.com/post/%E6%B1%82%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84/</link><pubDate>Tue, 12 Nov 2019 21:35:06 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E6%B1%82%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84/</guid><description>&lt;h2 id="基本概念">基本概念&lt;/h2>
+&lt;p>AOE 网中，每个节点称为一个事件，其中有两个比较特殊的点&lt;/p>
+&lt;ul>
+&lt;li>一个入度为 0，称为&lt;code>源点&lt;/code>，&lt;/li>
+&lt;li>一个出度为 0，称为&lt;code>汇点&lt;/code>。&lt;/li>
+&lt;/ul>
+&lt;p>各节点之间弧的权重 w 表示一个活动 ai 的持续时间，每个事件有&lt;code>最早开始时间 ve&lt;/code> 和&lt;code>最晚开始时间 vl&lt;/code>，每个活动也有&lt;code>最早开始时间 e&lt;/code> 和&lt;code>最晚开始时间 l&lt;/code>。其中 &lt;code>l=e&lt;/code> 的活动所组成的路径称为&lt;code>关键路径&lt;/code>。关键路径中包含的活动称为&lt;code>关键活动&lt;/code>&lt;/p>
+&lt;h2 id="各个量的求法">各个量的求法：&lt;/h2>
+&lt;p>&lt;strong>事件的最早开始时间 ve&lt;/strong>&lt;br>
+从源点开始，源点的最早开始时间为 0，其后的事件依次为前一个节点的最早开始时间加上对应弧的权重。如果某一个节点有多个入度，则该事件的最早开始时间取各个入度计算结果中的最大值。&lt;/p>
+&lt;p>&lt;strong>事件的最晚开始时间 vl&lt;/strong>&lt;br>
+最晚开始时间需要从汇点开始推，汇点的最晚开始时间等于其最早开始时间，接下来依次向前推，每个顶点的最晚开始时间等于后一个顶点的最晚开始时间减去对应弧的权重。如果该点有多个出度，则该事件的最晚开始时间取各个出度计算结果中的最小值。&lt;/p>
+&lt;p>&lt;strong>活动的最早开始时间 e&lt;/strong>&lt;br>
+一个活动的最早开始时间等于该活动所对应的弧的弧尾的最早开始时间。&lt;/p>
+&lt;p>&lt;strong>活动的最晚开始时间 l&lt;/strong>&lt;br>
+活动的最晚开始时间等于该活动所对应弧的弧头的最晚开始时间减去该弧的权重。&lt;/p>
+&lt;h2 id="举例">举例&lt;/h2>
+&lt;p>下面是一个实际的例子：&lt;/p>
+&lt;p>&lt;img src="https://i.imgur.com/n7K5lXp.png" alt="Imgur">&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>顶点&lt;/th>
+&lt;th>ve&lt;/th>
+&lt;th>vl&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>v1&lt;/td>
+&lt;td>0&lt;/td>
+&lt;td>0&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>v2&lt;/td>
+&lt;td>3&lt;/td>
+&lt;td>4&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>v3&lt;/td>
+&lt;td>2&lt;/td>
+&lt;td>2&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>v4&lt;/td>
+&lt;td>6&lt;/td>
+&lt;td>6&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>v5&lt;/td>
+&lt;td>6&lt;/td>
+&lt;td>7&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>v6&lt;/td>
+&lt;td>8&lt;/td>
+&lt;td>8&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>&lt;strong>事件对应的最早开始时间的推算&lt;/strong>&lt;/p>
+&lt;ol>
+&lt;li>v1 为源点，故 v1 的最早开始时间是 0&lt;/li>
+&lt;li>v2 的入度为 1，它的最早开始时间等于 v1 的最早开始时间加上连接它们之间弧的权重 a1，结果是 0+3=3&lt;/li>
+&lt;li>v3 的入度为 1，它的最早开始时间等于 v1 的最早开始时间加上连接它们之间弧的权重 a2，结果是 0+2=2&lt;/li>
+&lt;li>v4 的入度为 2，首先计算出对应的两个时间，
+&lt;ol>
+&lt;li>v2 的最早开始时间加上它们之间弧的权重 a3，结果是 3+2=5&lt;/li>
+&lt;li>v3 的最早开始时间加上它们之间弧的权重 a5，结果是 2+4=6&lt;/li>
+&lt;li>比较上面的两个结果 6&amp;gt;5，故 v4 的最早开始时间是 6&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>v5 的入度为 1，它的最早开始时间等于 v2 的最早开始时间加上连接它们之间弧的权重 a4,结果是 3+3=6&lt;/li>
+&lt;li>v6 的入度为 3,首先计算出对应的三个时间：
+&lt;ol>
+&lt;li>v3 的最早开始时间加上它们之间弧的权重 a6，结果是 2+3=5&lt;/li>
+&lt;li>v4 的最早开始时间加上它们之间弧的权重 a7，结果是 6+2=8&lt;/li>
+&lt;li>v5 的最早开始时间加上它们之间弧的权重 a8，结果是 6+1=7&lt;/li>
+&lt;li>比较三个结果 8&amp;gt;7&amp;gt;5，故 v6 的最早开始时间是 8&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ol>
+&lt;p>&lt;strong>事件对应的最晚开始时间的推算&lt;/strong>&lt;/p>
+&lt;ol>
+&lt;li>v6 为汇点，v6 的最晚开始时间等于其最早开始时间等于 8&lt;/li>
+&lt;li>v5 的出度为 1, 它的最晚开始时间等于 v6 的最晚开始时间减去它们之间弧的权重 a8, 结果是 8-1=7&lt;/li>
+&lt;li>v4 的出度为 1, 它的最晚开始时间等于 v6 的最晚开始时间减去它们之间弧的权重 a7, 结果是 8-2=6&lt;/li>
+&lt;li>v3 的出度为 2,首先计算对应的两个时间：
+&lt;ol>
+&lt;li>v6 的最晚开始时间减去它们之间弧的权重 a6, 结果是 8-3=5&lt;/li>
+&lt;li>v4 的最晚开始时间减去它们之间弧的权重 a5, 结果是 6-4=2&lt;/li>
+&lt;li>比较上面的两个值 2&amp;lt;5，故 v3 的最晚开始时间是 2&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>v2 的出度为 2，首先计算对应的两个时间：
+&lt;ol>
+&lt;li>v5 的最晚开始时间减去它们之间弧的权重 a4, 结果是 7-3=4&lt;/li>
+&lt;li>v4 的最晚开始时间减去它们之间弧的权重 a3, 结果是 6-2=4&lt;/li>
+&lt;li>比较上面的两个结果 4=4,故 v3 的最晚开始时间为 4&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>v1 的出度为 2，首先计算对应的两个时间：
+&lt;ol>
+&lt;li>v2 的最晚开始时间减去它们之间弧的权重 a1, 结果是 4-3=1&lt;/li>
+&lt;li>v3 的最晚开始时间减去它们之间弧的权重 a2, 结果是 2-2=0&lt;/li>
+&lt;li>比较上面的两个结果 0&amp;lt;1,故 v3 的最晚开始时间为 0&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ol>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>活动&lt;/th>
+&lt;th>e&lt;/th>
+&lt;th>l&lt;/th>
+&lt;th>l-e&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>a1&lt;/td>
+&lt;td>0&lt;/td>
+&lt;td>1&lt;/td>
+&lt;td>1&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>a2&lt;/td>
+&lt;td>0&lt;/td>
+&lt;td>0&lt;/td>
+&lt;td>0&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>a3&lt;/td>
+&lt;td>3&lt;/td>
+&lt;td>4&lt;/td>
+&lt;td>1&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>a4&lt;/td>
+&lt;td>3&lt;/td>
+&lt;td>4&lt;/td>
+&lt;td>1&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>a5&lt;/td>
+&lt;td>2&lt;/td>
+&lt;td>2&lt;/td>
+&lt;td>0&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>a6&lt;/td>
+&lt;td>2&lt;/td>
+&lt;td>5&lt;/td>
+&lt;td>3&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>a7&lt;/td>
+&lt;td>6&lt;/td>
+&lt;td>6&lt;/td>
+&lt;td>0&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>a8&lt;/td>
+&lt;td>6&lt;/td>
+&lt;td>7&lt;/td>
+&lt;td>1&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>&lt;strong>活动对应的最早开始时间的推算&lt;/strong>&lt;/p>
+&lt;p>活动所对应的最早开始时间等于活动所对应弧的弧尾的最早开始时间，所以&lt;/p>
+&lt;ul>
+&lt;li>e(a1)=ve(v1)=0&lt;/li>
+&lt;li>e(a2)=ve(v1)=0&lt;/li>
+&lt;li>e(a3)=ve(v2)=3&lt;/li>
+&lt;li>e(a4)=ve(v2)=3&lt;/li>
+&lt;li>&amp;hellip;&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>活动对应的最晚开始时间的推算&lt;/strong>&lt;/p>
+&lt;p>活动所对应的最晚开始时间等于活动所对应弧的弧头的最晚开始时间减去活动的持续时间（即该弧的权重），所以：&lt;/p>
+&lt;ul>
+&lt;li>l(a1)=el(v2)-a1=4-3=1&lt;/li>
+&lt;li>l(a2)=el(v3)-a2=2-2=0&lt;/li>
+&lt;li>l(a3)=el(v4)-a3=6-2=4&lt;/li>
+&lt;li>l(a4)=el(v5)-a4=7-3=4&lt;/li>
+&lt;li>&amp;hellip;&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>关键路径的确定&lt;/strong>&lt;/p>
+&lt;p>找出活动时间表当中 &lt;code>l=e&lt;/code> 的活动 a2,a5,a7 即是关键路径中对应的关键活动，由这些关键活动构成的关键路径如下图：&lt;/p>
+&lt;p>&lt;img src="https://i.imgur.com/MLkv6K2.png" alt="Imgur">&lt;/p></description></item></channel></rss>

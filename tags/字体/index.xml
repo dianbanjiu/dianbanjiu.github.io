@@ -1,1 +1,20 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>字体 on 点半九</title><link>https://www.dianbanjiu.com/tags/%E5%AD%97%E4%BD%93/</link><description>Recent content in 字体 on 点半九</description><generator>Hugo</generator><language>zh-cn</language><copyright>dianbanjiu@gmail.com</copyright><lastBuildDate>Tue, 02 Mar 2021 00:34:31 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/%E5%AD%97%E4%BD%93/index.xml" rel="self" type="application/rss+xml"/><item><title>Linux 添加 Windows 字体库</title><link>https://www.dianbanjiu.com/post/linux-%E6%B7%BB%E5%8A%A0-windows-%E5%AD%97%E4%BD%93%E5%BA%93/</link><pubDate>Wed, 27 May 2020 23:02:52 +0800</pubDate><guid>https://www.dianbanjiu.com/post/linux-%E6%B7%BB%E5%8A%A0-windows-%E5%AD%97%E4%BD%93%E5%BA%93/</guid><description>如果你有尝试过在 Linux 下打开 Windows 制作的 word 文档，或者在 Windows 下打开 Linux 制作的 word 文档，你可能会惊喜的发现在两个平台下同一个 word 文件的样式截然不同，这对于一些对</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>字体 on 点半九</title><link>https://www.dianbanjiu.com/tags/%E5%AD%97%E4%BD%93/</link><description>Recent content in 字体 on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 27 May 2020 23:02:52 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/%E5%AD%97%E4%BD%93/index.xml" rel="self" type="application/rss+xml"/><item><title>Linux 添加 Windows 字体库</title><link>https://www.dianbanjiu.com/post/linux-%E6%B7%BB%E5%8A%A0-windows-%E5%AD%97%E4%BD%93%E5%BA%93/</link><pubDate>Wed, 27 May 2020 23:02:52 +0800</pubDate><guid>https://www.dianbanjiu.com/post/linux-%E6%B7%BB%E5%8A%A0-windows-%E5%AD%97%E4%BD%93%E5%BA%93/</guid><description>&lt;p>如果你有尝试过在 Linux 下打开 Windows 制作的 word 文档，或者在 Windows 下打开 Linux 制作的 word 文档，你可能会惊喜的发现在两个平台下同一个 word 文件的样式截然不同，这对于一些对格式要求比较严格的情况还是比较麻烦的。不过在 Linux 下还是有很简单的解决办法的。&lt;/p>
+&lt;p>测试平台及工具：&lt;/p>
+&lt;ul>
+&lt;li>Manjaro Linux&lt;/li>
+&lt;li>WPS&lt;/li>
+&lt;/ul>
+&lt;h2 id="way-1复制粘贴推荐">way 1：复制粘贴（推荐）&lt;/h2>
+&lt;p>首先你需要一台装有 Windows 的电脑或者一个装有 Windows 的虚拟机，从 C 盘的 &lt;code>windows/Fonts&lt;/code> 中复制出你需要的字体，或者干脆直接复制整个 &lt;code>Fonts&lt;/code> 目录；&lt;/p>
+&lt;p>然后在你的 Linux 的 &lt;code>/usr/share/fonts/&lt;/code> 目录下新建一个目录，比如 WinFonts 之类的，名字可以随意，只要你知道它是干啥的就好；&lt;/p>
+&lt;p>接着把你第一步复制出来的字体放到第二步新建的目录中；&lt;/p>
+&lt;p>最后执行下面的指令刷新字体：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ sudo fc-cache -fv
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这下再打开你之前格式显示有问题的 word 文档，应该就可以正常显示了。&lt;/p>
+&lt;h2 id="way-2从-aur-安装">way 2：从 AUR 安装&lt;/h2>
+&lt;p>万能的 AUR 里基本只有你想不到的，安装 win 下的字体也同样是小菜一碟，而且后续如果有新的字体，通过 AUR 安装的字体还可以无感更新。&lt;/p>
+&lt;p>AUR 里有很多 win 的字体包，甚至还分为不同的 win 系统，比如 win10、win7，这里你可以只安装一个 &lt;code>ttf-ms-fonts&lt;/code> 包，这个包基本上就包含的比较全了。&lt;/p>
+&lt;p>最后同样需要执行一下上面提到的那条命令刷新一下字体。&lt;/p>
+&lt;p>这里推荐第一个方法，因为第二个方法涉及到的字体都要在线下载，速度上自然比不过本地拷贝，而且常用的字体其实并不会很多，而且这些常用的字体通常也都比较稳定更新不会很多。&lt;/p>
+&lt;h2 id="额外补充">额外补充&lt;/h2>
+&lt;p>我在从使用命令刷新完字体后，感觉整个系统的字体都变得“锐利”起来了，大概就是变成了 Windows 字体的那个样子，我虽然是完整拷贝了 Windows 的字体库，但是我并没有设置本地的字体为 Windows 的字体，这个问题还得后面再看看是什么原因导致的。&lt;/p></description></item></channel></rss>

@@ -1,1 +1,98 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Github on 点半九</title><link>https://www.dianbanjiu.com/tags/github/</link><description>Recent content in Github on 点半九</description><generator>Hugo</generator><language>zh-cn</language><copyright>dianbanjiu@gmail.com</copyright><lastBuildDate>Sun, 29 Jan 2023 11:06:21 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/github/index.xml" rel="self" type="application/rss+xml"/><item><title>把图片存储在hugo项目下</title><link>https://www.dianbanjiu.com/post/%E6%8A%8A%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8%E5%9C%A8hugo%E9%A1%B9%E7%9B%AE%E4%B8%8B/</link><pubDate>Sun, 04 Dec 2022 02:50:07 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E6%8A%8A%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8%E5%9C%A8hugo%E9%A1%B9%E7%9B%AE%E4%B8%8B/</guid><description>之前博客的图片一直是放在各种图床上面的，一开始是 imgur，虽然是免费的，但是在国内访问是一个很大的问题，所以后来就迁移到了 sm.ms，迁移</description></item><item><title>Github Action 自动修改文章的更新日期</title><link>https://www.dianbanjiu.com/post/github-action-%E8%87%AA%E5%8A%A8%E4%BF%AE%E6%94%B9%E6%96%87%E7%AB%A0%E7%9A%84%E6%9B%B4%E6%96%B0%E6%97%A5%E6%9C%9F/</link><pubDate>Wed, 08 Jun 2022 00:25:49 +0800</pubDate><guid>https://www.dianbanjiu.com/post/github-action-%E8%87%AA%E5%8A%A8%E4%BF%AE%E6%94%B9%E6%96%87%E7%AB%A0%E7%9A%84%E6%9B%B4%E6%96%B0%E6%97%A5%E6%9C%9F/</guid><description>我博客写的多是一些偏向于技术或者工具使用方面的文章，随着技术或者工具的更迭，我也需要时不时地更新一下历史文章。在没有使用 action 之前我一直是手动修</description></item><item><title>Github 开启两步验证后，git 推送鉴权失败</title><link>https://www.dianbanjiu.com/post/github-%E5%BC%80%E5%90%AF%E4%B8%A4%E6%AD%A5%E9%AA%8C%E8%AF%81%E5%90%8Egit-%E6%8E%A8%E9%80%81%E9%89%B4%E6%9D%83%E5%A4%B1%E8%B4%A5/</link><pubDate>Thu, 03 Oct 2019 11:05:02 +0800</pubDate><guid>https://www.dianbanjiu.com/post/github-%E5%BC%80%E5%90%AF%E4%B8%A4%E6%AD%A5%E9%AA%8C%E8%AF%81%E5%90%8Egit-%E6%8E%A8%E9%80%81%E9%89%B4%E6%9D%83%E5%A4%B1%E8%B4%A5/</guid><description>最近开启了 Github 的两步验证，然后在桌面上使用 git 向 Github 推送文件的时候总是出现鉴权失败的问题，在排除了密码错误的原因之后，觉得应该就是两步验证的锅了。</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Github on 点半九</title><link>https://www.dianbanjiu.com/tags/github/</link><description>Recent content in Github on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 04 Dec 2022 02:50:07 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/github/index.xml" rel="self" type="application/rss+xml"/><item><title>把图片存储在hugo项目下</title><link>https://www.dianbanjiu.com/post/%E6%8A%8A%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8%E5%9C%A8hugo%E9%A1%B9%E7%9B%AE%E4%B8%8B/</link><pubDate>Sun, 04 Dec 2022 02:50:07 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E6%8A%8A%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8%E5%9C%A8hugo%E9%A1%B9%E7%9B%AE%E4%B8%8B/</guid><description>&lt;p>之前博客的图片一直是放在各种图床上面的，一开始是 imgur，虽然是免费的，但是在国内访问是一个很大的问题，所以后来就迁移到了 sm.ms，迁移完成之后在国内国外网络都可以比较顺畅的访问了&lt;/p>
+&lt;p>不过在迁移的过程中发现一个问题，图片在上传到这些图床之后，他们都会使用自己的规则重新生成一个对外的名字，虽然我理解他们这么做的原因，但是这会极大的增加我以后迁移图床的难度。所以我就开始考虑把所有的图片都放在能够自定义文件名的地方，这样不管是在博客中引用还是以后迁移起来都很简单，只需要使用正则统一修改图片的前缀地址即可。目前采用的是直接把所有图片都放到博客的目录下面，跟博客一同编译&lt;/p>
+&lt;p>我现在的博客使用的是 hugo，hugo 在 build 站点的时候会把根目录下 static 目录里面的内容直接扔在生成的静态站点的根目录下面，所以可以通过这种方式来引用图片&lt;/p>
+&lt;ol>
+&lt;li>在 static 目录下面创建 img 目录（static 不存在的话手动创建）&lt;/li>
+&lt;li>把图片放在 static/img 下面&lt;/li>
+&lt;li>在引用图片的时候使用 /img/picturename.extra 进行引用&lt;/li>
+&lt;/ol>
+&lt;p>比如我放了一张名为 doge.png 的图片到 static/img 下面，那就可以通过 &lt;code>![](/img/doge.png)&lt;/code> 来引用这张图片&lt;/p>
+&lt;p>&lt;img src="https://www.dianbanjiu.com/img/doge.png" alt="">&lt;/p>
+&lt;p>我现在的域名是配置了 Cloudflare 加速的，把图片也放在博客目录下之后，相当于也顺便给图片也开了加速，可以说是一举两得了😂&lt;/p></description></item><item><title>Github Action 自动修改文章的更新日期</title><link>https://www.dianbanjiu.com/post/github-action-%E8%87%AA%E5%8A%A8%E4%BF%AE%E6%94%B9%E6%96%87%E7%AB%A0%E7%9A%84%E6%9B%B4%E6%96%B0%E6%97%A5%E6%9C%9F/</link><pubDate>Wed, 08 Jun 2022 00:25:49 +0800</pubDate><guid>https://www.dianbanjiu.com/post/github-action-%E8%87%AA%E5%8A%A8%E4%BF%AE%E6%94%B9%E6%96%87%E7%AB%A0%E7%9A%84%E6%9B%B4%E6%96%B0%E6%97%A5%E6%9C%9F/</guid><description>&lt;p>我博客写的多是一些偏向于技术或者工具使用方面的文章，随着技术或者工具的更迭，我也需要时不时地更新一下历史文章。在没有使用 action 之前我一直是手动修改文章更新时间，这种方式虽然可行，但是多少有点繁琐。在使用 action 自动部署博客之后，我就想能不能通过 action 自动修改文章的更新时间&lt;/p>
+&lt;p>结合官方文档，目前确定了整体的流程，大致需要下面三步&lt;/p>
+&lt;h2 id="1修改-archetypesdefaultmd">1、修改 archetypes/default.md&lt;/h2>
+&lt;p>&lt;strong>archetypes/default.md&lt;/strong> 是博客文章的默认模板，当你使用 &lt;code>hugo new post&lt;/code> 创建文章的时候，hugo 会把这个模板内容填充到你新建的文章中。你需要在其中新增下面一行，当你创建新文章的时候，默认会把当前日期填充为文章的更新日期&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span>lastmod: {{ .Date }}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>当你设置了第二步之后，这里实际展示的数据会根据第二步的设置进行替换&lt;/p>
+&lt;h2 id="2修改-configtomlyamljson">2、修改 config.toml/yaml/json&lt;/h2>
+&lt;p>修改博客的配置文件，在其中新增下面两行&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-toml" data-lang="toml">&lt;span style="display:flex;">&lt;span>[&lt;span style="color:#a6e22e">frontmatter&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">lastmod&lt;/span> = [&lt;span style="color:#e6db74">&amp;#34;:git&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;lastmod&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;:fileModTime&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>&lt;code>:git&lt;/code>: 以文件的提交时间作为更新时间&lt;/li>
+&lt;li>&lt;code>lastmod&lt;/code>: 以文章里面的 lastmod 字段作为更新时间&lt;/li>
+&lt;li>&lt;code>:fileModTime&lt;/code>: 以文件的修改时间作为更新时间&lt;/li>
+&lt;/ul>
+&lt;p>你可以根据自己的需要设置/组合这些参数，这几个参数的生效顺序就是根据他们在数组中的顺序决定的&lt;/p>
+&lt;p>如果你像我一样使用文章 git 提交的时间作为文章更新时间的话，还需要在博客的配置文件中新增下面一行&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-toml" data-lang="toml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">enableGitInfo&lt;/span> = &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>关于这部分更多的详细配置，你可以参考延伸阅读&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>&lt;/p>
+&lt;h2 id="3修改-action-配置文件可选">3、修改 action 配置文件（可选）&lt;/h2>
+&lt;p>如果你想以文章的 git 提交时间作为文章的更新时间的话，你还需要修改一下 action 的配置文件。下面是我的 action 的配置文件&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Build and Publish Blog&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">on&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">push&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">branches&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">blog&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">jobs&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">build&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">runs-on&lt;/span>: &lt;span style="color:#ae81ff">ubuntu-latest&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">steps&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Checkout&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">uses&lt;/span>: &lt;span style="color:#ae81ff">actions/checkout@master&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">with&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">fetch-depth&lt;/span>: &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Disable quotePath&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">run&lt;/span>: &lt;span style="color:#ae81ff">git config --global core.quotePath false&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">setup hugo&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">uses&lt;/span>: &lt;span style="color:#ae81ff">peaceiris/actions-hugo@v2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">with&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">hugo-version&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;latest&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">build hugo&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">run&lt;/span>: &lt;span style="color:#ae81ff">hugo --gc --minify --cleanDestinationDir&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">deploy hugo&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">uses&lt;/span>: &lt;span style="color:#ae81ff">peaceiris/actions-gh-pages@v2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">env&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ACTIONS_DEPLOY_KEY&lt;/span>: &lt;span style="color:#ae81ff">${{ secrets.ACTIONS_DEPLOY_KEY }}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">PUBLISH_BRANCH&lt;/span>: &lt;span style="color:#ae81ff">master&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">PUBLISH_DIR&lt;/span>: &lt;span style="color:#ae81ff">./public&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>注意上面的 &lt;code>Checkout&lt;/code> 和 &lt;code>Disable quotePath&lt;/code> 阶段&lt;/p>
+&lt;p>其中 &lt;code>Checkout&lt;/code> 阶段需要有下面两行，在这里 &lt;strong>fetch-depth&lt;/strong> 的默认值是 1，也就是说它默认只会拉取分支最近的一次 commit，这可能会导致一些文章的 &lt;code>GitInfo&lt;/code> 变量无法获取到。设置为 0 代表拉取所有分支的所有提交&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">with&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">fetch-depth&lt;/span>: &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>默认情况下，当文件名中包含中文的时候，git 会使用引号把文件名括起来，但是这会导致 action 中无法读取 &lt;code>:GitInfo&lt;/code> 变量，所以这里需要有 &lt;code>Disable quotePath&lt;/code> 阶段&lt;/p>
+&lt;p>通过上面这些操作之后，你可以尝试修改一篇历史文章，并提交到 GitHub 上，待 action 成功运行完成之后，你应该就可以看到效果了&lt;/p>
+&lt;div class="footnotes" role="doc-endnotes">
+&lt;hr>
+&lt;ol>
+&lt;li id="fn:1">
+&lt;p>hugo 日期配置官方文档: &lt;a href="https://gohugo.io/getting-started/configuration/#configure-dates">https://gohugo.io/getting-started/configuration/#configure-dates&lt;/a>&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;/div></description></item><item><title>Github 开启两步验证后，git 推送鉴权失败</title><link>https://www.dianbanjiu.com/post/github-%E5%BC%80%E5%90%AF%E4%B8%A4%E6%AD%A5%E9%AA%8C%E8%AF%81%E5%90%8Egit-%E6%8E%A8%E9%80%81%E9%89%B4%E6%9D%83%E5%A4%B1%E8%B4%A5/</link><pubDate>Thu, 03 Oct 2019 11:05:02 +0800</pubDate><guid>https://www.dianbanjiu.com/post/github-%E5%BC%80%E5%90%AF%E4%B8%A4%E6%AD%A5%E9%AA%8C%E8%AF%81%E5%90%8Egit-%E6%8E%A8%E9%80%81%E9%89%B4%E6%9D%83%E5%A4%B1%E8%B4%A5/</guid><description>&lt;p>最近开启了 Github 的两步验证，然后在桌面上使用 git 向 Github 推送文件的时候总是出现&lt;code>鉴权失败&lt;/code>的问题，在排除了密码错误的原因之后，觉得应该就是两步验证的锅了。&lt;/p>
+&lt;p>下面是解决办法：&lt;/p>
+&lt;ol>
+&lt;li>打开 Github 的 「&lt;a href="https://github.com/settings/profile">Settings&lt;/a>」&lt;/li>
+&lt;li>进入 「&lt;a href="https://github.com/settings/apps">Developer settings&lt;/a>」&lt;/li>
+&lt;li>打开 「&lt;a href="https://github.com/settings/tokens">Personal access tokens&lt;/a>」&lt;/li>
+&lt;li>点击 「Generate new token」，生成一个新的 token&lt;/li>
+&lt;/ol>
+&lt;p>&lt;strong>生成 token 之后千万记得把 token 复制并保存好，因为 github 为了安全起见，这个 token 只会出现一次，也就是说如果你以后忘记了这个 token，只能重新创建一个。&lt;/strong>&lt;/p>
+&lt;p>push 之前记得先要配置好用户名跟密码：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ git config --global user.name &lt;span style="color:#e6db74">&amp;#34;username&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ git config --global user.email &lt;span style="color:#e6db74">&amp;#34;email@example.com&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>之后再 push 的时候将密码替换为上面生成的 &lt;code>access token&lt;/code> 就可以了。&lt;/p>
+&lt;hr>
+&lt;p>你还可以创建一个 &lt;code>.git-credentials&lt;/code> 文件 (文件名可以任意，这里只是为了表义)，其中的内容（依规则替换掉其中的用户名和密码/access token）：&lt;/p>
+&lt;pre tabindex="0">&lt;code>https://{username}:{password}@github.com
+&lt;/code>&lt;/pre>&lt;p>在终端输入下面的命令：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ git config --global credential.helper store --file ~/.git-credentials
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>credential&lt;/code> 是用来配置 git 的凭证存储的参数。&lt;br>
+&lt;code>--file&lt;/code> 后面指定的是凭证存放的位置。&lt;/p>
+&lt;p>这种方式可以避免每次 push 的时候都需要输入密码，但是因为密码是&lt;code>明文&lt;/code>存储在本地，可能不是很安全。&lt;/p>
+&lt;hr>
+&lt;p>不过貌似这个文件并不是强制的，我在使用 access token push 完之后，直接执行：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ git config --global credential.helper store
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在之后的推送中也不再需要输入用户名和密码了。&lt;/p></description></item></channel></rss>

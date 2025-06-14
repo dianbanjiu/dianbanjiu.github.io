@@ -1,1 +1,169 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Go on 点半九</title><link>https://www.dianbanjiu.com/tags/go/</link><description>Recent content in Go on 点半九</description><generator>Hugo</generator><language>zh-cn</language><copyright>dianbanjiu@gmail.com</copyright><lastBuildDate>Mon, 26 Dec 2022 11:17:32 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/go/index.xml" rel="self" type="application/rss+xml"/><item><title>同一目录下多 main 文件的 Debug 方法</title><link>https://www.dianbanjiu.com/post/%E5%90%8C%E4%B8%80%E7%9B%AE%E5%BD%95%E4%B8%8B%E5%A4%9A-main-%E6%96%87%E4%BB%B6%E7%9A%84-debug-%E6%96%B9%E6%B3%95/</link><pubDate>Sat, 29 Oct 2022 14:30:45 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E5%90%8C%E4%B8%80%E7%9B%AE%E5%BD%95%E4%B8%8B%E5%A4%9A-main-%E6%96%87%E4%BB%B6%E7%9A%84-debug-%E6%96%B9%E6%B3%95/</guid><description>现在有一个项目包含如下文件 go.mod main.go demo.go main.go 文件内容如下 1 2 3 4 5 6 7 8 9 10 package main func main() { n := Node{ Id: 10, Data: &amp;#34;Hello foo&amp;#34;, } demo(n) } demo.go 文件内容如下 1 2 3 4 5 6 7 8 9 10 11 12 package main</description></item><item><title>在 Go 代码中检查是否实现了某个接口</title><link>https://www.dianbanjiu.com/post/%E5%9C%A8-go-%E4%BB%A3%E7%A0%81%E4%B8%AD%E6%A3%80%E6%9F%A5%E6%98%AF%E5%90%A6%E5%AE%9E%E7%8E%B0%E4%BA%86%E6%9F%90%E4%B8%AA%E6%8E%A5%E5%8F%A3/</link><pubDate>Tue, 09 Aug 2022 00:25:33 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E5%9C%A8-go-%E4%BB%A3%E7%A0%81%E4%B8%AD%E6%A3%80%E6%9F%A5%E6%98%AF%E5%90%A6%E5%AE%9E%E7%8E%B0%E4%BA%86%E6%9F%90%E4%B8%AA%E6%8E%A5%E5%8F%A3/</guid><description>go 里面想要实现一个接口，只需要实现这个接口中的 所有方法即可。这种方式看起来很简洁，但是却不利于后期的维护。因为没有显式的指明实现的接口，一旦</description></item><item><title>Go 多版本安装</title><link>https://www.dianbanjiu.com/post/go-%E5%A4%9A%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85/</link><pubDate>Wed, 15 Jun 2022 11:23:21 +0800</pubDate><guid>https://www.dianbanjiu.com/post/go-%E5%A4%9A%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85/</guid><description>工作中做 go 开发的时候，经常会遇到本地比打包机的 go 版本新的情况，而有些特性或者功能又只包含在新版本当中，导致时有打包失败的情况发生。比如，经常</description></item><item><title>从零开始配置 Go 开发环境</title><link>https://www.dianbanjiu.com/post/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E9%85%8D%E7%BD%AE-go-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</link><pubDate>Wed, 22 Apr 2020 22:50:05 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E9%85%8D%E7%BD%AE-go-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</guid><description>安装 go 关于详细的安装教程，可以参考 官方安装文档 官网提供了各个操作系统下的安装包以及源码，你也可以尝试通过包管理器进行安装，更加简单而且方便后</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Go on 点半九</title><link>https://www.dianbanjiu.com/tags/go/</link><description>Recent content in Go on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 29 Oct 2022 14:30:45 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/go/index.xml" rel="self" type="application/rss+xml"/><item><title>同一目录下多 main 文件的 Debug 方法</title><link>https://www.dianbanjiu.com/post/%E5%90%8C%E4%B8%80%E7%9B%AE%E5%BD%95%E4%B8%8B%E5%A4%9A-main-%E6%96%87%E4%BB%B6%E7%9A%84-debug-%E6%96%B9%E6%B3%95/</link><pubDate>Sat, 29 Oct 2022 14:30:45 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E5%90%8C%E4%B8%80%E7%9B%AE%E5%BD%95%E4%B8%8B%E5%A4%9A-main-%E6%96%87%E4%BB%B6%E7%9A%84-debug-%E6%96%B9%E6%B3%95/</guid><description>&lt;p>现在有一个项目包含如下文件&lt;/p>
+&lt;ul>
+&lt;li>go.mod&lt;/li>
+&lt;li>main.go&lt;/li>
+&lt;li>demo.go&lt;/li>
+&lt;/ul>
+&lt;p>main.go 文件内容如下&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">n&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">Node&lt;/span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Id&lt;/span>: &lt;span style="color:#ae81ff">10&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Data&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Hello foo&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">demo&lt;/span>(&lt;span style="color:#a6e22e">n&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>demo.go 文件内容如下&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">type&lt;/span> &lt;span style="color:#a6e22e">Node&lt;/span> &lt;span style="color:#66d9ef">struct&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Data&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span> &lt;span style="color:#e6db74">`json:&amp;#34;data&amp;#34;`&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Id&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span> &lt;span style="color:#e6db74">`json:&amp;#34;id&amp;#34;`&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">demo&lt;/span>(&lt;span style="color:#a6e22e">n&lt;/span> &lt;span style="color:#a6e22e">Node&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#a6e22e">n&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>直接在项目目录下执行 &lt;code>go run main.go&lt;/code> 或者使用 VSCode、Goland 等进行编译可能会出现异常&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-text" data-lang="text">&lt;span style="display:flex;">&lt;span>./main.go:4:7: undefined: Node
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./main.go:9:2: undefined: demo
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在终端运行/编译的时候将 &lt;code>go run main.go&lt;/code> 修改为 &lt;code>go run .&lt;/code>（&lt;code>.&lt;/code> 是 main 包所在的路径，需要根据项目情况进行修改）程序即可正常运行&lt;/p>
+&lt;p>在 VSCode 中可以通过如下配置来避免此问题&lt;br>
+1、打开 VSCode 的&lt;code>运行和调试窗口&lt;/code>（快捷键 &lt;code>Ctrl+Shift+D&lt;/code>）&lt;br>
+2、点击 &lt;code>创建 launch.json 文件&lt;/code>&lt;br>
+3、选择 &lt;code>Go：Launch Package&lt;/code>&lt;br>
+4、上一步会创建并打开 .vscode/launch.json 文件，文件内容如下&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-JSON" data-lang="JSON">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// 使用 IntelliSense 了解相关属性。
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">// 悬停以查看现有属性的描述。
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">// 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">&amp;#34;version&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;0.2.0&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;configurations&amp;#34;&lt;/span>: [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Launch Package&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;go&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;request&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;launch&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;mode&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;auto&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;program&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;${fileDirname}&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>修改其中 &lt;code>program&lt;/code> 字段的值为 &lt;code>&amp;quot;${workspaceFolder}&amp;quot;&lt;/code>，这时再按下 F5 就会发现程序正常运行了&lt;/p>
+&lt;p>&lt;code>workspaceFolder&lt;/code> 表示当前工作区的根目录，单项目一般指项目的根目录。如果 main 包在其他目录下，将 program 的值改为对应的路径即可。比如我的 main 包在项目的 &lt;code>cmd/single/&lt;/code> 下，program 的值就需要改为 &lt;code>&amp;quot;${workspaceFolder}/cmd/single&amp;quot;&lt;/code>&lt;/p>
+&lt;p>简而言之就是运行/编译项目的时候需要指定 main 包所在的目录，而非指定 main 方法所属的文件。在编译 go 程序的时候单纯指定 main 方法所在的文件，同目录下其他 main 包里的内容是不会被检索和编译的&lt;/p></description></item><item><title>在 Go 代码中检查是否实现了某个接口</title><link>https://www.dianbanjiu.com/post/%E5%9C%A8-go-%E4%BB%A3%E7%A0%81%E4%B8%AD%E6%A3%80%E6%9F%A5%E6%98%AF%E5%90%A6%E5%AE%9E%E7%8E%B0%E4%BA%86%E6%9F%90%E4%B8%AA%E6%8E%A5%E5%8F%A3/</link><pubDate>Tue, 09 Aug 2022 00:25:33 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E5%9C%A8-go-%E4%BB%A3%E7%A0%81%E4%B8%AD%E6%A3%80%E6%9F%A5%E6%98%AF%E5%90%A6%E5%AE%9E%E7%8E%B0%E4%BA%86%E6%9F%90%E4%B8%AA%E6%8E%A5%E5%8F%A3/</guid><description>&lt;p>go 里面想要实现一个接口，只需要实现这个接口中的 所有方法即可。这种方式看起来很简洁，但是却不利于后期的维护。因为没有显式的指明实现的接口，一旦对接口做了修改，其他所有已经实现了该接口的类型都会失效。最近在 goframe 的终端工具 gf 的源码中看到了检查一个类型是否实现某个接口的方法，简单有效&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">_&lt;/span> &lt;span style="color:#a6e22e">NewT&lt;/span> = &lt;span style="color:#a6e22e">T&lt;/span>{}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>通过变量赋值，但忽略变量本身的方式来检查类型是否匹配，如果 &lt;code>NewT&lt;/code> 类型实现了 &lt;code>T&lt;/code> 接口的所有方法，赋值成功，否则编译阶段就会报错，IDE 也会及时的提醒你赋值有问题&lt;/p></description></item><item><title>Go 多版本安装</title><link>https://www.dianbanjiu.com/post/go-%E5%A4%9A%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85/</link><pubDate>Wed, 15 Jun 2022 11:23:21 +0800</pubDate><guid>https://www.dianbanjiu.com/post/go-%E5%A4%9A%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85/</guid><description>&lt;p>工作中做 go 开发的时候，经常会遇到本地比打包机的 go 版本新的情况，而有些特性或者功能又只包含在新版本当中，导致时有打包失败的情况发生。比如，经常会出现的一个问题就是 ioutil 这个包在 1.16 之后已经被废弃了，其中的一些方法也转移到了其他的包中，我脑海中一直有这个印象，所以就下意识地避免使用 ioutil 这个包，但是因为打包机使用的是 1.15 版本，所以我下意识的避免反而造成了打包失败。在这种情况下，最好的方式就是将本地项目的开发环境切换到 1.15。好在官方&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>也提供了安装多版本的方式&lt;/p>
+&lt;p>首先本地需要先安装好一个版本的 go，最好是最新的版本。安装完成之后将 GOPROXY 配置为国内的代理，加速之后的下载速度。我常用的配置&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>go env -w GOPROXY&lt;span style="color:#f92672">=&lt;/span>https://goproxy.cn
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>接着安装 go1.15&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>go install golang.org/dl/go1.15@latest
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>go1.15 download
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>安装完成之后可以通过下面的命令测试一下是否安装成功&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>~/go/bin/go1.15 version
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>为了方便起见，你可以给 go1.15 的可执行文件起个别名，或者将 &lt;code>~/go/bin&lt;/code> 添加到环境 PATH 当中，可以简化需要输入的命令&lt;/p>
+&lt;p>go 默认会把其他版本的源码放置在 &lt;code>~/sdk/&lt;/code> 下，所以上面下载的 1.15 版本的 GOROOT 就是 &lt;code>~/sdk/go1.15&lt;/code>&lt;/p>
+&lt;p>你可以通过 &lt;code>go1.15 env&lt;/code> 查看 1.15 版本对应的环境变量&lt;/p>
+&lt;p>如果你想卸载 go1.15，只需要从 &lt;code>$GOPATH/bin&lt;/code> 把 go1.15 删掉，然后把 &lt;code>$HOME/sdk/go1.15&lt;/code> 删掉即可&lt;/p>
+&lt;div class="footnotes" role="doc-endnotes">
+&lt;hr>
+&lt;ol>
+&lt;li id="fn:1">
+&lt;p>&lt;a href="https://go.dev/doc/manage-install">https://go.dev/doc/manage-install&lt;/a>&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;/div></description></item><item><title>从零开始配置 Go 开发环境</title><link>https://www.dianbanjiu.com/post/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E9%85%8D%E7%BD%AE-go-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</link><pubDate>Wed, 22 Apr 2020 22:50:05 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E9%85%8D%E7%BD%AE-go-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</guid><description>&lt;h1 id="安装-go">安装 go&lt;/h1>
+&lt;p>关于详细的安装教程，可以参考 &lt;a href="https://go.dev/doc/install">官方安装文档&lt;/a>&lt;/p>
+&lt;p>官网提供了各个操作系统下的安装包以及源码，你也可以尝试通过包管理器进行安装，更加简单而且方便后面的升级&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo pacman -S go &lt;span style="color:#75715e">#Arch Linux&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo zypper in go &lt;span style="color:#75715e">#OpenSuse&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>brew install go &lt;span style="color:#75715e">#MacOS&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>scoop install go &lt;span style="color:#75715e">#Windows&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>通过包管理器安装的 go，只需要定期运行对应的更新命令，就可以将本地的 go 更新到当前比较新的版本（这个主要取决于包管理对于包的更新策略）&lt;/p>
+&lt;p>当然你也可以使用官方的 &lt;a href="https://www.dianbanjiu.com/post/go-%E5%A4%9A%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85/">多版本管理方式进行安装&lt;/a>&lt;/p>
+&lt;h2 id="测试">测试&lt;/h2>
+&lt;p>安装完成之后，可以使用下面的命令看是否安装成功了&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ go version
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>go version go1.14.2 linux/amd64
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>我当前 go 的版本是 1.14.2 linxu/amd64 架构的&lt;/p>
+&lt;h1 id="gomodule">gomodule&lt;/h1>
+&lt;p>gomodule 现在是 go 默认的包管理工具，用来解决 go 项目的依赖问题&lt;/p>
+&lt;h2 id="配置">配置&lt;/h2>
+&lt;p>下面来配置一下 gomodule 的环境，在终端执行下面的两条命令&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>go env -w GO111MODULE&lt;span style="color:#f92672">=&lt;/span>on &lt;span style="color:#75715e"># 如果你使用 1.13 之后的版本，可以忽略这一条命令&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>go env -w GOPROXY&lt;span style="color:#f92672">=&lt;/span>https://goproxy.cn &lt;span style="color:#75715e"># 你可以使用其他的代理，比如 https://goproxy.io 等&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>goproxy 是 go 的模块代理，以前一些 &lt;code>golang.org/&lt;/code> 下的包下载可能会比较慢，有了 goproxy 之后就不用再担心这个了。&lt;code>goproxy.cn&lt;/code> 使用的是七牛的 CDN 进行分发的，实测速度很可以，当然还有一些其他的代理服务，你可以自行查找自己喜欢的&lt;/p>
+&lt;h2 id="简单使用">简单使用&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ mkdir ~/GoProject
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ cd ~/GoProject
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ go mod init hello &lt;span style="color:#75715e"># 初始化 go 模块&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>上面就创建了一个名为 &lt;code>demo&lt;/code> 的模块，模块名可以根据自己的需要修改&lt;br>
+执行完上面的命令之后，会在项目根目录下生成一个 &lt;code>go.mod&lt;/code> 文件，看一下里面的内容&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ cat go.mod
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>module demo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>go 1.14
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>一开始里面只有一个模块名和你当前的 go 版本&lt;/p>
+&lt;p>安装模块的时候跟之前一样，在项目根目录下执行：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ go get -u https://github.com/gin-gonic/gin
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>再看一下里面的内容：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ cat go.mod
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>module leetcode
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>go 1.14
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>require &lt;span style="color:#f92672">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> github.com/gin-gonic/gin v1.6.2 // indirect
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> github.com/golang/protobuf v1.4.0 // indirect
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> github.com/modern-go/reflect2 v1.0.1 // indirect
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> golang.org/x/sys v0.0.0-20200420163511-1957bb5e6d1f // indirect
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>可以看到，gin 框架及其依赖都已经被添加进来了&lt;/p>
+&lt;p>项目构建完成之后，可以使用 &lt;code>go mod tidy&lt;/code> 将项目中从未用到过的模块移除&lt;/p>
+&lt;h1 id="编辑器ide">编辑器/IDE&lt;/h1>
+&lt;p>推荐的编辑器是 VSCode，多平台、插件丰富。推荐的 IDE 是 Goland，功能齐全&lt;/p>
+&lt;h2 id="vscode">VSCode&lt;/h2>
+&lt;p>1、安装 VSCode&lt;br>
+2、扩展市场搜索并安装 &lt;code>golang.go&lt;/code>&lt;br>
+3、按 &lt;code>Ctrl+Shift+p&lt;/code>，输入 &lt;code>go: install/update tools&lt;/code>，全选依赖项，点击确定安装开发 go 用到的一些依赖。在开始之前请先配置好 go 的 &lt;code>GOPROXY&lt;/code> 变量&lt;br>
+4、（可选）安装&lt;code>formulahendry.code-runner&lt;/code> 插件用于直接运行一些代码片段&lt;br>
+5、（可选）安装 &lt;code>maxnatchanon.go-struct-tag-autogen&lt;/code> 用于自动补全结构体多种风格的 tag。具体的配置可以参考 &lt;a href="https://github.com/maxnatchanon/vscode-go-struct-tag-autogen">https://github.com/maxnatchanon/vscode-go-struct-tag-autogen&lt;/a>，下面是我的配置&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-JSON" data-lang="JSON">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#34;goStructTagAutogen.tagSuggestion&amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">:&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;json&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;cases&amp;#34;&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;camel&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;snake&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;uppersnake&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;pascal&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;none&amp;#34;&lt;/span>],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;options&amp;#34;&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;-&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;omitempty&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;form&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;cases&amp;#34;&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;camel&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;snake&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;uppersnake&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;pascal&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;none&amp;#34;&lt;/span>],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;options&amp;#34;&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;-&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;omitempty&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;bson&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;cases&amp;#34;&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;snake&amp;#34;&lt;/span>],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;options&amp;#34;&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;-&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;omitempty&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;binding&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;options&amp;#34;&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;required&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>注意，如果自动补全不生效，你需要在你 VSCode 的配置文件中新增下面的内容&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-JSON" data-lang="JSON">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#34;editor.quickSuggestions&amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">:&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;strings&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;on&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>6、（可选）安装 &lt;code>doggy8088.quicktype-refresh&lt;/code>，可以转换 JSON 数据为对应的结构体&lt;br>
+7、（可选）安装 &lt;code>mishkinf.goto-next-previous-member&lt;/code>，使用 Ctrl+Arrow Up/Down 在同一个文件相邻的方法间进行跳转&lt;br>
+8、（可选）在 VSCode 的配置文件中新增下面的内容，启用由 gopls 支持的语法高亮，具体说明可以参见 &lt;a href="https://code.visualstudio.com/api/language-extensions/semantic-highlight-guide">https://code.visualstudio.com/api/language-extensions/semantic-highlight-guide&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-JSON" data-lang="JSON">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#34;gopls&amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">:&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;ui.semanticTokens&amp;#34;&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>接着就可以使用 VSCode 开始你愉快的 go 开发了&lt;/p>
+&lt;h2 id="goland">Goland&lt;/h2>
+&lt;p>Goland 是 Jetbrains 开发的 Go IDE，它的配置在我的 &lt;a href="https://www.dianbanjiu.com/post/goalnd-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/">Goalnd 基础配置&lt;/a> 有介绍，需要的话可以翻看一下，这里就不赘述了&lt;/p>
+&lt;p>Enjoy Yourself.&lt;/p></description></item></channel></rss>

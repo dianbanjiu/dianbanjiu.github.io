@@ -1,1 +1,1010 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Linux on 点半九</title><link>https://www.dianbanjiu.com/tags/linux/</link><description>Recent content in Linux on 点半九</description><generator>Hugo</generator><language>zh-cn</language><copyright>dianbanjiu@gmail.com</copyright><lastBuildDate>Thu, 22 Feb 2024 22:28:26 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/linux/index.xml" rel="self" type="application/rss+xml"/><item><title>搭建memos</title><link>https://www.dianbanjiu.com/post/%E6%90%AD%E5%BB%BAmemos/</link><pubDate>Thu, 22 Feb 2024 00:36:16 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E6%90%AD%E5%BB%BAmemos/</guid><description>最近看到了一个比较有意思的服务 Memos，支持自己部署，所以我也来搞了一个玩玩，下面是大概的流程 1、安装 docker 我服务器使用的是 Centos8，如</description></item><item><title>Arch Linux更新后没有声音</title><link>https://www.dianbanjiu.com/post/arch-linux%E6%9B%B4%E6%96%B0%E5%90%8E%E6%B2%A1%E6%9C%89%E5%A3%B0%E9%9F%B3/</link><pubDate>Sun, 29 Oct 2023 12:41:20 +0800</pubDate><guid>https://www.dianbanjiu.com/post/arch-linux%E6%9B%B4%E6%96%B0%E5%90%8E%E6%B2%A1%E6%9C%89%E5%A3%B0%E9%9F%B3/</guid><description>在昨晚 pacman -Syu 之后，今天早上突然发现电脑无法播放声音了 我目前使用的音频方案是 pulseaudio+pulseaudio-bluetooth，修改</description></item><item><title>Linux 访问 Windows 共享目录</title><link>https://www.dianbanjiu.com/post/linux-%E8%AE%BF%E9%97%AE-windows-%E5%85%B1%E4%BA%AB%E7%9B%AE%E5%BD%95/</link><pubDate>Thu, 14 Apr 2022 16:36:33 +0800</pubDate><guid>https://www.dianbanjiu.com/post/linux-%E8%AE%BF%E9%97%AE-windows-%E5%85%B1%E4%BA%AB%E7%9B%AE%E5%BD%95/</guid><description>因为工作需要，需要在电脑上安装一个 VPN 程序，但是官方并没有提供 Linux 版本，通过 wine 虽然能安装成功，但是界面总是显示不出来。实在不想折腾了，就直接装了</description></item><item><title>Arch Linux 安装微信</title><link>https://www.dianbanjiu.com/post/arch-linux-%E5%AE%89%E8%A3%85%E5%BE%AE%E4%BF%A1/</link><pubDate>Sat, 09 Apr 2022 12:57:54 +0800</pubDate><guid>https://www.dianbanjiu.com/post/arch-linux-%E5%AE%89%E8%A3%85%E5%BE%AE%E4%BF%A1/</guid><description>AUR 中提供了多个微信的安装包，具体的可以参考 微信的 Wiki 页，我使用的是 com.qq.weixin.deepin，版本是 3.2.1.154 安装比较简单，直接通过 AUR 的</description></item><item><title>Linux 安装后</title><link>https://www.dianbanjiu.com/post/linux-%E5%AE%89%E8%A3%85%E5%90%8E/</link><pubDate>Wed, 06 Apr 2022 00:00:00 +0000</pubDate><guid>https://www.dianbanjiu.com/post/linux-%E5%AE%89%E8%A3%85%E5%90%8E/</guid><description>之前因为好奇心，在自己的笔记本上重装了 N 多次系统，虽然基本上都是局限在 Linux 的各种发行版之间，不过最近两三年基本上算是稳定下来，只尝试过 Manjaro 和 Arch L</description></item><item><title>Git 以中文展示修改路径</title><link>https://www.dianbanjiu.com/post/git-%E4%BB%A5%E4%B8%AD%E6%96%87%E5%B1%95%E7%A4%BA%E4%BF%AE%E6%94%B9%E8%B7%AF%E5%BE%84/</link><pubDate>Sun, 20 Mar 2022 14:38:24 +0800</pubDate><guid>https://www.dianbanjiu.com/post/git-%E4%BB%A5%E4%B8%AD%E6%96%87%E5%B1%95%E7%A4%BA%E4%BF%AE%E6%94%B9%E8%B7%AF%E5%BE%84/</guid><description>默认情况下，使用 git status 来查看更改文件时，如果路径中包含有空格或者一些中文字符时，对应的文件路径会用引号括起来，并且其中的中文字符会以反斜杠 \ 进</description></item><item><title>使用 Rclone 挂载 OneDrive</title><link>https://www.dianbanjiu.com/post/%E4%BD%BF%E7%94%A8-rclone-%E6%8C%82%E8%BD%BD-onedrive/</link><pubDate>Wed, 16 Mar 2022 11:47:59 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E4%BD%BF%E7%94%A8-rclone-%E6%8C%82%E8%BD%BD-onedrive/</guid><description>安装 因为 OneDrive 没有提供官方的 Linux 客户端，所以为了方便起见，我选择直接通过 rclone 将 OneDrive 挂载到本地，这样就可以在本地直接对 OneDrive 的文件进行管理 首先需要安装 rclone 程序</description></item><item><title>Arch Linux 无法配对蓝牙耳机</title><link>https://www.dianbanjiu.com/post/arch-linux-%E6%97%A0%E6%B3%95%E9%85%8D%E5%AF%B9%E8%93%9D%E7%89%99%E8%80%B3%E6%9C%BA/</link><pubDate>Fri, 25 Feb 2022 13:42:06 +0800</pubDate><guid>https://www.dianbanjiu.com/post/arch-linux-%E6%97%A0%E6%B3%95%E9%85%8D%E5%AF%B9%E8%93%9D%E7%89%99%E8%80%B3%E6%9C%BA/</guid><description>最近在尝试使用这台装了 Arch Linux 的笔记本连接蓝牙耳机的时候，发现总是无法成功配对 因为蓝牙键盘是可以正常连接的，判断蓝牙驱动应该是正常的，所以大概率</description></item><item><title>如何在 Linux 下制作 Windows 启动器</title><link>https://www.dianbanjiu.com/post/%E5%A6%82%E4%BD%95%E5%9C%A8-linux-%E4%B8%8B%E5%88%B6%E4%BD%9C-windows-%E5%90%AF%E5%8A%A8%E5%99%A8/</link><pubDate>Sat, 06 Nov 2021 12:24:27 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E5%A6%82%E4%BD%95%E5%9C%A8-linux-%E4%B8%8B%E5%88%B6%E4%BD%9C-windows-%E5%90%AF%E5%8A%A8%E5%99%A8/</guid><description>在 Linux 下制作 Windows 启动盘，有三种常用的方式：dd、WoeUSB、Ventoy。 WoeUSB WoeUSB 可以使用 pip3 install WoeUsb-ng 进行安装。 WoeUSB 我以前用的时候还可以，但是这次也不知道</description></item><item><title> Bash, Cannot Set LC_CTYPE to Default, No Such File or Directory</title><link>https://www.dianbanjiu.com/post/-bash-cannot-set-lc_ctype-to-default-no-such-file-or-directory/</link><pubDate>Thu, 30 Jul 2020 22:38:35 +0800</pubDate><guid>https://www.dianbanjiu.com/post/-bash-cannot-set-lc_ctype-to-default-no-such-file-or-directory/</guid><description>最近使用 MacOS 的终端通过 ssh 连接 Linux 服务器的过程中，出现了一点问题，每次连接上之后，都会出现 -bash, cannot change locale, No such file or directory，整段错误代码没记住，</description></item><item><title>关于 Shell 脚本中空格的一点小坑</title><link>https://www.dianbanjiu.com/post/%E5%85%B3%E4%BA%8E-shell-%E8%84%9A%E6%9C%AC%E4%B8%AD%E7%A9%BA%E6%A0%BC%E7%9A%84%E4%B8%80%E7%82%B9%E5%B0%8F%E5%9D%91/</link><pubDate>Mon, 27 Jul 2020 00:23:54 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E5%85%B3%E4%BA%8E-shell-%E8%84%9A%E6%9C%AC%E4%B8%AD%E7%A9%BA%E6%A0%BC%E7%9A%84%E4%B8%80%E7%82%B9%E5%B0%8F%E5%9D%91/</guid><description>最近为了结合 gilab runner 自动化打包，写了不少的 shell 脚本，虽然都是比较简单的内容，但还是踩了不少的坑。最近的一个就是有关字符串的问题。 在很多场景下我们可</description></item><item><title>创建 Shell 脚本的帮助信息</title><link>https://www.dianbanjiu.com/post/%E5%88%9B%E5%BB%BA-shell-%E8%84%9A%E6%9C%AC%E7%9A%84%E5%B8%AE%E5%8A%A9%E4%BF%A1%E6%81%AF/</link><pubDate>Wed, 22 Jul 2020 23:28:50 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E5%88%9B%E5%BB%BA-shell-%E8%84%9A%E6%9C%AC%E7%9A%84%E5%B8%AE%E5%8A%A9%E4%BF%A1%E6%81%AF/</guid><description>原文链接 [英]：https://samizdat.dev/help-message-for-shell-scripts/ 有很多种方式可以获取</description></item><item><title>Linux 添加 Windows 字体库</title><link>https://www.dianbanjiu.com/post/linux-%E6%B7%BB%E5%8A%A0-windows-%E5%AD%97%E4%BD%93%E5%BA%93/</link><pubDate>Wed, 27 May 2020 23:02:52 +0800</pubDate><guid>https://www.dianbanjiu.com/post/linux-%E6%B7%BB%E5%8A%A0-windows-%E5%AD%97%E4%BD%93%E5%BA%93/</guid><description>如果你有尝试过在 Linux 下打开 Windows 制作的 word 文档，或者在 Windows 下打开 Linux 制作的 word 文档，你可能会惊喜的发现在两个平台下同一个 word 文件的样式截然不同，这对于一些对</description></item><item><title>使用手机制作 Linux Live CD</title><link>https://www.dianbanjiu.com/post/%E4%BD%BF%E7%94%A8%E6%89%8B%E6%9C%BA%E5%88%B6%E4%BD%9C-linux-live-cd/</link><pubDate>Thu, 02 Jan 2020 12:44:45 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E4%BD%BF%E7%94%A8%E6%89%8B%E6%9C%BA%E5%88%B6%E4%BD%9C-linux-live-cd/</guid><description>在 2020 年的第一天，因为想试试黑苹果，所以就从网上下载了安装镜像，在自己的笔记本上尝试了一下，不过因为各种原因最后安装失败了，惟一的系统也在尝试</description></item><item><title>Android 手机投屏到 Linux 下</title><link>https://www.dianbanjiu.com/post/android-%E6%89%8B%E6%9C%BA%E6%8A%95%E5%B1%8F%E5%88%B0-linux-%E4%B8%8B/</link><pubDate>Tue, 24 Dec 2019 14:40:22 +0800</pubDate><guid>https://www.dianbanjiu.com/post/android-%E6%89%8B%E6%9C%BA%E6%8A%95%E5%B1%8F%E5%88%B0-linux-%E4%B8%8B/</guid><description>最近发现了一个可以在 Linux 下使用的手机投屏软件软件 —— scrcpy，同时也支持 Windows 和 MacOS，但是因为我用的是 Manjaro Linux，所以下面只会介绍 Manjaro 下</description></item><item><title>计算当前目录下所有以 .c 结尾的文件数量</title><link>https://www.dianbanjiu.com/post/%E8%AE%A1%E7%AE%97%E5%BD%93%E5%89%8D%E7%9B%AE%E5%BD%95%E4%B8%8B%E6%89%80%E6%9C%89%E4%BB%A5-.c-%E7%BB%93%E5%B0%BE%E7%9A%84%E6%96%87%E4%BB%B6%E6%95%B0%E9%87%8F/</link><pubDate>Sat, 09 Nov 2019 23:48:37 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E8%AE%A1%E7%AE%97%E5%BD%93%E5%89%8D%E7%9B%AE%E5%BD%95%E4%B8%8B%E6%89%80%E6%9C%89%E4%BB%A5-.c-%E7%BB%93%E5%B0%BE%E7%9A%84%E6%96%87%E4%BB%B6%E6%95%B0%E9%87%8F/</guid><description>1 $ ls -l | grep &amp;#34;.c$&amp;#34; | wc -l 其中 ls -l 是列出当前目录下所有的非隐藏文件，如果需要显示隐藏文件可以添加 -a 选项； 将上一步得到的结果传输给 grep，字符串加</description></item><item><title>压缩/解压缩</title><link>https://www.dianbanjiu.com/post/linux-%E4%B8%8B%E7%9A%84%E8%A7%A3%E5%8E%8B%E7%BC%A9%E5%B7%A5%E5%85%B7/</link><pubDate>Sun, 06 Oct 2019 08:26:21 +0800</pubDate><guid>https://www.dianbanjiu.com/post/linux-%E4%B8%8B%E7%9A%84%E8%A7%A3%E5%8E%8B%E7%BC%A9%E5%B7%A5%E5%85%B7/</guid><description>在 Linux 下，除了最常用的 tar 归档命令之外，还有两个很好用的压缩/解压缩的工具，一个是 unarchiver，另一个是 p7zip。 Unarchiver unarchiver 实际上是一个解压</description></item><item><title>Github 开启两步验证后，git 推送鉴权失败</title><link>https://www.dianbanjiu.com/post/github-%E5%BC%80%E5%90%AF%E4%B8%A4%E6%AD%A5%E9%AA%8C%E8%AF%81%E5%90%8Egit-%E6%8E%A8%E9%80%81%E9%89%B4%E6%9D%83%E5%A4%B1%E8%B4%A5/</link><pubDate>Thu, 03 Oct 2019 11:05:02 +0800</pubDate><guid>https://www.dianbanjiu.com/post/github-%E5%BC%80%E5%90%AF%E4%B8%A4%E6%AD%A5%E9%AA%8C%E8%AF%81%E5%90%8Egit-%E6%8E%A8%E9%80%81%E9%89%B4%E6%9D%83%E5%A4%B1%E8%B4%A5/</guid><description>最近开启了 Github 的两步验证，然后在桌面上使用 git 向 Github 推送文件的时候总是出现鉴权失败的问题，在排除了密码错误的原因之后，觉得应该就是两步验证的锅了。</description></item><item><title>禁用笔记本的自带键盘</title><link>https://www.dianbanjiu.com/post/%E7%A6%81%E7%94%A8%E7%AC%94%E8%AE%B0%E6%9C%AC%E7%9A%84%E8%87%AA%E5%B8%A6%E9%94%AE%E7%9B%98/</link><pubDate>Fri, 20 Sep 2019 13:05:56 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E7%A6%81%E7%94%A8%E7%AC%94%E8%AE%B0%E6%9C%AC%E7%9A%84%E8%87%AA%E5%B8%A6%E9%94%AE%E7%9B%98/</guid><description>最近半年笔记本的键盘已经慢慢地开始失灵，经常有些键按不出来，所以就另外买了一把键盘。 不过有时候需要带笔记本出去，所以这样一来还需要带着键盘，</description></item><item><title>Linux 下蓝牙鼠标延迟严重</title><link>https://www.dianbanjiu.com/post/linux-%E4%B8%8B%E8%93%9D%E7%89%99%E9%BC%A0%E6%A0%87%E5%BB%B6%E8%BF%9F%E4%B8%A5%E9%87%8D/</link><pubDate>Mon, 16 Sep 2019 13:30:06 +0800</pubDate><guid>https://www.dianbanjiu.com/post/linux-%E4%B8%8B%E8%93%9D%E7%89%99%E9%BC%A0%E6%A0%87%E5%BB%B6%E8%BF%9F%E4%B8%A5%E9%87%8D/</guid><description>最近买了一个小米便携蓝牙鼠标，在 Arch Linux 下成功连接上鼠标之后，发现鼠标的延迟特别严重，但是鼠标连接到手机上却十分顺滑，由此基本断定是在 Arch Linux 上的某</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Linux on 点半九</title><link>https://www.dianbanjiu.com/tags/linux/</link><description>Recent content in Linux on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 22 Feb 2024 00:36:16 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/linux/index.xml" rel="self" type="application/rss+xml"/><item><title>搭建memos</title><link>https://www.dianbanjiu.com/post/%E6%90%AD%E5%BB%BAmemos/</link><pubDate>Thu, 22 Feb 2024 00:36:16 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E6%90%AD%E5%BB%BAmemos/</guid><description>&lt;p>最近看到了一个比较有意思的服务 Memos，支持自己部署，所以我也来搞了一个玩玩，下面是大概的流程&lt;/p>
+&lt;h2 id="1安装-docker">1、安装 docker&lt;/h2>
+&lt;p>我服务器使用的是 Centos8，如果你使用的是其他发行版可以参考 &lt;a href="https://docs.docker.com/engine/install/">Docker 官方的说明文档&lt;/a>&lt;/p>
+&lt;p>首先卸载已经安装的旧 docker&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>sudo yum remove docker &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> docker-client &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> docker-client-latest &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> docker-common &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> docker-latest &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> docker-latest-logrotate &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> docker-logrotate &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> docker-engine
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>安装 yum-utils 包&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>sudo yum install -y yum-utils
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>添加 docker 软件源&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>安装最新版的 docker&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>sudo yum install docker-ce
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>启动 docker，并将它设置为开机自启&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>sudo systemctl start docker
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo systemctl enable docker
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>确认 docker 启动成功&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>sudo docker info
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="2安装-memos">2、安装 Memos&lt;/h2>
+&lt;p>官网提供了 docker 和 docker-compose 的部署方式，因为只有一个服务，所以我选择直接使用 docker 部署&lt;/p>
+&lt;p>&lt;a href="https://www.usememos.com/docs/install/self-hosting">官方文档链接&lt;/a>&lt;/p>
+&lt;p>先创建一个目录用来存放 Memos 的数据文件&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>mkdir /opt/memos
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>安装 Memos&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>docker run -d &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --init &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --name memos &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --publish 5230:5230 &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --volume /opt/memos/:/var/opt/memos &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> neosmemo/memos:stable
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>上面命令执行完之后 Memos 就跑起来了，可以使用 http://ip:5230 来测试一下&lt;/p>
+&lt;h2 id="3添加域名解析">3、添加域名解析&lt;/h2>
+&lt;p>添加一条 A 记录，如 memos.dianbanjiu.com 解析到自己服务器的公网 IP 上&lt;/p>
+&lt;ol>
+&lt;li>在 cloudflare 选择自己的站点&lt;/li>
+&lt;li>在侧边栏选择 DNS-&amp;gt;记录&lt;/li>
+&lt;li>选择添加记录按钮，添加一条 A 记录（类型选择 A，名称输入 memos，IPV4 地址填自己的服务器公网 IP）&lt;/li>
+&lt;/ol>
+&lt;p>后续我会把服务改为 https 访问，而我的域名是托管在 cloudflare 上的，所以可以直接用 cloudflare 生成一份 15 年有效期的证书&lt;/p>
+&lt;ol>
+&lt;li>在 cloudflare 选择自己的站点&lt;/li>
+&lt;li>在侧边栏选择 SSL/TLS-&amp;gt;源服务器&lt;/li>
+&lt;li>点击创建证书按钮，根据提示创建即可。推荐生成 pem 格式的私钥&lt;/li>
+&lt;/ol>
+&lt;p>将证书保存为 dianbanjiu.com.pem，将私钥保存为 dianbanjiu.com.key&lt;/p>
+&lt;p>将生成的两个文件上传至服务器的 /etc/nginx/cert 下&lt;/p>
+&lt;h2 id="4安装-nginx">4、安装 nginx&lt;/h2>
+&lt;p>官方软件源里的 nginx 版本可能比较老，可以选择安装 nginx 软件源，以安装最新的 nginx&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>rpm -ivh http://nginx.org/packages/centos/8/x86_64/RPMS/nginx-1.24.0-1.el8.ngx.x86_64.rpm
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>上面的命令会直接安装好 1.24.0 版本的 nginx，这也是当前最新版本&lt;/p>
+&lt;p>启动 nginx 并设置开机自启&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>sudo systemctl start nginx
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo systemctl enable nginx
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在浏览器直接访问 http://ip 应该就可以看到 nginx 的输出了&lt;/p>
+&lt;p>新增 Memos 的 nginx 配置，在 /etc/nginx/conf.d 中新增一个 memos.dianbanjiu.com.conf 文件。文件内容如下&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">server&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">listen&lt;/span> &lt;span style="color:#ae81ff">443&lt;/span> &lt;span style="color:#e6db74">ssl&lt;/span> &lt;span style="color:#e6db74">http2&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">server_name&lt;/span> &lt;span style="color:#e6db74">memos.dianbanjiu.com&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ssl_certificate&lt;/span> &lt;span style="color:#e6db74">/etc/nginx/cert/dianbanjiu.com.pem&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ssl_certificate_key&lt;/span> &lt;span style="color:#e6db74">/etc/nginx/cert/dianbanjiu.com.key&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ssl_prefer_server_ciphers&lt;/span> &lt;span style="color:#66d9ef">on&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">access_log&lt;/span> &lt;span style="color:#e6db74">/var/log/nginx/memos.access.log&lt;/span> &lt;span style="color:#e6db74">main&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">location&lt;/span> &lt;span style="color:#e6db74">/&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_pass&lt;/span> &lt;span style="color:#e6db74">http://127.0.0.1:5230&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_set_header&lt;/span> &lt;span style="color:#e6db74">Host&lt;/span> $host;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_set_header&lt;/span> &lt;span style="color:#e6db74">X-Real-IP&lt;/span> $remote_addr;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_set_header&lt;/span> &lt;span style="color:#e6db74">X-Forwarded-For&lt;/span> $proxy_add_x_forwarded_for;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">server&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">listen&lt;/span> &lt;span style="color:#ae81ff">80&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">server_name&lt;/span> &lt;span style="color:#e6db74">memos.dianbanjiu.com&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">rewrite&lt;/span> &lt;span style="color:#e6db74">^/(.*)&lt;/span>$ &lt;span style="color:#e6db74">https://memos.dianbanjiu.com/&lt;/span>$1 &lt;span style="color:#e6db74">permanent&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>重新加载 nginx 配置&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>nginx -t &lt;span style="color:#75715e">#检查配置文件是否有误&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>nginx -s reload
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>直接通过浏览器访问 &lt;a href="https://memos.dianbanjiu.com">https://memos.dianbanjiu.com&lt;/a> 确认服务是否安装成功&lt;/p>
+&lt;p>如果你是在国内服务器上搭建的 Memos，服务在短暂能访问之后就出现再也无法访问的情况，有可能是因为域名未备案导致被服务商直接拦截了，这种情况下要么去备案并自己修改页面在最下面加上备案信息，要么就只能通过 ip 访问。&lt;/p></description></item><item><title>Arch Linux更新后没有声音</title><link>https://www.dianbanjiu.com/post/arch-linux%E6%9B%B4%E6%96%B0%E5%90%8E%E6%B2%A1%E6%9C%89%E5%A3%B0%E9%9F%B3/</link><pubDate>Sun, 29 Oct 2023 12:41:20 +0800</pubDate><guid>https://www.dianbanjiu.com/post/arch-linux%E6%9B%B4%E6%96%B0%E5%90%8E%E6%B2%A1%E6%9C%89%E5%A3%B0%E9%9F%B3/</guid><description>&lt;p>在昨晚 &lt;code>pacman -Syu&lt;/code> 之后，今天早上突然发现电脑无法播放声音了&lt;/p>
+&lt;p>我目前使用的音频方案是 pulseaudio+pulseaudio-bluetooth，修改各种配置无果之后，尝试换了一个新的方案 pipewire-pulse+wireplumber&lt;/p>
+&lt;p>首先把电脑声音调整到一个稍小一点的音量，然后 &lt;code>pacman -S pipewire-pulse wireplumber&lt;/code> &lt;br>
+安装过程中会提示需要移除 pulseaudio+pulseaudio-bluetooth，安装完成之后，声音立刻就开始播放了&lt;/p></description></item><item><title>Linux 访问 Windows 共享目录</title><link>https://www.dianbanjiu.com/post/linux-%E8%AE%BF%E9%97%AE-windows-%E5%85%B1%E4%BA%AB%E7%9B%AE%E5%BD%95/</link><pubDate>Thu, 14 Apr 2022 16:36:33 +0800</pubDate><guid>https://www.dianbanjiu.com/post/linux-%E8%AE%BF%E9%97%AE-windows-%E5%85%B1%E4%BA%AB%E7%9B%AE%E5%BD%95/</guid><description>&lt;p>因为工作需要，需要在电脑上安装一个 VPN 程序，但是官方并没有提供 Linux 版本，通过 wine 虽然能安装成功，但是界面总是显示不出来。实在不想折腾了，就直接装了一个 Windows 的虚拟机，有一些需要编辑的文件就通过共享的方式在宿主机上进行编辑&lt;/p>
+&lt;p>Linux 上 samba 的安装以及 Windows 文件共享的设置倒是一帆风顺，没出现什么问题，不过在 Linux 下获取 Windows 共享目录的时候却出现了异常&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 正常打印出了 users 目录下的内容&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ smbclient -c &lt;span style="color:#e6db74">&amp;#34;dir&amp;#34;&lt;/span> //ip/users -U user%passwd
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>. DR &lt;span style="color:#ae81ff">0&lt;/span> Wed Apr &lt;span style="color:#ae81ff">13&lt;/span> 17:52:49 &lt;span style="color:#ae81ff">2022&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>.. DR &lt;span style="color:#ae81ff">0&lt;/span> Wed Apr &lt;span style="color:#ae81ff">13&lt;/span> 17:52:49 &lt;span style="color:#ae81ff">2022&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Default DHR &lt;span style="color:#ae81ff">0&lt;/span> Wed Apr &lt;span style="color:#ae81ff">13&lt;/span> 17:52:49 &lt;span style="color:#ae81ff">2022&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 继续打印用户目录下的内容时出现异常&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ smbclient -c &lt;span style="color:#e6db74">&amp;#34;dir&amp;#34;&lt;/span> //ip/users/test -U user%passwd
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tree connect failed: NT_STATUS_BAD_NETWORK_NAME
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>经过一番冲浪之后大概确定原因是 Windows 使用的 samba 版本是 v1，而 Linux 下的 samba 版本是 v4，v4 并不直接向下兼容，&lt;code>smbclient&lt;/code> 又不支持指定 samba 版本，不指定 samba 版本就无法直接打印出共享目录中的文件，死循环&lt;/p>
+&lt;p>不过通过 mount 使用 cifs 格式挂载共享目录的时候是可以指定 samba 版本的，修改命令，通过下面的方式可以将共享目录挂载到本地&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo mount -t cifs -o username&lt;span style="color:#f92672">=&lt;/span>windows_user,password&lt;span style="color:#f92672">=&lt;/span>windows_user_password,vers&lt;span style="color:#f92672">=&lt;/span>1.0,gid&lt;span style="color:#f92672">=&lt;/span>$GID,uid&lt;span style="color:#f92672">=&lt;/span>$UID //ip/共享路径 /home/test/samba_mount_path
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>这里注意把 windows_user、windows_user_password、ip、共享路径修改为 Windows 对应的信息，/home/test/samba_mount_path 是在 Linux 下的挂载点&lt;/li>
+&lt;li>vers=1.0 指定的是 samba 的协议版本&lt;/li>
+&lt;/ul>
+&lt;p>因为一般情况下都是由 root 用户来进行 mount 操作的，挂载到本地的目录所属用户及用户组也是 root，对其中的文件进行操作时需要添加 sudo 前缀命令，为了让普通用户能直接操作，此处需要指定 gid=$GID,uid=$UID 两个参数，分别代表当前用户所属用户组的 ID 和当前用户的 ID&lt;/p></description></item><item><title>Arch Linux 安装微信</title><link>https://www.dianbanjiu.com/post/arch-linux-%E5%AE%89%E8%A3%85%E5%BE%AE%E4%BF%A1/</link><pubDate>Sat, 09 Apr 2022 12:57:54 +0800</pubDate><guid>https://www.dianbanjiu.com/post/arch-linux-%E5%AE%89%E8%A3%85%E5%BE%AE%E4%BF%A1/</guid><description>&lt;p>AUR 中提供了多个微信的安装包，具体的可以参考 &lt;a href="https://wiki.archlinux.org/title/WeChat_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29">微信的 Wiki 页&lt;/a>，我使用的是 &lt;a href="https://aur.archlinux.org/packages/com.qq.weixin.deepin">com.qq.weixin.deepin&lt;/a>，版本是 3.2.1.154&lt;/p>
+&lt;p>安装比较简单，直接通过 AUR 的包管理器安装即可&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ yay com.qq.weixin.deepin
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>为了让微信用起来更舒服，在安装完成之后还有一些需要调整的地方&lt;/p>
+&lt;p>&lt;strong>1、方块字&lt;/strong>&lt;/p>
+&lt;p>当你打开微信之后，有可能会发现微信输入框的中文字全都是方块字，这一般是因为你的系统缺少了一些字体导致的，此处推荐安装微软雅黑（msyh）或者宋体（simsun）&lt;/p>
+&lt;p>如果从包管理器中没有找到这两个字体包，可以直接把 Windows &lt;code>C:\Windows\Fonts&lt;/code> 下面的所有字体 copy 到 Arch Linux 的 &lt;code>/usr/share/fonts/&lt;/code> 下，然后执行 &lt;code>fc-cache -vf&lt;/code> 刷新字体缓存&lt;/p>
+&lt;p>&lt;strong>2、高分屏&lt;/strong>&lt;/p>
+&lt;p>微信默认的 DPI 是 96dpi，在 1080p 下刚刚好，但是在一些高分屏上就会显得有点小，作者在 AUR 的评论中是通过执行 &lt;code>WINEPREFIX=~/.deepinwine/Deepin-WeChat deepin-wine6-stable winecfg&lt;/code> 命令，然后在 &lt;code>显示&lt;/code> 标签中调整 DPI，我尝试了一下，程序重启之后 DPI 又会恢复到默认的 96dpi&lt;/p>
+&lt;p>我现在是通过在 &lt;code>/etc/environment&lt;/code> 中新增一行 &lt;code>DEEPIN_WINE_SCALE=1.25&lt;/code> 解决的，因为我的显示器是 2k 的，所以此处设置的缩放是 1.25（&lt;strong>注意：需要重启一次系统才能使配置文件的修改生效&lt;/strong>）&lt;/p></description></item><item><title>Linux 安装后</title><link>https://www.dianbanjiu.com/post/linux-%E5%AE%89%E8%A3%85%E5%90%8E/</link><pubDate>Wed, 06 Apr 2022 00:00:00 +0000</pubDate><guid>https://www.dianbanjiu.com/post/linux-%E5%AE%89%E8%A3%85%E5%90%8E/</guid><description>&lt;p>之前因为好奇心，在自己的笔记本上重装了 N 多次系统，虽然基本上都是局限在 Linux 的各种发行版之间，不过最近两三年基本上算是稳定下来，只尝试过 Manjaro 和 Arch Linux，最近两年的话就只有在使用 Arch Linux 了。下面记录一下我在重装系统之后会安装的一些软件以及基本都会做的一些简单配置，来帮助我更好的使用这台电脑&lt;/p>
+&lt;h2 id="配置源">配置源&lt;/h2>
+&lt;p>为了保证后续软件安装的速度，在连接网络后的第一件事就是先配置国内的软件源&lt;/p>
+&lt;p>1、编辑 &lt;code>/etc/pacman.d/mirrorlist&lt;/code>，搜索 &lt;code>China&lt;/code> 字段，将清华、中科大的镜像源移动到文件的开头&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>Server &lt;span style="color:#f92672">=&lt;/span> https://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Server &lt;span style="color:#f92672">=&lt;/span> https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>2、archlinuxcn 软件源提供了很多非官方源的常用软件包，在 &lt;code>/etc/pacman.conf&lt;/code> 的最后添加如下的内容以启用 archlinuxcn 源&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-text" data-lang="text">&lt;span style="display:flex;">&lt;span>[archlinuxcn]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>添加完成之后需要安装 &lt;code>archlinuxcn-keyring&lt;/code> 来导入一些 archlinuxcn 对应的密钥&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ sudo pacman -Syyu archlinuxcn-keyring
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="软件安装">软件安装&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>软件&lt;/th>
+&lt;th>备注&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>chromium&lt;/td>
+&lt;td>浏览器&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>tmux&lt;/td>
+&lt;td>终端复用工具&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>git&lt;/td>
+&lt;td>版本管理工具&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>visual-studio-code-bin&lt;/td>
+&lt;td>文本编辑器&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>tree&lt;/td>
+&lt;td>树形目录查看&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>goland gland-jre&lt;/td>
+&lt;td>go IDE，继承自 IDEA&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>spotify&lt;/td>
+&lt;td>流音乐媒体&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>keepassxc&lt;/td>
+&lt;td>密码管理工具&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>jdk11-openjdk&lt;/td>
+&lt;td>jdk&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>java11-openjfx&lt;/td>
+&lt;td>goland 的 markdown 预览依赖此程序&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>docker&lt;/td>
+&lt;td>容器&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>obs-studio&lt;/td>
+&lt;td>录屏&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>flameshot&lt;/td>
+&lt;td>截图工具&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>yay&lt;/td>
+&lt;td>aur 包安管理&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>go&lt;/td>
+&lt;td>go 语言开发环境&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>fcitx5 fcitx5-im fcitx5-chinese-addons&lt;/td>
+&lt;td>fcitx5 输入法框架&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>telegram-desktop&lt;/td>
+&lt;td>IM 工具&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>hugo&lt;/td>
+&lt;td>hugo 博客命令行工具&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>nodejs npm&lt;/td>
+&lt;td>nodejs 开发环境&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>plasma-browser-integration&lt;/td>
+&lt;td>plasma 桌面的浏览器集成插件&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>translate-shell&lt;/td>
+&lt;td>终端翻译工具&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>postman-bin&lt;/td>
+&lt;td>api 测试工具&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ark&lt;/td>
+&lt;td>KDE 官方的压缩文件查看器&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>unzip unrar p7zip&lt;/td>
+&lt;td>几种常用的压缩格式&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>gnome-keyring&lt;/td>
+&lt;td>钥匙串管理，vscode 连接 github 需要使用到&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>peek&lt;/td>
+&lt;td>linux 下一个非常简单的 gif 录制工具&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>numix-circle-icon-theme-git&lt;/td>
+&lt;td>图标包&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>一行命令安装上面所有应用。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ sudo pacman -S git zsh vim tmux visual-studio-code-bin tree goland goland-jre spotify keepassxc jdk11-openjdk java11-openjfx docker obs-studio flameshot yay go fcitx5 fcitx5-im fcitx5-chinese-addons telegram-desktop hugo nodejs npm plasma-browser-integration translate-shell postman-bin ark unarchiver unzip unrar p7zip gnome-keyring peek numix-circle-icon-theme-git
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="环境配置">环境配置&lt;/h2>
+&lt;h3 id="磁盘自动挂载">磁盘自动挂载&lt;/h3>
+&lt;p>如果想要将一些其他的磁盘在系统开机时自动挂载，可以先通过 &lt;code>blkid&lt;/code> 命令找到磁盘对应的 UUID，接着在 &lt;code>/etc/fstab&lt;/code> 的末尾按照下面的格式新增一行&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-text" data-lang="text">&lt;span style="display:flex;">&lt;span>UUID=disk_uuid /path/to/mount disk_format defaults 0 0
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>&lt;code>disk_uuid&lt;/code> 就是上面通过 &lt;code>blkid&lt;/code> 命令找到的磁盘的 uuid&lt;/li>
+&lt;li>&lt;code>/path/to/mount&lt;/code> 是你想要将磁盘挂载到的目录&lt;/li>
+&lt;li>&lt;code>disk_format&lt;/code> 是磁盘的文件系统格式，比如 NTFS、EXT4、FAT32 等等&lt;/li>
+&lt;li>后面的 &lt;code>defaults 0 0&lt;/code> 如非，必要保持不变即可，其及具体含义可以参照 &lt;a href="https://wiki.archlinux.org/title/fstab">Arch Linux Wiki 关于 fstab 的介绍&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="zsh-配置">zsh 配置&lt;/h3>
+&lt;p>oh-my-zsh 提供了一套开箱即用的 zsh 配置，并且有很多额外的主题和插件可供选用，可以通过下面的命令来安装 oh-my-zsh 以及 zsh-autosuggestions、zsh-syntax-highlighting 两个插件&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ sh -c &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh&lt;span style="color:#66d9ef">)&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ git clone https://github.com/zsh-users/zsh-autosuggestions &lt;span style="color:#e6db74">${&lt;/span>ZSH_CUSTOM&lt;span style="color:#66d9ef">:-&lt;/span>~/.oh-my-zsh/custom&lt;span style="color:#e6db74">}&lt;/span>/plugins/zsh-autosuggestions
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git &lt;span style="color:#e6db74">${&lt;/span>ZSH_CUSTOM&lt;span style="color:#66d9ef">:-&lt;/span>~/.oh-my-zsh/custom&lt;span style="color:#e6db74">}&lt;/span>/plugins/zsh-syntax-highlighting
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果提示 &lt;code>443 拒绝连接&lt;/code> 的话，可以直接访问 &lt;a href="https://github.com/ohmyzsh/ohmyzsh/blob/master/tools/install.sh">ohmyzsh github 仓库&lt;/a>，然后将该文件的内容复制到 install.sh 文件中，使用 &lt;code>bash install.sh&lt;/code> 命令来安装 oh-my-zsh&lt;/p>
+&lt;p>安装完成之后编辑 &lt;code>~/.zshrc&lt;/code>，修改 plugins 字段。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-zshrc" data-lang="zshrc">&lt;span style="display:flex;">&lt;span>plugins&lt;span style="color:#f92672">=(&lt;/span>git zsh-autosuggestions zsh-syntax-highlighting extract&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>extract&lt;/code> 插件可以简化命令行解压时复杂的参数，只需 &lt;code>x 压缩包&lt;/code>，即可将压缩包解压到当前目录下。&lt;/p>
+&lt;p>一般情况下 &lt;code>zsh-autosuggestions&lt;/code>会将一些待补全的内容以较浅的颜色进行展示，但是异常情况下可能直接以普通文本的形式展示出来，这可能是因为终端的颜色编码配置不正确，需要在 .zshrc 中添加 &lt;code>export TERM=xterm-256color&lt;/code>&lt;/p>
+&lt;h3 id="配置-docker">配置 docker&lt;/h3>
+&lt;p>使用下面的命令将当前用户添加到 docker 组中，之后就可以通过当前用户身份直接使用 docker。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>sudo usermod -aG docker $USERNAME
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>编辑 &lt;code>/etc/docker/daemon.json&lt;/code>，添加国内镜像源&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{ &lt;span style="color:#f92672">&amp;#34;registry-mirrors&amp;#34;&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;https://reg-mirror.qiniu.com/&amp;#34;&lt;/span>]}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>阿里也提供了 docker 镜像源服务，但是需要使用个人帐号获取对应的链接，&lt;a href="https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors">点此获取&lt;/a>&lt;/p>
+&lt;h3 id="go-开发配置">go 开发配置&lt;/h3>
+&lt;p>安装 go 依赖自动导入工具&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>go get -u golang.org/x/tools/cmd/goimports
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>修改 go 的依赖下载代理&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># go env -w GO111MODULE=on #新版本的 GO 默认开启此功能，可不添加此行&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>go env -w GOPROXY&lt;span style="color:#f92672">=&lt;/span>https://goproxy.cn
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="输入法配置">输入法配置&lt;/h3>
+&lt;p>/etc/environment 开头添加以下内容，可以避免 fcitx5 的一些问题&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-text" data-lang="text">&lt;span style="display:flex;">&lt;span>GTK_IM_MODULE=fcitx
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>QT_IM_MODULE=fcitx
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>XMODIFIERS=@im=fcitx
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>INPUT_METHOD=fcitx
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>SDL_IM_MODULE=fcitx
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>GLFW_IM_MODULE=ibus
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="deepin-tim-配置">deepin-tim 配置&lt;/h3>
+&lt;p>安装 deepin 版 tim 之后需要在设置的开机自启动里添加 &lt;code>/usr/lib/gsd-xsettings&lt;/code> 的自启动脚本。&lt;/p>
+&lt;p>调整 tim 的 DPI&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ cd /opt/deepinwine/tools &lt;span style="color:#75715e"># TIM 的安装目录&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ ./SetDpi.sh &lt;span style="color:#ae81ff">126&lt;/span> Deepin-TIM &lt;span style="color:#75715e"># 调整 TIM 的 DPI&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="蓝牙配置">蓝牙配置&lt;/h3>
+&lt;p>开机启动蓝牙服务&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>sudo systemctl enable bluetooth
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>接着编辑 &lt;code>/etc/bluetooth/main.conf&lt;/code>，找到 &lt;code>AutoEnable&lt;/code> 字段，取消前面的注释，并将对应的值修改为 &lt;code>true&lt;/code> 就可以在电脑启动的同时开启蓝牙，这样在登录界面就可以直接连接到你的蓝牙外设了&lt;/p>
+&lt;h3 id="jetbrains-配置">Jetbrains 配置&lt;/h3>
+&lt;p>Jetbrains 系列的软件在 Linux 下默认的字体显示非常辣眼睛，需要同时安装对应的 &lt;code>-jre&lt;/code> 支持才行。如 Goland 就需要安装 &lt;code>goland-jre&lt;/code>&lt;/p>
+&lt;p>如果有在 goland 中预览 markdown 文件的需要，还需要安装 &lt;code>java11-openjfx&lt;/code>&lt;/p>
+&lt;h3 id="界面美化">界面美化&lt;/h3>
+&lt;p>KDE 当前的默认桌面其实已经挺不错的了，此处仅推荐一套图标包 &lt;a href="https://github.com/numixproject/numix-icon-theme-circle">numix-circle-icon-theme&lt;/a>&lt;/p></description></item><item><title>Git 以中文展示修改路径</title><link>https://www.dianbanjiu.com/post/git-%E4%BB%A5%E4%B8%AD%E6%96%87%E5%B1%95%E7%A4%BA%E4%BF%AE%E6%94%B9%E8%B7%AF%E5%BE%84/</link><pubDate>Sun, 20 Mar 2022 14:38:24 +0800</pubDate><guid>https://www.dianbanjiu.com/post/git-%E4%BB%A5%E4%B8%AD%E6%96%87%E5%B1%95%E7%A4%BA%E4%BF%AE%E6%94%B9%E8%B7%AF%E5%BE%84/</guid><description>&lt;p>默认情况下，使用 &lt;code>git status&lt;/code> 来查看更改文件时，如果路径中包含有空格或者一些中文字符时，对应的文件路径会用引号括起来，并且其中的中文字符会以反斜杠 &lt;code>\&lt;/code> 进行转义，就像下面这样：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ git status
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>On branch blog
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Your branch is up to date with &lt;span style="color:#e6db74">&amp;#39;origin/blog&amp;#39;&lt;/span>.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Untracked files:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">(&lt;/span>use &lt;span style="color:#e6db74">&amp;#34;git add &amp;lt;file&amp;gt;...&amp;#34;&lt;/span> to include in what will be committed&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;content/post/git \344\273\245\344\270\255\346\226\207\345\261\225\347\244\272\344\277\256\346\224\271\350\267\257\345\276\204.md&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>nothing added to commit but untracked files present &lt;span style="color:#f92672">(&lt;/span>use &lt;span style="color:#e6db74">&amp;#34;git add&amp;#34;&lt;/span> to track&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>虽然这种配置在你的文件名中含有换行回车之类字符的时候可能比较有用（这种文件数量应该很少吧😑），但是在修改文件比较多的情况下就很难知道对应的是哪些文件，想要正常打印出这些中文字符的话可以通过下面的配置项来解决&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ git config core.quotePath false
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>上面的设置是仅对单个项目设置，如果需要针对全局所有的项目关闭这个特性，可以添加 &lt;code>--global&lt;/code> 参数&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ git config --global core.quotePath false
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>参数的一些具体说明可以参考此处： &lt;a href="https://git-scm.com/docs/git-config#Documentation/git-config.txt-corequotePath">https://git-scm.com/docs/git-config#Documentation/git-config.txt-corequotePath&lt;/a>&lt;/p></description></item><item><title>使用 Rclone 挂载 OneDrive</title><link>https://www.dianbanjiu.com/post/%E4%BD%BF%E7%94%A8-rclone-%E6%8C%82%E8%BD%BD-onedrive/</link><pubDate>Wed, 16 Mar 2022 11:47:59 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E4%BD%BF%E7%94%A8-rclone-%E6%8C%82%E8%BD%BD-onedrive/</guid><description>&lt;h2 id="安装">安装&lt;/h2>
+&lt;p>因为 OneDrive 没有提供官方的 Linux 客户端，所以为了方便起见，我选择直接通过 rclone 将 OneDrive 挂载到本地，这样就可以在本地直接对 OneDrive 的文件进行管理&lt;/p>
+&lt;p>首先需要安装 &lt;code>rclone&lt;/code> 程序本体，我使用的是 Arch Linux，可以直接通过 pacman 进行安装&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ sudo pacman -S rclone
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="配置">配置&lt;/h2>
+&lt;p>接着就可以使用 &lt;code>rclone&lt;/code>开始配置自己的 OneDrive 了，下面是我实际配置过程的输出&lt;/p>
+&lt;p>开始之前，先说几个需要注意的地方：&lt;/p>
+&lt;ol>
+&lt;li>类似下面的这种选择，可以选择输入前面的序号，如 1，也可以选择输入后面的文字，如 fichier&lt;/li>
+&lt;/ol>
+&lt;pre tabindex="0">&lt;code>1 / 1Fichier
+\ &amp;#34;fichier&amp;#34;
+&lt;/code>&lt;/pre>&lt;ol start="2">
+&lt;li>在选择 &lt;code>region&lt;/code> 地区的时候，一定确定好自己要挂载的 OneDrive 是哪个版本的，如果你使用的是世纪互联版本的 OneDrive 那就选择 &lt;code>cn&lt;/code>，否则一般选择 &lt;code>global&lt;/code> 就可以， &lt;code>us&lt;/code> 是美国政府版（应该没人真的是这个吧）&lt;/li>
+&lt;li>在 &lt;code>Use auto config?&lt;/code> 阶段，如果你选择了 &lt;code>Y&lt;/code> ，rclone 会打开一个浏览器页面，需要你登录并授权 OneDrive 的访问权限。有些教程可能会让你使用 &lt;code>rclone authorize&lt;/code> 来单独获取 OneDrive 的 token 及授权，不过两者其实区别不大，唯一的区别就是自动配置模式下可以自动帮你获取到 token，而后者需要你使用另一个命令获取 token，在配置 OneDrive 的时候手动粘贴进去&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ rclone config
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Current remotes:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Name Type
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">====&lt;/span> &lt;span style="color:#f92672">====&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>e&lt;span style="color:#f92672">)&lt;/span> Edit existing remote
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>n&lt;span style="color:#f92672">)&lt;/span> New remote
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>d&lt;span style="color:#f92672">)&lt;/span> Delete remote
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>r&lt;span style="color:#f92672">)&lt;/span> Rename remote
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>c&lt;span style="color:#f92672">)&lt;/span> Copy remote
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>s&lt;span style="color:#f92672">)&lt;/span> Set configuration password
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>q&lt;span style="color:#f92672">)&lt;/span> Quit config
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>e/n/d/r/c/s/q&amp;gt; n
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>name&amp;gt; testDrive
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Option Storage.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Type of storage to configure.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Enter a string value. Press Enter &lt;span style="color:#66d9ef">for&lt;/span> the default &lt;span style="color:#f92672">(&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span>&lt;span style="color:#f92672">)&lt;/span>.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Choose a number from below, or type in your own value.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">1&lt;/span> / 1Fichier
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;fichier&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">2&lt;/span> / Alias &lt;span style="color:#66d9ef">for&lt;/span> an existing remote
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;alias&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">3&lt;/span> / Amazon Drive
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;amazon cloud drive&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">4&lt;/span> / Amazon S3 Compliant Storage Providers including AWS, Alibaba, Ceph, Digital Ocean, Dreamhost, IBM COS, Minio, SeaweedFS, and Tencent COS
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;s3&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">5&lt;/span> / Backblaze B2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;b2&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">6&lt;/span> / Better checksums &lt;span style="color:#66d9ef">for&lt;/span> other remotes
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;hasher&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">7&lt;/span> / Box
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;box&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">8&lt;/span> / Cache a remote
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;cache&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">9&lt;/span> / Citrix Sharefile
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;sharefile&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">10&lt;/span> / Compress a remote
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;compress&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">11&lt;/span> / Dropbox
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;dropbox&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">12&lt;/span> / Encrypt/Decrypt a remote
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;crypt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">13&lt;/span> / Enterprise File Fabric
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;filefabric&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">14&lt;/span> / FTP Connection
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;ftp&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">15&lt;/span> / Google Cloud Storage &lt;span style="color:#f92672">(&lt;/span>this is not Google Drive&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;google cloud storage&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">16&lt;/span> / Google Drive
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;drive&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">17&lt;/span> / Google Photos
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;google photos&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">18&lt;/span> / Hadoop distributed file system
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;hdfs&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">19&lt;/span> / Hubic
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;hubic&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">20&lt;/span> / In memory object storage system.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;memory&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">21&lt;/span> / Jottacloud
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;jottacloud&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">22&lt;/span> / Koofr
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;koofr&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">23&lt;/span> / Local Disk
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;local&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">24&lt;/span> / Mail.ru Cloud
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;mailru&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">25&lt;/span> / Mega
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;mega&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">26&lt;/span> / Microsoft Azure Blob Storage
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;azureblob&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">27&lt;/span> / Microsoft OneDrive
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;onedrive&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">28&lt;/span> / OpenDrive
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;opendrive&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">29&lt;/span> / OpenStack Swift &lt;span style="color:#f92672">(&lt;/span>Rackspace Cloud Files, Memset Memstore, OVH&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;swift&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">30&lt;/span> / Pcloud
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;pcloud&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">31&lt;/span> / Put.io
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;putio&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">32&lt;/span> / QingCloud Object Storage
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;qingstor&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">33&lt;/span> / SSH/SFTP Connection
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;sftp&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">34&lt;/span> / Sia Decentralized Cloud
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;sia&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">35&lt;/span> / Sugarsync
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;sugarsync&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">36&lt;/span> / Tardigrade Decentralized Cloud Storage
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;tardigrade&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">37&lt;/span> / Transparently chunk/split large files
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;chunker&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">38&lt;/span> / Union merges the contents of several upstream fs
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;union&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">39&lt;/span> / Uptobox
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;uptobox&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">40&lt;/span> / Webdav
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;webdav&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">41&lt;/span> / Yandex Disk
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;yandex&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">42&lt;/span> / Zoho
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;zoho&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">43&lt;/span> / http Connection
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;http&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">44&lt;/span> / premiumize.me
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;premiumizeme&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">45&lt;/span> / seafile
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;seafile&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Storage&amp;gt; onedrive
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Option client_id.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>OAuth Client Id.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Leave blank normally.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Enter a string value. Press Enter &lt;span style="color:#66d9ef">for&lt;/span> the default &lt;span style="color:#f92672">(&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span>&lt;span style="color:#f92672">)&lt;/span>.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>client_id&amp;gt; &lt;span style="color:#f92672">{&lt;/span>直接回车就可以&lt;span style="color:#f92672">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Option client_secret.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>OAuth Client Secret.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Leave blank normally.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Enter a string value. Press Enter &lt;span style="color:#66d9ef">for&lt;/span> the default &lt;span style="color:#f92672">(&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span>&lt;span style="color:#f92672">)&lt;/span>.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>client_secret&amp;gt; &lt;span style="color:#f92672">{&lt;/span>直接回车就可以&lt;span style="color:#f92672">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Option region.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Choose national cloud region &lt;span style="color:#66d9ef">for&lt;/span> OneDrive.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Enter a string value. Press Enter &lt;span style="color:#66d9ef">for&lt;/span> the default &lt;span style="color:#f92672">(&lt;/span>&lt;span style="color:#e6db74">&amp;#34;global&amp;#34;&lt;/span>&lt;span style="color:#f92672">)&lt;/span>.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Choose a number from below, or type in your own value.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">1&lt;/span> / Microsoft Cloud Global
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;global&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">2&lt;/span> / Microsoft Cloud &lt;span style="color:#66d9ef">for&lt;/span> US Government
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;us&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">3&lt;/span> / Microsoft Cloud Germany
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;de&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">4&lt;/span> / Azure and Office &lt;span style="color:#ae81ff">365&lt;/span> operated by 21Vianet in China
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;cn&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>region&amp;gt; global
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Edit advanced config?
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>y&lt;span style="color:#f92672">)&lt;/span> Yes
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>n&lt;span style="color:#f92672">)&lt;/span> No &lt;span style="color:#f92672">(&lt;/span>default&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>y/n&amp;gt; n
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Use auto config?
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> * Say Y &lt;span style="color:#66d9ef">if&lt;/span> not sure
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> * Say N &lt;span style="color:#66d9ef">if&lt;/span> you are working on a remote or headless machine
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>y&lt;span style="color:#f92672">)&lt;/span> Yes &lt;span style="color:#f92672">(&lt;/span>default&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>n&lt;span style="color:#f92672">)&lt;/span> No
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>y/n&amp;gt; y
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2022/03/16 10:04:50 NOTICE: If your browser doesn&lt;span style="color:#960050;background-color:#1e0010">&amp;#39;&lt;/span>t open automatically go to the following link: http://127.0.0.1:53682/auth?state&lt;span style="color:#f92672">=&lt;/span>qkwpEntUvXPewzviZQXNOHA
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2022/03/16 10:04:50 NOTICE: Log in and authorize rclone &lt;span style="color:#66d9ef">for&lt;/span> access
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2022/03/16 10:04:50 NOTICE: Waiting &lt;span style="color:#66d9ef">for&lt;/span> code...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2022/03/16 10:06:03 NOTICE: Got code
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Option config_type.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Type of connection
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Enter a string value. Press Enter &lt;span style="color:#66d9ef">for&lt;/span> the default &lt;span style="color:#f92672">(&lt;/span>&lt;span style="color:#e6db74">&amp;#34;onedrive&amp;#34;&lt;/span>&lt;span style="color:#f92672">)&lt;/span>.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Choose a number from below, or type in an existing value.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">1&lt;/span> / OneDrive Personal or Business
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;onedrive&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">2&lt;/span> / Root Sharepoint site
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;sharepoint&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> / Sharepoint site name or URL
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">3&lt;/span> | E.g. mysite or https://contoso.sharepoint.com/sites/mysite
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;url&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">4&lt;/span> / Search &lt;span style="color:#66d9ef">for&lt;/span> a Sharepoint site
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;search&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">5&lt;/span> / Type in driveID &lt;span style="color:#f92672">(&lt;/span>advanced&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;driveid&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">6&lt;/span> / Type in SiteID &lt;span style="color:#f92672">(&lt;/span>advanced&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;siteid&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> / Sharepoint server-relative path &lt;span style="color:#f92672">(&lt;/span>advanced&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">7&lt;/span> | E.g. /teams/hr
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;path&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>config_type&amp;gt; &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Drive OK?
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Found drive &lt;span style="color:#e6db74">&amp;#34;root&amp;#34;&lt;/span> of type &lt;span style="color:#e6db74">&amp;#34;personal&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>URL: https://onedrive.live.com/?cid&lt;span style="color:#f92672">=&lt;/span>j2sy7l2us75j92
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>y&lt;span style="color:#f92672">)&lt;/span> Yes &lt;span style="color:#f92672">(&lt;/span>default&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>n&lt;span style="color:#f92672">)&lt;/span> No
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>y/n&amp;gt; y
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>--------------------
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>testDrive&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>type &lt;span style="color:#f92672">=&lt;/span> onedrive
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>token &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#f92672">{&lt;/span>这里就不展示了&lt;span style="color:#f92672">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>drive_id &lt;span style="color:#f92672">=&lt;/span> js7y3isjy29hj725
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>drive_type &lt;span style="color:#f92672">=&lt;/span> personal
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>--------------------
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>y&lt;span style="color:#f92672">)&lt;/span> Yes this is OK &lt;span style="color:#f92672">(&lt;/span>default&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>e&lt;span style="color:#f92672">)&lt;/span> Edit this remote
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>d&lt;span style="color:#f92672">)&lt;/span> Delete this remote
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>y/e/d&amp;gt; y
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Current remotes:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Name Type
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">====&lt;/span> &lt;span style="color:#f92672">====&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>testDrive onedrive
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>e&lt;span style="color:#f92672">)&lt;/span> Edit existing remote
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>n&lt;span style="color:#f92672">)&lt;/span> New remote
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>d&lt;span style="color:#f92672">)&lt;/span> Delete remote
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>r&lt;span style="color:#f92672">)&lt;/span> Rename remote
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>c&lt;span style="color:#f92672">)&lt;/span> Copy remote
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>s&lt;span style="color:#f92672">)&lt;/span> Set configuration password
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>q&lt;span style="color:#f92672">)&lt;/span> Quit config
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>e/n/d/r/c/s/q&amp;gt; q
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="测试挂载卸载">测试&amp;amp;&amp;amp;挂载&amp;amp;&amp;amp;卸载&lt;/h2>
+&lt;h3 id="测试">测试&lt;/h3>
+&lt;p>接着你可以使用下面的命令列出自己 OneDrive 中的所有一级目录，测试一下是否配置成功&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ rclone lsd testDrive:
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="挂载">挂载&lt;/h3>
+&lt;p>如果你只想在需要的时候手动挂载 OneDrive，可以使用下面的命令&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ rclone mount testDrive:/ /path/to/mount --allow-non-empty --vfs-cache-mode full --daemon
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>&lt;code>testDrive&lt;/code> 是上面在配置 OneDrive 时指定的 name&lt;/li>
+&lt;li>&lt;code>testDrive:&lt;/code> 后面跟着的是你想要挂载到本地的 OneDrive 中的目录或者文件，这里的 &lt;code>/&lt;/code> 代表 OneDrive 中的所有内容&lt;/li>
+&lt;li>&lt;code>/path/to/mount&lt;/code> 是指定你将 OneDrive 挂载到本地的位置。此目录需要提前创建并赋予足够的读写权限&lt;/li>
+&lt;li>&lt;code>--allow-non-empty&lt;/code> 允许将 OneDrive 挂载到一个非空目录中，该参数&lt;strong>可不指定&lt;/strong>&lt;/li>
+&lt;li>&lt;code>--vfs-cache-mode full&lt;/code> 缓存模式，我这里指定的是 &lt;code>full&lt;/code>，默认是 &lt;code>off&lt;/code> 。这里一共支持 4 种模式，我这里就简单说一下这两种的区别
+&lt;ul>
+&lt;li>&lt;code>full&lt;/code> 模式下所有对远程文件的读写都会缓存到磁盘中&lt;/li>
+&lt;li>&lt;code>off&lt;/code> 模式下所有对远程文件的读写都不会缓存到磁盘中&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>rclone 的挂载命令是一个前台服务，如果你关闭了当前的会话，那挂载进程也会退出。&lt;code>--daemon&lt;/code> 参数可以将 rclone 的挂载命令作为一个后台服务，这样即使你关闭了当前会话，挂载进程也不会退出&lt;/li>
+&lt;/ul>
+&lt;h3 id="卸载">卸载&lt;/h3>
+&lt;p>使用 rclone 挂载的云盘的卸载和普通磁盘的卸载方式一样，可以直接使用 &lt;code>umount&lt;/code> 来完成&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>umount testDrive
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="开机自启动">开机自启动&lt;/h2>
+&lt;p>当然，如果想要避免每次开机都要手动挂载一次，也可以选择创建开机自启脚本&lt;/p>
+&lt;p>在 &lt;code>~/.config/autostart&lt;/code> 目录下创建一个以 &lt;code>.desktop&lt;/code> 结尾的文件，该文件的内容如下&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>Desktop Entry&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Type&lt;span style="color:#f92672">=&lt;/span>Application
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>NoDisplay&lt;span style="color:#f92672">=&lt;/span>true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Terminal&lt;span style="color:#f92672">=&lt;/span>false
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Name&lt;span style="color:#f92672">=&lt;/span>dianDrive
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Exec&lt;span style="color:#f92672">=&lt;/span>/usr/bin/rclone mount testDrive:/ /path/to/mount --allow-non-empty --vfs-cache-mode full --daemon
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Icon&lt;span style="color:#f92672">=&lt;/span>onedrive
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Comment&lt;span style="color:#f92672">=&lt;/span>Auto mount OneDrive to local.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Categories&lt;span style="color:#f92672">=&lt;/span>Network;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Arch Linux 无法配对蓝牙耳机</title><link>https://www.dianbanjiu.com/post/arch-linux-%E6%97%A0%E6%B3%95%E9%85%8D%E5%AF%B9%E8%93%9D%E7%89%99%E8%80%B3%E6%9C%BA/</link><pubDate>Fri, 25 Feb 2022 13:42:06 +0800</pubDate><guid>https://www.dianbanjiu.com/post/arch-linux-%E6%97%A0%E6%B3%95%E9%85%8D%E5%AF%B9%E8%93%9D%E7%89%99%E8%80%B3%E6%9C%BA/</guid><description>&lt;p>最近在尝试使用这台装了 Arch Linux 的笔记本连接蓝牙耳机的时候，发现总是无法成功配对&lt;/p>
+&lt;p>因为蓝牙键盘是可以正常连接的，判断蓝牙驱动应该是正常的，所以大概率是缺少某些蓝牙音频驱动。然后查看蓝牙的日志发现如下报错：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ systemctl status bluetooth
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...src/service.c:btd_service_connect&lt;span style="color:#f92672">()&lt;/span> a2dp-sink profile connect failed &lt;span style="color:#66d9ef">for&lt;/span> B8:D5:0B:D0:06:B0: Protocol not available
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>虽然在 Arch Linux Wiki 的 &lt;a href="https://wiki.archlinux.org/title/Bluetooth_headset_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29">Bluetooth_headset&lt;/a> 章节提示说已经默认支持 A2DP profile，但是看上面的日志应该是没有安装成功。&lt;/p>
+&lt;p>安装 &lt;code>pulseaudio-bluetooth&lt;/code> 之后再尝试配对蓝牙耳机，发现可以正常连接并且正常当作电脑扬声器了。&lt;/p></description></item><item><title>如何在 Linux 下制作 Windows 启动器</title><link>https://www.dianbanjiu.com/post/%E5%A6%82%E4%BD%95%E5%9C%A8-linux-%E4%B8%8B%E5%88%B6%E4%BD%9C-windows-%E5%90%AF%E5%8A%A8%E5%99%A8/</link><pubDate>Sat, 06 Nov 2021 12:24:27 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E5%A6%82%E4%BD%95%E5%9C%A8-linux-%E4%B8%8B%E5%88%B6%E4%BD%9C-windows-%E5%90%AF%E5%8A%A8%E5%99%A8/</guid><description>&lt;p>在 Linux 下制作 Windows 启动盘，有三种常用的方式：dd、WoeUSB、Ventoy。&lt;/p>
+&lt;h2 id="woeusb">WoeUSB&lt;/h2>
+&lt;p>WoeUSB 可以使用 &lt;code>pip3 install WoeUsb-ng&lt;/code> 进行安装。&lt;/p>
+&lt;p>WoeUSB 我以前用的时候还可以，但是这次也不知道为什么，虽然可以正常写入镜像，但是做的启动盘始终不能进入 Windows 引导界面，换了好几个版本的 Windows10 镜像都是一样的。&lt;/p>
+&lt;h2 id="ventoy">Ventoy&lt;/h2>
+&lt;p>Ventoy 的话，用起来比较简单，首先去 &lt;a href="https://www.ventoy.net/en/download.html">Ventoy 官方下载页面&lt;/a> 下载压缩包，解压后在终端执行 &lt;code>sudo bash /path/to/VentoyWeb.sh&lt;/code> 启动服务，接着访问启动信息中展示的本地端口，像我这里就是 24680 端口。在页面上选择你用来做启动盘的设备，然后点击安装即可。
+&lt;img src="https://i.imgur.com/cH5zfZ3.png" alt="">&lt;br>
+&lt;img src="https://i.imgur.com/F0b0m9S.png" alt="">
+上面之所以需要使用 sudo 来运行，一方面是因为 Ventoy 需要获取你的 PC 上现在都有哪些存储设备，另一方面是因为安装的过程中需要对设备进行格式化。&lt;/p>
+&lt;p>安装好 Ventoy 之后，你只需要把各种 ISO 镜像文件扔到安装 Ventoy 的 U 盘中即可。&lt;/p>
+&lt;p>如果你现在看一下这个 U 盘的分区结构你可以发现 U 盘上会有两个分区，一大一小，后面很小的那个分区放的就是 Ventoy 的引导文件，前面这个分区是用来放你的镜像文件的，理论上你把前面这个分区用来存放其他文件也是完全没问题的。&lt;/p>
+&lt;p>这次电脑成功进入了 Ventoy 的引导界面，但是在我选择了 ISO 文件之后，Ventoy 提示我缺少一些东西 Windows 引导失败（我裂开了）我又重新下载了最新的 Windows10 镜像，还是会出现同样的问题，可能是需要安装一些其他的 Ventoy 插件或者是 Ventoy 对于 AMD 的支持不太好？但是我没有继续折腾了。&lt;/p>
+&lt;h2 id="dd">dd&lt;/h2>
+&lt;p>这一 Part 的标题虽然是 dd，但是你也可以直接使用复制粘贴来完成，这个方案相比上面两个稍微麻烦一点，但是并不复杂，而且这也是我唯一测试成功的方案😭&lt;/p>
+&lt;p>下面涉及到对磁盘的分区操作，熟悉终端工具的可以直接用 fdisk 跟 mkfs 完成，习惯 GUI 的可以使用 gparted 完成。&lt;/p>
+&lt;p>下面是使用 dd 创建 Windows 启动盘的步骤：&lt;/p>
+&lt;ol>
+&lt;li>备份好 U 盘中的数据&lt;/li>
+&lt;li>删除 U 盘中所有的分区&lt;/li>
+&lt;li>创建 GPT 分区表&lt;/li>
+&lt;li>在 U 盘上创建两个分区，其中第二个分区只需要留 300MB 的空间即可，剩下的可以全部给第一个分区（&lt;strong>注意：大的分区在前面，里面会存放 Windows 镜像中的文件，小的分区在后面，里面会放引导文件，两个分区的顺序一定不可以错：前大后小&lt;/strong>）
+&lt;ol>
+&lt;li>第一个分区格式化为 NTFS 格式&lt;/li>
+&lt;li>第二个分区格式化为 Fat32 格式&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>直接复制或者使用 dd 将 Windows 镜像中的文件写入到 U 盘的第一个分区&lt;/li>
+&lt;li>下载由 Rufus 提供的 &lt;a href="https://github.com/pbatard/rufus/blob/master/res/uefi/uefi-ntfs.img">uefi-ntfs.img&lt;/a> UEFI 引导镜像&lt;/li>
+&lt;li>复制 uefi-utfs.img 中的所有文件到 U 盘的第二个分区中&lt;/li>
+&lt;/ol>
+&lt;p>待所有文件都写入完成之后，在 BIOS 中将 U 盘移动到启动顺序的第一个，然后启动电脑，应该就可以看到 Windows 的引导界面了。&lt;/p></description></item><item><title> Bash, Cannot Set LC_CTYPE to Default, No Such File or Directory</title><link>https://www.dianbanjiu.com/post/-bash-cannot-set-lc_ctype-to-default-no-such-file-or-directory/</link><pubDate>Thu, 30 Jul 2020 22:38:35 +0800</pubDate><guid>https://www.dianbanjiu.com/post/-bash-cannot-set-lc_ctype-to-default-no-such-file-or-directory/</guid><description>&lt;p>最近使用 MacOS 的终端通过 ssh 连接 Linux 服务器的过程中，出现了一点问题，每次连接上之后，都会出现 &lt;code>-bash, cannot change locale, No such file or directory&lt;/code>，整段错误代码没记住，但大概就是这么个意思。&lt;/p>
+&lt;p>最开始我以为这是服务器那边的问题，所以就没怎么在意，毕竟登录之后一个 &lt;code>Ctrl-l&lt;/code> 就啥都没了。直到前几天因为 activemq 获取中文信息乱码的时候我才注意到这个问题的重要性。&lt;/p>
+&lt;p>我在服务器上搭建了一个 activemq 的中间件，然后通过本地向 activemq 发送了一些信息，如果信息中包含了中文，那在 activemq 的 Web console 中中文就会显示乱码。&lt;/p>
+&lt;p>可是按理说我服务器的字符编码是 &lt;code>UTF-8&lt;/code>（重点，后面要考），avtivemq 的 webapps 用的编码也是 &lt;code>utf-8&lt;/code>，向 activemq 发送信息的程序是用 golang 写的，golang 默认的编码格式也是 &lt;code>utf-8&lt;/code>，编码格式都是统一的，为什么会出现乱码呢。&lt;/p>
+&lt;p>在尝试过修改代码发送的信息为各种编码格式，以及修改 activemq 的 webapps 编码格式仍旧无果之后，我就怀着死马当活马医的心态修改了 activemq 运行时的字符编码环境为 &lt;code>zh_CN.UTF-8&lt;/code>，然后奇迹发生了，中文乱码消失了，我又试了一下 &lt;code>en_US.UTF-8&lt;/code>，也可以正常显示中文。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ env LC_CTYPE&lt;span style="color:#f92672">=&lt;/span>zh_CN.UFT-8 activemq start
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>后来在网上搜原因的时候无意中看到了一篇文章是教别人如何修改 MacOS 的终端在连接到服务器时不传递自己的 &lt;code>locale&lt;/code>，&lt;a href="https://www.cyberciti.biz/faq/os-x-terminal-bash-warning-setlocale-lc_ctype-cannot-change-locale/">[原文链接]&lt;/a> ，我就试着改了一下，修改完之后我再登录到服务器，这次没有了之前的 &lt;code>-bash, cannot change locale, No such file or directory&lt;/code> 的错误，查看服务器的字符编码 &lt;code>en_US.UTF-8&lt;/code>。&lt;/p>
+&lt;p>&lt;strong>握了个大草&lt;/strong>&lt;/p>
+&lt;p>突然就想明白了为什么在 MacOS 下使用终端登录服务器会报 &lt;code>-bash, cannot change locale, No such file or directory&lt;/code> 的那个错误了。&lt;/p>
+&lt;p>在 Linux 下的 UTF-8 字符集有很多，比如 zh_CN.UTF-8、en_US.UTF-8，但唯独没有独立的叫做 UTF-8 的字符集，因为在 Linux 中，UTF-8 是作为一种字符编码的规范，而 zh_CN.UTF-8 则是按照 UTF-8 规范实现的字符集。&lt;/p>
+&lt;p>那问题来了，为什么我之前在终端中查看的字符编码会是 UTF-8 而非 zh_CN.UTF-8 之类呢？结合我之前看到的那篇文章，其实是因为 MacOS 的终端在连接到服务器的时候会把自己的字符编码环境给带到服务器去，MacOS 的字符集是苹果自己实现的一套符合 UTF-8 规范叫做 UTF-8 的字符集，但是 Linux 上并没有这套字符集，虽然 MacOS 终端带到服务器上的编码环境仅在它这个终端会话中有效，但是在这个会话中所有运行的程序都会去调用这个不存在的字符集，所以才出现了 &lt;code>-bash, cannot change locale, No such file or directory&lt;/code> 的问题以及 activemq 中文乱码的现象。&lt;/p>
+&lt;blockquote>
+&lt;p>修改方式：在 MacOS 的 终端(Terminal)-&amp;gt;偏好设置-&amp;gt;高级 中，取消勾选在启动时设置 locale 环境变量。&lt;br>
+另外还可以通过在 &lt;code>/etc/ssh/ssh_config&lt;/code> 中注释掉 &lt;code>SendEnv LANG LC_*&lt;/code>，也可以达到同样的效果。&lt;br>
+如果使用第一种方式可能会导致 MacOS 的终端中文无法显示，所以还是更推荐第二种方式。&lt;/p>&lt;/blockquote>
+&lt;p>最后简单说一下 Linux 字符编码相关的内容：&lt;/p>
+&lt;p>Linux 的字符编码环境是通过多个 LC_* 环境变量来定义的，比如 LC_CTYPE(Linux 的字符显示方式)，LC_TIME(时间和日期的格式)&amp;hellip;&lt;/p>
+&lt;p>既然是变量，那都是可以随意修改的，即使是系统中不存在的那在设置的当时也不会报错，除非在某些显式调用时，比如使用 &lt;code>locale&lt;/code> 命令查看系统的各种字符编码的格式时，如果你定义了错误的字符格式环境，那 &lt;code>locale&lt;/code> 就会提示类似 &lt;code>Cannot set LC_CTYPE to default, No such file or directory&lt;/code> 的错误。不过其他一些隐式的调用，比如 activemq 执行时就不会自动检查这些变量的正确与否。&lt;/p>
+&lt;p>所以希望大家不要忽视遇到的任何一个 warning 以及 error，指不定就是以后某个的 bug 突破口。&lt;/p>
+&lt;p>参考链接：&lt;br>
+[1]: &lt;a href="https://wiki.archlinux.org/index.php/Locale">Arch Wiki &amp;ndash; locale&lt;/a>&lt;/p></description></item><item><title>关于 Shell 脚本中空格的一点小坑</title><link>https://www.dianbanjiu.com/post/%E5%85%B3%E4%BA%8E-shell-%E8%84%9A%E6%9C%AC%E4%B8%AD%E7%A9%BA%E6%A0%BC%E7%9A%84%E4%B8%80%E7%82%B9%E5%B0%8F%E5%9D%91/</link><pubDate>Mon, 27 Jul 2020 00:23:54 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E5%85%B3%E4%BA%8E-shell-%E8%84%9A%E6%9C%AC%E4%B8%AD%E7%A9%BA%E6%A0%BC%E7%9A%84%E4%B8%80%E7%82%B9%E5%B0%8F%E5%9D%91/</guid><description>&lt;p>最近为了结合 gilab runner 自动化打包，写了不少的 shell 脚本，虽然都是比较简单的内容，但还是踩了不少的坑。最近的一个就是有关字符串的问题。&lt;/p>
+&lt;p>在很多场景下我们可能都需要给 shell 脚本指定一些参数，或者在 shell 脚本执行过程中输入一些内容，这些内容大多是字符串的形式，比如下面这个创建文件的脚本：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ cat touchFile.sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/bin/bash&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo $1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>touch $1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ bash touchFile.sh &lt;span style="color:#e6db74">&amp;#34;hello world&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>你觉得上面的代码会输出什么以及会创建哪些文件呢？输出 &lt;code>hello world&lt;/code>，创建 &lt;code>hello\ world&lt;/code>？&lt;/p>
+&lt;p>正确答案是输出 &lt;code>hello world&lt;/code>，并创建 &lt;code>hello&lt;/code> 和 &lt;code>world&lt;/code> 两个文件。&lt;/p>
+&lt;p>因为 shell 在从命令行获取到由双引号包裹的内容后，一般会将其识别为一个字符串，即便引号中有空格。但是在获取到含有引号的字符串之后，shell 就会将这个双引号给自动去掉了，所以 &lt;code>echo hell world&lt;/code> 可以得到预期的结果，但到了 &lt;code>touch hello world&lt;/code> 就相当于创建了 hello 和 world 两个文件，这显然不符合我们的预期，那么该如何解决这个问题呢？&lt;/p>
+&lt;p>首先我们需要知道，Linux 很多命令在获取参数的时候通常都会以空格为分隔符，但是如果空格是在两个双引号中间的话，shell 就会忽略这个空格，而把这个空格作为引号字符串的一部分。所以我们只需对上面的代码稍作修改即可。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ cat touchFile.sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/bin/bash&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo $1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>touch &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$1&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这样在执行脚本就可以成功创建带有空格的文件名了。当然你也可以将其应用到 shell 各种需要获取带空格字符串的地方，而不仅仅是创建文件。&lt;/p></description></item><item><title>创建 Shell 脚本的帮助信息</title><link>https://www.dianbanjiu.com/post/%E5%88%9B%E5%BB%BA-shell-%E8%84%9A%E6%9C%AC%E7%9A%84%E5%B8%AE%E5%8A%A9%E4%BF%A1%E6%81%AF/</link><pubDate>Wed, 22 Jul 2020 23:28:50 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E5%88%9B%E5%BB%BA-shell-%E8%84%9A%E6%9C%AC%E7%9A%84%E5%B8%AE%E5%8A%A9%E4%BF%A1%E6%81%AF/</guid><description>&lt;p>原文链接 [英]：&lt;a href="https://samizdat.dev/help-message-for-shell-scripts/">https://samizdat.dev/help-message-for-shell-scripts/&lt;/a>&lt;/p>
+&lt;p>有很多种方式可以获取一个 shell 脚本的帮助信息（当然得是在你确实在脚本中写了帮助信息的情况下），你可以使用 cat 或者 echo 来获取这些帮助信息。但是这种方式显得太过暴力，我们其实有更加优雅的方式。&lt;/p>
+&lt;p>假设你所有的脚本信息都写在文件的开头。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/bin/bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#75715e">### &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">### my-script -- do something well&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">### &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">### Usage:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">### my-script &amp;lt;input&amp;gt; &amp;lt;output&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">### &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">### Options:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">### &amp;lt;input&amp;gt; Input file to read&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">### &amp;lt;output&amp;gt; Output file to write, use - for stdout&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">### -h show help message&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>接着我们需要写一个方法来获取这些帮助信息：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>help&lt;span style="color:#f92672">(){&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sed -rn &lt;span style="color:#e6db74">&amp;#39;s/^### ?//;T;p&amp;#39;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$0&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>其中，&lt;code>$0&lt;/code> 代表你所执行的这个脚本文件的文件名。&lt;br>
+这个方法中主要使用的命令就是 sed，sed 是一个流编辑器，会基于你给定的一系列规则来处理给定的数据。&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>-n&lt;/code> —— 表示不会打印模式空间里的内容。&lt;/li>
+&lt;li>&lt;code>-r&lt;/code> —— 表示可以在脚本中使用 扩展的正则表达式。&lt;/li>
+&lt;li>&lt;code>s&lt;/code> —— 代表替代模式。&lt;/li>
+&lt;li>&lt;code>/&lt;/code> —— 代表规则的开始/结束。&lt;/li>
+&lt;li>&lt;code>^### ?&lt;/code> —— 按照正则匹配以 ### 开头的包含一个或者零个空格的字符串。&lt;/li>
+&lt;li>&lt;code>//&lt;/code> —— 这两个 “/” 中的内容会替换掉前面匹配到的内容。&lt;br>
+所以 &lt;code>sed -rn 's/^### ?//&lt;/code> 就表示会以 「空字符串」 替换掉所有 「行首的三个#以及其后可能有的一个空格」。&lt;/li>
+&lt;li>&lt;code>T&lt;/code> —— 表示如果 sed 编辑器没有成功完成替换，则跳转到 sed 命令的最后。&lt;/li>
+&lt;li>&lt;code>p&lt;/code> —— 代表打印替换的结果。&lt;/li>
+&lt;/ul>
+&lt;p>最后用空参数或者 &lt;code>-h&lt;/code> 来调用这个方法：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#f92672">[[&lt;/span> $# &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#f92672">]]&lt;/span> &lt;span style="color:#f92672">||&lt;/span> &lt;span style="color:#f92672">[[&lt;/span> $1 &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#e6db74">&amp;#34;-h&amp;#34;&lt;/span> &lt;span style="color:#f92672">]]&lt;/span>; &lt;span style="color:#66d9ef">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> help
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> exit &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果你习惯在一个脚本的开头做注释的话，可以试试这种方法。&lt;/p></description></item><item><title>Linux 添加 Windows 字体库</title><link>https://www.dianbanjiu.com/post/linux-%E6%B7%BB%E5%8A%A0-windows-%E5%AD%97%E4%BD%93%E5%BA%93/</link><pubDate>Wed, 27 May 2020 23:02:52 +0800</pubDate><guid>https://www.dianbanjiu.com/post/linux-%E6%B7%BB%E5%8A%A0-windows-%E5%AD%97%E4%BD%93%E5%BA%93/</guid><description>&lt;p>如果你有尝试过在 Linux 下打开 Windows 制作的 word 文档，或者在 Windows 下打开 Linux 制作的 word 文档，你可能会惊喜的发现在两个平台下同一个 word 文件的样式截然不同，这对于一些对格式要求比较严格的情况还是比较麻烦的。不过在 Linux 下还是有很简单的解决办法的。&lt;/p>
+&lt;p>测试平台及工具：&lt;/p>
+&lt;ul>
+&lt;li>Manjaro Linux&lt;/li>
+&lt;li>WPS&lt;/li>
+&lt;/ul>
+&lt;h2 id="way-1复制粘贴推荐">way 1：复制粘贴（推荐）&lt;/h2>
+&lt;p>首先你需要一台装有 Windows 的电脑或者一个装有 Windows 的虚拟机，从 C 盘的 &lt;code>windows/Fonts&lt;/code> 中复制出你需要的字体，或者干脆直接复制整个 &lt;code>Fonts&lt;/code> 目录；&lt;/p>
+&lt;p>然后在你的 Linux 的 &lt;code>/usr/share/fonts/&lt;/code> 目录下新建一个目录，比如 WinFonts 之类的，名字可以随意，只要你知道它是干啥的就好；&lt;/p>
+&lt;p>接着把你第一步复制出来的字体放到第二步新建的目录中；&lt;/p>
+&lt;p>最后执行下面的指令刷新字体：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ sudo fc-cache -fv
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这下再打开你之前格式显示有问题的 word 文档，应该就可以正常显示了。&lt;/p>
+&lt;h2 id="way-2从-aur-安装">way 2：从 AUR 安装&lt;/h2>
+&lt;p>万能的 AUR 里基本只有你想不到的，安装 win 下的字体也同样是小菜一碟，而且后续如果有新的字体，通过 AUR 安装的字体还可以无感更新。&lt;/p>
+&lt;p>AUR 里有很多 win 的字体包，甚至还分为不同的 win 系统，比如 win10、win7，这里你可以只安装一个 &lt;code>ttf-ms-fonts&lt;/code> 包，这个包基本上就包含的比较全了。&lt;/p>
+&lt;p>最后同样需要执行一下上面提到的那条命令刷新一下字体。&lt;/p>
+&lt;p>这里推荐第一个方法，因为第二个方法涉及到的字体都要在线下载，速度上自然比不过本地拷贝，而且常用的字体其实并不会很多，而且这些常用的字体通常也都比较稳定更新不会很多。&lt;/p>
+&lt;h2 id="额外补充">额外补充&lt;/h2>
+&lt;p>我在从使用命令刷新完字体后，感觉整个系统的字体都变得“锐利”起来了，大概就是变成了 Windows 字体的那个样子，我虽然是完整拷贝了 Windows 的字体库，但是我并没有设置本地的字体为 Windows 的字体，这个问题还得后面再看看是什么原因导致的。&lt;/p></description></item><item><title>使用手机制作 Linux Live CD</title><link>https://www.dianbanjiu.com/post/%E4%BD%BF%E7%94%A8%E6%89%8B%E6%9C%BA%E5%88%B6%E4%BD%9C-linux-live-cd/</link><pubDate>Thu, 02 Jan 2020 12:44:45 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E4%BD%BF%E7%94%A8%E6%89%8B%E6%9C%BA%E5%88%B6%E4%BD%9C-linux-live-cd/</guid><description>&lt;p>在 2020 年的第一天，因为想试试黑苹果，所以就从网上下载了安装镜像，在自己的笔记本上尝试了一下，不过因为各种原因最后安装失败了，惟一的系统也在尝试安装黑苹果的时候给格掉了。身边又只有这一台电脑，没办法，本来准备去网吧写个 Manjaro 的启动盘的，可惜木马病毒太多，在网吧杀了两个小时的毒，也没杀完，最后就放弃了。&lt;/p>
+&lt;p>&lt;img src="https://i.imgur.com/BXi7QoK.jpg" alt="Imgur">&lt;/p>
+&lt;p>在从网吧回寝室的路上，我想到了曾经在 distrowatch.org 上好像看到过 gparted，就是那个 Linux 下挺著名的分区工具，也有一个 Linux 发行版，而且我隐约记得它似乎是可以直接解压到 U 盘使用的。想到这我就迫不及待得尝试了一下，果然可以！！！&lt;/p>
+&lt;h3 id="预先准备">预先准备&lt;/h3>
+&lt;ul>
+&lt;li>两个 U 盘（一个用来装 gparted，另一个用来制作 manjaro 启动盘）。&lt;/li>
+&lt;li>一个 otg（可以连接 U 盘到手机上的工具）。&lt;/li>
+&lt;li>手机一部&lt;/li>
+&lt;/ul>
+&lt;h3 id="game-start">Game Start&lt;/h3>
+&lt;p>首先去 &lt;a href="https://gparted.org/download.php">gparted 下载页面&lt;/a> 下载 &lt;strong>Stable directory (.iso/.zip)(for i686, i686-pae and amd64 architectures)&lt;/strong>。&lt;/p>
+&lt;p>&lt;img src="https://i.imgur.com/O0ld1kR.png" alt="Imgur">&lt;/p>
+&lt;p>下载下来的是一个 zip 压缩包，在手机上可以直接解压出来，然后利用 otg 把手机跟 U 盘连接起来，在复制文件之前，请先确保 U 盘的格式为 fat 格式。然后将解压之后的文件复制到 U 盘当中，gparted 本身并不是很大，解压后大概 357M，但是因为之后还要下载 manjaro 镜像文件，所以这两个 U 盘的容量都建议至少 4G 以上。&lt;/p>
+&lt;p>至此，Gparted Live CD 已经制作完成，插到电脑上，进入电脑的引导界面，选择 Gparted 所在的 U 盘启动。&lt;/p>
+&lt;p>建议你在复制完 Live CD 所需的文件之后，同时下载好需要的镜像文件，比如我选择的 manjaro，&lt;a href="https://mirrors.tuna.tsinghua.edu.cn/osdn/storage/g/m/ma/">manjaro 下载地址&lt;/a>，这是清华的镜像源，国内下载速度很快，包括官方版本和社区版本以及之前的历史版本。在手机上下载好之后也复制到 Live CD 当中。&lt;/p>
+&lt;p>引导加载完成之后后你可以看到下面这个画面，选择第一项回车进入。&lt;/p>
+&lt;p>&lt;img src="https://i.imgur.com/d27drNa.png" alt="Imgur">&lt;/p>
+&lt;p>之后的键盘模式选择 &lt;code>Don't touch keymap&lt;/code>：&lt;/p>
+&lt;p>&lt;img src="https://i.imgur.com/O55JJzQ.png" alt="imgur">&lt;/p>
+&lt;p>后面的两项直接回车，第一个回车会直接选择默认的 US English 为默认的语言，第二个回车是以图形界面加载桌面。&lt;/p>
+&lt;p>&lt;img src="https://i.imgur.com/LtegLuc.png" alt="Imgur">&lt;/p>
+&lt;p>加载完成即可进入桌面了：&lt;/p>
+&lt;p>&lt;img src="https://i.imgur.com/rTqcked.png" alt="Imgur">&lt;/p>
+&lt;p>插上你的另外一个 U 盘，使用 &lt;code>fdisk&lt;/code> 命令确定新插入 U 盘的设备名，然后就可以使用 dd 命令将镜像写入 U 盘了。&lt;/p>
+&lt;p>&lt;img src="https://i.imgur.com/hOsO0gV.png" alt="Imgur">&lt;/p>
+&lt;p>最后关机拔掉 gparted Live CD 的 U 盘，开机重新进入新的引导盘。之后的就可以根据新的安装要求安装新系统了。&lt;/p></description></item><item><title>Android 手机投屏到 Linux 下</title><link>https://www.dianbanjiu.com/post/android-%E6%89%8B%E6%9C%BA%E6%8A%95%E5%B1%8F%E5%88%B0-linux-%E4%B8%8B/</link><pubDate>Tue, 24 Dec 2019 14:40:22 +0800</pubDate><guid>https://www.dianbanjiu.com/post/android-%E6%89%8B%E6%9C%BA%E6%8A%95%E5%B1%8F%E5%88%B0-linux-%E4%B8%8B/</guid><description>&lt;p>最近发现了一个可以在 Linux 下使用的手机投屏软件软件 —— &lt;strong>scrcpy&lt;/strong>，同时也支持 Windows 和 MacOS，但是因为我用的是 Manjaro Linux，所以下面只会介绍 Manjaro 下的情况。其他的系统可以参照 &lt;a href="https://github.com/Genymobile/scrcpy">scrcpy&lt;/a>&lt;/p>
+&lt;h2 id="安装">安装&lt;/h2>
+&lt;p>如果使用的是 Arch Linux 系的系统，并且已经配置了 archlinuxcn 的源，可以直接使用 pacman 进行安装：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ sudo pacman -S scrcpy
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果没有配置的话，也可以从 aur 获取，以 &lt;strong>yay&lt;/strong> 为例：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ yay scrcpy
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="配置">配置&lt;/h2>
+&lt;p>在开启 scrcpy 之前，你还需要做下面这几件事情：&lt;/p>
+&lt;ol>
+&lt;li>电脑上安装 &lt;strong>adb&lt;/strong>。&lt;/li>
+&lt;li>在手机上打开 &lt;strong>开发者模式&lt;/strong>。&lt;/li>
+&lt;li>在开发者模式当中开启 &lt;strong>USB 调试&lt;/strong> 以及 &lt;strong>USB 调试(安全设置)&lt;/strong>&lt;/li>
+&lt;/ol>
+&lt;blockquote>
+&lt;p>注：&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>USB 调试(安全设置)&lt;/strong> 可能不是所有的手机上都会有，如果有的话最好开启，我使用的是 mi Mix2，系统是 MIUI eu，不开启 &lt;strong>USB 调试(安全设置)&lt;/strong> 的情况下，在 scrcpy 当中是无法使用鼠标以及键盘的。&lt;/li>
+&lt;li>在 Linux 下可以通过安装 &lt;strong>android-tools&lt;/strong> 来获取 adb。&lt;/li>
+&lt;/ol>&lt;/blockquote>
+&lt;p>scrcpy 可以通过有线和无线两种方式连接手机。&lt;/p>
+&lt;h2 id="使用">使用&lt;/h2>
+&lt;h3 id="有线">有线&lt;/h3>
+&lt;ol>
+&lt;li>上面这些都准备好了之后，先使用数据线连接手机与电脑，在终端先输入 &lt;code>adb devices&lt;/code>，如果是第一次执行这条命令，在手机上应该会出现一个确认使用该电脑调试手机的通知，同时终端上也会显示你的设备号。&lt;/li>
+&lt;li>点击确认之后，直接在终端输入 &lt;code>scrcpy&lt;/code> 应该就可以看到手机界面出现在电脑屏幕上了。&lt;/li>
+&lt;/ol>
+&lt;h3 id="无线">无线&lt;/h3>
+&lt;ol>
+&lt;li>第一步同上面有线连接的第一步。&lt;/li>
+&lt;li>连接成功之后，在终端输入 &lt;code>adb tcpip 5555&lt;/code>，这个端口可以根据自己的需要选择。&lt;/li>
+&lt;li>开启成功之后就可以拔掉数据线了。&lt;/li>
+&lt;li>在手机的 设置-&amp;gt;我的设备-&amp;gt;全部参数-&amp;gt;状态信息 中查看手机的 ip（这是 MIUI 的查看方式，其他系统应该大同小异）。&lt;/li>
+&lt;li>在终端输入 &lt;code>adb connect PHONE_IP:5555&lt;/code> 连接手机。&lt;/li>
+&lt;li>最后在终端输入 &lt;code>scrcpy&lt;/code> 就可以看到现在的手机界面了。&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://i.imgur.com/yWiL9sC.png" alt="">&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;strong>注意：&lt;/strong>&lt;/p>
+&lt;ol>
+&lt;li>连接之后，仅可以传输手机的画面，但并不能传递声音，声音依然是从手机发出的。&lt;/li>
+&lt;li>开启 MIUI 的 USB 调试（安全设置）需要登录小米帐号才可以，如果使用 4g 网络依旧无法连接，可以尝试切换到 wifi 网络。&lt;/li>
+&lt;/ol>&lt;/blockquote>
+&lt;h2 id="快捷使用">快捷使用&lt;/h2>
+&lt;p>下面是一些常用的键盘快捷方式：&lt;br>
+&lt;strong>注：&lt;/strong> Linux 下的 &lt;code>mod&lt;/code> 键为 &lt;code>视窗&lt;/code> 键，也就是那个 windows 图标键。&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>作用&lt;/th>
+&lt;th>快捷键&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>返回&lt;/td>
+&lt;td>mod+B&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>主界面&lt;/td>
+&lt;td>mod+H&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>多任务界面&lt;/td>
+&lt;td>mod+S&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>关闭手机屏幕（电脑上的界面正常显示）&lt;/td>
+&lt;td>mod+O&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>开启手机屏幕&lt;/td>
+&lt;td>右键单击&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>展开通知栏&lt;/td>
+&lt;td>mod+N&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>折叠通知栏&lt;/td>
+&lt;td>mod+Shift+N&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>如果需要将电脑的文件传到手机，直接将文件拖拽到电脑上的手机界面即可，文件默认是会存放在用户的主目录下的，也就是手机上跟 Downloads 同级的目录下。&lt;/p>
+&lt;p>虽然 scrcpy 也支持同步手机跟电脑的剪贴板，不过不是很好用。&lt;/p>
+&lt;p>此外， scrcpy 还支持很多其他的参数，也还有很多其他的快捷键，上面仅列出了我经常使用的几个。&lt;/p>
+&lt;p>如果你手机跟电脑上还安装了 &lt;code>kde-connect&lt;/code> 的话，可以通过它来同步手机的通知以及剪贴板，还可以用来管理手机文件。跟 scrcpy 搭配使用体验还是很不错的。&lt;/p>
+&lt;p>在连接到电脑之后我们很多时候可能都希望手机息屏而 PC 端的镜像可以常亮，虽然可以通过 &lt;code>mod+O&lt;/code> 来实现，但这种方式实现的亮屏会在达到手机屏幕休眠时间之后自动黑屏，所以想要实现常亮的话需要在启动 scrcpy 的时候添加一个可以保持屏幕唤醒的参数：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ scrcpy --turn-screen-off --stay-awake
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果亮屏是刚需的话也可以将这个命令设置为 scrcpy 的别名，只需要在 &lt;code>~/.zshrc&lt;/code> 或者 &lt;code>~/.bashrc&lt;/code> 中添加如下内容，然后 &lt;code>source&lt;/code> 该文件即可：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>alias scrcpy&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;scrcpy --turn-screen-off --stay-awake&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>计算当前目录下所有以 .c 结尾的文件数量</title><link>https://www.dianbanjiu.com/post/%E8%AE%A1%E7%AE%97%E5%BD%93%E5%89%8D%E7%9B%AE%E5%BD%95%E4%B8%8B%E6%89%80%E6%9C%89%E4%BB%A5-.c-%E7%BB%93%E5%B0%BE%E7%9A%84%E6%96%87%E4%BB%B6%E6%95%B0%E9%87%8F/</link><pubDate>Sat, 09 Nov 2019 23:48:37 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E8%AE%A1%E7%AE%97%E5%BD%93%E5%89%8D%E7%9B%AE%E5%BD%95%E4%B8%8B%E6%89%80%E6%9C%89%E4%BB%A5-.c-%E7%BB%93%E5%B0%BE%E7%9A%84%E6%96%87%E4%BB%B6%E6%95%B0%E9%87%8F/</guid><description>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ ls -l | grep &lt;span style="color:#e6db74">&amp;#34;.c&lt;/span>$&lt;span style="color:#e6db74">&amp;#34;&lt;/span> | wc -l
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>其中 &lt;code>ls -l&lt;/code> 是列出当前目录下所有的非隐藏文件，如果需要显示隐藏文件可以添加 &lt;code>-a&lt;/code> 选项；&lt;br>
+将上一步得到的结果传输给 &lt;code>grep&lt;/code>，字符串加美元符 &lt;code>$&lt;/code> 在正则式中代表以该字符串结尾的所有内容；&lt;br>
+上一步获取的内容都是以行为单位的，&lt;code>wc&lt;/code> 命令可以计算给定文件的行数、字符数以及字节数，&lt;code>-l&lt;/code> 选项可以输出换行符的个数。&lt;/p></description></item><item><title>压缩/解压缩</title><link>https://www.dianbanjiu.com/post/linux-%E4%B8%8B%E7%9A%84%E8%A7%A3%E5%8E%8B%E7%BC%A9%E5%B7%A5%E5%85%B7/</link><pubDate>Sun, 06 Oct 2019 08:26:21 +0800</pubDate><guid>https://www.dianbanjiu.com/post/linux-%E4%B8%8B%E7%9A%84%E8%A7%A3%E5%8E%8B%E7%BC%A9%E5%B7%A5%E5%85%B7/</guid><description>&lt;p>在 Linux 下，除了最常用的 tar 归档命令之外，还有两个很好用的压缩/解压缩的工具，一个是 &lt;code>unarchiver&lt;/code>，另一个是 &lt;code>p7zip&lt;/code>。&lt;/p>
+&lt;h2 id="unarchiver">Unarchiver&lt;/h2>
+&lt;p>unarchiver 实际上是一个解压工具，其中包含了 &lt;code>unar&lt;/code> 和 &lt;code>lsar&lt;/code> 两个命令行程序。&lt;/p>
+&lt;p>在 Arch Linux 下可以直接通过 pacman 命令安装 unarchiver 这个程序包，在其他的 Linux 发行版，如 Ubuntu 下，可以通过 apt 直接安装 unar 程序包。&lt;/p>
+&lt;p>其中 &lt;code>lsar&lt;/code> 是用来列出压缩包中的文件，&lt;code>unar&lt;/code> 则负责把文件从压缩包中提取出来，两个命令的用法都很简单：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ lsar &amp;lt;archive name&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ unar &amp;lt;archive name&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>因为 zip 压缩包并不会包含有关系统编码的信息，所以在 Linux（系统编码一般为 utf-8）下解压一些非 utf-8（如 gbk 之类）的 zip 压缩包的时候经常会出现乱码的情况。而 unarchiver 的强大之处就在于&lt;strong>即使该压缩包的编码格式不是 utf-8,在解压后也不会出现任何乱码的情况&lt;/strong>。&lt;/p>
+&lt;h2 id="p7zip">p7zip&lt;/h2>
+&lt;p>p7zip 其实就是 7zip 在 Linux 下的命令行版本。&lt;/p>
+&lt;p>在 Linux 下其实有很多好用的压缩工具，但是随之而来的一个问题就是：工具多了，涉及的命令也多了。选择 p7zip 的原因还是它支持更多的压缩格式。&lt;/p>
+&lt;p>p7zip 中一般会包含三个命令，分别是 &lt;code>7z&lt;/code>、&lt;code>7za&lt;/code>、&lt;code>7zr&lt;/code>，这三个命令的主要区别就是处理的范围：&lt;/p>
+&lt;ul>
+&lt;li>7z 支持 p7zip 范围内所有的压缩格式；&lt;/li>
+&lt;li>7za 支持的格式略少于 7z；&lt;/li>
+&lt;li>7zr 则只支持 7z 类型的压缩格式，且无法处理加密文件。&lt;/li>
+&lt;/ul>
+&lt;p>所以下面就只介绍 7z 相关的几个常用命令。&lt;/p>
+&lt;p>创建压缩文件&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ 7z a &amp;lt;archive name&amp;gt; &amp;lt;file name&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>创建压缩包的同时加密，-p 选项用来指定密码。切勿在 -p 选项后直接跟随密码，上面这种格式回车之后会提示你设置密码的&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ 7z a &amp;lt;archive name&amp;gt; &amp;lt;file name&amp;gt; -p
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>更新压缩文件&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ 7z u &amp;lt;archive name&amp;gt; &amp;lt;file name&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>列出压缩文件中包含的文件&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ 7z l &amp;lt;archive name&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>直接将压缩包中的内容提取到当前目录&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ 7z e &amp;lt;archive name&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>全路径提取（不建议使用，可能会覆盖掉系统原有的一些文件）&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ 7z x &amp;lt;archive name&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>提取文件到一个新的目录当中&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ 7z x -o&amp;lt;floader name&amp;gt; &amp;lt;archive name&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>检查压缩包的完整性&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ 7z t &amp;lt;archive name&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Github 开启两步验证后，git 推送鉴权失败</title><link>https://www.dianbanjiu.com/post/github-%E5%BC%80%E5%90%AF%E4%B8%A4%E6%AD%A5%E9%AA%8C%E8%AF%81%E5%90%8Egit-%E6%8E%A8%E9%80%81%E9%89%B4%E6%9D%83%E5%A4%B1%E8%B4%A5/</link><pubDate>Thu, 03 Oct 2019 11:05:02 +0800</pubDate><guid>https://www.dianbanjiu.com/post/github-%E5%BC%80%E5%90%AF%E4%B8%A4%E6%AD%A5%E9%AA%8C%E8%AF%81%E5%90%8Egit-%E6%8E%A8%E9%80%81%E9%89%B4%E6%9D%83%E5%A4%B1%E8%B4%A5/</guid><description>&lt;p>最近开启了 Github 的两步验证，然后在桌面上使用 git 向 Github 推送文件的时候总是出现&lt;code>鉴权失败&lt;/code>的问题，在排除了密码错误的原因之后，觉得应该就是两步验证的锅了。&lt;/p>
+&lt;p>下面是解决办法：&lt;/p>
+&lt;ol>
+&lt;li>打开 Github 的 「&lt;a href="https://github.com/settings/profile">Settings&lt;/a>」&lt;/li>
+&lt;li>进入 「&lt;a href="https://github.com/settings/apps">Developer settings&lt;/a>」&lt;/li>
+&lt;li>打开 「&lt;a href="https://github.com/settings/tokens">Personal access tokens&lt;/a>」&lt;/li>
+&lt;li>点击 「Generate new token」，生成一个新的 token&lt;/li>
+&lt;/ol>
+&lt;p>&lt;strong>生成 token 之后千万记得把 token 复制并保存好，因为 github 为了安全起见，这个 token 只会出现一次，也就是说如果你以后忘记了这个 token，只能重新创建一个。&lt;/strong>&lt;/p>
+&lt;p>push 之前记得先要配置好用户名跟密码：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ git config --global user.name &lt;span style="color:#e6db74">&amp;#34;username&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ git config --global user.email &lt;span style="color:#e6db74">&amp;#34;email@example.com&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>之后再 push 的时候将密码替换为上面生成的 &lt;code>access token&lt;/code> 就可以了。&lt;/p>
+&lt;hr>
+&lt;p>你还可以创建一个 &lt;code>.git-credentials&lt;/code> 文件 (文件名可以任意，这里只是为了表义)，其中的内容（依规则替换掉其中的用户名和密码/access token）：&lt;/p>
+&lt;pre tabindex="0">&lt;code>https://{username}:{password}@github.com
+&lt;/code>&lt;/pre>&lt;p>在终端输入下面的命令：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ git config --global credential.helper store --file ~/.git-credentials
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>credential&lt;/code> 是用来配置 git 的凭证存储的参数。&lt;br>
+&lt;code>--file&lt;/code> 后面指定的是凭证存放的位置。&lt;/p>
+&lt;p>这种方式可以避免每次 push 的时候都需要输入密码，但是因为密码是&lt;code>明文&lt;/code>存储在本地，可能不是很安全。&lt;/p>
+&lt;hr>
+&lt;p>不过貌似这个文件并不是强制的，我在使用 access token push 完之后，直接执行：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ git config --global credential.helper store
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在之后的推送中也不再需要输入用户名和密码了。&lt;/p></description></item><item><title>禁用笔记本的自带键盘</title><link>https://www.dianbanjiu.com/post/%E7%A6%81%E7%94%A8%E7%AC%94%E8%AE%B0%E6%9C%AC%E7%9A%84%E8%87%AA%E5%B8%A6%E9%94%AE%E7%9B%98/</link><pubDate>Fri, 20 Sep 2019 13:05:56 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E7%A6%81%E7%94%A8%E7%AC%94%E8%AE%B0%E6%9C%AC%E7%9A%84%E8%87%AA%E5%B8%A6%E9%94%AE%E7%9B%98/</guid><description>&lt;p>最近半年笔记本的键盘已经慢慢地开始失灵，经常有些键按不出来，所以就另外买了一把键盘。&lt;/p>
+&lt;p>不过有时候需要带笔记本出去，所以这样一来还需要带着键盘，为了在把键盘放在笔记本的自带键盘上不会误触到就决定禁用掉自带键盘。&lt;/p>
+&lt;p>主要使用的工具是 &lt;strong>xinput&lt;/strong>。&lt;/p>
+&lt;p>xinput 是 Linux 下用来管理输入设备的工具，该程序可以在 &lt;code>xorg-xinput&lt;/code> 包中找到。常用的一些指令，如：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ xinput list &lt;span style="color:#75715e">#列出当前所有的输入设备&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ xinput disable &amp;lt;device id&amp;gt;|&amp;lt;device name&amp;gt; &lt;span style="color:#75715e">#根据指定的 id 或者设备名禁用该设备&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ xinput enable &amp;lt;device id&amp;gt;|&amp;lt;device name&amp;gt; &lt;span style="color:#75715e">#根据指定的 id 或者设备名启用该设备&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ xinput list
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ↳ AT Translated Set &lt;span style="color:#ae81ff">2&lt;/span> keyboard id&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">18&lt;/span> &lt;span style="color:#f92672">[&lt;/span>slave keyboard &lt;span style="color:#f92672">(&lt;/span>3&lt;span style="color:#f92672">)]&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>上面是使用 &lt;code>list&lt;/code> 参数后的一部分片段，其中的 &lt;strong>AT Translated Set 2 keyboard&lt;/strong> 就是自带键盘的设备名，后面的 18 就是设备对应的 id。&lt;/p>
+&lt;p>然后使用 &lt;code>disable&lt;/code> 参数以及 id 或者设备名关掉自带键盘就可以了：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ xinput disable &lt;span style="color:#ae81ff">18&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>or
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ xinput disable &lt;span style="color:#e6db74">&amp;#34;AT Translated Set 2 keyboard&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>不过需要注意的是，在计算机重启之后，设备会被重新启用，为了方便起见，你可以把上面的那条命令写在一个开机脚本里，让它随着计算机启动一同被执行。&lt;/p>
+&lt;p>下面以 &lt;strong>KDE Plasma&lt;/strong> 桌面说明，不同的桌面可能会有不同的方式：&lt;br>
+首先在任意位置创建一个脚本文件，如 &lt;code>~/script/keyboard.sh&lt;/code>，其中包含以下内容：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/bin/bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>xinput disable &lt;span style="color:#e6db74">&amp;#34;AT Translated Set 2 keyboard&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后在 &lt;code>~/.config/plasma-workspace/env&lt;/code> 下创建 &lt;code>keyboard.sh&lt;/code> 的软链接。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ cd ~/.config/plasma-workspace/env
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ ln -s ~/script/keyboard.sh keyboard.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在 &lt;code>~/.config/plasma-workspace/env&lt;/code> 下存放的脚本文件会在 Plasma 启动前执行。&lt;/p>
+&lt;p>另外还有一点，&lt;strong>设备的 id 并不是固定的&lt;/strong>，所以在写开机脚本的时候务必使用设备名。&lt;/p>
+&lt;hr>
+&lt;p>如果在添加为开机脚本之后发现开机后键盘依旧可以正常使用，可以检查一下是否给脚本添加了&lt;code>可执行权限&lt;/code>。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ chmod +x keyboard.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Linux 下蓝牙鼠标延迟严重</title><link>https://www.dianbanjiu.com/post/linux-%E4%B8%8B%E8%93%9D%E7%89%99%E9%BC%A0%E6%A0%87%E5%BB%B6%E8%BF%9F%E4%B8%A5%E9%87%8D/</link><pubDate>Mon, 16 Sep 2019 13:30:06 +0800</pubDate><guid>https://www.dianbanjiu.com/post/linux-%E4%B8%8B%E8%93%9D%E7%89%99%E9%BC%A0%E6%A0%87%E5%BB%B6%E8%BF%9F%E4%B8%A5%E9%87%8D/</guid><description>&lt;p>最近买了一个小米便携蓝牙鼠标，在 Arch Linux 下成功连接上鼠标之后，发现鼠标的延迟特别严重，但是鼠标连接到手机上却十分顺滑，由此基本断定是在 Arch Linux 上的某些配置导致的这些问题。&lt;/p>
+&lt;h3 id="解决办法">解决办法&lt;/h3>
+&lt;ul>
+&lt;li>断开并重新连接鼠标。（无效）&lt;/li>
+&lt;li>断开其他的外设，如无线键盘（使用 2.4GHZ 的无线接收器），断开 wifi（包括 2.4GHZ 和 5GHZ 的频段）。（无效）&lt;/li>
+&lt;li>修改鼠标轮询率（Mouse polling rate ）。（丝般顺滑）&lt;/li>
+&lt;/ul>
+&lt;p>在系统的蓝牙设备管理器当中查看当前蓝牙鼠标的地址，地址字段类似于 &lt;code>D3:77:66:C8:FE:53&lt;/code>。然后在超级用户的状态下修改 &lt;code>/var/lib/bluetooth/&amp;lt;mac-of-your-adapter&amp;gt;/&amp;lt;mac-of-your-mouse&amp;gt;/info&lt;/code>，添加以下字段：&lt;/p>
+&lt;blockquote>
+&lt;p>一般情况，系统上只有一个蓝牙适配器，&lt;code>&amp;lt;mac-of-your-adapter&amp;gt;&lt;/code> 是可以直接使用 Tab 键来补全的，你只需要根据之前查看到的蓝牙鼠标地址替换掉 &lt;code>&amp;lt;mac-of-your-mouse&amp;gt;&lt;/code> 就可以了。&lt;/p>&lt;/blockquote>
+&lt;pre tabindex="0">&lt;code>[ConnectionParameters]
+MinInterval=6
+MaxInterval=9
+Latency=44
+Timeout=216
+&lt;/code>&lt;/pre>&lt;p>通常 Linux 下的蓝牙设备是不会自动连接的，可以通过在 &lt;code>/etc/bluetooth/main.conf&lt;/code> 的 &lt;code>[Policy]&lt;/code> 下添加 &lt;code>AutoEnable=true&lt;/code> 将蓝牙设备设置为开机自动连接。&lt;/p>
+&lt;h3 id="关于轮询率和轮询间隔">关于轮询率和轮询间隔&lt;/h3>
+&lt;p>设备的轮询率（单位 Hz）取决于轮询间隔，轮询间隔以毫秒为单位进行测量，等于滞后时间。&lt;/p>
+&lt;p>默认的轮询间隔一般为 10ms，但是 USB 控制器一般会向下取最近的 2 的整数次幂，所以 10ms 的轮询时间实际上是 8ms 的轮询时间。&lt;/p>
+&lt;p>下面是几个常用轮询率与轮询间隔的对应表（速率 = 1000/轮询间隔）：&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>轮询率（Hz）&lt;/th>
+&lt;th>1000&lt;/th>
+&lt;th>500&lt;/th>
+&lt;th>250&lt;/th>
+&lt;th>125&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>轮询间隔（ms）&lt;/td>
+&lt;td>1&lt;/td>
+&lt;td>2&lt;/td>
+&lt;td>4&lt;/td>
+&lt;td>8&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>如果是进行一些精度较高的活动时，可以把轮询间隔尽可能地调得小一些，不过这么做同时也会加重 CPU 的负担。&lt;/p></description></item><item><title>Linux 客户端代理配置</title><link>https://www.dianbanjiu.com/post/linux-%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE/</link><pubDate>Fri, 30 Aug 2019 18:34:00 +0800</pubDate><guid>https://www.dianbanjiu.com/post/linux-%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE/</guid><description>&lt;h2 id="购买服务">购买服务&lt;/h2>
+&lt;p>最开始是自建的 shadowsocks 服务，使用的搬瓦工洛杉矶的服务器，但是速度不是很理想，而且还经常被封。后来迁移数据的时候，发现搬瓦工也有单独的 shadowsocks 服务出售，相对于自建来说成本更低，相较来说算是个不错的选择。&lt;/p>
+&lt;p>费用如下图所示&lt;br>
+&lt;img src="https://imgur.com/iJGqs6F.png" alt="Imgur">&lt;br>
+这个是最便宜的那个套餐，每月 100G 的流量，因为我平时多的话也不过 50 左右，所以就选了这个，如果你嫌少，他们还有每月 500/1000G 的套餐，世界加钱可及。&lt;/p>
+&lt;p>速度的话，YouTube 1080p 基本上可以全程无卡顿，至于 2k、4k 的话，也可以，不过会有偶尔的卡顿。&lt;/p>
+&lt;p>如果你也想购买他们的服务，可以 &lt;a href="https://justmysocks.net/members/aff.php?aff=4151">点击此处直达&lt;/a>。&lt;/p>
+&lt;p>&lt;strong>2022 年 7 月 15 号更新&lt;/strong>&lt;br>
+弃用了 Qv2ray 和 shadowsocks-libev，统一使用 &lt;a href="https://github.com/Dreamacro/clash">clash&lt;/a> 配置代理&lt;/p>
+&lt;p>clash 是一个用 go 写的多平台代理工具，我这里使用的是无图形界面的版本，你可以直接从包管理器里面安装，或者从项目的 release 下载&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Arch Linux&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo pacman -S clash
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># windows&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>scoop install clash
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>安装完成之后需要先运行一次 clash 程序下载 &lt;code>Country.mmdb&lt;/code> 并且初始化 &lt;code>config.yaml&lt;/code>，这两个文件一般位于用户主目录下面的 &lt;code>.config/clash&lt;/code> 下面&lt;/p>
+&lt;p>接着只需要修改 config.yaml 文件，并且添加自己的服务配置信息即可&lt;/p>
+&lt;p>一些参数的基础配置可以参考 &lt;a href="https://github.com/dianbanjiu/just/tree/main/clash">此处&lt;/a>&lt;/p>
+&lt;hr>
+&lt;p>&lt;strong>2020 年 9 月 7 日更新&lt;/strong>&lt;br>
+现在 justmysocks 默认的五个连接中的三个已经从 shadowsocks 修改为了 vmess 协议，虽然 shadowsocks-libev 可以安装 v2ray 插件来支持 vmess，但是总的来说配置还是不够直观，而 shadowsocks-qt 也并没有提供插件的计划，所以现在我已经改为使用 &lt;code>qv2ray&lt;/code> 来作为新的代理工具了。&lt;/p>
+&lt;h2 id="qv2ray">Qv2ray&lt;/h2>
+&lt;p>需要安装的软件：&lt;/p>
+&lt;ul>
+&lt;li>Qv2ray&lt;/li>
+&lt;li>v2ray&lt;/li>
+&lt;/ul>
+&lt;p>安装完成之后，打开 Qv2ray，点击左上角的 &lt;code>首选项&lt;/code>，在 &lt;code>内核设置&lt;/code> 处确保 v2ray 核心选择正确。&lt;br>
+&lt;img src="https://www.dianbanjiu.com/resources/_gen/images/qv2ray%E9%A6%96%E9%80%89%E9%A1%B9.png" alt="">&lt;/p>
+&lt;p>在 &lt;code>入站设置&lt;/code> 中勾选设置 &lt;code>系统代理&lt;/code>，并启用 &lt;code>socks设置&lt;/code> 与 &lt;code>http设置&lt;/code>（Linux 在此处只需设置 系统代理，MacOS 三项都需开启）。&lt;/p>
+&lt;p>在 &lt;code>连接设置&lt;/code> 中，启用 &lt;code>绕过中国大陆&lt;/code>。&lt;/p>
+&lt;p>最后点击左下角的 &lt;code>新建&lt;/code> 按钮，选择 &lt;code>二维码&lt;/code>，在你的 justmysocks 界面截屏扫描对应的帐号二维码即可添加 socks 或者 v2ray 链接。&lt;/p>
+&lt;p>Linux 下启用 &lt;code>系统代理&lt;/code> 后，浏览器无需设置任何代理工具就可以直接访问 google，而在 MacOS 下则仍需配置浏览器代理，所以 Linux 在第二步中只需设置 系统代理，而 MacOS 三项都需开启才能正常使用。&lt;/p>
+&lt;hr>
+&lt;h2 id="shadowsocks-配置">shadowsocks 配置&lt;/h2>
+&lt;p>首先使用系统的包管理软件安装 shadowsocks-libev 这个软件包。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ sudo pacman -S shadowsocks-libev &lt;span style="color:#75715e"># Arch Linux&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ sudo apt install shadowsocks-libev &lt;span style="color:#75715e"># Debian/Ubuntu&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在 /etc/shadowsocks 下创建 config.json 文件。在其中写入以下内容，将其中的字段根据情况修改，主要是服务器的地址(server)、密码(password)、端口号(server_port)、加密方法(method)。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;server&amp;#34;&lt;/span>:&lt;span style="color:#e6db74">&amp;#34;my_server_ip&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;server_port&amp;#34;&lt;/span>:&lt;span style="color:#ae81ff">8388&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;local_address&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;127.0.0.1&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;local_port&amp;#34;&lt;/span>:&lt;span style="color:#ae81ff">1080&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;password&amp;#34;&lt;/span>:&lt;span style="color:#e6db74">&amp;#34;mypassword&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;timeout&amp;#34;&lt;/span>:&lt;span style="color:#ae81ff">300&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;method&amp;#34;&lt;/span>:&lt;span style="color:#e6db74">&amp;#34;aes-256-cfb&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;fast_open&amp;#34;&lt;/span>: &lt;span style="color:#66d9ef">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>shadowsocks-libev 添加 obfs 插件，在配置文件中还需要添加两行：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;plugin&amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">:&lt;/span>&lt;span style="color:#e6db74">&amp;#34;obfs-local&amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;plugin_opts&amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">:&lt;/span>&lt;span style="color:#e6db74">&amp;#34;obfs=tls&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>配置好文件后，使用下面的命令启动 shadowsocks 服务：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ sudo systemctl start shadowsocks-libev@config.service
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果想要开机自启动的话：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ sudo systemctl enable shadowsocks-libev@config.service
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>当然，你也可以选择使用带有前端界面的 &lt;code>shadowsocks-qt5&lt;/code> 程序，它在大多数的发行版中都可以找到。&lt;/p>
+&lt;p>因为并不是所有的程序都支持 socks 服务，但是大多数的程序都支持 http 代理，下面就通过 privoxy 将 socks 转发为 http 代理。&lt;/p>
+&lt;h2 id="privoxy-配置">privoxy 配置&lt;/h2>
+&lt;p>首先下载 &lt;code>privoxy&lt;/code> 这个软件包。&lt;/p>
+&lt;p>编辑 privoxy 的配置文件 &lt;code>/etc/privoxy/config&lt;/code>，在其中添加下面一行，转发 socks5：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>forward-socks5 / localhost:1080 .
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>注意在最后有一个点&lt;/strong>&lt;/p>
+&lt;p>使用下面的命令启动 privoxy&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ sudo systemctl start privoxy.service
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>建议将该服务设置为开机自启动。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ sudo systemctl enable privoxy.service
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>至此为止，shadowsocks 就在 Linux 客户端设置完毕，也成功将 socks5 转发为 http，可以通过 chromium 来验证一下是否可用。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ http_proxy&lt;span style="color:#f92672">=&lt;/span>http://127.0.0.1:8118 chromium
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果可以正常使用 google 就说明配置成功了。&lt;/p></description></item></channel></rss>

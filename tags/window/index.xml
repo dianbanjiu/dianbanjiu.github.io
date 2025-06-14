@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Window on 点半九</title><link>https://www.dianbanjiu.com/tags/window/</link><description>Recent content in Window on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 12 Jun 2025 21:33:04 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/window/index.xml" rel="self" type="application/rss+xml"/><item><title>Windows硬件监控工具——TrafficMonitor</title><link>https://www.dianbanjiu.com/post/windows%E7%A1%AC%E4%BB%B6%E7%9B%91%E6%8E%A7%E5%B7%A5%E5%85%B7trafficmonitor/</link><pubDate>Thu, 12 Jun 2025 21:33:04 +0800</pubDate><guid>https://www.dianbanjiu.com/post/windows%E7%A1%AC%E4%BB%B6%E7%9B%91%E6%8E%A7%E5%B7%A5%E5%85%B7trafficmonitor/</guid><description>&lt;p>平时在 Windows 下看电脑资源占用情况的时候，经常需要打开任务管理器切来切去，感觉有点麻烦。最近在 V2EX 和 Reddit 的 desktop 社区找灵感的时候，发现了 &lt;a href="https://github.com/zhongyang219/TrafficMonitor">TrafficMonitor&lt;/a> 这个工具&lt;/p>
+&lt;ul>
+&lt;li>它可以在悬浮窗和任务栏展示当前系统资源的占用情况&lt;/li>
+&lt;li>内置了网卡、CPU、显卡、内存和硬盘的监控&lt;/li>
+&lt;li>悬浮窗支持换肤&lt;/li>
+&lt;li>支持通过插件扩展更多功能&lt;/li>
+&lt;/ul>
+&lt;p>因为平时不喜欢使用悬浮窗，所以现在仅启用了任务栏模式，展示了上传下载、CPU、内存使用率，显卡使用率和显卡温度。显示效果是这样子的&lt;br>
+&lt;img src="https://www.dianbanjiu.com/img/trafficmonitor-on-taskbar.png" alt="实际效果">&lt;/p>
+&lt;h3 id="关于安装">关于安装&lt;/h3>
+&lt;p>可以选择直接从项目的 &lt;a href="https://github.com/zhongyang219/TrafficMonitor/releases/latest">Github release&lt;/a> 进行下载&lt;br>
+也可以选择通过包管理器，比如 scoop 进行安装（scoop install trafficmonitor）&lt;/p>
+&lt;h3 id="关于如何启用">关于如何启用&lt;/h3>
+&lt;p>打开软件之后，默认是以主窗口，也就是悬浮窗的方式进行展示的，如果需要启用任务栏模式，需要在右下角的任务图标中，在 TrafficMonitor 的图标上点击右键，并选中 “&lt;strong>显示任务栏窗口&lt;/strong>”&lt;/p>
+&lt;h3 id="关于如何启用显卡监控">关于如何启用显卡监控&lt;/h3>
+&lt;p>默认情况下工具只会显示网速、CPU、内存，如果需要添加显卡的支持，需要在工具的 &lt;strong>设置（或者叫选项）-&amp;gt;常规设置-&amp;gt;硬件监控&lt;/strong>中启用更多的监控选项&lt;br>
+&lt;img src="https://www.dianbanjiu.com/img/trafficmonitor-options.png" alt="启用更多硬件设置">&lt;/p></description></item></channel></rss>

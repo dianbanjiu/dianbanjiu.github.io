@@ -1,1 +1,52 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Shell on 点半九</title><link>https://www.dianbanjiu.com/tags/shell/</link><description>Recent content in Shell on 点半九</description><generator>Hugo</generator><language>zh-cn</language><copyright>dianbanjiu@gmail.com</copyright><lastBuildDate>Tue, 02 Mar 2021 00:34:31 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/shell/index.xml" rel="self" type="application/rss+xml"/><item><title>关于 Shell 脚本中空格的一点小坑</title><link>https://www.dianbanjiu.com/post/%E5%85%B3%E4%BA%8E-shell-%E8%84%9A%E6%9C%AC%E4%B8%AD%E7%A9%BA%E6%A0%BC%E7%9A%84%E4%B8%80%E7%82%B9%E5%B0%8F%E5%9D%91/</link><pubDate>Mon, 27 Jul 2020 00:23:54 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E5%85%B3%E4%BA%8E-shell-%E8%84%9A%E6%9C%AC%E4%B8%AD%E7%A9%BA%E6%A0%BC%E7%9A%84%E4%B8%80%E7%82%B9%E5%B0%8F%E5%9D%91/</guid><description>最近为了结合 gilab runner 自动化打包，写了不少的 shell 脚本，虽然都是比较简单的内容，但还是踩了不少的坑。最近的一个就是有关字符串的问题。 在很多场景下我们可</description></item><item><title>创建 Shell 脚本的帮助信息</title><link>https://www.dianbanjiu.com/post/%E5%88%9B%E5%BB%BA-shell-%E8%84%9A%E6%9C%AC%E7%9A%84%E5%B8%AE%E5%8A%A9%E4%BF%A1%E6%81%AF/</link><pubDate>Wed, 22 Jul 2020 23:28:50 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E5%88%9B%E5%BB%BA-shell-%E8%84%9A%E6%9C%AC%E7%9A%84%E5%B8%AE%E5%8A%A9%E4%BF%A1%E6%81%AF/</guid><description>原文链接 [英]：https://samizdat.dev/help-message-for-shell-scripts/ 有很多种方式可以获取</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Shell on 点半九</title><link>https://www.dianbanjiu.com/tags/shell/</link><description>Recent content in Shell on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 27 Jul 2020 00:23:54 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/shell/index.xml" rel="self" type="application/rss+xml"/><item><title>关于 Shell 脚本中空格的一点小坑</title><link>https://www.dianbanjiu.com/post/%E5%85%B3%E4%BA%8E-shell-%E8%84%9A%E6%9C%AC%E4%B8%AD%E7%A9%BA%E6%A0%BC%E7%9A%84%E4%B8%80%E7%82%B9%E5%B0%8F%E5%9D%91/</link><pubDate>Mon, 27 Jul 2020 00:23:54 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E5%85%B3%E4%BA%8E-shell-%E8%84%9A%E6%9C%AC%E4%B8%AD%E7%A9%BA%E6%A0%BC%E7%9A%84%E4%B8%80%E7%82%B9%E5%B0%8F%E5%9D%91/</guid><description>&lt;p>最近为了结合 gilab runner 自动化打包，写了不少的 shell 脚本，虽然都是比较简单的内容，但还是踩了不少的坑。最近的一个就是有关字符串的问题。&lt;/p>
+&lt;p>在很多场景下我们可能都需要给 shell 脚本指定一些参数，或者在 shell 脚本执行过程中输入一些内容，这些内容大多是字符串的形式，比如下面这个创建文件的脚本：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ cat touchFile.sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/bin/bash&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo $1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>touch $1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ bash touchFile.sh &lt;span style="color:#e6db74">&amp;#34;hello world&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>你觉得上面的代码会输出什么以及会创建哪些文件呢？输出 &lt;code>hello world&lt;/code>，创建 &lt;code>hello\ world&lt;/code>？&lt;/p>
+&lt;p>正确答案是输出 &lt;code>hello world&lt;/code>，并创建 &lt;code>hello&lt;/code> 和 &lt;code>world&lt;/code> 两个文件。&lt;/p>
+&lt;p>因为 shell 在从命令行获取到由双引号包裹的内容后，一般会将其识别为一个字符串，即便引号中有空格。但是在获取到含有引号的字符串之后，shell 就会将这个双引号给自动去掉了，所以 &lt;code>echo hell world&lt;/code> 可以得到预期的结果，但到了 &lt;code>touch hello world&lt;/code> 就相当于创建了 hello 和 world 两个文件，这显然不符合我们的预期，那么该如何解决这个问题呢？&lt;/p>
+&lt;p>首先我们需要知道，Linux 很多命令在获取参数的时候通常都会以空格为分隔符，但是如果空格是在两个双引号中间的话，shell 就会忽略这个空格，而把这个空格作为引号字符串的一部分。所以我们只需对上面的代码稍作修改即可。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ cat touchFile.sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/bin/bash&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo $1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>touch &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$1&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这样在执行脚本就可以成功创建带有空格的文件名了。当然你也可以将其应用到 shell 各种需要获取带空格字符串的地方，而不仅仅是创建文件。&lt;/p></description></item><item><title>创建 Shell 脚本的帮助信息</title><link>https://www.dianbanjiu.com/post/%E5%88%9B%E5%BB%BA-shell-%E8%84%9A%E6%9C%AC%E7%9A%84%E5%B8%AE%E5%8A%A9%E4%BF%A1%E6%81%AF/</link><pubDate>Wed, 22 Jul 2020 23:28:50 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E5%88%9B%E5%BB%BA-shell-%E8%84%9A%E6%9C%AC%E7%9A%84%E5%B8%AE%E5%8A%A9%E4%BF%A1%E6%81%AF/</guid><description>&lt;p>原文链接 [英]：&lt;a href="https://samizdat.dev/help-message-for-shell-scripts/">https://samizdat.dev/help-message-for-shell-scripts/&lt;/a>&lt;/p>
+&lt;p>有很多种方式可以获取一个 shell 脚本的帮助信息（当然得是在你确实在脚本中写了帮助信息的情况下），你可以使用 cat 或者 echo 来获取这些帮助信息。但是这种方式显得太过暴力，我们其实有更加优雅的方式。&lt;/p>
+&lt;p>假设你所有的脚本信息都写在文件的开头。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/bin/bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#75715e">### &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">### my-script -- do something well&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">### &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">### Usage:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">### my-script &amp;lt;input&amp;gt; &amp;lt;output&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">### &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">### Options:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">### &amp;lt;input&amp;gt; Input file to read&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">### &amp;lt;output&amp;gt; Output file to write, use - for stdout&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">### -h show help message&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>接着我们需要写一个方法来获取这些帮助信息：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>help&lt;span style="color:#f92672">(){&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sed -rn &lt;span style="color:#e6db74">&amp;#39;s/^### ?//;T;p&amp;#39;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$0&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>其中，&lt;code>$0&lt;/code> 代表你所执行的这个脚本文件的文件名。&lt;br>
+这个方法中主要使用的命令就是 sed，sed 是一个流编辑器，会基于你给定的一系列规则来处理给定的数据。&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>-n&lt;/code> —— 表示不会打印模式空间里的内容。&lt;/li>
+&lt;li>&lt;code>-r&lt;/code> —— 表示可以在脚本中使用 扩展的正则表达式。&lt;/li>
+&lt;li>&lt;code>s&lt;/code> —— 代表替代模式。&lt;/li>
+&lt;li>&lt;code>/&lt;/code> —— 代表规则的开始/结束。&lt;/li>
+&lt;li>&lt;code>^### ?&lt;/code> —— 按照正则匹配以 ### 开头的包含一个或者零个空格的字符串。&lt;/li>
+&lt;li>&lt;code>//&lt;/code> —— 这两个 “/” 中的内容会替换掉前面匹配到的内容。&lt;br>
+所以 &lt;code>sed -rn 's/^### ?//&lt;/code> 就表示会以 「空字符串」 替换掉所有 「行首的三个#以及其后可能有的一个空格」。&lt;/li>
+&lt;li>&lt;code>T&lt;/code> —— 表示如果 sed 编辑器没有成功完成替换，则跳转到 sed 命令的最后。&lt;/li>
+&lt;li>&lt;code>p&lt;/code> —— 代表打印替换的结果。&lt;/li>
+&lt;/ul>
+&lt;p>最后用空参数或者 &lt;code>-h&lt;/code> 来调用这个方法：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#f92672">[[&lt;/span> $# &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#f92672">]]&lt;/span> &lt;span style="color:#f92672">||&lt;/span> &lt;span style="color:#f92672">[[&lt;/span> $1 &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#e6db74">&amp;#34;-h&amp;#34;&lt;/span> &lt;span style="color:#f92672">]]&lt;/span>; &lt;span style="color:#66d9ef">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> help
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> exit &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果你习惯在一个脚本的开头做注释的话，可以试试这种方法。&lt;/p></description></item></channel></rss>

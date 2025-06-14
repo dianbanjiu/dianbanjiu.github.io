@@ -1,1 +1,24 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Alertmanager on 点半九</title><link>https://www.dianbanjiu.com/tags/alertmanager/</link><description>Recent content in Alertmanager on 点半九</description><generator>Hugo</generator><language>zh-cn</language><copyright>dianbanjiu@gmail.com</copyright><lastBuildDate>Sun, 08 Aug 2021 14:10:11 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/alertmanager/index.xml" rel="self" type="application/rss+xml"/><item><title>关于 Alertmanager 中 group_interval 与 repeat_interval 上的一些坑</title><link>https://www.dianbanjiu.com/post/alertmanager-%E4%B8%AD%E4%B8%89%E4%B8%AA%E6%97%B6%E9%97%B4%E5%8F%82%E6%95%B0%E4%B8%8A%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91/</link><pubDate>Wed, 14 Jul 2021 23:56:01 +0800</pubDate><guid>https://www.dianbanjiu.com/post/alertmanager-%E4%B8%AD%E4%B8%89%E4%B8%AA%E6%97%B6%E9%97%B4%E5%8F%82%E6%95%B0%E4%B8%8A%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91/</guid><description>Alertmanager 中有三个关于告警时间的参数： group_wait：alertmanager 在接收到一条新的告警（第一次出现的告警）时，将这条告警发送给 receiver 之</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Alertmanager on 点半九</title><link>https://www.dianbanjiu.com/tags/alertmanager/</link><description>Recent content in Alertmanager on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 14 Jul 2021 23:56:01 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/alertmanager/index.xml" rel="self" type="application/rss+xml"/><item><title>关于 Alertmanager 中 group_interval 与 repeat_interval 上的一些坑</title><link>https://www.dianbanjiu.com/post/alertmanager-%E4%B8%AD%E4%B8%89%E4%B8%AA%E6%97%B6%E9%97%B4%E5%8F%82%E6%95%B0%E4%B8%8A%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91/</link><pubDate>Wed, 14 Jul 2021 23:56:01 +0800</pubDate><guid>https://www.dianbanjiu.com/post/alertmanager-%E4%B8%AD%E4%B8%89%E4%B8%AA%E6%97%B6%E9%97%B4%E5%8F%82%E6%95%B0%E4%B8%8A%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91/</guid><description>&lt;p>Alertmanager 中有三个关于告警时间的参数：&lt;/p>
+&lt;ol>
+&lt;li>group_wait：alertmanager 在接收到一条新的告警（第一次出现的告警）时，将这条告警发送给 receiver 之前需要等待的时间&lt;/li>
+&lt;li>group_interval：对于一条已经出现过的告警，alertmanager 检查会每隔 group_interval 时间检查一次告警&lt;/li>
+&lt;li>repeat_interval： 对于一条已经出现过的告警，每隔 repeat_interval 会重新发送给 receiver&lt;/li>
+&lt;/ol>
+&lt;p>这三个参数的基础含义比较简单，但是在最近的使用中，我发现当我按照如下格式设置这三个参数时：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">group_wait&lt;/span>: &lt;span style="color:#ae81ff">15m&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">group_interval&lt;/span>: &lt;span style="color:#ae81ff">5m&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">repeat_interval&lt;/span>: &lt;span style="color:#ae81ff">15m&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>我将会每隔 20m 收到一次告警，如果我将 repeat_interval 设置为 20m，那我将会每 25m 收到一次告警&amp;hellip;&lt;br>
+这种现象好像跟这三个参数在 alertmanager 文档中的说明不太一样啊。在搜寻无果之后，我在 alertmanager 的 github 仓库上提了一个 issue，官方给出了一个比较合理的解释。&lt;/p>
+&lt;p>&lt;a href="https://github.com/prometheus/alertmanager/issues/2647">点此查看此 issue&lt;/a>&lt;/p>
+&lt;p>我根据 Issue 的回答简单总结了一下这三个参数的含义：&lt;/p>
+&lt;blockquote>
+&lt;p>Alertmanager 在收到一条新的告警之后，会等待 group_wait 时间，对这条新的告警做一些分组、更新、静默的操作。当第一条告警经过 group_wait 时间之后，Alertmanager 会每隔 group_interval 时间检查一次这条告警，判断是否需要对这条告警进行一些操作，当 Alertmanager 经过 n 次 group_interval 的检查后，n*group_interval 恰好大于 repeat_interval 的时候，Alertmanager 才会将这条告警再次发送给对应的 receiver。&lt;/p>&lt;/blockquote>
+&lt;p>结合我上面的例子，第一条告警在发送给 alertmanager 15m 后会第一次发送给 receiver，接着 Alertmanager 会每隔 5m 检查一次这条告警，在第 4 次检查的时候，到上次告警发出的时间刚好经过了 5*4=20&amp;gt;15，所以第二次告警会在第一条告警发出后的 20m 后再次发出，此后每条重复告警都会每隔 20m 发送一次。&lt;/p>
+&lt;p>这也就意味着在上面的例子中，当你的 15m&amp;lt;repeat_interval&amp;lt;20m 时，任意两条重复告警的间隔都是 20m。&lt;/p>
+&lt;p>此外还有一个问题：在上面的例子中，如果 alertmanager 是每隔 5m 检查一次告警，那为什么不是恰好在 15m 的时候发出这条告警？关于这个问题，在 Issue 中尚未给出比较明确的答复。&lt;/p>
+&lt;p>根据目前的情况，这个问题有两个暂时解决方案：&lt;/p>
+&lt;ol>
+&lt;li>调整 repeat_interval 的值：同样结合上面的例子，如果你想每隔 20m 收到一次重复告警，那就把 repeat_interval 设置为 [15m,20m) 之间的任意一个时间&lt;/li>
+&lt;li>调整 group_interval 的值：既然 alertmanager 会每隔 group_interval 检查一次已有的告警，那就尽可能将它的时间调的低一些，比如将其设置为 1m，这样你最多在你设置的 repeat_interval+1m 左右就可以收到重复告警&lt;/li>
+&lt;/ol></description></item></channel></rss>

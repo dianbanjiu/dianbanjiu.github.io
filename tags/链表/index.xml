@@ -1,1 +1,136 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>链表 on 点半九</title><link>https://www.dianbanjiu.com/tags/%E9%93%BE%E8%A1%A8/</link><description>Recent content in 链表 on 点半九</description><generator>Hugo</generator><language>zh-cn</language><copyright>dianbanjiu@gmail.com</copyright><lastBuildDate>Tue, 07 Sep 2021 22:21:00 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/%E9%93%BE%E8%A1%A8/index.xml" rel="self" type="application/rss+xml"/><item><title>链表</title><link>https://www.dianbanjiu.com/post/%E9%93%BE%E8%A1%A8/</link><pubDate>Fri, 18 Oct 2019 03:38:42 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E9%93%BE%E8%A1%A8/</guid><description>链表通常是由大于等于零个具有相同属性的节点连接而成的一串数据，每个节点一般都会包含数据域跟指针域两部分。 比较常用的链表有三种，分别是单(向)</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>链表 on 点半九</title><link>https://www.dianbanjiu.com/tags/%E9%93%BE%E8%A1%A8/</link><description>Recent content in 链表 on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 18 Oct 2019 03:38:42 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/%E9%93%BE%E8%A1%A8/index.xml" rel="self" type="application/rss+xml"/><item><title>链表</title><link>https://www.dianbanjiu.com/post/%E9%93%BE%E8%A1%A8/</link><pubDate>Fri, 18 Oct 2019 03:38:42 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E9%93%BE%E8%A1%A8/</guid><description>&lt;p>链表通常是由大于等于零个具有相同属性的节点连接而成的一串数据，每个节点一般都会包含数据域跟指针域两部分。&lt;/p>
+&lt;p>比较常用的链表有三种，分别是单(向)链表，双(向)链表和循环链表。&lt;/p>
+&lt;h2 id="单链表">单链表&lt;/h2>
+&lt;p>单链表的特点是其中的每个节点的指针域仅指向它的直接后继节点。&lt;/p>
+&lt;p>所谓直接后继节点，也就是紧挨着当前节点的下一个节点；对应的还有一个直接前驱节点的概念，指的是该节点紧挨着的前一个节点。单链表的每个节点除头节点外，都有且仅有一个直接前驱，除最后一个节点外的所有节点都有且仅有一个直接后继。&lt;/p>
+&lt;p>由单链表的结构可以知道，单链表的每个节点仅知道下一个节点的位置，却不知道上一个节点的情况。&lt;/p>
+&lt;p>&lt;img src="https://i.imgur.com/dymCnVC.png" alt="Imgur">&lt;/p>
+&lt;p>单链表中 p 点之后添加新节点的操作：&lt;/p>
+&lt;ol>
+&lt;li>先遍历链表到 p 节点&lt;/li>
+&lt;li>将 p 的指向直接后继存储到另一个变量 t 当中&lt;/li>
+&lt;li>将 p.Next 指向新的节点，将新节点的 Next 指向 t&lt;/li>
+&lt;/ol>
+&lt;p>单链表删除索引为 i 的节点：&lt;/p>
+&lt;ol>
+&lt;li>遍历链表到 i-1 所在的节点 p&lt;/li>
+&lt;li>将 p.Next 指向 p.Next.Next&lt;/li>
+&lt;/ol>
+&lt;p>下面来使用 go 创建一个简单的单链表：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">type&lt;/span> &lt;span style="color:#a6e22e">LList&lt;/span> &lt;span style="color:#66d9ef">struct&lt;/span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Data&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Next&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">LList&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">InitList&lt;/span>() &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">LList&lt;/span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#f92672">&amp;amp;&lt;/span>&lt;span style="color:#a6e22e">LList&lt;/span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Data&lt;/span>: &lt;span style="color:#ae81ff">0&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Next&lt;/span>: &lt;span style="color:#66d9ef">nil&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">l&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">LList&lt;/span>)&lt;span style="color:#a6e22e">Append&lt;/span>(&lt;span style="color:#a6e22e">e&lt;/span>, &lt;span style="color:#a6e22e">index&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span>){
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">l&lt;/span>.&lt;span style="color:#a6e22e">Len&lt;/span>() &amp;lt; &lt;span style="color:#a6e22e">index&lt;/span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">index&lt;/span> &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">l&lt;/span> = &lt;span style="color:#f92672">&amp;amp;&lt;/span>&lt;span style="color:#a6e22e">LList&lt;/span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Data&lt;/span>: &lt;span style="color:#a6e22e">e&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Next&lt;/span>: &lt;span style="color:#a6e22e">l&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">p&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">l&lt;/span>.&lt;span style="color:#a6e22e">Next&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#a6e22e">i&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>; &lt;span style="color:#a6e22e">i&lt;/span> &amp;lt; &lt;span style="color:#a6e22e">index&lt;/span>; &lt;span style="color:#a6e22e">i&lt;/span>&lt;span style="color:#f92672">++&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">p&lt;/span> = &lt;span style="color:#a6e22e">p&lt;/span>.&lt;span style="color:#a6e22e">Next&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">p&lt;/span>.&lt;span style="color:#a6e22e">Next&lt;/span> = &lt;span style="color:#f92672">&amp;amp;&lt;/span>&lt;span style="color:#a6e22e">LList&lt;/span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Data&lt;/span>: &lt;span style="color:#a6e22e">e&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Next&lt;/span>: &lt;span style="color:#a6e22e">p&lt;/span>.&lt;span style="color:#a6e22e">Next&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">l&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">LList&lt;/span>)&lt;span style="color:#a6e22e">Delete&lt;/span>(&lt;span style="color:#a6e22e">index&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span>)&lt;span style="color:#66d9ef">int&lt;/span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">l&lt;/span>.&lt;span style="color:#a6e22e">Len&lt;/span>() &amp;lt; &lt;span style="color:#a6e22e">index&lt;/span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">e&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">index&lt;/span> &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">e&lt;/span> = &lt;span style="color:#a6e22e">l&lt;/span>.&lt;span style="color:#a6e22e">Data&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">l&lt;/span> = &lt;span style="color:#a6e22e">l&lt;/span>.&lt;span style="color:#a6e22e">Next&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">e&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">p&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">l&lt;/span>.&lt;span style="color:#a6e22e">Next&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#a6e22e">i&lt;/span>&lt;span style="color:#f92672">:=&lt;/span>&lt;span style="color:#ae81ff">0&lt;/span>; &lt;span style="color:#a6e22e">i&lt;/span>&amp;lt;&lt;span style="color:#a6e22e">index&lt;/span>; &lt;span style="color:#a6e22e">i&lt;/span>&lt;span style="color:#f92672">++&lt;/span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">p&lt;/span> = &lt;span style="color:#a6e22e">p&lt;/span>.&lt;span style="color:#a6e22e">Next&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">e&lt;/span> = &lt;span style="color:#a6e22e">p&lt;/span>.&lt;span style="color:#a6e22e">Next&lt;/span>.&lt;span style="color:#a6e22e">Data&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">p&lt;/span>.&lt;span style="color:#a6e22e">Next&lt;/span> = &lt;span style="color:#a6e22e">p&lt;/span>.&lt;span style="color:#a6e22e">Next&lt;/span>.&lt;span style="color:#a6e22e">Next&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">e&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">l&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">LList&lt;/span>)&lt;span style="color:#a6e22e">Len&lt;/span>()&lt;span style="color:#66d9ef">int&lt;/span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">i&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">p&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">l&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#a6e22e">p&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">i&lt;/span>&lt;span style="color:#f92672">+=&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">p&lt;/span> = &lt;span style="color:#a6e22e">p&lt;/span>.&lt;span style="color:#a6e22e">Next&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">i&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>go 会在声明一个变量的同时对其进行初始化，结构体的零值为 &lt;code>nil&lt;/code>。如果你在声明一个节点的时候使用的是 &lt;code>var p *LList&lt;/code>，那么在下面任何对 p 结构体内单个条目的操作都会引发空指针的引用错误。&lt;/p>
+&lt;h2 id="双链表">双链表&lt;/h2>
+&lt;p>双链表跟单链表的区别是，双链表比单链表的节点多了一个指针域，指向它的直接前驱。&lt;/p>
+&lt;p>双链表的每个节点除头节点外，都有且仅有一个直接前驱，除最后一个节点外的所有节点都有且仅有一个直接后继。&lt;/p>
+&lt;p>&lt;img src="https://i.imgur.com/AaYzcRX.png" alt="Imgur">&lt;/p>
+&lt;p>双链表的节点结构：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">type&lt;/span> &lt;span style="color:#a6e22e">DList&lt;/span> &lt;span style="color:#66d9ef">struct&lt;/span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Data&lt;/span> &lt;span style="color:#a6e22e">ElemenType&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Pre&lt;/span>, &lt;span style="color:#a6e22e">Next&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">DList&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>因为双链表相较单链表多了一个指针，所以在进行添加删除等操作时需要同时考虑到两个指针的变化。&lt;/p>
+&lt;p>在双链表的 p 节点后添加新的节点操作：&lt;/p>
+&lt;ol>
+&lt;li>遍历链表到 p 节点&lt;/li>
+&lt;li>先将新节点的 Pre 指针指向 p，并将新节点的 Next 指针指向 p 的直接后继&lt;/li>
+&lt;li>将 p 直接后继的 Pre 指针指向新的节点，并将 p 的 Next 指针指向新的节点&lt;/li>
+&lt;/ol>
+&lt;p>删除索引为 i 的节点：&lt;/p>
+&lt;ol>
+&lt;li>遍历链表至 i-1&lt;/li>
+&lt;li>将索引为 i+1 的节点的 Pre 指针指向 索引为 i-1 的节点&lt;/li>
+&lt;li>将索引为 i-1 的节点的 Next 指针指向索引为 i+1 的节点&lt;/li>
+&lt;/ol>
+&lt;p>双向链表在 go 标准库的 container/list 包中已经实现，可以直接导入使用，此处就不重复说明：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">type&lt;/span> &lt;span style="color:#a6e22e">Element&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">e&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">Element&lt;/span>) &lt;span style="color:#a6e22e">Next&lt;/span>() &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">Element&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">e&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">Element&lt;/span>) &lt;span style="color:#a6e22e">Prev&lt;/span>() &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">Element&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">type&lt;/span> &lt;span style="color:#a6e22e">List&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">New&lt;/span>() &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">List&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">l&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">List&lt;/span>) &lt;span style="color:#a6e22e">Back&lt;/span>() &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">Element&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">l&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">List&lt;/span>) &lt;span style="color:#a6e22e">Front&lt;/span>() &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">Element&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">l&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">List&lt;/span>) &lt;span style="color:#a6e22e">Init&lt;/span>() &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">List&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">l&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">List&lt;/span>) &lt;span style="color:#a6e22e">InsertAfter&lt;/span>(&lt;span style="color:#a6e22e">v&lt;/span> &lt;span style="color:#66d9ef">interface&lt;/span>{}, &lt;span style="color:#a6e22e">mark&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">Element&lt;/span>) &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">Element&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">l&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">List&lt;/span>) &lt;span style="color:#a6e22e">InsertBefore&lt;/span>(&lt;span style="color:#a6e22e">v&lt;/span> &lt;span style="color:#66d9ef">interface&lt;/span>{}, &lt;span style="color:#a6e22e">mark&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">Element&lt;/span>) &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">Element&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">l&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">List&lt;/span>) &lt;span style="color:#a6e22e">Len&lt;/span>() &lt;span style="color:#66d9ef">int&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">l&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">List&lt;/span>) &lt;span style="color:#a6e22e">MoveAfter&lt;/span>(&lt;span style="color:#a6e22e">e&lt;/span>, &lt;span style="color:#a6e22e">mark&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">Element&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">l&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">List&lt;/span>) &lt;span style="color:#a6e22e">MoveBefore&lt;/span>(&lt;span style="color:#a6e22e">e&lt;/span>, &lt;span style="color:#a6e22e">mark&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">Element&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">l&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">List&lt;/span>) &lt;span style="color:#a6e22e">MoveToBack&lt;/span>(&lt;span style="color:#a6e22e">e&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">Element&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">l&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">List&lt;/span>) &lt;span style="color:#a6e22e">MoveToFront&lt;/span>(&lt;span style="color:#a6e22e">e&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">Element&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">l&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">List&lt;/span>) &lt;span style="color:#a6e22e">PushBack&lt;/span>(&lt;span style="color:#a6e22e">v&lt;/span> &lt;span style="color:#66d9ef">interface&lt;/span>{}) &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">Element&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">l&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">List&lt;/span>) &lt;span style="color:#a6e22e">PushBackList&lt;/span>(&lt;span style="color:#a6e22e">other&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">List&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">l&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">List&lt;/span>) &lt;span style="color:#a6e22e">PushFront&lt;/span>(&lt;span style="color:#a6e22e">v&lt;/span> &lt;span style="color:#66d9ef">interface&lt;/span>{}) &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">Element&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">l&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">List&lt;/span>) &lt;span style="color:#a6e22e">PushFrontList&lt;/span>(&lt;span style="color:#a6e22e">other&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">List&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">l&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">List&lt;/span>) &lt;span style="color:#a6e22e">Remove&lt;/span>(&lt;span style="color:#a6e22e">e&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">Element&lt;/span>) &lt;span style="color:#66d9ef">interface&lt;/span>{}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="循环链表">循环链表&lt;/h2>
+&lt;p>循环链表又分为循环单链表或者循环双链表，它们与上面两种链表的区别在于：循环链表将头节点与最后一个节点以单双链表各自的形式形成了直接前驱后继的关系。&lt;/p>
+&lt;p>所以在循环链表中的每个节点都有一个直接前驱与直接后继。&lt;/p>
+&lt;p>&lt;img src="https://i.imgur.com/vMXrmei.png" alt="Imgur">&lt;br>
+&lt;img src="https://i.imgur.com/yErfKGJ.png" alt="Imgur">&lt;/p>
+&lt;p>因为首尾相接的缘故，循环链表其实可以不必严格区分头节点跟尾节点，因为无论从哪个节点开始都可以遍历整个链表。&lt;/p>
+&lt;p>除这些区别外，其他的操作与单双链表也基本相同。&lt;/p></description></item></channel></rss>

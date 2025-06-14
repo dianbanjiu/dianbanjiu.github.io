@@ -1,1 +1,254 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Onedrive on 点半九</title><link>https://www.dianbanjiu.com/tags/onedrive/</link><description>Recent content in Onedrive on 点半九</description><generator>Hugo</generator><language>zh-cn</language><copyright>dianbanjiu@gmail.com</copyright><lastBuildDate>Sat, 02 Dec 2023 23:10:48 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/onedrive/index.xml" rel="self" type="application/rss+xml"/><item><title>使用 Rclone 挂载 OneDrive</title><link>https://www.dianbanjiu.com/post/%E4%BD%BF%E7%94%A8-rclone-%E6%8C%82%E8%BD%BD-onedrive/</link><pubDate>Wed, 16 Mar 2022 11:47:59 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E4%BD%BF%E7%94%A8-rclone-%E6%8C%82%E8%BD%BD-onedrive/</guid><description>安装 因为 OneDrive 没有提供官方的 Linux 客户端，所以为了方便起见，我选择直接通过 rclone 将 OneDrive 挂载到本地，这样就可以在本地直接对 OneDrive 的文件进行管理 首先需要安装 rclone 程序</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Onedrive on 点半九</title><link>https://www.dianbanjiu.com/tags/onedrive/</link><description>Recent content in Onedrive on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 16 Mar 2022 11:47:59 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/onedrive/index.xml" rel="self" type="application/rss+xml"/><item><title>使用 Rclone 挂载 OneDrive</title><link>https://www.dianbanjiu.com/post/%E4%BD%BF%E7%94%A8-rclone-%E6%8C%82%E8%BD%BD-onedrive/</link><pubDate>Wed, 16 Mar 2022 11:47:59 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E4%BD%BF%E7%94%A8-rclone-%E6%8C%82%E8%BD%BD-onedrive/</guid><description>&lt;h2 id="安装">安装&lt;/h2>
+&lt;p>因为 OneDrive 没有提供官方的 Linux 客户端，所以为了方便起见，我选择直接通过 rclone 将 OneDrive 挂载到本地，这样就可以在本地直接对 OneDrive 的文件进行管理&lt;/p>
+&lt;p>首先需要安装 &lt;code>rclone&lt;/code> 程序本体，我使用的是 Arch Linux，可以直接通过 pacman 进行安装&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ sudo pacman -S rclone
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="配置">配置&lt;/h2>
+&lt;p>接着就可以使用 &lt;code>rclone&lt;/code>开始配置自己的 OneDrive 了，下面是我实际配置过程的输出&lt;/p>
+&lt;p>开始之前，先说几个需要注意的地方：&lt;/p>
+&lt;ol>
+&lt;li>类似下面的这种选择，可以选择输入前面的序号，如 1，也可以选择输入后面的文字，如 fichier&lt;/li>
+&lt;/ol>
+&lt;pre tabindex="0">&lt;code>1 / 1Fichier
+\ &amp;#34;fichier&amp;#34;
+&lt;/code>&lt;/pre>&lt;ol start="2">
+&lt;li>在选择 &lt;code>region&lt;/code> 地区的时候，一定确定好自己要挂载的 OneDrive 是哪个版本的，如果你使用的是世纪互联版本的 OneDrive 那就选择 &lt;code>cn&lt;/code>，否则一般选择 &lt;code>global&lt;/code> 就可以， &lt;code>us&lt;/code> 是美国政府版（应该没人真的是这个吧）&lt;/li>
+&lt;li>在 &lt;code>Use auto config?&lt;/code> 阶段，如果你选择了 &lt;code>Y&lt;/code> ，rclone 会打开一个浏览器页面，需要你登录并授权 OneDrive 的访问权限。有些教程可能会让你使用 &lt;code>rclone authorize&lt;/code> 来单独获取 OneDrive 的 token 及授权，不过两者其实区别不大，唯一的区别就是自动配置模式下可以自动帮你获取到 token，而后者需要你使用另一个命令获取 token，在配置 OneDrive 的时候手动粘贴进去&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ rclone config
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Current remotes:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Name Type
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">====&lt;/span> &lt;span style="color:#f92672">====&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>e&lt;span style="color:#f92672">)&lt;/span> Edit existing remote
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>n&lt;span style="color:#f92672">)&lt;/span> New remote
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>d&lt;span style="color:#f92672">)&lt;/span> Delete remote
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>r&lt;span style="color:#f92672">)&lt;/span> Rename remote
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>c&lt;span style="color:#f92672">)&lt;/span> Copy remote
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>s&lt;span style="color:#f92672">)&lt;/span> Set configuration password
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>q&lt;span style="color:#f92672">)&lt;/span> Quit config
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>e/n/d/r/c/s/q&amp;gt; n
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>name&amp;gt; testDrive
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Option Storage.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Type of storage to configure.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Enter a string value. Press Enter &lt;span style="color:#66d9ef">for&lt;/span> the default &lt;span style="color:#f92672">(&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span>&lt;span style="color:#f92672">)&lt;/span>.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Choose a number from below, or type in your own value.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">1&lt;/span> / 1Fichier
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;fichier&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">2&lt;/span> / Alias &lt;span style="color:#66d9ef">for&lt;/span> an existing remote
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;alias&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">3&lt;/span> / Amazon Drive
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;amazon cloud drive&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">4&lt;/span> / Amazon S3 Compliant Storage Providers including AWS, Alibaba, Ceph, Digital Ocean, Dreamhost, IBM COS, Minio, SeaweedFS, and Tencent COS
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;s3&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">5&lt;/span> / Backblaze B2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;b2&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">6&lt;/span> / Better checksums &lt;span style="color:#66d9ef">for&lt;/span> other remotes
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;hasher&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">7&lt;/span> / Box
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;box&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">8&lt;/span> / Cache a remote
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;cache&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">9&lt;/span> / Citrix Sharefile
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;sharefile&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">10&lt;/span> / Compress a remote
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;compress&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">11&lt;/span> / Dropbox
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;dropbox&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">12&lt;/span> / Encrypt/Decrypt a remote
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;crypt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">13&lt;/span> / Enterprise File Fabric
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;filefabric&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">14&lt;/span> / FTP Connection
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;ftp&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">15&lt;/span> / Google Cloud Storage &lt;span style="color:#f92672">(&lt;/span>this is not Google Drive&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;google cloud storage&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">16&lt;/span> / Google Drive
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;drive&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">17&lt;/span> / Google Photos
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;google photos&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">18&lt;/span> / Hadoop distributed file system
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;hdfs&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">19&lt;/span> / Hubic
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;hubic&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">20&lt;/span> / In memory object storage system.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;memory&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">21&lt;/span> / Jottacloud
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;jottacloud&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">22&lt;/span> / Koofr
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;koofr&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">23&lt;/span> / Local Disk
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;local&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">24&lt;/span> / Mail.ru Cloud
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;mailru&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">25&lt;/span> / Mega
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;mega&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">26&lt;/span> / Microsoft Azure Blob Storage
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;azureblob&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">27&lt;/span> / Microsoft OneDrive
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;onedrive&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">28&lt;/span> / OpenDrive
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;opendrive&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">29&lt;/span> / OpenStack Swift &lt;span style="color:#f92672">(&lt;/span>Rackspace Cloud Files, Memset Memstore, OVH&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;swift&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">30&lt;/span> / Pcloud
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;pcloud&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">31&lt;/span> / Put.io
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;putio&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">32&lt;/span> / QingCloud Object Storage
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;qingstor&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">33&lt;/span> / SSH/SFTP Connection
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;sftp&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">34&lt;/span> / Sia Decentralized Cloud
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;sia&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">35&lt;/span> / Sugarsync
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;sugarsync&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">36&lt;/span> / Tardigrade Decentralized Cloud Storage
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;tardigrade&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">37&lt;/span> / Transparently chunk/split large files
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;chunker&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">38&lt;/span> / Union merges the contents of several upstream fs
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;union&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">39&lt;/span> / Uptobox
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;uptobox&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">40&lt;/span> / Webdav
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;webdav&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">41&lt;/span> / Yandex Disk
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;yandex&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">42&lt;/span> / Zoho
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;zoho&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">43&lt;/span> / http Connection
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;http&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">44&lt;/span> / premiumize.me
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;premiumizeme&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">45&lt;/span> / seafile
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;seafile&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Storage&amp;gt; onedrive
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Option client_id.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>OAuth Client Id.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Leave blank normally.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Enter a string value. Press Enter &lt;span style="color:#66d9ef">for&lt;/span> the default &lt;span style="color:#f92672">(&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span>&lt;span style="color:#f92672">)&lt;/span>.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>client_id&amp;gt; &lt;span style="color:#f92672">{&lt;/span>直接回车就可以&lt;span style="color:#f92672">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Option client_secret.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>OAuth Client Secret.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Leave blank normally.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Enter a string value. Press Enter &lt;span style="color:#66d9ef">for&lt;/span> the default &lt;span style="color:#f92672">(&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span>&lt;span style="color:#f92672">)&lt;/span>.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>client_secret&amp;gt; &lt;span style="color:#f92672">{&lt;/span>直接回车就可以&lt;span style="color:#f92672">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Option region.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Choose national cloud region &lt;span style="color:#66d9ef">for&lt;/span> OneDrive.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Enter a string value. Press Enter &lt;span style="color:#66d9ef">for&lt;/span> the default &lt;span style="color:#f92672">(&lt;/span>&lt;span style="color:#e6db74">&amp;#34;global&amp;#34;&lt;/span>&lt;span style="color:#f92672">)&lt;/span>.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Choose a number from below, or type in your own value.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">1&lt;/span> / Microsoft Cloud Global
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;global&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">2&lt;/span> / Microsoft Cloud &lt;span style="color:#66d9ef">for&lt;/span> US Government
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;us&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">3&lt;/span> / Microsoft Cloud Germany
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;de&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">4&lt;/span> / Azure and Office &lt;span style="color:#ae81ff">365&lt;/span> operated by 21Vianet in China
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;cn&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>region&amp;gt; global
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Edit advanced config?
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>y&lt;span style="color:#f92672">)&lt;/span> Yes
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>n&lt;span style="color:#f92672">)&lt;/span> No &lt;span style="color:#f92672">(&lt;/span>default&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>y/n&amp;gt; n
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Use auto config?
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> * Say Y &lt;span style="color:#66d9ef">if&lt;/span> not sure
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> * Say N &lt;span style="color:#66d9ef">if&lt;/span> you are working on a remote or headless machine
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>y&lt;span style="color:#f92672">)&lt;/span> Yes &lt;span style="color:#f92672">(&lt;/span>default&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>n&lt;span style="color:#f92672">)&lt;/span> No
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>y/n&amp;gt; y
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2022/03/16 10:04:50 NOTICE: If your browser doesn&lt;span style="color:#960050;background-color:#1e0010">&amp;#39;&lt;/span>t open automatically go to the following link: http://127.0.0.1:53682/auth?state&lt;span style="color:#f92672">=&lt;/span>qkwpEntUvXPewzviZQXNOHA
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2022/03/16 10:04:50 NOTICE: Log in and authorize rclone &lt;span style="color:#66d9ef">for&lt;/span> access
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2022/03/16 10:04:50 NOTICE: Waiting &lt;span style="color:#66d9ef">for&lt;/span> code...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2022/03/16 10:06:03 NOTICE: Got code
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Option config_type.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Type of connection
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Enter a string value. Press Enter &lt;span style="color:#66d9ef">for&lt;/span> the default &lt;span style="color:#f92672">(&lt;/span>&lt;span style="color:#e6db74">&amp;#34;onedrive&amp;#34;&lt;/span>&lt;span style="color:#f92672">)&lt;/span>.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Choose a number from below, or type in an existing value.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">1&lt;/span> / OneDrive Personal or Business
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;onedrive&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">2&lt;/span> / Root Sharepoint site
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;sharepoint&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> / Sharepoint site name or URL
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">3&lt;/span> | E.g. mysite or https://contoso.sharepoint.com/sites/mysite
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;url&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">4&lt;/span> / Search &lt;span style="color:#66d9ef">for&lt;/span> a Sharepoint site
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;search&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">5&lt;/span> / Type in driveID &lt;span style="color:#f92672">(&lt;/span>advanced&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;driveid&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">6&lt;/span> / Type in SiteID &lt;span style="color:#f92672">(&lt;/span>advanced&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;siteid&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> / Sharepoint server-relative path &lt;span style="color:#f92672">(&lt;/span>advanced&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">7&lt;/span> | E.g. /teams/hr
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">\ &lt;/span>&lt;span style="color:#e6db74">&amp;#34;path&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>config_type&amp;gt; &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Drive OK?
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Found drive &lt;span style="color:#e6db74">&amp;#34;root&amp;#34;&lt;/span> of type &lt;span style="color:#e6db74">&amp;#34;personal&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>URL: https://onedrive.live.com/?cid&lt;span style="color:#f92672">=&lt;/span>j2sy7l2us75j92
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>y&lt;span style="color:#f92672">)&lt;/span> Yes &lt;span style="color:#f92672">(&lt;/span>default&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>n&lt;span style="color:#f92672">)&lt;/span> No
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>y/n&amp;gt; y
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>--------------------
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>testDrive&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>type &lt;span style="color:#f92672">=&lt;/span> onedrive
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>token &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#f92672">{&lt;/span>这里就不展示了&lt;span style="color:#f92672">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>drive_id &lt;span style="color:#f92672">=&lt;/span> js7y3isjy29hj725
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>drive_type &lt;span style="color:#f92672">=&lt;/span> personal
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>--------------------
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>y&lt;span style="color:#f92672">)&lt;/span> Yes this is OK &lt;span style="color:#f92672">(&lt;/span>default&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>e&lt;span style="color:#f92672">)&lt;/span> Edit this remote
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>d&lt;span style="color:#f92672">)&lt;/span> Delete this remote
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>y/e/d&amp;gt; y
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Current remotes:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Name Type
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">====&lt;/span> &lt;span style="color:#f92672">====&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>testDrive onedrive
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>e&lt;span style="color:#f92672">)&lt;/span> Edit existing remote
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>n&lt;span style="color:#f92672">)&lt;/span> New remote
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>d&lt;span style="color:#f92672">)&lt;/span> Delete remote
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>r&lt;span style="color:#f92672">)&lt;/span> Rename remote
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>c&lt;span style="color:#f92672">)&lt;/span> Copy remote
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>s&lt;span style="color:#f92672">)&lt;/span> Set configuration password
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>q&lt;span style="color:#f92672">)&lt;/span> Quit config
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>e/n/d/r/c/s/q&amp;gt; q
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="测试挂载卸载">测试&amp;amp;&amp;amp;挂载&amp;amp;&amp;amp;卸载&lt;/h2>
+&lt;h3 id="测试">测试&lt;/h3>
+&lt;p>接着你可以使用下面的命令列出自己 OneDrive 中的所有一级目录，测试一下是否配置成功&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ rclone lsd testDrive:
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="挂载">挂载&lt;/h3>
+&lt;p>如果你只想在需要的时候手动挂载 OneDrive，可以使用下面的命令&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ rclone mount testDrive:/ /path/to/mount --allow-non-empty --vfs-cache-mode full --daemon
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>&lt;code>testDrive&lt;/code> 是上面在配置 OneDrive 时指定的 name&lt;/li>
+&lt;li>&lt;code>testDrive:&lt;/code> 后面跟着的是你想要挂载到本地的 OneDrive 中的目录或者文件，这里的 &lt;code>/&lt;/code> 代表 OneDrive 中的所有内容&lt;/li>
+&lt;li>&lt;code>/path/to/mount&lt;/code> 是指定你将 OneDrive 挂载到本地的位置。此目录需要提前创建并赋予足够的读写权限&lt;/li>
+&lt;li>&lt;code>--allow-non-empty&lt;/code> 允许将 OneDrive 挂载到一个非空目录中，该参数&lt;strong>可不指定&lt;/strong>&lt;/li>
+&lt;li>&lt;code>--vfs-cache-mode full&lt;/code> 缓存模式，我这里指定的是 &lt;code>full&lt;/code>，默认是 &lt;code>off&lt;/code> 。这里一共支持 4 种模式，我这里就简单说一下这两种的区别
+&lt;ul>
+&lt;li>&lt;code>full&lt;/code> 模式下所有对远程文件的读写都会缓存到磁盘中&lt;/li>
+&lt;li>&lt;code>off&lt;/code> 模式下所有对远程文件的读写都不会缓存到磁盘中&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>rclone 的挂载命令是一个前台服务，如果你关闭了当前的会话，那挂载进程也会退出。&lt;code>--daemon&lt;/code> 参数可以将 rclone 的挂载命令作为一个后台服务，这样即使你关闭了当前会话，挂载进程也不会退出&lt;/li>
+&lt;/ul>
+&lt;h3 id="卸载">卸载&lt;/h3>
+&lt;p>使用 rclone 挂载的云盘的卸载和普通磁盘的卸载方式一样，可以直接使用 &lt;code>umount&lt;/code> 来完成&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>umount testDrive
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="开机自启动">开机自启动&lt;/h2>
+&lt;p>当然，如果想要避免每次开机都要手动挂载一次，也可以选择创建开机自启脚本&lt;/p>
+&lt;p>在 &lt;code>~/.config/autostart&lt;/code> 目录下创建一个以 &lt;code>.desktop&lt;/code> 结尾的文件，该文件的内容如下&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>Desktop Entry&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Type&lt;span style="color:#f92672">=&lt;/span>Application
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>NoDisplay&lt;span style="color:#f92672">=&lt;/span>true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Terminal&lt;span style="color:#f92672">=&lt;/span>false
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Name&lt;span style="color:#f92672">=&lt;/span>dianDrive
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Exec&lt;span style="color:#f92672">=&lt;/span>/usr/bin/rclone mount testDrive:/ /path/to/mount --allow-non-empty --vfs-cache-mode full --daemon
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Icon&lt;span style="color:#f92672">=&lt;/span>onedrive
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Comment&lt;span style="color:#f92672">=&lt;/span>Auto mount OneDrive to local.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Categories&lt;span style="color:#f92672">=&lt;/span>Network;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

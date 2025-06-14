@@ -1,1 +1,102 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Android on 点半九</title><link>https://www.dianbanjiu.com/tags/android/</link><description>Recent content in Android on 点半九</description><generator>Hugo</generator><language>zh-cn</language><copyright>dianbanjiu@gmail.com</copyright><lastBuildDate>Tue, 02 Mar 2021 00:34:31 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/android/index.xml" rel="self" type="application/rss+xml"/><item><title>Android 手机投屏到 Linux 下</title><link>https://www.dianbanjiu.com/post/android-%E6%89%8B%E6%9C%BA%E6%8A%95%E5%B1%8F%E5%88%B0-linux-%E4%B8%8B/</link><pubDate>Tue, 24 Dec 2019 14:40:22 +0800</pubDate><guid>https://www.dianbanjiu.com/post/android-%E6%89%8B%E6%9C%BA%E6%8A%95%E5%B1%8F%E5%88%B0-linux-%E4%B8%8B/</guid><description>最近发现了一个可以在 Linux 下使用的手机投屏软件软件 —— scrcpy，同时也支持 Windows 和 MacOS，但是因为我用的是 Manjaro Linux，所以下面只会介绍 Manjaro 下</description></item><item><title>禁止 Android 版的 Firefox 自动跳转应用</title><link>https://www.dianbanjiu.com/post/%E7%A6%81%E6%AD%A2-android-%E7%89%88%E7%9A%84-firefox-%E8%87%AA%E5%8A%A8%E8%B7%B3%E8%BD%AC%E5%BA%94%E7%94%A8/</link><pubDate>Sat, 23 Nov 2019 21:48:35 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E7%A6%81%E6%AD%A2-android-%E7%89%88%E7%9A%84-firefox-%E8%87%AA%E5%8A%A8%E8%B7%B3%E8%BD%AC%E5%BA%94%E7%94%A8/</guid><description>Android 版的 Firefox 在打开像是知乎回答，bilibili 的视频，小米商城等的时候，会自动跳转至手机上对应的 app 里面去，可是如果你的手机上如果没有安装这些软</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Android on 点半九</title><link>https://www.dianbanjiu.com/tags/android/</link><description>Recent content in Android on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 24 Dec 2019 14:40:22 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/android/index.xml" rel="self" type="application/rss+xml"/><item><title>Android 手机投屏到 Linux 下</title><link>https://www.dianbanjiu.com/post/android-%E6%89%8B%E6%9C%BA%E6%8A%95%E5%B1%8F%E5%88%B0-linux-%E4%B8%8B/</link><pubDate>Tue, 24 Dec 2019 14:40:22 +0800</pubDate><guid>https://www.dianbanjiu.com/post/android-%E6%89%8B%E6%9C%BA%E6%8A%95%E5%B1%8F%E5%88%B0-linux-%E4%B8%8B/</guid><description>&lt;p>最近发现了一个可以在 Linux 下使用的手机投屏软件软件 —— &lt;strong>scrcpy&lt;/strong>，同时也支持 Windows 和 MacOS，但是因为我用的是 Manjaro Linux，所以下面只会介绍 Manjaro 下的情况。其他的系统可以参照 &lt;a href="https://github.com/Genymobile/scrcpy">scrcpy&lt;/a>&lt;/p>
+&lt;h2 id="安装">安装&lt;/h2>
+&lt;p>如果使用的是 Arch Linux 系的系统，并且已经配置了 archlinuxcn 的源，可以直接使用 pacman 进行安装：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ sudo pacman -S scrcpy
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果没有配置的话，也可以从 aur 获取，以 &lt;strong>yay&lt;/strong> 为例：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ yay scrcpy
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="配置">配置&lt;/h2>
+&lt;p>在开启 scrcpy 之前，你还需要做下面这几件事情：&lt;/p>
+&lt;ol>
+&lt;li>电脑上安装 &lt;strong>adb&lt;/strong>。&lt;/li>
+&lt;li>在手机上打开 &lt;strong>开发者模式&lt;/strong>。&lt;/li>
+&lt;li>在开发者模式当中开启 &lt;strong>USB 调试&lt;/strong> 以及 &lt;strong>USB 调试(安全设置)&lt;/strong>&lt;/li>
+&lt;/ol>
+&lt;blockquote>
+&lt;p>注：&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>USB 调试(安全设置)&lt;/strong> 可能不是所有的手机上都会有，如果有的话最好开启，我使用的是 mi Mix2，系统是 MIUI eu，不开启 &lt;strong>USB 调试(安全设置)&lt;/strong> 的情况下，在 scrcpy 当中是无法使用鼠标以及键盘的。&lt;/li>
+&lt;li>在 Linux 下可以通过安装 &lt;strong>android-tools&lt;/strong> 来获取 adb。&lt;/li>
+&lt;/ol>&lt;/blockquote>
+&lt;p>scrcpy 可以通过有线和无线两种方式连接手机。&lt;/p>
+&lt;h2 id="使用">使用&lt;/h2>
+&lt;h3 id="有线">有线&lt;/h3>
+&lt;ol>
+&lt;li>上面这些都准备好了之后，先使用数据线连接手机与电脑，在终端先输入 &lt;code>adb devices&lt;/code>，如果是第一次执行这条命令，在手机上应该会出现一个确认使用该电脑调试手机的通知，同时终端上也会显示你的设备号。&lt;/li>
+&lt;li>点击确认之后，直接在终端输入 &lt;code>scrcpy&lt;/code> 应该就可以看到手机界面出现在电脑屏幕上了。&lt;/li>
+&lt;/ol>
+&lt;h3 id="无线">无线&lt;/h3>
+&lt;ol>
+&lt;li>第一步同上面有线连接的第一步。&lt;/li>
+&lt;li>连接成功之后，在终端输入 &lt;code>adb tcpip 5555&lt;/code>，这个端口可以根据自己的需要选择。&lt;/li>
+&lt;li>开启成功之后就可以拔掉数据线了。&lt;/li>
+&lt;li>在手机的 设置-&amp;gt;我的设备-&amp;gt;全部参数-&amp;gt;状态信息 中查看手机的 ip（这是 MIUI 的查看方式，其他系统应该大同小异）。&lt;/li>
+&lt;li>在终端输入 &lt;code>adb connect PHONE_IP:5555&lt;/code> 连接手机。&lt;/li>
+&lt;li>最后在终端输入 &lt;code>scrcpy&lt;/code> 就可以看到现在的手机界面了。&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://i.imgur.com/yWiL9sC.png" alt="">&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;strong>注意：&lt;/strong>&lt;/p>
+&lt;ol>
+&lt;li>连接之后，仅可以传输手机的画面，但并不能传递声音，声音依然是从手机发出的。&lt;/li>
+&lt;li>开启 MIUI 的 USB 调试（安全设置）需要登录小米帐号才可以，如果使用 4g 网络依旧无法连接，可以尝试切换到 wifi 网络。&lt;/li>
+&lt;/ol>&lt;/blockquote>
+&lt;h2 id="快捷使用">快捷使用&lt;/h2>
+&lt;p>下面是一些常用的键盘快捷方式：&lt;br>
+&lt;strong>注：&lt;/strong> Linux 下的 &lt;code>mod&lt;/code> 键为 &lt;code>视窗&lt;/code> 键，也就是那个 windows 图标键。&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>作用&lt;/th>
+&lt;th>快捷键&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>返回&lt;/td>
+&lt;td>mod+B&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>主界面&lt;/td>
+&lt;td>mod+H&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>多任务界面&lt;/td>
+&lt;td>mod+S&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>关闭手机屏幕（电脑上的界面正常显示）&lt;/td>
+&lt;td>mod+O&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>开启手机屏幕&lt;/td>
+&lt;td>右键单击&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>展开通知栏&lt;/td>
+&lt;td>mod+N&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>折叠通知栏&lt;/td>
+&lt;td>mod+Shift+N&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>如果需要将电脑的文件传到手机，直接将文件拖拽到电脑上的手机界面即可，文件默认是会存放在用户的主目录下的，也就是手机上跟 Downloads 同级的目录下。&lt;/p>
+&lt;p>虽然 scrcpy 也支持同步手机跟电脑的剪贴板，不过不是很好用。&lt;/p>
+&lt;p>此外， scrcpy 还支持很多其他的参数，也还有很多其他的快捷键，上面仅列出了我经常使用的几个。&lt;/p>
+&lt;p>如果你手机跟电脑上还安装了 &lt;code>kde-connect&lt;/code> 的话，可以通过它来同步手机的通知以及剪贴板，还可以用来管理手机文件。跟 scrcpy 搭配使用体验还是很不错的。&lt;/p>
+&lt;p>在连接到电脑之后我们很多时候可能都希望手机息屏而 PC 端的镜像可以常亮，虽然可以通过 &lt;code>mod+O&lt;/code> 来实现，但这种方式实现的亮屏会在达到手机屏幕休眠时间之后自动黑屏，所以想要实现常亮的话需要在启动 scrcpy 的时候添加一个可以保持屏幕唤醒的参数：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ scrcpy --turn-screen-off --stay-awake
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果亮屏是刚需的话也可以将这个命令设置为 scrcpy 的别名，只需要在 &lt;code>~/.zshrc&lt;/code> 或者 &lt;code>~/.bashrc&lt;/code> 中添加如下内容，然后 &lt;code>source&lt;/code> 该文件即可：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>alias scrcpy&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;scrcpy --turn-screen-off --stay-awake&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>禁止 Android 版的 Firefox 自动跳转应用</title><link>https://www.dianbanjiu.com/post/%E7%A6%81%E6%AD%A2-android-%E7%89%88%E7%9A%84-firefox-%E8%87%AA%E5%8A%A8%E8%B7%B3%E8%BD%AC%E5%BA%94%E7%94%A8/</link><pubDate>Sat, 23 Nov 2019 21:48:35 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E7%A6%81%E6%AD%A2-android-%E7%89%88%E7%9A%84-firefox-%E8%87%AA%E5%8A%A8%E8%B7%B3%E8%BD%AC%E5%BA%94%E7%94%A8/</guid><description>&lt;p>Android 版的 Firefox 在打开像是知乎回答，bilibili 的视频，小米商城等的时候，会自动跳转至手机上对应的 app 里面去，可是如果你的手机上如果没有安装这些软件的话，Firefox 就会跳转至以 app 名为协议名的一个网址，类似 &lt;code>zhihu://...&lt;/code>，而这个网址一般是无法识别的，这时候就会出现下面的情况。&lt;/p>
+&lt;p>&lt;img src="https://i.loli.net/2019/11/23/oVcpgzalmKjAH34.jpg" alt="">&lt;/p>
+&lt;p>要解决这个问题，可以按照下面的步骤：&lt;/p>
+&lt;ol>
+&lt;li>在 Firefox 的地址栏输入 &lt;code>about:config&lt;/code>，&lt;/li>
+&lt;li>搜索 &lt;code>network.protocol-handler.external-default&lt;/code> 字段，&lt;/li>
+&lt;li>将该项对应的值由 &lt;code>true&lt;/code> 改为 &lt;code>false&lt;/code> 即可。&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;p>参考链接：&lt;br>
+&lt;a href="https://www.mobibrw.com/2018/12856">https://www.mobibrw.com/2018/12856&lt;/a>&lt;/p></description></item></channel></rss>

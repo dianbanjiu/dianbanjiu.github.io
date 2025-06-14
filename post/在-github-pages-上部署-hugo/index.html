@@ -1,5 +1,5 @@
-<!doctype html><html lang=zh-cn itemscope itemtype=http://schema.org/WebPage><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><title>在 Github Pages 上部署 Hugo - 点半九</title>
-<meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta name=MobileOptimized content="width"><meta name=HandheldFriendly content="true"><meta name=applicable-device content="pc,mobile"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=mobile-web-app-capable content="yes"><meta name=author content="dianbanjiu"><meta name=description content="其实在 github pages（以下简称 pages）上部署 hugo 的过程很简单，如何保证这些文件的迁移才是有点麻烦的事，不过最关键的问题其实在于你是否有足够的"><meta name=generator content="Hugo 0.128.2"><link rel=canonical href=https://www.dianbanjiu.com/post/%E5%9C%A8-github-pages-%E4%B8%8A%E9%83%A8%E7%BD%B2-hugo/><link rel=icon href=/favicon.svg><link rel=stylesheet href=/sass/jane.min.a1264e3ef168929cc1e8e2dd49db9c792db12c19bca13e0688af29035af51fd7.css integrity="sha256-oSZOPvFokpzB6OLdSduceS2xLBm8oT4GiK8pA1r1H9c=" media=screen crossorigin=anonymous><meta property="og:url" content="https://www.dianbanjiu.com/post/%E5%9C%A8-github-pages-%E4%B8%8A%E9%83%A8%E7%BD%B2-hugo/"><meta property="og:site_name" content="点半九"><meta property="og:title" content="在 Github Pages 上部署 Hugo"><meta property="og:description" content="其实在 github pages（以下简称 pages）上部署 hugo 的过程很简单，如何保证这些文件的迁移才是有点麻烦的事，不过最关键的问题其实在于你是否有足够的"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="post"><meta property="article:published_time" content="2021-01-07T00:33:09+08:00"><meta property="article:modified_time" content="2022-06-08T00:24:22+08:00"><meta property="article:tag" content="Blog"><meta property="article:tag" content="Hugo"><meta itemprop=name content="在 Github Pages 上部署 Hugo"><meta itemprop=description content="其实在 github pages（以下简称 pages）上部署 hugo 的过程很简单，如何保证这些文件的迁移才是有点麻烦的事，不过最关键的问题其实在于你是否有足够的"><meta itemprop=datePublished content="2021-01-07T00:33:09+08:00"><meta itemprop=dateModified content="2022-06-08T00:24:22+08:00"><meta itemprop=wordCount content="1821"><meta itemprop=keywords content="Blog,Hugo"><meta name=twitter:card content="summary"><meta name=twitter:title content="在 Github Pages 上部署 Hugo"><meta name=twitter:description content="其实在 github pages（以下简称 pages）上部署 hugo 的过程很简单，如何保证这些文件的迁移才是有点麻烦的事，不过最关键的问题其实在于你是否有足够的"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>点半九</a></div><div class=mobile-navbar-icon><span></span>
+<!doctype html><html lang=en itemscope itemtype=http://schema.org/WebPage><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><title>在 Github Pages 上部署 Hugo - 点半九</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta name=MobileOptimized content="width"><meta name=HandheldFriendly content="true"><meta name=applicable-device content="pc,mobile"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=mobile-web-app-capable content="yes"><meta name=author content="dianbanjiu"><meta name=description content="其实在 github pages（以下简称 pages）上部署 hugo 的过程很简单，如何保证这些文件的迁移才是有点麻烦的事，不过最关键的问题其实在于你是否有足够的精力写下去。
+"><meta name=generator content="Hugo 0.147.8"><link rel=canonical href=https://www.dianbanjiu.com/post/%E5%9C%A8-github-pages-%E4%B8%8A%E9%83%A8%E7%BD%B2-hugo/><link rel=icon href=/favicon.svg><link rel=stylesheet href=/sass/jane.min.d6d67617ae798b21e88620f3a30fc6d2b05beb56ea61820f8352262738b2ceca.css integrity="sha256-1tZ2F655iyHohiDzow/G0rBb61bqYYIPg1ImJziyzso=" media=screen crossorigin=anonymous><meta property="og:url" content="https://www.dianbanjiu.com/post/%E5%9C%A8-github-pages-%E4%B8%8A%E9%83%A8%E7%BD%B2-hugo/"><meta property="og:site_name" content="点半九"><meta property="og:title" content="在 Github Pages 上部署 Hugo"><meta property="og:description" content="其实在 github pages（以下简称 pages）上部署 hugo 的过程很简单，如何保证这些文件的迁移才是有点麻烦的事，不过最关键的问题其实在于你是否有足够的精力写下去。"><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="article:section" content="post"><meta property="article:published_time" content="2021-01-07T00:33:09+08:00"><meta property="article:modified_time" content="2025-06-14T13:13:51+00:00"><meta property="article:tag" content="Blog"><meta property="article:tag" content="Hugo"><meta itemprop=name content="在 Github Pages 上部署 Hugo"><meta itemprop=description content="其实在 github pages（以下简称 pages）上部署 hugo 的过程很简单，如何保证这些文件的迁移才是有点麻烦的事，不过最关键的问题其实在于你是否有足够的精力写下去。"><meta itemprop=datePublished content="2021-01-07T00:33:09+08:00"><meta itemprop=dateModified content="2025-06-14T13:13:51+00:00"><meta itemprop=wordCount content="1750"><meta itemprop=keywords content="Blog,Hugo"><meta name=twitter:card content="summary"><meta name=twitter:title content="在 Github Pages 上部署 Hugo"><meta name=twitter:description content="其实在 github pages（以下简称 pages）上部署 hugo 的过程很简单，如何保证这些文件的迁移才是有点麻烦的事，不过最关键的问题其实在于你是否有足够的精力写下去。"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>点半九</a></div><div class=mobile-navbar-icon><span></span>
 <span></span>
 <span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><li class=mobile-menu-item><a class=menu-item-link href=https://www.dianbanjiu.com/>主页</a></li><li class=mobile-menu-item><a class=menu-item-link href=https://www.dianbanjiu.com/post/>归档</a></li><li class=mobile-menu-item><a class=menu-item-link href=https://www.dianbanjiu.com/tags>标签</a></li><li class=mobile-menu-item><a class=menu-item-link href=https://www.dianbanjiu.com/about>关于</a></li><li class=mobile-menu-item><a class=menu-item-link href=https://www.dianbanjiu.com/search>搜索</a></li></ul></nav><link rel=stylesheet href=/lib/photoswipe/photoswipe.min.css><link rel=stylesheet href=/lib/photoswipe/default-skin/default-skin.min.css><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
 <button class="pswp__button pswp__button--share" title=Share></button>
@@ -10,156 +10,84 @@
 2021-01-07
 </time></span>|
 <span style=vertical-align:middle><time datetime=2021-01-07 class=post-time>更新于
-2022-06-08</time></span></div></header><div class=post-content><p>其实在 github pages（以下简称 pages）上部署 hugo 的过程很简单，如何保证这些文件的迁移才是有点麻烦的事，不过最关键的问题其实在于你是否有足够的精力写下去。</p><h2 id=初阶>初阶</h2><h3 id=需要准备的一些东西>需要准备的一些东西</h3><ul><li>github 帐号</li><li>hugo</li><li>git</li></ul><h3 id=开始>开始</h3><p>git 跟 hugo 这两个软件包应该在很多 Linux 发行版中都可以找到，可以直接使用系统对应的包管理进行安装即可。<br>安装完之后可以使用下面的命令进行确认</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>$ hugo version
-</span></span></code></pre></td></tr></table></div></div><p>然后使用下面的命令创建站点</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>$ hugo new site mysite 
-</span></span><span class=line><span class=cl>Congratulations! Your new Hugo site is created in /home/xxx/demo/mysite.
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>Just a few more steps and you<span class=err>&#39;</span>re ready to go:
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>1. Download a theme into the same-named folder.
-</span></span><span class=line><span class=cl>   Choose a theme from https://themes.gohugo.io/ or
-</span></span><span class=line><span class=cl>   create your own with the <span class=s2>&#34;hugo new theme &lt;THEMENAME&gt;&#34;</span> command.
-</span></span><span class=line><span class=cl>2. Perhaps you want to add some content. You can add single files
-</span></span><span class=line><span class=cl>   with <span class=s2>&#34;hugo new &lt;SECTIONNAME&gt;/&lt;FILENAME&gt;.&lt;FORMAT&gt;&#34;</span>.
-</span></span><span class=line><span class=cl>3. Start the built-in live server via <span class=s2>&#34;hugo server&#34;</span>.
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>Visit https://gohugo.io/ <span class=k>for</span> quickstart guide and full documentation.
-</span></span></code></pre></td></tr></table></div></div><p>输入命令后基本上立刻就可以看到输出的 “congratulation &mldr;”，这说明创建成功了。</p><p>刚创建好的站点一般包含下面几个目录</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span><span class=lnt>8
-</span><span class=lnt>9
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>mysite
-</span></span><span class=line><span class=cl>├── archetypes
-</span></span><span class=line><span class=cl>│   └── default.md
-</span></span><span class=line><span class=cl>├── config.toml
-</span></span><span class=line><span class=cl>├── content
-</span></span><span class=line><span class=cl>├── data
-</span></span><span class=line><span class=cl>├── layouts
-</span></span><span class=line><span class=cl>├── static
-</span></span><span class=line><span class=cl>└── themes
-</span></span></code></pre></td></tr></table></div></div><p><strong>注意：</strong> 如果没有指明操作路径，默认就是在 mysite 下。</p><p>接下来去 <a href=https://themes.gohugo.io/>hugo 主题站</a> 挑一个自己喜欢的主题，然后将其下载到 themes 目录中。下面以 hugo-theme-jane 为例。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>$ <span class=nb>cd</span> mysite
-</span></span><span class=line><span class=cl>$ git clone https://github.com/xianmin/hugo-theme-jane themes/jane
-</span></span></code></pre></td></tr></table></div></div><p>在 jane 目录下有一些已经比较完善的配置文件，像是 jane/exampleSite 下的 config.toml 以及 jane/archetypes/default.md，前者是用来配置站点的环境的，后者则是编写的文章的模板文件，一般这些文件里都会有比较详细的说明，根据它的说明进行修改就可以了。</p><p>修改完成之后，就可以创建一篇文章来测试一下</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>$ hugo new post/helloWorld.md
-</span></span></code></pre></td></tr></table></div></div><p>这条命令将会在 mysite/content/post 下创建 helloWorld.md 这个文件，向这个文件里随便加点内容。然后使用下面的命令来预览一下效果</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>$ hugo server -D
-</span></span></code></pre></td></tr></table></div></div><p>打开浏览器，输入 http://localhost:1313 就可以看到博客日后的样式了。</p><p>如果预览之后觉得满意，就可以使用下面的命令将站点部署至 pages（请将下面的 Name 修改为你的 github 用户名），在开始之前，先在 github 上创建一个名为 Name.github.io 的 repo</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>$ hugo
-</span></span><span class=line><span class=cl>$ <span class=nb>cd</span> public
-</span></span><span class=line><span class=cl>$ git init
-</span></span><span class=line><span class=cl>$ git add .
-</span></span><span class=line><span class=cl>$ git remote add origin https://github.com/Name/Name.github.io.git
-</span></span><span class=line><span class=cl>$ git commit -m <span class=s2>&#34;create blog site&#34;</span>
-</span></span><span class=line><span class=cl>$ git push origin master
-</span></span></code></pre></td></tr></table></div></div><p>在浏览器输入 Name.github.io 就可以查看部署好的站点。</p><h3 id=备份>备份</h3><p>这样 hugo 站点基本就算是部署完成了，不过这些文件都是 hugo 编译好的一些静态文件，为了避免更换系统之后无法更新博客，你需要将 mysite 站点下除了 public 之外的目录都进行一个备份（之所以不备份 public 目录，是因为在执行 <code>hugo</code> 命令之后都会重新生成 public 目录）。</p><p>可以在 github 创建一个新的 repo 来存放这些文件。假设这个 repo 名为 Blog</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>$ git init
-</span></span><span class=line><span class=cl>$ git submodule add https://github.com/xianmin/hugo-theme-jane.git themes/jane
-</span></span><span class=line><span class=cl>$ <span class=nb>echo</span> <span class=s2>&#34;public/&#34;</span> &gt;&gt; .gitignore
-</span></span><span class=line><span class=cl>$ git add .
-</span></span><span class=line><span class=cl>$ git commit -m <span class=s2>&#34;backup blog&#34;</span>
-</span></span><span class=line><span class=cl>$ git push origin master
-</span></span></code></pre></td></tr></table></div></div><p>上面的第二步使用 submodule 参数是因为 themes/jane 目录本身也是一个使用 git 进行版本控制的目录。而 public 虽然也是一个使用 git 进行版本控制的目录，但是因为它已经被添加到 .gitignore 文件当中，所以是不会被 git 索引的。</p><p>如果你换了系统之类的，先将 Blog 这个 repo 克隆到本地，然后再将主题克隆一遍就可以像之前那样继续你的写作了。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>$ git clone https://github.com/Name/Blog.git <span class=o>&amp;&amp;</span> <span class=nb>cd</span> Blog
-</span></span><span class=line><span class=cl>$ git clone https://github.com/xianmin/hugo-theme-jane.git themes/jane
-</span></span></code></pre></td></tr></table></div></div><h2 id=进阶>进阶</h2><p>初阶里面你需要写完文章之后手动构建一下，这种方式显然不够优雅，下面一起来康康怎么让构建的过程完全自动化。</p><p>为了这个自动化的过程，你需要将网站的源码和 public 下面的内容放在 dianbanjiu.github.io 仓库的不同分支，不过要保证主分支必须放的是 public 里面的内容。我这里的分支对应关系是 master 分支存放 public，blog 分支存放源码，其中 master 为主分支。</p><p>这个自动化的过程需要结合 github action 来完成。</p><p>首先我们先来配置一下 action。</p><ol><li>去 dianbanjiu.github.io 仓库的 <code>Settings->Deploy keys</code> 添加一个新的 deploy key，这个 key 用你的 ssh 公钥即可，记得勾选 <code>Allow write access</code>。</li><li>在 <code>Settings->Secrets</code> 下添加一个新的 Secrets，这里填写你的 ssh 密钥，名字为了与之后的脚本对应就设置为 <code>ACTIONS_DEPLOY_KEY</code>。</li><li>在源码对应的分支下根目录下创建一个 <code>.github</code> 的目录，在 <code>.github</code> 下创建一个叫做 <code>workflows</code> 的目录，<code>workflows</code> 目录下创建一个 <code>public.yml</code> 的文件。简单来说就是 github action 会从分支根目录下寻找 .github/workflows 目录，这个目录下存放的就是你的一些 action，如果你有多个任务可以创建多个 action，不过这里就不多说了。</li></ol><p>public.yml 文件的内容如下</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span><span class=lnt>22
-</span><span class=lnt>23
-</span><span class=lnt>24
-</span><span class=lnt>25
-</span><span class=lnt>26
-</span><span class=lnt>27
-</span><span class=lnt>28
-</span><span class=lnt>29
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Build and Publish Blog</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>on</span><span class=p>:</span><span class=w> 
-</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>push</span><span class=p>:</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>branches</span><span class=p>:</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=l>blog</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>jobs</span><span class=p>:</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>build</span><span class=p>:</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>runs-on</span><span class=p>:</span><span class=w> </span><span class=l>ubuntu-latest</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>steps</span><span class=p>:</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Checkout</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/checkout@master</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>fetch-depth</span><span class=p>:</span><span class=w> </span><span class=m>0</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Disable quotePath</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=l>git config --global core.quotePath false</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>setup hugo</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>peaceiris/actions-hugo@v2</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>hugo-version</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;latest&#39;</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>build hugo</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=l>hugo --gc --minify --cleanDestinationDir</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>deploy hugo</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>peaceiris/actions-gh-pages@v2</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>env</span><span class=p>:</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>ACTIONS_DEPLOY_KEY</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.ACTIONS_DEPLOY_KEY }}</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>PUBLISH_BRANCH</span><span class=p>:</span><span class=w> </span><span class=l>master</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>PUBLISH_DIR</span><span class=p>:</span><span class=w> </span><span class=l>./public</span><span class=w>
-</span></span></span></code></pre></td></tr></table></div></div><p>这里只介绍其中几个比较关键的点：</p><ol><li>branches 下指定的分支是你网站源码所在的分支，如果指定错误这个 action 就无法运行</li><li><code>ACTIONS_DEPLOY_KEY</code> 的值对应于你之前在 <code>Settings->Secrets</code> 下添加的 <code>Secrets</code>，确保两者一致即可</li><li><code>PUBLISH_BRANCH</code> 对应于你的主分支</li><li><code>PUBLISH_DIR</code> 对应于执行 hugo 命令后生成文件的位置，一般默认就是 <code>./public</code></li></ol><p>做完这些之后再将内容推送到 blog 分支的时候，action 就会自动执行构建过程，然后将构建好的博客内容推送到 master 分支</p><h2 id=延伸阅读>延伸阅读</h2><p><a href=http://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html>GitHub Actions 入门教程</a></p></div><footer class=post-footer><div class=post-tags><a href=https://www.dianbanjiu.com/tags/blog/>blog</a>
-<a href=https://www.dianbanjiu.com/tags/hugo/>hugo</a></div><nav class=post-nav><a class=prev href=/post/pixabay_api/><i class=iconfont><svg class="icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18" height="18"><path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417l277.93508-310.326815c11.338233-12.190647 11.035334-32.285311-.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"/></svg>
+2025-06-14</time></span></div></header><div class=post-content><p>其实在 github pages（以下简称 pages）上部署 hugo 的过程很简单，如何保证这些文件的迁移才是有点麻烦的事，不过最关键的问题其实在于你是否有足够的精力写下去。</p><h2 id=初阶>初阶</h2><h3 id=需要准备的一些东西>需要准备的一些东西</h3><ul><li>github 帐号</li><li>hugo</li><li>git</li></ul><h3 id=开始>开始</h3><p>git 跟 hugo 这两个软件包应该在很多 Linux 发行版中都可以找到，可以直接使用系统对应的包管理进行安装即可。<br>安装完之后可以使用下面的命令进行确认</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ hugo version
+</span></span></code></pre></div><p>然后使用下面的命令创建站点</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ hugo new site mysite 
+</span></span><span style=display:flex><span>Congratulations! Your new Hugo site is created in /home/xxx/demo/mysite.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Just a few more steps and you<span style=color:#960050;background-color:#1e0010>&#39;</span>re ready to go:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>1. Download a theme into the same-named folder.
+</span></span><span style=display:flex><span>   Choose a theme from https://themes.gohugo.io/ or
+</span></span><span style=display:flex><span>   create your own with the <span style=color:#e6db74>&#34;hugo new theme &lt;THEMENAME&gt;&#34;</span> command.
+</span></span><span style=display:flex><span>2. Perhaps you want to add some content. You can add single files
+</span></span><span style=display:flex><span>   with <span style=color:#e6db74>&#34;hugo new &lt;SECTIONNAME&gt;/&lt;FILENAME&gt;.&lt;FORMAT&gt;&#34;</span>.
+</span></span><span style=display:flex><span>3. Start the built-in live server via <span style=color:#e6db74>&#34;hugo server&#34;</span>.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Visit https://gohugo.io/ <span style=color:#66d9ef>for</span> quickstart guide and full documentation.
+</span></span></code></pre></div><p>输入命令后基本上立刻就可以看到输出的 “congratulation &mldr;”，这说明创建成功了。</p><p>刚创建好的站点一般包含下面几个目录</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>mysite
+</span></span><span style=display:flex><span>├── archetypes
+</span></span><span style=display:flex><span>│   └── default.md
+</span></span><span style=display:flex><span>├── config.toml
+</span></span><span style=display:flex><span>├── content
+</span></span><span style=display:flex><span>├── data
+</span></span><span style=display:flex><span>├── layouts
+</span></span><span style=display:flex><span>├── static
+</span></span><span style=display:flex><span>└── themes
+</span></span></code></pre></div><p><strong>注意：</strong> 如果没有指明操作路径，默认就是在 mysite 下。</p><p>接下来去 <a href=https://themes.gohugo.io/>hugo 主题站</a> 挑一个自己喜欢的主题，然后将其下载到 themes 目录中。下面以 hugo-theme-jane 为例。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ cd mysite
+</span></span><span style=display:flex><span>$ git clone https://github.com/xianmin/hugo-theme-jane themes/jane
+</span></span></code></pre></div><p>在 jane 目录下有一些已经比较完善的配置文件，像是 jane/exampleSite 下的 config.toml 以及 jane/archetypes/default.md，前者是用来配置站点的环境的，后者则是编写的文章的模板文件，一般这些文件里都会有比较详细的说明，根据它的说明进行修改就可以了。</p><p>修改完成之后，就可以创建一篇文章来测试一下</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ hugo new post/helloWorld.md
+</span></span></code></pre></div><p>这条命令将会在 mysite/content/post 下创建 helloWorld.md 这个文件，向这个文件里随便加点内容。然后使用下面的命令来预览一下效果</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ hugo server -D
+</span></span></code></pre></div><p>打开浏览器，输入 http://localhost:1313 就可以看到博客日后的样式了。</p><p>如果预览之后觉得满意，就可以使用下面的命令将站点部署至 pages（请将下面的 Name 修改为你的 github 用户名），在开始之前，先在 github 上创建一个名为 Name.github.io 的 repo</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ hugo
+</span></span><span style=display:flex><span>$ cd public
+</span></span><span style=display:flex><span>$ git init
+</span></span><span style=display:flex><span>$ git add .
+</span></span><span style=display:flex><span>$ git remote add origin https://github.com/Name/Name.github.io.git
+</span></span><span style=display:flex><span>$ git commit -m <span style=color:#e6db74>&#34;create blog site&#34;</span>
+</span></span><span style=display:flex><span>$ git push origin master
+</span></span></code></pre></div><p>在浏览器输入 Name.github.io 就可以查看部署好的站点。</p><h3 id=备份>备份</h3><p>这样 hugo 站点基本就算是部署完成了，不过这些文件都是 hugo 编译好的一些静态文件，为了避免更换系统之后无法更新博客，你需要将 mysite 站点下除了 public 之外的目录都进行一个备份（之所以不备份 public 目录，是因为在执行 <code>hugo</code> 命令之后都会重新生成 public 目录）。</p><p>可以在 github 创建一个新的 repo 来存放这些文件。假设这个 repo 名为 Blog</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ git init
+</span></span><span style=display:flex><span>$ git submodule add https://github.com/xianmin/hugo-theme-jane.git themes/jane
+</span></span><span style=display:flex><span>$ echo <span style=color:#e6db74>&#34;public/&#34;</span> &gt;&gt; .gitignore
+</span></span><span style=display:flex><span>$ git add .
+</span></span><span style=display:flex><span>$ git commit -m <span style=color:#e6db74>&#34;backup blog&#34;</span>
+</span></span><span style=display:flex><span>$ git push origin master
+</span></span></code></pre></div><p>上面的第二步使用 submodule 参数是因为 themes/jane 目录本身也是一个使用 git 进行版本控制的目录。而 public 虽然也是一个使用 git 进行版本控制的目录，但是因为它已经被添加到 .gitignore 文件当中，所以是不会被 git 索引的。</p><p>如果你换了系统之类的，先将 Blog 这个 repo 克隆到本地，然后再将主题克隆一遍就可以像之前那样继续你的写作了。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ git clone https://github.com/Name/Blog.git <span style=color:#f92672>&amp;&amp;</span> cd Blog
+</span></span><span style=display:flex><span>$ git clone https://github.com/xianmin/hugo-theme-jane.git themes/jane
+</span></span></code></pre></div><h2 id=进阶>进阶</h2><p>初阶里面你需要写完文章之后手动构建一下，这种方式显然不够优雅，下面一起来康康怎么让构建的过程完全自动化。</p><p>为了这个自动化的过程，你需要将网站的源码和 public 下面的内容放在 dianbanjiu.github.io 仓库的不同分支，不过要保证主分支必须放的是 public 里面的内容。我这里的分支对应关系是 master 分支存放 public，blog 分支存放源码，其中 master 为主分支。</p><p>这个自动化的过程需要结合 github action 来完成。</p><p>首先我们先来配置一下 action。</p><ol><li>去 dianbanjiu.github.io 仓库的 <code>Settings->Deploy keys</code> 添加一个新的 deploy key，这个 key 用你的 ssh 公钥即可，记得勾选 <code>Allow write access</code>。</li><li>在 <code>Settings->Secrets</code> 下添加一个新的 Secrets，这里填写你的 ssh 密钥，名字为了与之后的脚本对应就设置为 <code>ACTIONS_DEPLOY_KEY</code>。</li><li>在源码对应的分支下根目录下创建一个 <code>.github</code> 的目录，在 <code>.github</code> 下创建一个叫做 <code>workflows</code> 的目录，<code>workflows</code> 目录下创建一个 <code>public.yml</code> 的文件。简单来说就是 github action 会从分支根目录下寻找 .github/workflows 目录，这个目录下存放的就是你的一些 action，如果你有多个任务可以创建多个 action，不过这里就不多说了。</li></ol><p>public.yml 文件的内容如下</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#f92672>name</span>: <span style=color:#ae81ff>Build and Publish Blog</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>on</span>: 
+</span></span><span style=display:flex><span>  <span style=color:#f92672>push</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>branches</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#ae81ff>blog</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>jobs</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>build</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>runs-on</span>: <span style=color:#ae81ff>ubuntu-latest</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>steps</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Checkout</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>actions/checkout@master</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>with</span>:
+</span></span><span style=display:flex><span>          <span style=color:#f92672>fetch-depth</span>: <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Disable quotePath</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>run</span>: <span style=color:#ae81ff>git config --global core.quotePath false</span>
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>setup hugo</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>peaceiris/actions-hugo@v2</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>with</span>:
+</span></span><span style=display:flex><span>            <span style=color:#f92672>hugo-version</span>: <span style=color:#e6db74>&#39;latest&#39;</span>
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>build hugo</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>run</span>: <span style=color:#ae81ff>hugo --gc --minify --cleanDestinationDir</span>
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>deploy hugo</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>peaceiris/actions-gh-pages@v2</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>env</span>:
+</span></span><span style=display:flex><span>          <span style=color:#f92672>ACTIONS_DEPLOY_KEY</span>: <span style=color:#ae81ff>${{ secrets.ACTIONS_DEPLOY_KEY }}</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>PUBLISH_BRANCH</span>: <span style=color:#ae81ff>master</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>PUBLISH_DIR</span>: <span style=color:#ae81ff>./public</span>
+</span></span></code></pre></div><p>这里只介绍其中几个比较关键的点：</p><ol><li>branches 下指定的分支是你网站源码所在的分支，如果指定错误这个 action 就无法运行</li><li><code>ACTIONS_DEPLOY_KEY</code> 的值对应于你之前在 <code>Settings->Secrets</code> 下添加的 <code>Secrets</code>，确保两者一致即可</li><li><code>PUBLISH_BRANCH</code> 对应于你的主分支</li><li><code>PUBLISH_DIR</code> 对应于执行 hugo 命令后生成文件的位置，一般默认就是 <code>./public</code></li></ol><p>做完这些之后再将内容推送到 blog 分支的时候，action 就会自动执行构建过程，然后将构建好的博客内容推送到 master 分支</p><h2 id=延伸阅读>延伸阅读</h2><p><a href=http://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html>GitHub Actions 入门教程</a></p></div><footer class=post-footer><div class=post-tags><a href=https://www.dianbanjiu.com/tags/blog/>blog</a>
+<a href=https://www.dianbanjiu.com/tags/hugo/>hugo</a></div><nav class=post-nav><a class=prev href=/post/pixabay_api/><i class=iconfont><svg class="icon" viewBox="0 0 1024 1024" xmlns:xlink="http://www.w3.org/1999/xlink" width="18" height="18"><path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417l277.93508-310.326815c11.338233-12.190647 11.035334-32.285311-.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"/></svg>
 </i><span class="prev-text nav-default">[译] Pixabay API</span>
-<span class="prev-text nav-mobile">上一篇</span>
+<span class="prev-text nav-mobile">Prev</span>
 </a><a class=next href=/post/git-%E5%AD%90%E6%A8%A1%E5%9D%97%E7%AE%A1%E7%90%86/><span class="next-text nav-default">Git 子模块管理</span>
-<span class="prev-text nav-mobile">下一篇</span>
-<i class=iconfont><svg class="icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18" height="18"><path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697c-11.777231-11.500939-30.216186-10.304694-41.178865 2.712784z"/></svg></i></a></nav></footer></article></div></div></main><footer id=footer class=footer><div class=copyright><span class=copyright-year>&copy;
+<span class="prev-text nav-mobile">Next</span>
+<i class=iconfont><svg class="icon" viewBox="0 0 1024 1024" xmlns:xlink="http://www.w3.org/1999/xlink" width="18" height="18"><path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697c-11.777231-11.500939-30.216186-10.304694-41.178865 2.712784z"/></svg></i></a></nav></footer></article></div></div></main><footer id=footer class=footer><div class=copyright><span class=copyright-year>&copy;
 2019 -
-2024
-<span class=heart><i class=iconfont><svg class="icon" viewBox="0 0 1025 1024" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="14" height="14"><path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7.0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1.0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2.0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3.1-42.5-8-83.6-24-122.2z" fill="#8a8a8a"/></svg>
-</i></span><span class=author>dianbanjiu@gmail.com</span></span></div></footer></div><script type=text/javascript src=/lib/jquery/jquery-3.2.1.min.js></script><script type=text/javascript src=/lib/slideout/slideout-1.0.1.min.js></script><script type=text/javascript src=/js/main.638251f4230630f0335d8c6748e53a96f94b72670920b60c09a56fdc8bece214.js integrity="sha256-Y4JR9CMGMPAzXYxnSOU6lvlLcmcJILYMCaVv3Ivs4hQ=" crossorigin=anonymous></script><script type=text/javascript src=/js/load-photoswipe.js></script><script type=text/javascript src=/lib/photoswipe/photoswipe.min.js></script><script type=text/javascript src=/lib/photoswipe/photoswipe-ui-default.min.js></script></body></html>
+2025
+<span class=heart><i class=iconfont><svg class="icon" viewBox="0 0 1025 1024" xmlns:xlink="http://www.w3.org/1999/xlink" width="14" height="14"><path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7.0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1.0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2.0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3.1-42.5-8-83.6-24-122.2z" fill="#8a8a8a"/></svg></i></span></span></div></footer></div><script type=text/javascript src=/lib/jquery/jquery-3.2.1.min.js></script><script type=text/javascript src=/lib/slideout/slideout-1.0.1.min.js></script><script type=text/javascript src=/js/main.638251f4230630f0335d8c6748e53a96f94b72670920b60c09a56fdc8bece214.js integrity="sha256-Y4JR9CMGMPAzXYxnSOU6lvlLcmcJILYMCaVv3Ivs4hQ=" crossorigin=anonymous></script><script type=text/javascript src=/js/load-photoswipe.js></script><script type=text/javascript src=/lib/photoswipe/photoswipe.min.js></script><script type=text/javascript src=/lib/photoswipe/photoswipe-ui-default.min.js></script></body></html>

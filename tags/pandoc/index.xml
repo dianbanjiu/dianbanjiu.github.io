@@ -1,1 +1,52 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pandoc on 点半九</title><link>https://www.dianbanjiu.com/tags/pandoc/</link><description>Recent content in Pandoc on 点半九</description><generator>Hugo</generator><language>zh-cn</language><copyright>dianbanjiu@gmail.com</copyright><lastBuildDate>Tue, 02 Mar 2021 00:34:31 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/pandoc/index.xml" rel="self" type="application/rss+xml"/><item><title>Pandoc 使用及踩坑</title><link>https://www.dianbanjiu.com/post/pandoc-%E4%BD%BF%E7%94%A8%E5%8F%8A%E8%B8%A9%E5%9D%91/</link><pubDate>Sat, 31 Aug 2019 18:52:53 +0800</pubDate><guid>https://www.dianbanjiu.com/post/pandoc-%E4%BD%BF%E7%94%A8%E5%8F%8A%E8%B8%A9%E5%9D%91/</guid><description>我在转换文档方面的需求很简单，只要能把各种不同类型的文档转换成 PDF 文件就可以了。我的电脑系统是 Arch Linux，没有装 LibreOffice 或者 OpenOffice，</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pandoc on 点半九</title><link>https://www.dianbanjiu.com/tags/pandoc/</link><description>Recent content in Pandoc on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 31 Aug 2019 18:52:53 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/pandoc/index.xml" rel="self" type="application/rss+xml"/><item><title>Pandoc 使用及踩坑</title><link>https://www.dianbanjiu.com/post/pandoc-%E4%BD%BF%E7%94%A8%E5%8F%8A%E8%B8%A9%E5%9D%91/</link><pubDate>Sat, 31 Aug 2019 18:52:53 +0800</pubDate><guid>https://www.dianbanjiu.com/post/pandoc-%E4%BD%BF%E7%94%A8%E5%8F%8A%E8%B8%A9%E5%9D%91/</guid><description>&lt;p>我在转换文档方面的需求很简单，只要能把各种不同类型的文档转换成 PDF 文件就可以了。我的电脑系统是 Arch Linux，没有装 LibreOffice 或者 OpenOffice，因为这两个在格式方面的问题太多了，不如 PDF 来的痛快（关键是 Okular + PDF 真的很舒服），所以我大多数时候都是把 word 或者 markdown 之类的文件转换成 PDF 文件来看。鉴于我的这些需求，我想到了 &lt;a href="https://pandoc.org/">pandoc&lt;/a>。&lt;/p>
+&lt;h2 id="安装">安装&lt;/h2>
+&lt;p>pandoc 在各个 Linux 发行版的仓库中都有，可以直接使用自己系统上的包管理进行安装即可。&lt;br>
+除了 pandoc 之外，还需要安装 &lt;code>texlive&lt;/code> 的相关组件，用于把文档转换为 PDF 格式。基于 Arch Linux 的系统下叫做 &lt;code>texlive-core&lt;/code>，基于Debian 的系统下叫做 &lt;code>texlive-base&lt;/code>。&lt;/p>
+&lt;p>Arch Linux&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ sudo pacman -S pandoc texlive-core
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Debian/Ubuntu&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ sudo apt install pandoc texlive-base
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="快速上手">快速上手&lt;/h2>
+&lt;p>在 pandoc 的官方 Github 库的 &lt;a href="https://github.com/jgm/pandoc/blob/master/README.md">README&lt;/a> 列出了 pandoc 支持读取和转换成的各种类型。&lt;/p>
+&lt;p>pandoc 的使用很简单&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ pandoc test.md -o test.pdf
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>注意：如果文件转换成功，是不会在终端输出任何内容的&lt;/p>&lt;/blockquote>
+&lt;p>这样就可以把 &lt;code>markdown&lt;/code> 转换成 &lt;code>pdf&lt;/code> 类型了，其中的 &lt;code>-o&lt;/code> 选项是指定转换后的文件名。&lt;/p>
+&lt;p>pandoc 还支持许多其他的选项，如果你有兴趣的话，可以使用 &lt;code>man pandoc &lt;/code> 命令查看，或者可以参阅 pandoc 的在线 &lt;a href="https://pandoc.org/MANUAL.html">User Guide&lt;/a>，也可以下载 &lt;a href="https://pandoc.org/MANUAL.pdf">PDF 版&lt;/a>。&lt;/p>
+&lt;p>不过上面说到的那个例子只有在你的源文件是纯英文的时候出问题的情况才会比较少，如果文件是非英文的，那就还需要进行一些额外的配置。&lt;/p>
+&lt;p>首先使用 &lt;code>fc-list :lang=zh&lt;/code> 命令查看一下你自己系统上都安装了哪些中文字体：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ fc-list :lang&lt;span style="color:#f92672">=&lt;/span>zh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/usr/share/fonts/noto-cjk/NotoSerifCJK-Regular.ttc: Noto Serif CJK SC:style&lt;span style="color:#f92672">=&lt;/span>Regular
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/usr/share/fonts/noto-cjk/NotoSansCJK-DemiLight.ttc: Noto Sans CJK JP,Noto Sans CJK JP DemiLight:style&lt;span style="color:#f92672">=&lt;/span>DemiLight,Regular
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/usr/share/fonts/noto-cjk/NotoSansCJK-Black.ttc: Noto Sans CJK JP,Noto Sans CJK JP Black:style&lt;span style="color:#f92672">=&lt;/span>Black,Regular
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/usr/share/fonts/noto-cjk/NotoSerifCJK-Light.ttc: Noto Serif CJK KR,Noto Serif CJK KR Light:style&lt;span style="color:#f92672">=&lt;/span>Light,Regular
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/usr/share/fonts/noto-cjk/NotoSansCJK-Medium.ttc: Noto Sans CJK JP,Noto Sans CJK JP Medium:style&lt;span style="color:#f92672">=&lt;/span>Medium,Regular
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/usr/share/fonts/noto-cjk/NotoSansCJK-Bold.ttc: Noto Sans CJK TC:style&lt;span style="color:#f92672">=&lt;/span>Bold
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/usr/share/fonts/noto-cjk/NotoSerifCJK-ExtraLight.ttc: Noto Serif CJK SC,Noto Serif CJK SC ExtraLight:style&lt;span style="color:#f92672">=&lt;/span>ExtraLight,Regular
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/usr/share/fonts/noto-cjk/NotoSansCJK-Bold.ttc: Noto Sans CJK SC:style&lt;span style="color:#f92672">=&lt;/span>Bold
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/usr/share/fonts/noto-cjk/NotoSansCJK-Medium.ttc: Noto Sans CJK TC,Noto Sans CJK TC Medium:style&lt;span style="color:#f92672">=&lt;/span>Medium,Regular
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>上面的是我系统上安装的一部分字体，注意每行&lt;strong>第一个冒号&lt;/strong>到其后&lt;strong>第一个逗号&lt;/strong>之间的内容&lt;/p>&lt;/blockquote>
+&lt;p>在最初例子的基础上我们需要再加两个参数使 pandoc 可以正常识别并转换文档，这两个参数分别是 &lt;code>--pdf-engine=xelatex&lt;/code> 和 &lt;code>-V CJKmainfont='Noto Sans CJK SC&lt;/code>。其中 &lt;code>--pdf-engine&lt;/code> 是用来指定 pandoc 在转换过程中使用的模板，后者可以使 Pandoc 正常地识别源文档中的汉语等非英文语言，&lt;code>CJKmainfont&lt;/code> 用来指定你要使用的字体（也就是上面使用 &lt;code>fc-list&lt;/code> 命令列出的，每一行第一个&lt;strong>冒号&lt;/strong>到其后第一个&lt;strong>逗号&lt;/strong>之间的内容），比如我选择的是 &amp;lsquo;Noto Sans CJK SC&amp;rsquo;，这里的字体名称区分大小写，如果字体间有空白的话（就像 Noto Sans CJK SC)，一定要用引号把它们扩起来，单引号双引号都可以。&lt;/p>
+&lt;p>好了，修改后的命令如下：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ pandoc test.md -o test.pdf --pdf-engine&lt;span style="color:#f92672">=&lt;/span>xelatex -V CJKmainfont&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;Noto Sans CJK SC&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这下就可以应付绝大多数需要将其他类型的文档转换成 PDF 格式的需求了。&lt;/p>
+&lt;h2 id="一些坑">一些坑&lt;/h2>
+&lt;p>最近在使用 pandoc 命令将 markdown 文件转换成 pdf 文件时，发生了一些之前没遇到的错误。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ pandoc test.md -o test.pdf --pdf-engine&lt;span style="color:#f92672">=&lt;/span>xelatex -V CJKmainfont&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;Noto Sans Mono CJK SC&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Error producing PDF.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>! LaTeX Error: File &lt;span style="color:#e6db74">`&lt;/span>environ.sty&lt;span style="color:#960050;background-color:#1e0010">&amp;#39;&lt;/span> not found.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Type X to quit or &amp;lt;RETURN&amp;gt; to proceed,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>or enter new name. &lt;span style="color:#f92672">(&lt;/span>Default extension: sty&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Enter file name:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>! Emergency stop.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;read *&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>l.42 &lt;span style="color:#ae81ff">\f&lt;/span>ile_if_exist:nT
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>上面的错误提示缺少了 environ.sty 这个文件，后来在 &lt;code>texlive-latexextra&lt;/code> 这个包中发现了 &lt;code>environ.sty&lt;/code> 这个文件。&lt;/p>
+&lt;p>texlive-latexextra 包位于官方源中，可以直接使用 &lt;code>pacman&lt;/code> 命令安装。&lt;/p>
+&lt;p>除此之外，这个包中还有很多额外的 .sty 文件。具体的文件列表可以在 &lt;a href="https://www.archlinux.org/packages/extra/any/texlive-latexextra/files/">此处&lt;/a> 查看&lt;/p></description></item></channel></rss>

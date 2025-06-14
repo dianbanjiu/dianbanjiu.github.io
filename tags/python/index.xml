@@ -1,1 +1,14 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Python on 点半九</title><link>https://www.dianbanjiu.com/tags/python/</link><description>Recent content in Python on 点半九</description><generator>Hugo</generator><language>zh-cn</language><copyright>dianbanjiu@gmail.com</copyright><lastBuildDate>Thu, 21 Apr 2022 11:22:15 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/python/index.xml" rel="self" type="application/rss+xml"/><item><title>VSCode 自动补全 Python 的函数括号</title><link>https://www.dianbanjiu.com/post/vscode-%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8-python-%E7%9A%84%E5%87%BD%E6%95%B0%E6%8B%AC%E5%8F%B7/</link><pubDate>Thu, 21 Apr 2022 11:19:41 +0800</pubDate><guid>https://www.dianbanjiu.com/post/vscode-%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8-python-%E7%9A%84%E5%87%BD%E6%95%B0%E6%8B%AC%E5%8F%B7/</guid><description>目前 VSCode 对 Python 的支持已经相当好了，比如各种提示、补全、跳转、调试都是完全没有任何问题的 在 VSCode 中写 Python 的话，我一般会安装两个插件 Python：提供对 Python</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Python on 点半九</title><link>https://www.dianbanjiu.com/tags/python/</link><description>Recent content in Python on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 21 Apr 2022 11:19:41 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/python/index.xml" rel="self" type="application/rss+xml"/><item><title>VSCode 自动补全 Python 的函数括号</title><link>https://www.dianbanjiu.com/post/vscode-%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8-python-%E7%9A%84%E5%87%BD%E6%95%B0%E6%8B%AC%E5%8F%B7/</link><pubDate>Thu, 21 Apr 2022 11:19:41 +0800</pubDate><guid>https://www.dianbanjiu.com/post/vscode-%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8-python-%E7%9A%84%E5%87%BD%E6%95%B0%E6%8B%AC%E5%8F%B7/</guid><description>&lt;p>目前 VSCode 对 Python 的支持已经相当好了，比如各种提示、补全、跳转、调试都是完全没有任何问题的&lt;/p>
+&lt;p>在 VSCode 中写 Python 的话，我一般会安装两个插件&lt;/p>
+&lt;ul>
+&lt;li>Python：提供对 Python 开发的支持&lt;/li>
+&lt;li>Pylance：提供对 Python 一些智能补全方面的增强&lt;/li>
+&lt;/ul>
+&lt;p>不过在 VSCode 下写 Python 有一个比较蛋疼的点，就是补全函数的时候仅会补全函数名，而不会自动补全后面的括号&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 输入&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>pr
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 期待补全为&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 实际补全效果&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>不过好在 Pylance 插件其实是支持通过配置项来开启该功能的。在设置中搜索 &lt;code>python.analysis.completefunctionparens&lt;/code> 并启用即可&lt;/p></description></item></channel></rss>

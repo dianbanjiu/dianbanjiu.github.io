@@ -1,1 +1,104 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Scoop on 点半九</title><link>https://www.dianbanjiu.com/tags/scoop/</link><description>Recent content in Scoop on 点半九</description><generator>Hugo</generator><language>zh-cn</language><copyright>dianbanjiu@gmail.com</copyright><lastBuildDate>Fri, 15 Jul 2022 00:17:51 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/scoop/index.xml" rel="self" type="application/rss+xml"/><item><title>Windows 包管理器 —— Scoop</title><link>https://www.dianbanjiu.com/post/windows-%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8--scoop/</link><pubDate>Thu, 21 Apr 2022 00:08:16 +0800</pubDate><guid>https://www.dianbanjiu.com/post/windows-%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8--scoop/</guid><description>我很喜欢 Linux 软件的安装方式，如果一个软件存在于软件源中，只需一行命令就可以安装好这个软件，而且大多数时候也不用担心下到什么流氓程序。所以当我有</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Scoop on 点半九</title><link>https://www.dianbanjiu.com/tags/scoop/</link><description>Recent content in Scoop on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 21 Apr 2022 00:08:16 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/scoop/index.xml" rel="self" type="application/rss+xml"/><item><title>Windows 包管理器 —— Scoop</title><link>https://www.dianbanjiu.com/post/windows-%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8--scoop/</link><pubDate>Thu, 21 Apr 2022 00:08:16 +0800</pubDate><guid>https://www.dianbanjiu.com/post/windows-%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8--scoop/</guid><description>&lt;p>我很喜欢 Linux 软件的安装方式，如果一个软件存在于软件源中，只需一行命令就可以安装好这个软件，而且大多数时候也不用担心下到什么流氓程序。所以当我有了一台 Windows 的电脑之后，我也尝试去寻找 Windows 下是否也有类似的工具，最终，我找到了 Scoop&lt;/p>
+&lt;h2 id="安装">安装&lt;/h2>
+&lt;p>官网地址： &lt;a href="https://scoop.sh/">https://scoop.sh/&lt;/a>&lt;/p>
+&lt;p>首先确保系统已经安装好下面两个程序：&lt;/p>
+&lt;ol>
+&lt;li>PowerShell 的版本 &amp;gt;= 5&lt;/li>
+&lt;li>.NET Framework 的版本 &amp;gt;=4.5&lt;/li>
+&lt;/ol>
+&lt;p>通过管理员身份启动一个终端窗口，依次执行下面的命令&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>Set-ExecutionPolicy RemoteSigned -scope CurrentUser
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>iwr -useb get.scoop.sh | iex
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="常用操作">常用操作&lt;/h2>
+&lt;ul>
+&lt;li>查看帮助信息&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>scoop help
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>查看某个子命令的帮助信息，如 update&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>scoop help update
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>查询软件包，如 aria2&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>scoop search aria2
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>查看某一个软件包的主页，如 aria2&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>scoop home aria2
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>安装软件包，如 aria2&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>scoop install aria2
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>更新某个软件包，如 aria2&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>scoop update aria2
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>更新软件源&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>scoop update
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>更新所有已安装的软件包&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>scoop update -a
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>展示软件包状态以及可更新的软件包&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>scoop status
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>清除历史包缓存&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>scoop cache rm *
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>移除历史旧版本&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>scoop cleanup *
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>启用 extras 软件源&lt;/li>
+&lt;/ul>
+&lt;p>主软件源中包含的软件比较有限，可以通过下面的命令来启用 extras 软件源。main 和 extras 软件源都是由 scoop 官方维护的，由其他用户维护的软件源可以通过类似的方式进行添加，只需要把 extras 替换为对应软件源的链接即可&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>scoop bucket add extras
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>移除某个软件源，如 extras&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>scoop bucket rm extras
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="进阶操作">进阶操作&lt;/h2>
+&lt;ul>
+&lt;li>设置代理&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>scoop config proxy &lt;span style="color:#ae81ff">127.0&lt;/span>.0.&lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">:&lt;/span>&lt;span style="color:#ae81ff">8889&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>通过 aria2c 启用多线程下载&lt;/li>
+&lt;/ul>
+&lt;p>aria2 安装之后，Scoop 默认就会启用 aria2 的多线程下载&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>scoop install aria2
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>启用 aria2 之后，scoop 默认会打印一些警告信息，虽然很有道理，但是我选择关闭提示&lt;/p>
+&lt;p>&lt;img src="https://i.imgur.com/1pJJ51V.png" alt="https://i.imgur.com/1pJJ51V.png">&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>scoop config aria2-warning-enabled false
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>关闭 aria2 多线程下载&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>scoop config aria2-enabled false
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="常见问题">常见问题&lt;/h2>
+&lt;h3 id="在更新下载程序包的时候出现类似-invoke-webrequest--无法连接到远程服务器-的报错">在更新/下载程序包的时候出现类似 &lt;code>Invoke-WebRequest : 无法连接到远程服务器&lt;/code> 的报错&lt;/h3>
+&lt;p>&lt;img src="https://i.imgur.com/psX044t.png" alt="https://i.imgur.com/psX044t.png">&lt;/p>
+&lt;p>这很有可能是 scoop 对一些系统目录没有访问权限，而这些程序包的安装又需要对一些系统目录进行操作，这个时候可以 &lt;code>管理员身份&lt;/code> 运行终端，然后重新执行安装/更新命令&lt;/p>
+&lt;h3 id="scoop-安装程序失败之后在-status-命令里面会一直输出错误信息">scoop 安装程序失败之后，在 status 命令里面会一直输出错误信息&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>PS &amp;gt; scoop status
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Scoop is up to date.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Name Installed Version Latest Version Missing Dependencies Info
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---- ----------------- -------------- -------------------- ----
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>snipaste Install failedManifest removed
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>可以通过 uninstall 这个软件包来移除这个提示&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>PS &amp;gt; scoop uninstall snipaste
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ERROR &lt;span style="color:#e6db74">&amp;#39;snipaste&amp;#39;&lt;/span> isn&lt;span style="color:#e6db74">&amp;#39;t installed correctly.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">Removing older version (1.16.2).
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>snipaste&lt;span style="color:#960050;background-color:#1e0010">&amp;#39;&lt;/span> was uninstalled.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>PS &amp;gt; scoop status
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Scoop is up to date.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Everything is ok!
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
