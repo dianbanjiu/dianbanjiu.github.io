@@ -12,27 +12,23 @@ hasCJKLanguage = true     # has chinese/japanese/korean ? # 自动检测是否�
 [pagination]
   pagerSize = 5          # Number of articles displayed on the homepage  # 首页每页显示的文章数
 rssLimit = 20             # Limit Entry Count to Rss file # 限制 Rss 文章输出数量
-# googleAnalytics = "UA-146793229-1"      # UA-XXXXXXXX-X
-copyright = "dianbanjiu@gmail.com"            # default: author.name ↓        # 默认为下面配置的author.name ↓
-enableGitInfo = true
-headPic = true
-# Highlight options.
-# See https://gohugo.io/content-management/syntax-highlighting/
-PygmentsCodeFences = true # Enable syntax highlighting with GitHub flavoured code fences
-PygmentsUseClasses = true # Use CSS classes to format highlighted code
-PygmentsCodefencesGuessSyntax = true
-PygmentsOptions = "linenos=table"
+
+# Google Analytics
+[services.googleAnalytics]
+  id = "UA-146793229-1"
 
 # language support # en / zh-cn / other... translations present in i18n/
 defaultContentLanguage = "zh-cn"           # Default language to use
-[languages.zh-cn]
-  languageCode = "zh-cn"
-  languageName = "简体中文"
-  weight = 1
-[languages.en]
-  languageCode = "en"
-  languageName = "English"
-  weight = 1
+
+[languages]
+  [languages.zh-cn]
+    languageCode = "zh-cn"
+    languageName = "简体中文"
+    weight = 1
+  [languages.en]
+    languageCode = "en"
+    languageName = "English"
+    weight = 2
 
 [author]                  # essential                     # 必需
   name = "点半九"

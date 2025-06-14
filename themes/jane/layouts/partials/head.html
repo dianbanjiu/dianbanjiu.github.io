@@ -106,10 +106,5 @@ https://github.com/spf13/hugo/blob/master/tpl/tplimpl/template_embedded.go#L158 
   <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
 <![endif]-->` | safeHTML }}
 
-<!-- Analytics -->
-{{- if and (not hugo.IsServer) .Site.GoogleAnalytics -}}
-{{ template "_internal/google_analytics.html" . }}
-{{- end -}}
-
 <!-- Custom head -->
 {{ partial "custom_head.html" . }}
