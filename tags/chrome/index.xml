@@ -1,50 +1,51 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Chrome on 点半九</title><link>https://www.dianbanjiu.com/tags/chrome/</link><description>Recent content in Chrome on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 10 Apr 2021 22:35:17 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/chrome/index.xml" rel="self" type="application/rss+xml"/><item><title>五个浏览器插件，让你的浏览器更加好用</title><link>https://www.dianbanjiu.com/post/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6%E6%8E%A8%E8%8D%90/</link><pubDate>Sat, 10 Apr 2021 22:35:17 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6%E6%8E%A8%E8%8D%90/</guid><description>&lt;blockquote>
-&lt;p>不能扩展的浏览器是没有灵魂的&lt;/p>&lt;/blockquote>
-&lt;p>这篇文章向大家推荐一些我正在使用的浏览器插件，希望可以让你的浏览器更好用。&lt;/p>
-&lt;p>我目前在使用的浏览器是 Chromium，基于 Chromium 的浏览器都可以点击文中的链接直达 Chrome 网上商店进行安装，同时这些插件在 Firefox 的扩展商店也都可以搜到。&lt;/p>
-&lt;h2 id="ublock-origin">uBlock Origin&lt;/h2>
-&lt;p>&lt;a href="https://chrome.google.com/webstore/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm">Chrome 网上商店直达链接&lt;/a>&lt;/p>
-&lt;p>一个轻量但高效的网络请求过滤工具。&lt;/p>
-&lt;p>最基础的广告屏蔽功能在我日常使用过程中感觉可以拦截 90% 以上的广告。如果页面还有没法自动过滤的广告，&lt;del>建议直接关掉这个页面&lt;/del>可以自定义过滤规则。&lt;/p>
-&lt;p>uBlock Origin 的自定义过滤规则非常简单易用且功能强大，不仅可以过滤网址，还可以过滤页面上的元素标签。以我的博客为例，如果你不想要看到每日一词的诗句，可以在右上角选中 uBlock Origin 的吸管图标，然后在页面上选中每日一词的元素，点击创建即可从页面上过滤掉该元素。&lt;br>
-&lt;img src="https://imgur.com/fzVE5Yp.png" alt=""> &lt;br>
-&lt;img src="https://imgur.com/yP4bdDa.png" alt="">&lt;/p>
-&lt;p>不过需要注意的是，有时候这类插件会导致一些页面无法正常访问。&lt;/p>
-&lt;h2 id="imagus">Imagus&lt;/h2>
-&lt;p>&lt;a href="https://chrome.google.com/webstore/detail/imagus/immpkjjlgappgfkkfieppnmlhakdmaab">Chrome 网上商店直达链接&lt;/a>&lt;/p>
-&lt;p>平时在浏览一些图库网站的时候，如果想要看某张图片的高清大图，通常需要点击图片进入图片详情页才行，但是通过这个插件，你只需将鼠标悬停在图片上即可查看图片对应的 「高清大图」。&lt;br>
-&lt;img src="https://imgur.com/3nPP0fy.png" alt="Imgur">&lt;/p>
-&lt;h2 id="vimium">Vimium&lt;/h2>
-&lt;p>&lt;a href="https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb">Chrome 网上商店直达链接&lt;/a>&lt;/p>
-&lt;p>对于使用习惯使用键盘来操作浏览器，特别是习惯使用 Vim 编辑器的童鞋来说，Vimium 绝对值得你一试，因为 Vimium 受 Vim 的启发，提供了通过快捷键的方式在标签页、链接、历史记录、书签等进行快速切换。 &lt;br>
-&lt;img src="https://imgur.com/WvYiDb0.png" alt="">&lt;/p>
-&lt;p>Vimium 可以通过快捷键做到很多事情，这也导致很多人看到这么多快捷键就放弃了，但我还是强烈建议你尝试一下这个插件，因为你熟悉一遍之后会发现常用的其实就是那么几个。&lt;/p>
-&lt;p>这里说几个比较常用的操作：&lt;/p>
-&lt;ol>
-&lt;li>按下 &lt;code>f&lt;/code> 会在当前页面打开新的页面&lt;/li>
-&lt;li>按下 &lt;code>F&lt;/code> 会在新的标签页打开新的页面&lt;/li>
-&lt;li>按下 &lt;code>b/B&lt;/code> 会搜索并打开书签，打开逻辑同上&lt;/li>
-&lt;li>按下 &lt;code>o/O&lt;/code> 搜索并打开书签、历史记录，逻辑同上&lt;/li>
-&lt;li>&lt;code>t&lt;/code> 新建标签页&lt;/li>
-&lt;li>&lt;code>T&lt;/code> 在已经打开的标签页搜索并跳转&lt;/li>
-&lt;li>&lt;code>x&lt;/code> 关闭标签页&lt;/li>
-&lt;li>&lt;code>X&lt;/code> 恢复上一个关闭的标签页&lt;/li>
-&lt;li>&lt;code>h/j/k/l&lt;/code> 在页面中进行上下左右的移动&lt;/li>
-&lt;li>&lt;code>gg&lt;/code> 回到页面顶端&lt;/li>
-&lt;li>&lt;code>G&lt;/code> 到达页面的底端&lt;/li>
-&lt;li>&lt;code>?&lt;/code> 查看帮助页面&lt;/li>
-&lt;/ol>
-&lt;p>需要注意的是，该插件在 Chrome 的内置页面，比如 &lt;code>chrome://&lt;/code> 开头的页面或 Chrome 网上商店都是不生效的。&lt;/p>
-&lt;h2 id="沙拉查词">沙拉查词&lt;/h2>
-&lt;p>&lt;a href="https://chrome.google.com/webstore/detail/%E6%B2%99%E6%8B%89%E6%9F%A5%E8%AF%8D-%E8%81%9A%E5%90%88%E8%AF%8D%E5%85%B8%E5%88%92%E8%AF%8D%E7%BF%BB%E8%AF%91/cdonnmffkdaoajfknoeeecmchibpmkmg">Chrome 网上商店直达链接&lt;/a>&lt;/p>
-&lt;p>沙拉查词是一款划词翻译插件，支持划词翻译、网页翻译甚至是 PDF 翻译。我最常用的是划词翻译，在页面上选中内容之后，会在旁边出现一个沙拉碗的图标，点击它即可查看选中内容的翻译。&lt;/p>
-&lt;p>我最喜欢这个划词翻译插件的原因，一方面是你可以针对自己的使用习惯进行非常多的设定，其次就是它支持很多词典，可以通过多个翻译源展示选中内容的释义，还会展示对应的遣词造句，可以很好的帮助我了解选中内容的意思。&lt;del>老文盲了&lt;/del>&lt;/p>
-&lt;p>&lt;img src="https://imgur.com/9DHhC3v.png" alt="Imgur">&lt;/p>
-&lt;h2 id="wikiwand">Wikiwand&lt;/h2>
-&lt;p>&lt;a href="https://chrome.google.com/webstore/detail/wikiwand-wikipedia-modern/emffkefkbkpkgpdeeooapgaicgmcbolj">Chrome 网上商店直达链接&lt;/a>&lt;/p>
-&lt;p>如果你有浏览过维基百科的页面，那除了词条的丰富程度以外，页面的复古程度也绝对会引起你的注意。Wikiwand 就是一个美化维基百科页面的插件，以更加现代美观的方式展示词条内容。&lt;del>装了这个插件之后，真的是更爱学习了呢&lt;/del>&lt;/p>
-&lt;p>&lt;img src="https://imgur.com/bSk8V32.png" alt="Wikiwand">&lt;/p>
-&lt;h2 id="proxy-switchyomega">Proxy SwitchyOmega&lt;/h2>
-&lt;p>&lt;a href="https://chrome.google.com/webstore/detail/proxy-switchyomega/padekgcemlokbadohgkifijomclgjgif">Chrome 网上商店直达链接&lt;/a>&lt;/p>
-&lt;p>一个浏览器代理切换工具，在没有启用全局代理的情况下，可以使用这个工具很方便的进行代理设置的切换&lt;/p>
-&lt;p>&lt;img src="https://i.imgur.com/DU4hvMg.png" alt="Proxy SwitchyOmega">&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Chrome on 点半九</title><link>https://blog.djangozane.com/tags/chrome/</link><description>Recent content in Chrome on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 10 Apr 2021 22:35:17 +0800</lastBuildDate><atom:link href="https://blog.djangozane.com/tags/chrome/index.xml" rel="self" type="application/rss+xml"/><item><title>五个浏览器插件，让你的浏览器更加好用</title><link>https://blog.djangozane.com/post/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6%E6%8E%A8%E8%8D%90/</link><pubDate>Sat, 10 Apr 2021 22:35:17 +0800</pubDate><guid>https://blog.djangozane.com/post/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6%E6%8E%A8%E8%8D%90/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;不能扩展的浏览器是没有灵魂的&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这篇文章向大家推荐一些我正在使用的浏览器插件，希望可以让你的浏览器更好用。&lt;/p&gt;
+&lt;p&gt;我目前在使用的浏览器是 Chromium，基于 Chromium 的浏览器都可以点击文中的链接直达 Chrome 网上商店进行安装，同时这些插件在 Firefox 的扩展商店也都可以搜到。&lt;/p&gt;
+&lt;h2 id="ublock-origin"&gt;uBlock Origin&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://chrome.google.com/webstore/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm"&gt;Chrome 网上商店直达链接&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;一个轻量但高效的网络请求过滤工具。&lt;/p&gt;
+&lt;p&gt;最基础的广告屏蔽功能在我日常使用过程中感觉可以拦截 90% 以上的广告。如果页面还有没法自动过滤的广告，&lt;del&gt;建议直接关掉这个页面&lt;/del&gt;可以自定义过滤规则。&lt;/p&gt;
+&lt;p&gt;uBlock Origin 的自定义过滤规则非常简单易用且功能强大，不仅可以过滤网址，还可以过滤页面上的元素标签。以我的博客为例，如果你不想要看到每日一词的诗句，可以在右上角选中 uBlock Origin 的吸管图标，然后在页面上选中每日一词的元素，点击创建即可从页面上过滤掉该元素。&lt;br&gt;
+&lt;img src="https://imgur.com/fzVE5Yp.png" alt=""&gt; &lt;br&gt;
+&lt;img src="https://imgur.com/yP4bdDa.png" alt=""&gt;&lt;/p&gt;
+&lt;p&gt;不过需要注意的是，有时候这类插件会导致一些页面无法正常访问。&lt;/p&gt;
+&lt;h2 id="imagus"&gt;Imagus&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://chrome.google.com/webstore/detail/imagus/immpkjjlgappgfkkfieppnmlhakdmaab"&gt;Chrome 网上商店直达链接&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;平时在浏览一些图库网站的时候，如果想要看某张图片的高清大图，通常需要点击图片进入图片详情页才行，但是通过这个插件，你只需将鼠标悬停在图片上即可查看图片对应的 「高清大图」。&lt;br&gt;
+&lt;img src="https://imgur.com/3nPP0fy.png" alt="Imgur"&gt;&lt;/p&gt;
+&lt;h2 id="vimium"&gt;Vimium&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb"&gt;Chrome 网上商店直达链接&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;对于使用习惯使用键盘来操作浏览器，特别是习惯使用 Vim 编辑器的童鞋来说，Vimium 绝对值得你一试，因为 Vimium 受 Vim 的启发，提供了通过快捷键的方式在标签页、链接、历史记录、书签等进行快速切换。 &lt;br&gt;
+&lt;img src="https://imgur.com/WvYiDb0.png" alt=""&gt;&lt;/p&gt;
+&lt;p&gt;Vimium 可以通过快捷键做到很多事情，这也导致很多人看到这么多快捷键就放弃了，但我还是强烈建议你尝试一下这个插件，因为你熟悉一遍之后会发现常用的其实就是那么几个。&lt;/p&gt;
+&lt;p&gt;这里说几个比较常用的操作：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;按下 &lt;code&gt;f&lt;/code&gt; 会在当前页面打开新的页面&lt;/li&gt;
+&lt;li&gt;按下 &lt;code&gt;F&lt;/code&gt; 会在新的标签页打开新的页面&lt;/li&gt;
+&lt;li&gt;按下 &lt;code&gt;b/B&lt;/code&gt; 会搜索并打开书签，打开逻辑同上&lt;/li&gt;
+&lt;li&gt;按下 &lt;code&gt;o/O&lt;/code&gt; 搜索并打开书签、历史记录，逻辑同上&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;t&lt;/code&gt; 新建标签页&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;T&lt;/code&gt; 在已经打开的标签页搜索并跳转&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;x&lt;/code&gt; 关闭标签页&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;X&lt;/code&gt; 恢复上一个关闭的标签页&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;h/j/k/l&lt;/code&gt; 在页面中进行上下左右的移动&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;gg&lt;/code&gt; 回到页面顶端&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;G&lt;/code&gt; 到达页面的底端&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;?&lt;/code&gt; 查看帮助页面&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;需要注意的是，该插件在 Chrome 的内置页面，比如 &lt;code&gt;chrome://&lt;/code&gt; 开头的页面或 Chrome 网上商店都是不生效的。&lt;/p&gt;
+&lt;h2 id="沙拉查词"&gt;沙拉查词&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://chrome.google.com/webstore/detail/%E6%B2%99%E6%8B%89%E6%9F%A5%E8%AF%8D-%E8%81%9A%E5%90%88%E8%AF%8D%E5%85%B8%E5%88%92%E8%AF%8D%E7%BF%BB%E8%AF%91/cdonnmffkdaoajfknoeeecmchibpmkmg"&gt;Chrome 网上商店直达链接&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;沙拉查词是一款划词翻译插件，支持划词翻译、网页翻译甚至是 PDF 翻译。我最常用的是划词翻译，在页面上选中内容之后，会在旁边出现一个沙拉碗的图标，点击它即可查看选中内容的翻译。&lt;/p&gt;
+&lt;p&gt;我最喜欢这个划词翻译插件的原因，一方面是你可以针对自己的使用习惯进行非常多的设定，其次就是它支持很多词典，可以通过多个翻译源展示选中内容的释义，还会展示对应的遣词造句，可以很好的帮助我了解选中内容的意思。&lt;del&gt;老文盲了&lt;/del&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://imgur.com/9DHhC3v.png" alt="Imgur"&gt;&lt;/p&gt;
+&lt;h2 id="wikiwand"&gt;Wikiwand&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://chrome.google.com/webstore/detail/wikiwand-wikipedia-modern/emffkefkbkpkgpdeeooapgaicgmcbolj"&gt;Chrome 网上商店直达链接&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;如果你有浏览过维基百科的页面，那除了词条的丰富程度以外，页面的复古程度也绝对会引起你的注意。Wikiwand 就是一个美化维基百科页面的插件，以更加现代美观的方式展示词条内容。&lt;del&gt;装了这个插件之后，真的是更爱学习了呢&lt;/del&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://imgur.com/bSk8V32.png" alt="Wikiwand"&gt;&lt;/p&gt;
+&lt;h2 id="proxy-switchyomega"&gt;Proxy SwitchyOmega&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://chrome.google.com/webstore/detail/proxy-switchyomega/padekgcemlokbadohgkifijomclgjgif"&gt;Chrome 网上商店直达链接&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;一个浏览器代理切换工具，在没有启用全局代理的情况下，可以使用这个工具很方便的进行代理设置的切换&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://i.imgur.com/DU4hvMg.png" alt="Proxy SwitchyOmega"&gt;&lt;/p&gt;</description></item></channel></rss>

@@ -1,43 +1,43 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apple on 点半九</title><link>https://www.dianbanjiu.com/tags/apple/</link><description>Recent content in Apple on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 20 Jul 2023 05:44:59 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/apple/index.xml" rel="self" type="application/rss+xml"/><item><title>苹方字体</title><link>https://www.dianbanjiu.com/post/%E8%8B%B9%E6%96%B9%E5%AD%97%E4%BD%93/</link><pubDate>Thu, 20 Jul 2023 05:44:59 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E8%8B%B9%E6%96%B9%E5%AD%97%E4%BD%93/</guid><description>&lt;p>最近在 Linux 笔记本上安装了苹方SC的字体，感觉整个字体都锐利了不少，看起来也更舒服了&lt;/p>
-&lt;p>如果你也想试试效果，可以在 &lt;a href="https://github.com/prchann/fonts/blob/main/PingFang%20SC/PingFang%20SC.ttc">github&lt;/a> 下载 ttc 字体文件进行安装&lt;/p>
-&lt;p>KDE 桌面可以在 &lt;code>设置-&amp;gt;外观-&amp;gt;字体管理&lt;/code> 处选择 &lt;code>从文件安装&lt;/code>&lt;br>
-安装完成之后，在 &lt;code>设置-&amp;gt;外观-&amp;gt;字体&lt;/code> 处启用 &lt;code>PingFang SC&lt;/code> 即可&lt;/p></description></item><item><title>在非Apple的系统上安装苹果字体</title><link>https://www.dianbanjiu.com/post/%E5%9C%A8%E9%9D%9Eapple%E7%9A%84%E7%B3%BB%E7%BB%9F%E4%B8%8A%E5%AE%89%E8%A3%85%E8%8B%B9%E6%9E%9C%E5%AD%97%E4%BD%93/</link><pubDate>Fri, 24 Feb 2023 23:43:48 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E5%9C%A8%E9%9D%9Eapple%E7%9A%84%E7%B3%BB%E7%BB%9F%E4%B8%8A%E5%AE%89%E8%A3%85%E8%8B%B9%E6%9E%9C%E5%AD%97%E4%BD%93/</guid><description>&lt;p>这里主要说的是苹果的 SF 字体，在 Linux 上或者 Windows 上的安装流程大同小异&lt;/p>
-&lt;p>首先需要准备解压工具，我这里用到的是 &lt;a href="https://www.7-zip.org/">7-Zip&lt;/a>，Windows 和 Linux 都可以使用自己的包管理器从源里面安装，当然也可以点击前面的链接去官网下载安装包进行安装，具体的安装步骤这里就不赘述了，下面默认你已经安装好了 7-Zip&lt;/p>
-&lt;p>&lt;em>为了方便起见，我下面统一使用了命令行的方式进行解压，如果你用的是 7-Zip 的图形界面进行下面的解压操作也是完全没有任何问题的，只是解压出来的文件位置可能会有一点区别&lt;/em>&lt;/p>
-&lt;p>接着需要在&lt;a href="https://developer.apple.com/fonts/">苹果开发者&lt;/a>平台下载字体，下载无需登录开发者账号，此处我以 SF Pro 为例&lt;/p>
-&lt;p>点击 SF Pro 下面的 &lt;code>Download SF Pro&lt;/code>，下载完成之后你会得到一个名为 &lt;code>SF-Pro.dmg&lt;/code> 的文件，dmg 是苹果的一种打包方式，既然能打包就能解包，7-Zip 刚好就可以做到这件事情&lt;/p>
-&lt;p>打开终端（Terminal/CMD），使用下面的命令解压这个文件&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Windows&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>7z e .&lt;span style="color:#ae81ff">\S&lt;/span>F-Pro.dmg
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Linux&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>7z e ./SF-Pro.dmg
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>解压完成之后你应该会得到下面这几个文件&lt;/p>
-&lt;ul>
-&lt;li>.HFS+ Private Directory Data_&lt;/li>
-&lt;li>[HFS+ Private Data]&lt;/li>
-&lt;li>SFProFonts&lt;/li>
-&lt;li>.background.png&lt;/li>
-&lt;li>.DS_Store&lt;/li>
-&lt;li>SF Pro Fonts.pkg&lt;/li>
-&lt;/ul>
-&lt;p>接着继续解压 &lt;code>SF Pro Fonts.pkg&lt;/code> 这个文件&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Windows&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>7z e &lt;span style="color:#e6db74">&amp;#39;.\SF Pro Fonts.pkg&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Linux&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>7z e &lt;span style="color:#e6db74">&amp;#39;./SF Pro Fonts.pkg&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>解压完成之后，在当前目录会多出一个叫做 &lt;code>Payload~&lt;/code> 的文件，继续解压这个文件&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Windows&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>7z e .&lt;span style="color:#ae81ff">\P&lt;/span>ayload~
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Linux &lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>7z e ./Payload~
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>解压完成之后你会在当前目录下看到一堆 .otf 或者 .ttf 结尾的字体文件&lt;/p>
-&lt;p>Windows 用户可以用文件管理器打开这些字体所在的目录，选中你想安装的字体，点击右键，在右键菜单中选择安装即可。或者也可以打开 设置-&amp;gt;个性化-&amp;gt;字体，把想要安装的字体拖到 &lt;code>拖放以安装&lt;/code> 的框中即可&lt;/p>
-&lt;p>Linux 用户&lt;/p>
-&lt;ul>
-&lt;li>如果是给自己当前用户安装，可以创建 &lt;code>~/.local/share/fonts/&lt;/code> 目录&lt;/li>
-&lt;li>如果是给系统上所有用户安装，需要创建 &lt;code>/usr/local/share/fonts&lt;/code> 目录&lt;/li>
-&lt;/ul>
-&lt;p>在创建好的 fonts 目录下新增 otf 和 ttf 两个文件夹，分别把想要安装的 ttf 字体和 otf 字体复制到对应的目录中，最后使用 &lt;code>fc-cache&lt;/code> 命令刷新一下字体即可&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apple on 点半九</title><link>https://blog.djangozane.com/tags/apple/</link><description>Recent content in Apple on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 20 Jul 2023 05:44:59 +0800</lastBuildDate><atom:link href="https://blog.djangozane.com/tags/apple/index.xml" rel="self" type="application/rss+xml"/><item><title>苹方字体</title><link>https://blog.djangozane.com/post/%E8%8B%B9%E6%96%B9%E5%AD%97%E4%BD%93/</link><pubDate>Thu, 20 Jul 2023 05:44:59 +0800</pubDate><guid>https://blog.djangozane.com/post/%E8%8B%B9%E6%96%B9%E5%AD%97%E4%BD%93/</guid><description>&lt;p&gt;最近在 Linux 笔记本上安装了苹方SC的字体，感觉整个字体都锐利了不少，看起来也更舒服了&lt;/p&gt;
+&lt;p&gt;如果你也想试试效果，可以在 &lt;a href="https://github.com/prchann/fonts/blob/main/PingFang%20SC/PingFang%20SC.ttc"&gt;github&lt;/a&gt; 下载 ttc 字体文件进行安装&lt;/p&gt;
+&lt;p&gt;KDE 桌面可以在 &lt;code&gt;设置-&amp;gt;外观-&amp;gt;字体管理&lt;/code&gt; 处选择 &lt;code&gt;从文件安装&lt;/code&gt;&lt;br&gt;
+安装完成之后，在 &lt;code&gt;设置-&amp;gt;外观-&amp;gt;字体&lt;/code&gt; 处启用 &lt;code&gt;PingFang SC&lt;/code&gt; 即可&lt;/p&gt;</description></item><item><title>在非Apple的系统上安装苹果字体</title><link>https://blog.djangozane.com/post/%E5%9C%A8%E9%9D%9Eapple%E7%9A%84%E7%B3%BB%E7%BB%9F%E4%B8%8A%E5%AE%89%E8%A3%85%E8%8B%B9%E6%9E%9C%E5%AD%97%E4%BD%93/</link><pubDate>Fri, 24 Feb 2023 23:43:48 +0800</pubDate><guid>https://blog.djangozane.com/post/%E5%9C%A8%E9%9D%9Eapple%E7%9A%84%E7%B3%BB%E7%BB%9F%E4%B8%8A%E5%AE%89%E8%A3%85%E8%8B%B9%E6%9E%9C%E5%AD%97%E4%BD%93/</guid><description>&lt;p&gt;这里主要说的是苹果的 SF 字体，在 Linux 上或者 Windows 上的安装流程大同小异&lt;/p&gt;
+&lt;p&gt;首先需要准备解压工具，我这里用到的是 &lt;a href="https://www.7-zip.org/"&gt;7-Zip&lt;/a&gt;，Windows 和 Linux 都可以使用自己的包管理器从源里面安装，当然也可以点击前面的链接去官网下载安装包进行安装，具体的安装步骤这里就不赘述了，下面默认你已经安装好了 7-Zip&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;为了方便起见，我下面统一使用了命令行的方式进行解压，如果你用的是 7-Zip 的图形界面进行下面的解压操作也是完全没有任何问题的，只是解压出来的文件位置可能会有一点区别&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;接着需要在&lt;a href="https://developer.apple.com/fonts/"&gt;苹果开发者&lt;/a&gt;平台下载字体，下载无需登录开发者账号，此处我以 SF Pro 为例&lt;/p&gt;
+&lt;p&gt;点击 SF Pro 下面的 &lt;code&gt;Download SF Pro&lt;/code&gt;，下载完成之后你会得到一个名为 &lt;code&gt;SF-Pro.dmg&lt;/code&gt; 的文件，dmg 是苹果的一种打包方式，既然能打包就能解包，7-Zip 刚好就可以做到这件事情&lt;/p&gt;
+&lt;p&gt;打开终端（Terminal/CMD），使用下面的命令解压这个文件&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Windows&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;7z e .&lt;span style="color:#ae81ff"&gt;\S&lt;/span&gt;F-Pro.dmg
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Linux&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;7z e ./SF-Pro.dmg
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;解压完成之后你应该会得到下面这几个文件&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;.HFS+ Private Directory Data_&lt;/li&gt;
+&lt;li&gt;[HFS+ Private Data]&lt;/li&gt;
+&lt;li&gt;SFProFonts&lt;/li&gt;
+&lt;li&gt;.background.png&lt;/li&gt;
+&lt;li&gt;.DS_Store&lt;/li&gt;
+&lt;li&gt;SF Pro Fonts.pkg&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;接着继续解压 &lt;code&gt;SF Pro Fonts.pkg&lt;/code&gt; 这个文件&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Windows&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;7z e &lt;span style="color:#e6db74"&gt;&amp;#39;.\SF Pro Fonts.pkg&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Linux&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;7z e &lt;span style="color:#e6db74"&gt;&amp;#39;./SF Pro Fonts.pkg&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;解压完成之后，在当前目录会多出一个叫做 &lt;code&gt;Payload~&lt;/code&gt; 的文件，继续解压这个文件&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Windows&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;7z e .&lt;span style="color:#ae81ff"&gt;\P&lt;/span&gt;ayload~
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Linux &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;7z e ./Payload~
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;解压完成之后你会在当前目录下看到一堆 .otf 或者 .ttf 结尾的字体文件&lt;/p&gt;
+&lt;p&gt;Windows 用户可以用文件管理器打开这些字体所在的目录，选中你想安装的字体，点击右键，在右键菜单中选择安装即可。或者也可以打开 设置-&amp;gt;个性化-&amp;gt;字体，把想要安装的字体拖到 &lt;code&gt;拖放以安装&lt;/code&gt; 的框中即可&lt;/p&gt;
+&lt;p&gt;Linux 用户&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果是给自己当前用户安装，可以创建 &lt;code&gt;~/.local/share/fonts/&lt;/code&gt; 目录&lt;/li&gt;
+&lt;li&gt;如果是给系统上所有用户安装，需要创建 &lt;code&gt;/usr/local/share/fonts&lt;/code&gt; 目录&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在创建好的 fonts 目录下新增 otf 和 ttf 两个文件夹，分别把想要安装的 ttf 字体和 otf 字体复制到对应的目录中，最后使用 &lt;code&gt;fc-cache&lt;/code&gt; 命令刷新一下字体即可&lt;/p&gt;</description></item></channel></rss>

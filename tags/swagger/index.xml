@@ -1,22 +1,22 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Swagger on 点半九</title><link>https://www.dianbanjiu.com/tags/swagger/</link><description>Recent content in Swagger on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 08 Aug 2021 13:56:16 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/swagger/index.xml" rel="self" type="application/rss+xml"/><item><title>利用 Swagger UI 生成漂亮的接口文档</title><link>https://www.dianbanjiu.com/post/%E5%88%A9%E7%94%A8-swagger-ui-%E7%94%9F%E6%88%90%E6%BC%82%E4%BA%AE%E7%9A%84%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3/</link><pubDate>Sun, 08 Aug 2021 13:56:16 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E5%88%A9%E7%94%A8-swagger-ui-%E7%94%9F%E6%88%90%E6%BC%82%E4%BA%AE%E7%9A%84%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3/</guid><description>&lt;p>最近在跟前端进行对接的时候，规定了后端每个接口都必须要写接口文档，并且必须生成对应的 .json/.yaml 文件，这样他们就可以通过接口文件直接生成对应的 ts 文件，能够准确的进行接口参数的对接。这一部分现在我已经通过 Gitlab CI + 文件服务器的方式实现了。&lt;/p>
-&lt;p>但是作为后端，有时候想看看现在有什么接口，接口里有什么参数，之前只能通过看代码，现在有了接口文件，那当然是要搞个花里胡哨的东西来展示一下了。既然要看 Swagger 文档，最简单且有效的工具当然就是 Swagger 官方提供的 Swagger UI 了。&lt;/p>
-&lt;p>下面就来看看怎么来整一个 Swagger UI 玩玩。&lt;/p>
-&lt;h2 id="安装">&lt;strong>安装&lt;/strong>&lt;/h2>
-&lt;p>我们下面使用 Docker 来安装 Swagger UI。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ docker pull swaggerapi/swaggerui
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="启动">&lt;strong>启动&lt;/strong>&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ docker run -d -p 80:8080 -v ~/swagger:/usr/share/nginx/html/swagger --name swagger-ui swaggerapi/swagger-ui
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>&lt;code>d&lt;/code> 会让该容器以守护进程的形式在后台运行&lt;/li>
-&lt;li>&lt;code>p&lt;/code> 映射容器的 8080 端口到本机的 80 端口&lt;/li>
-&lt;li>&lt;code>v&lt;/code> 挂载本机的 &lt;code>~/swagger&lt;/code> 目录到容器的 &lt;code>/usr/share/nginx/html/swagger&lt;/code>&lt;/li>
-&lt;li>&lt;code>-name&lt;/code> 设定该容器的名字，方便以后通过名字对容器进行一些操作&lt;/li>
-&lt;/ul>
-&lt;p>启动完成之后，你就可以将已有的 swagger 文档（.yaml、.json 文件）放到 &lt;code>~/swagger&lt;/code> 目录下（假设该目录下已经有了一个名为 swagger.json 的文件），打开浏览器，访问 &lt;code>http://ip&lt;/code> 页面，在搜索框输入 &lt;code>swagger/swagger.json&lt;/code> 就可以查看你的接口文档了。&lt;/p>
-&lt;p>&lt;img src="https://i.imgur.com/rR7fnLm.png" alt="https://i.imgur.com/rR7fnLm.png">&lt;/p>
-&lt;h2 id="说明">&lt;strong>说明&lt;/strong>&lt;/h2>
-&lt;p>下面是 Swagger UI 容器中 nginx 的配置文件，在容器中的 &lt;code>/etc/nginx/nginx.conf&lt;/code>&lt;/p>
-&lt;pre tabindex="0">&lt;code>worker_processes 1;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Swagger on 点半九</title><link>https://blog.djangozane.com/tags/swagger/</link><description>Recent content in Swagger on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 08 Aug 2021 13:56:16 +0800</lastBuildDate><atom:link href="https://blog.djangozane.com/tags/swagger/index.xml" rel="self" type="application/rss+xml"/><item><title>利用 Swagger UI 生成漂亮的接口文档</title><link>https://blog.djangozane.com/post/%E5%88%A9%E7%94%A8-swagger-ui-%E7%94%9F%E6%88%90%E6%BC%82%E4%BA%AE%E7%9A%84%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3/</link><pubDate>Sun, 08 Aug 2021 13:56:16 +0800</pubDate><guid>https://blog.djangozane.com/post/%E5%88%A9%E7%94%A8-swagger-ui-%E7%94%9F%E6%88%90%E6%BC%82%E4%BA%AE%E7%9A%84%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3/</guid><description>&lt;p&gt;最近在跟前端进行对接的时候，规定了后端每个接口都必须要写接口文档，并且必须生成对应的 .json/.yaml 文件，这样他们就可以通过接口文件直接生成对应的 ts 文件，能够准确的进行接口参数的对接。这一部分现在我已经通过 Gitlab CI + 文件服务器的方式实现了。&lt;/p&gt;
+&lt;p&gt;但是作为后端，有时候想看看现在有什么接口，接口里有什么参数，之前只能通过看代码，现在有了接口文件，那当然是要搞个花里胡哨的东西来展示一下了。既然要看 Swagger 文档，最简单且有效的工具当然就是 Swagger 官方提供的 Swagger UI 了。&lt;/p&gt;
+&lt;p&gt;下面就来看看怎么来整一个 Swagger UI 玩玩。&lt;/p&gt;
+&lt;h2 id="安装"&gt;&lt;strong&gt;安装&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;我们下面使用 Docker 来安装 Swagger UI。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ docker pull swaggerapi/swaggerui
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="启动"&gt;&lt;strong&gt;启动&lt;/strong&gt;&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ docker run -d -p 80:8080 -v ~/swagger:/usr/share/nginx/html/swagger --name swagger-ui swaggerapi/swagger-ui
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;d&lt;/code&gt; 会让该容器以守护进程的形式在后台运行&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;p&lt;/code&gt; 映射容器的 8080 端口到本机的 80 端口&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;v&lt;/code&gt; 挂载本机的 &lt;code&gt;~/swagger&lt;/code&gt; 目录到容器的 &lt;code&gt;/usr/share/nginx/html/swagger&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-name&lt;/code&gt; 设定该容器的名字，方便以后通过名字对容器进行一些操作&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;启动完成之后，你就可以将已有的 swagger 文档（.yaml、.json 文件）放到 &lt;code&gt;~/swagger&lt;/code&gt; 目录下（假设该目录下已经有了一个名为 swagger.json 的文件），打开浏览器，访问 &lt;code&gt;http://ip&lt;/code&gt; 页面，在搜索框输入 &lt;code&gt;swagger/swagger.json&lt;/code&gt; 就可以查看你的接口文档了。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://i.imgur.com/rR7fnLm.png" alt="https://i.imgur.com/rR7fnLm.png"&gt;&lt;/p&gt;
+&lt;h2 id="说明"&gt;&lt;strong&gt;说明&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;下面是 Swagger UI 容器中 nginx 的配置文件，在容器中的 &lt;code&gt;/etc/nginx/nginx.conf&lt;/code&gt;&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;worker_processes 1;
 events {
 worker_connections 1024;
 }
@@ -51,6 +51,6 @@ include cors.conf;
 }
 }
 }
-&lt;/code>&lt;/pre>&lt;p>Swagger UI 的容器中启动了一个 nginx 服务，通过 nginx 来指定你需要访问的接口文档，默认情况下，该容器中 nginx 监听的是 8080 端口。&lt;/p>
-&lt;p>可以看到，当你访问 http://ip:80/ 时，它默认访问的是 &lt;code>/usr/share/nginx/html/index.html&lt;/code> ，当你在搜索框中输入一些文档名时，它会直接在 &lt;code>/usr/share/nginx/html/&lt;/code> 下找，找到了就会展示出来，找不到就会直接报错。所以上面才需要将本机存放接口文档的目录挂载到 &lt;code>/usr/share/nginx/html/&lt;/code> 下。&lt;/p>
-&lt;p>当然，无论是端口还是文档的存放位置，你都是可以通过修改镜像/容器的方式来更改。&lt;/p></description></item></channel></rss>
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Swagger UI 的容器中启动了一个 nginx 服务，通过 nginx 来指定你需要访问的接口文档，默认情况下，该容器中 nginx 监听的是 8080 端口。&lt;/p&gt;
+&lt;p&gt;可以看到，当你访问 http://ip:80/ 时，它默认访问的是 &lt;code&gt;/usr/share/nginx/html/index.html&lt;/code&gt; ，当你在搜索框中输入一些文档名时，它会直接在 &lt;code&gt;/usr/share/nginx/html/&lt;/code&gt; 下找，找到了就会展示出来，找不到就会直接报错。所以上面才需要将本机存放接口文档的目录挂载到 &lt;code&gt;/usr/share/nginx/html/&lt;/code&gt; 下。&lt;/p&gt;
+&lt;p&gt;当然，无论是端口还是文档的存放位置，你都是可以通过修改镜像/容器的方式来更改。&lt;/p&gt;</description></item></channel></rss>

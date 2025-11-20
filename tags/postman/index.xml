@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Postman on 点半九</title><link>https://www.dianbanjiu.com/tags/postman/</link><description>Recent content in Postman on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 14 Aug 2020 23:53:38 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/postman/index.xml" rel="self" type="application/rss+xml"/><item><title>Postman 添加环境变量</title><link>https://www.dianbanjiu.com/post/pacman-%E6%B7%BB%E5%8A%A0%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/</link><pubDate>Fri, 14 Aug 2020 23:53:38 +0800</pubDate><guid>https://www.dianbanjiu.com/post/pacman-%E6%B7%BB%E5%8A%A0%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/</guid><description>&lt;p>在使用 postman 进行后端接口测试的过程中，我常常会遇到除了登录接口外其他接口都需要 token 来验证的情况，遇到这种状况时，我经常会先转到登录接口，获取返回的 token，然后再把这个 token 复制粘帖到需要的地方，这种方式虽然可行，但是每次都要手动来进行操作，着实有点麻烦。&lt;/p>
-&lt;p>所以我就想 postman 有没有什么机制可以把这个 token 分享出来，然后我直接在 token 的位置使用环境变量来调用就可以了呢？&lt;/p>
-&lt;p>postman 做了这么久的接口测试，果然这个问题他们早就考虑到了，postman 本身是支持环境变量的，下面就看一下怎么使用吧。&lt;/p>
-&lt;ol>
-&lt;li>点击右上角的小齿轮，添加一个新的环境。&lt;/li>
-&lt;li>在这个环境里创建一个新的变量 token（你可以根据自己的习惯，起一个好记忆的）。&lt;/li>
-&lt;li>在首页选择刚才创建好的环境。&lt;/li>
-&lt;li>添加登录接口请求。&lt;/li>
-&lt;li>打开 &lt;code>Tests&lt;/code> 标签，在里面填写 &lt;code>pm.environment.set(&amp;quot;token&amp;quot;, JSON.parse(responseBody).access_token);&lt;/code>，你需要根据自己后端接口的返回来修改 &lt;code>JSON.parse(responseBody).access_token&lt;/code> 字段，如果你的登录接口返回的也是一个 json 格式的数据，那你只需要根据返回 json 中 token 对应的名字将 &lt;code>accsess_token&lt;/code> 修改一下就可以了。&lt;br>
-打开一个需要使用到 token 的接口，填写好对应的信息，在 &lt;code>Authorization&lt;/code> 标签里选择 &lt;code>Bearer Token&lt;/code>，在 token 的位置填写 &lt;code>{{token}}&lt;/code>。&lt;/li>
-&lt;li>发起一次登录请求，请求成功之后，返回需要使用到 token 的接口，发起新的请求，这时候应该是可以正常访问的。&lt;/li>
-&lt;li>如果 token 过期了，那只需要在登录接口那里重新发起一次登录请求，其他需要使用 token 的接口就会自动调用最新的 token。&lt;/li>
-&lt;/ol>
-&lt;p>建议如果是不同的项目，那可以多创建几个环境，然后使用不同的环境变量。&lt;/p>
-&lt;p>如果所有的项目的 token 类似，也可以考虑创建全局变量。&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Postman on 点半九</title><link>https://blog.djangozane.com/tags/postman/</link><description>Recent content in Postman on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 14 Aug 2020 23:53:38 +0800</lastBuildDate><atom:link href="https://blog.djangozane.com/tags/postman/index.xml" rel="self" type="application/rss+xml"/><item><title>Postman 添加环境变量</title><link>https://blog.djangozane.com/post/pacman-%E6%B7%BB%E5%8A%A0%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/</link><pubDate>Fri, 14 Aug 2020 23:53:38 +0800</pubDate><guid>https://blog.djangozane.com/post/pacman-%E6%B7%BB%E5%8A%A0%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/</guid><description>&lt;p&gt;在使用 postman 进行后端接口测试的过程中，我常常会遇到除了登录接口外其他接口都需要 token 来验证的情况，遇到这种状况时，我经常会先转到登录接口，获取返回的 token，然后再把这个 token 复制粘帖到需要的地方，这种方式虽然可行，但是每次都要手动来进行操作，着实有点麻烦。&lt;/p&gt;
+&lt;p&gt;所以我就想 postman 有没有什么机制可以把这个 token 分享出来，然后我直接在 token 的位置使用环境变量来调用就可以了呢？&lt;/p&gt;
+&lt;p&gt;postman 做了这么久的接口测试，果然这个问题他们早就考虑到了，postman 本身是支持环境变量的，下面就看一下怎么使用吧。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;点击右上角的小齿轮，添加一个新的环境。&lt;/li&gt;
+&lt;li&gt;在这个环境里创建一个新的变量 token（你可以根据自己的习惯，起一个好记忆的）。&lt;/li&gt;
+&lt;li&gt;在首页选择刚才创建好的环境。&lt;/li&gt;
+&lt;li&gt;添加登录接口请求。&lt;/li&gt;
+&lt;li&gt;打开 &lt;code&gt;Tests&lt;/code&gt; 标签，在里面填写 &lt;code&gt;pm.environment.set(&amp;quot;token&amp;quot;, JSON.parse(responseBody).access_token);&lt;/code&gt;，你需要根据自己后端接口的返回来修改 &lt;code&gt;JSON.parse(responseBody).access_token&lt;/code&gt; 字段，如果你的登录接口返回的也是一个 json 格式的数据，那你只需要根据返回 json 中 token 对应的名字将 &lt;code&gt;accsess_token&lt;/code&gt; 修改一下就可以了。&lt;br&gt;
+打开一个需要使用到 token 的接口，填写好对应的信息，在 &lt;code&gt;Authorization&lt;/code&gt; 标签里选择 &lt;code&gt;Bearer Token&lt;/code&gt;，在 token 的位置填写 &lt;code&gt;{{token}}&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;发起一次登录请求，请求成功之后，返回需要使用到 token 的接口，发起新的请求，这时候应该是可以正常访问的。&lt;/li&gt;
+&lt;li&gt;如果 token 过期了，那只需要在登录接口那里重新发起一次登录请求，其他需要使用 token 的接口就会自动调用最新的 token。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;建议如果是不同的项目，那可以多创建几个环境，然后使用不同的环境变量。&lt;/p&gt;
+&lt;p&gt;如果所有的项目的 token 类似，也可以考虑创建全局变量。&lt;/p&gt;</description></item></channel></rss>

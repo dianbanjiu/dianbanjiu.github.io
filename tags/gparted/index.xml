@@ -1,26 +1,26 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Gparted on 点半九</title><link>https://www.dianbanjiu.com/tags/gparted/</link><description>Recent content in Gparted on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 02 Jan 2020 12:44:45 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/gparted/index.xml" rel="self" type="application/rss+xml"/><item><title>使用手机制作 Linux Live CD</title><link>https://www.dianbanjiu.com/post/%E4%BD%BF%E7%94%A8%E6%89%8B%E6%9C%BA%E5%88%B6%E4%BD%9C-linux-live-cd/</link><pubDate>Thu, 02 Jan 2020 12:44:45 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E4%BD%BF%E7%94%A8%E6%89%8B%E6%9C%BA%E5%88%B6%E4%BD%9C-linux-live-cd/</guid><description>&lt;p>在 2020 年的第一天，因为想试试黑苹果，所以就从网上下载了安装镜像，在自己的笔记本上尝试了一下，不过因为各种原因最后安装失败了，惟一的系统也在尝试安装黑苹果的时候给格掉了。身边又只有这一台电脑，没办法，本来准备去网吧写个 Manjaro 的启动盘的，可惜木马病毒太多，在网吧杀了两个小时的毒，也没杀完，最后就放弃了。&lt;/p>
-&lt;p>&lt;img src="https://i.imgur.com/BXi7QoK.jpg" alt="Imgur">&lt;/p>
-&lt;p>在从网吧回寝室的路上，我想到了曾经在 distrowatch.org 上好像看到过 gparted，就是那个 Linux 下挺著名的分区工具，也有一个 Linux 发行版，而且我隐约记得它似乎是可以直接解压到 U 盘使用的。想到这我就迫不及待得尝试了一下，果然可以！！！&lt;/p>
-&lt;h3 id="预先准备">预先准备&lt;/h3>
-&lt;ul>
-&lt;li>两个 U 盘（一个用来装 gparted，另一个用来制作 manjaro 启动盘）。&lt;/li>
-&lt;li>一个 otg（可以连接 U 盘到手机上的工具）。&lt;/li>
-&lt;li>手机一部&lt;/li>
-&lt;/ul>
-&lt;h3 id="game-start">Game Start&lt;/h3>
-&lt;p>首先去 &lt;a href="https://gparted.org/download.php">gparted 下载页面&lt;/a> 下载 &lt;strong>Stable directory (.iso/.zip)(for i686, i686-pae and amd64 architectures)&lt;/strong>。&lt;/p>
-&lt;p>&lt;img src="https://i.imgur.com/O0ld1kR.png" alt="Imgur">&lt;/p>
-&lt;p>下载下来的是一个 zip 压缩包，在手机上可以直接解压出来，然后利用 otg 把手机跟 U 盘连接起来，在复制文件之前，请先确保 U 盘的格式为 fat 格式。然后将解压之后的文件复制到 U 盘当中，gparted 本身并不是很大，解压后大概 357M，但是因为之后还要下载 manjaro 镜像文件，所以这两个 U 盘的容量都建议至少 4G 以上。&lt;/p>
-&lt;p>至此，Gparted Live CD 已经制作完成，插到电脑上，进入电脑的引导界面，选择 Gparted 所在的 U 盘启动。&lt;/p>
-&lt;p>建议你在复制完 Live CD 所需的文件之后，同时下载好需要的镜像文件，比如我选择的 manjaro，&lt;a href="https://mirrors.tuna.tsinghua.edu.cn/osdn/storage/g/m/ma/">manjaro 下载地址&lt;/a>，这是清华的镜像源，国内下载速度很快，包括官方版本和社区版本以及之前的历史版本。在手机上下载好之后也复制到 Live CD 当中。&lt;/p>
-&lt;p>引导加载完成之后后你可以看到下面这个画面，选择第一项回车进入。&lt;/p>
-&lt;p>&lt;img src="https://i.imgur.com/d27drNa.png" alt="Imgur">&lt;/p>
-&lt;p>之后的键盘模式选择 &lt;code>Don't touch keymap&lt;/code>：&lt;/p>
-&lt;p>&lt;img src="https://i.imgur.com/O55JJzQ.png" alt="imgur">&lt;/p>
-&lt;p>后面的两项直接回车，第一个回车会直接选择默认的 US English 为默认的语言，第二个回车是以图形界面加载桌面。&lt;/p>
-&lt;p>&lt;img src="https://i.imgur.com/LtegLuc.png" alt="Imgur">&lt;/p>
-&lt;p>加载完成即可进入桌面了：&lt;/p>
-&lt;p>&lt;img src="https://i.imgur.com/rTqcked.png" alt="Imgur">&lt;/p>
-&lt;p>插上你的另外一个 U 盘，使用 &lt;code>fdisk&lt;/code> 命令确定新插入 U 盘的设备名，然后就可以使用 dd 命令将镜像写入 U 盘了。&lt;/p>
-&lt;p>&lt;img src="https://i.imgur.com/hOsO0gV.png" alt="Imgur">&lt;/p>
-&lt;p>最后关机拔掉 gparted Live CD 的 U 盘，开机重新进入新的引导盘。之后的就可以根据新的安装要求安装新系统了。&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Gparted on 点半九</title><link>https://blog.djangozane.com/tags/gparted/</link><description>Recent content in Gparted on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 02 Jan 2020 12:44:45 +0800</lastBuildDate><atom:link href="https://blog.djangozane.com/tags/gparted/index.xml" rel="self" type="application/rss+xml"/><item><title>使用手机制作 Linux Live CD</title><link>https://blog.djangozane.com/post/%E4%BD%BF%E7%94%A8%E6%89%8B%E6%9C%BA%E5%88%B6%E4%BD%9C-linux-live-cd/</link><pubDate>Thu, 02 Jan 2020 12:44:45 +0800</pubDate><guid>https://blog.djangozane.com/post/%E4%BD%BF%E7%94%A8%E6%89%8B%E6%9C%BA%E5%88%B6%E4%BD%9C-linux-live-cd/</guid><description>&lt;p&gt;在 2020 年的第一天，因为想试试黑苹果，所以就从网上下载了安装镜像，在自己的笔记本上尝试了一下，不过因为各种原因最后安装失败了，惟一的系统也在尝试安装黑苹果的时候给格掉了。身边又只有这一台电脑，没办法，本来准备去网吧写个 Manjaro 的启动盘的，可惜木马病毒太多，在网吧杀了两个小时的毒，也没杀完，最后就放弃了。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://i.imgur.com/BXi7QoK.jpg" alt="Imgur"&gt;&lt;/p&gt;
+&lt;p&gt;在从网吧回寝室的路上，我想到了曾经在 distrowatch.org 上好像看到过 gparted，就是那个 Linux 下挺著名的分区工具，也有一个 Linux 发行版，而且我隐约记得它似乎是可以直接解压到 U 盘使用的。想到这我就迫不及待得尝试了一下，果然可以！！！&lt;/p&gt;
+&lt;h3 id="预先准备"&gt;预先准备&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;两个 U 盘（一个用来装 gparted，另一个用来制作 manjaro 启动盘）。&lt;/li&gt;
+&lt;li&gt;一个 otg（可以连接 U 盘到手机上的工具）。&lt;/li&gt;
+&lt;li&gt;手机一部&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="game-start"&gt;Game Start&lt;/h3&gt;
+&lt;p&gt;首先去 &lt;a href="https://gparted.org/download.php"&gt;gparted 下载页面&lt;/a&gt; 下载 &lt;strong&gt;Stable directory (.iso/.zip)(for i686, i686-pae and amd64 architectures)&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://i.imgur.com/O0ld1kR.png" alt="Imgur"&gt;&lt;/p&gt;
+&lt;p&gt;下载下来的是一个 zip 压缩包，在手机上可以直接解压出来，然后利用 otg 把手机跟 U 盘连接起来，在复制文件之前，请先确保 U 盘的格式为 fat 格式。然后将解压之后的文件复制到 U 盘当中，gparted 本身并不是很大，解压后大概 357M，但是因为之后还要下载 manjaro 镜像文件，所以这两个 U 盘的容量都建议至少 4G 以上。&lt;/p&gt;
+&lt;p&gt;至此，Gparted Live CD 已经制作完成，插到电脑上，进入电脑的引导界面，选择 Gparted 所在的 U 盘启动。&lt;/p&gt;
+&lt;p&gt;建议你在复制完 Live CD 所需的文件之后，同时下载好需要的镜像文件，比如我选择的 manjaro，&lt;a href="https://mirrors.tuna.tsinghua.edu.cn/osdn/storage/g/m/ma/"&gt;manjaro 下载地址&lt;/a&gt;，这是清华的镜像源，国内下载速度很快，包括官方版本和社区版本以及之前的历史版本。在手机上下载好之后也复制到 Live CD 当中。&lt;/p&gt;
+&lt;p&gt;引导加载完成之后后你可以看到下面这个画面，选择第一项回车进入。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://i.imgur.com/d27drNa.png" alt="Imgur"&gt;&lt;/p&gt;
+&lt;p&gt;之后的键盘模式选择 &lt;code&gt;Don't touch keymap&lt;/code&gt;：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://i.imgur.com/O55JJzQ.png" alt="imgur"&gt;&lt;/p&gt;
+&lt;p&gt;后面的两项直接回车，第一个回车会直接选择默认的 US English 为默认的语言，第二个回车是以图形界面加载桌面。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://i.imgur.com/LtegLuc.png" alt="Imgur"&gt;&lt;/p&gt;
+&lt;p&gt;加载完成即可进入桌面了：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://i.imgur.com/rTqcked.png" alt="Imgur"&gt;&lt;/p&gt;
+&lt;p&gt;插上你的另外一个 U 盘，使用 &lt;code&gt;fdisk&lt;/code&gt; 命令确定新插入 U 盘的设备名，然后就可以使用 dd 命令将镜像写入 U 盘了。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://i.imgur.com/hOsO0gV.png" alt="Imgur"&gt;&lt;/p&gt;
+&lt;p&gt;最后关机拔掉 gparted Live CD 的 U 盘，开机重新进入新的引导盘。之后的就可以根据新的安装要求安装新系统了。&lt;/p&gt;</description></item></channel></rss>

@@ -1,25 +1,25 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>两步验证 on 点半九</title><link>https://www.dianbanjiu.com/tags/%E4%B8%A4%E6%AD%A5%E9%AA%8C%E8%AF%81/</link><description>Recent content in 两步验证 on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 03 Oct 2019 11:05:02 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/%E4%B8%A4%E6%AD%A5%E9%AA%8C%E8%AF%81/index.xml" rel="self" type="application/rss+xml"/><item><title>Github 开启两步验证后，git 推送鉴权失败</title><link>https://www.dianbanjiu.com/post/github-%E5%BC%80%E5%90%AF%E4%B8%A4%E6%AD%A5%E9%AA%8C%E8%AF%81%E5%90%8Egit-%E6%8E%A8%E9%80%81%E9%89%B4%E6%9D%83%E5%A4%B1%E8%B4%A5/</link><pubDate>Thu, 03 Oct 2019 11:05:02 +0800</pubDate><guid>https://www.dianbanjiu.com/post/github-%E5%BC%80%E5%90%AF%E4%B8%A4%E6%AD%A5%E9%AA%8C%E8%AF%81%E5%90%8Egit-%E6%8E%A8%E9%80%81%E9%89%B4%E6%9D%83%E5%A4%B1%E8%B4%A5/</guid><description>&lt;p>最近开启了 Github 的两步验证，然后在桌面上使用 git 向 Github 推送文件的时候总是出现&lt;code>鉴权失败&lt;/code>的问题，在排除了密码错误的原因之后，觉得应该就是两步验证的锅了。&lt;/p>
-&lt;p>下面是解决办法：&lt;/p>
-&lt;ol>
-&lt;li>打开 Github 的 「&lt;a href="https://github.com/settings/profile">Settings&lt;/a>」&lt;/li>
-&lt;li>进入 「&lt;a href="https://github.com/settings/apps">Developer settings&lt;/a>」&lt;/li>
-&lt;li>打开 「&lt;a href="https://github.com/settings/tokens">Personal access tokens&lt;/a>」&lt;/li>
-&lt;li>点击 「Generate new token」，生成一个新的 token&lt;/li>
-&lt;/ol>
-&lt;p>&lt;strong>生成 token 之后千万记得把 token 复制并保存好，因为 github 为了安全起见，这个 token 只会出现一次，也就是说如果你以后忘记了这个 token，只能重新创建一个。&lt;/strong>&lt;/p>
-&lt;p>push 之前记得先要配置好用户名跟密码：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ git config --global user.name &lt;span style="color:#e6db74">&amp;#34;username&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ git config --global user.email &lt;span style="color:#e6db74">&amp;#34;email@example.com&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>之后再 push 的时候将密码替换为上面生成的 &lt;code>access token&lt;/code> 就可以了。&lt;/p>
-&lt;hr>
-&lt;p>你还可以创建一个 &lt;code>.git-credentials&lt;/code> 文件 (文件名可以任意，这里只是为了表义)，其中的内容（依规则替换掉其中的用户名和密码/access token）：&lt;/p>
-&lt;pre tabindex="0">&lt;code>https://{username}:{password}@github.com
-&lt;/code>&lt;/pre>&lt;p>在终端输入下面的命令：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ git config --global credential.helper store --file ~/.git-credentials
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>credential&lt;/code> 是用来配置 git 的凭证存储的参数。&lt;br>
-&lt;code>--file&lt;/code> 后面指定的是凭证存放的位置。&lt;/p>
-&lt;p>这种方式可以避免每次 push 的时候都需要输入密码，但是因为密码是&lt;code>明文&lt;/code>存储在本地，可能不是很安全。&lt;/p>
-&lt;hr>
-&lt;p>不过貌似这个文件并不是强制的，我在使用 access token push 完之后，直接执行：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ git config --global credential.helper store
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在之后的推送中也不再需要输入用户名和密码了。&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>两步验证 on 点半九</title><link>https://blog.djangozane.com/tags/%E4%B8%A4%E6%AD%A5%E9%AA%8C%E8%AF%81/</link><description>Recent content in 两步验证 on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 03 Oct 2019 11:05:02 +0800</lastBuildDate><atom:link href="https://blog.djangozane.com/tags/%E4%B8%A4%E6%AD%A5%E9%AA%8C%E8%AF%81/index.xml" rel="self" type="application/rss+xml"/><item><title>Github 开启两步验证后，git 推送鉴权失败</title><link>https://blog.djangozane.com/post/github-%E5%BC%80%E5%90%AF%E4%B8%A4%E6%AD%A5%E9%AA%8C%E8%AF%81%E5%90%8Egit-%E6%8E%A8%E9%80%81%E9%89%B4%E6%9D%83%E5%A4%B1%E8%B4%A5/</link><pubDate>Thu, 03 Oct 2019 11:05:02 +0800</pubDate><guid>https://blog.djangozane.com/post/github-%E5%BC%80%E5%90%AF%E4%B8%A4%E6%AD%A5%E9%AA%8C%E8%AF%81%E5%90%8Egit-%E6%8E%A8%E9%80%81%E9%89%B4%E6%9D%83%E5%A4%B1%E8%B4%A5/</guid><description>&lt;p&gt;最近开启了 Github 的两步验证，然后在桌面上使用 git 向 Github 推送文件的时候总是出现&lt;code&gt;鉴权失败&lt;/code&gt;的问题，在排除了密码错误的原因之后，觉得应该就是两步验证的锅了。&lt;/p&gt;
+&lt;p&gt;下面是解决办法：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;打开 Github 的 「&lt;a href="https://github.com/settings/profile"&gt;Settings&lt;/a&gt;」&lt;/li&gt;
+&lt;li&gt;进入 「&lt;a href="https://github.com/settings/apps"&gt;Developer settings&lt;/a&gt;」&lt;/li&gt;
+&lt;li&gt;打开 「&lt;a href="https://github.com/settings/tokens"&gt;Personal access tokens&lt;/a&gt;」&lt;/li&gt;
+&lt;li&gt;点击 「Generate new token」，生成一个新的 token&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;生成 token 之后千万记得把 token 复制并保存好，因为 github 为了安全起见，这个 token 只会出现一次，也就是说如果你以后忘记了这个 token，只能重新创建一个。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;push 之前记得先要配置好用户名跟密码：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git config --global user.name &lt;span style="color:#e6db74"&gt;&amp;#34;username&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git config --global user.email &lt;span style="color:#e6db74"&gt;&amp;#34;email@example.com&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;之后再 push 的时候将密码替换为上面生成的 &lt;code&gt;access token&lt;/code&gt; 就可以了。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;你还可以创建一个 &lt;code&gt;.git-credentials&lt;/code&gt; 文件 (文件名可以任意，这里只是为了表义)，其中的内容（依规则替换掉其中的用户名和密码/access token）：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;https://{username}:{password}@github.com
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;在终端输入下面的命令：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git config --global credential.helper store --file ~/.git-credentials
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;credential&lt;/code&gt; 是用来配置 git 的凭证存储的参数。&lt;br&gt;
+&lt;code&gt;--file&lt;/code&gt; 后面指定的是凭证存放的位置。&lt;/p&gt;
+&lt;p&gt;这种方式可以避免每次 push 的时候都需要输入密码，但是因为密码是&lt;code&gt;明文&lt;/code&gt;存储在本地，可能不是很安全。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;不过貌似这个文件并不是强制的，我在使用 access token push 完之后，直接执行：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git config --global credential.helper store
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在之后的推送中也不再需要输入用户名和密码了。&lt;/p&gt;</description></item></channel></rss>

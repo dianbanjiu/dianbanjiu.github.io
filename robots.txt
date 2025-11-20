@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: https://www.dianbanjiu.com/sitemap.xml
+Sitemap: https://blog.djangozane.com/sitemap.xml

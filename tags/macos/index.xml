@@ -1,21 +1,22 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Macos on 点半九</title><link>https://www.dianbanjiu.com/tags/macos/</link><description>Recent content in Macos on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 30 Jul 2020 22:38:35 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/macos/index.xml" rel="self" type="application/rss+xml"/><item><title> Bash, Cannot Set LC_CTYPE to Default, No Such File or Directory</title><link>https://www.dianbanjiu.com/post/-bash-cannot-set-lc_ctype-to-default-no-such-file-or-directory/</link><pubDate>Thu, 30 Jul 2020 22:38:35 +0800</pubDate><guid>https://www.dianbanjiu.com/post/-bash-cannot-set-lc_ctype-to-default-no-such-file-or-directory/</guid><description>&lt;p>最近使用 MacOS 的终端通过 ssh 连接 Linux 服务器的过程中，出现了一点问题，每次连接上之后，都会出现 &lt;code>-bash, cannot change locale, No such file or directory&lt;/code>，整段错误代码没记住，但大概就是这么个意思。&lt;/p>
-&lt;p>最开始我以为这是服务器那边的问题，所以就没怎么在意，毕竟登录之后一个 &lt;code>Ctrl-l&lt;/code> 就啥都没了。直到前几天因为 activemq 获取中文信息乱码的时候我才注意到这个问题的重要性。&lt;/p>
-&lt;p>我在服务器上搭建了一个 activemq 的中间件，然后通过本地向 activemq 发送了一些信息，如果信息中包含了中文，那在 activemq 的 Web console 中中文就会显示乱码。&lt;/p>
-&lt;p>可是按理说我服务器的字符编码是 &lt;code>UTF-8&lt;/code>（重点，后面要考），avtivemq 的 webapps 用的编码也是 &lt;code>utf-8&lt;/code>，向 activemq 发送信息的程序是用 golang 写的，golang 默认的编码格式也是 &lt;code>utf-8&lt;/code>，编码格式都是统一的，为什么会出现乱码呢。&lt;/p>
-&lt;p>在尝试过修改代码发送的信息为各种编码格式，以及修改 activemq 的 webapps 编码格式仍旧无果之后，我就怀着死马当活马医的心态修改了 activemq 运行时的字符编码环境为 &lt;code>zh_CN.UTF-8&lt;/code>，然后奇迹发生了，中文乱码消失了，我又试了一下 &lt;code>en_US.UTF-8&lt;/code>，也可以正常显示中文。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ env LC_CTYPE&lt;span style="color:#f92672">=&lt;/span>zh_CN.UFT-8 activemq start
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>后来在网上搜原因的时候无意中看到了一篇文章是教别人如何修改 MacOS 的终端在连接到服务器时不传递自己的 &lt;code>locale&lt;/code>，&lt;a href="https://www.cyberciti.biz/faq/os-x-terminal-bash-warning-setlocale-lc_ctype-cannot-change-locale/">[原文链接]&lt;/a> ，我就试着改了一下，修改完之后我再登录到服务器，这次没有了之前的 &lt;code>-bash, cannot change locale, No such file or directory&lt;/code> 的错误，查看服务器的字符编码 &lt;code>en_US.UTF-8&lt;/code>。&lt;/p>
-&lt;p>&lt;strong>握了个大草&lt;/strong>&lt;/p>
-&lt;p>突然就想明白了为什么在 MacOS 下使用终端登录服务器会报 &lt;code>-bash, cannot change locale, No such file or directory&lt;/code> 的那个错误了。&lt;/p>
-&lt;p>在 Linux 下的 UTF-8 字符集有很多，比如 zh_CN.UTF-8、en_US.UTF-8，但唯独没有独立的叫做 UTF-8 的字符集，因为在 Linux 中，UTF-8 是作为一种字符编码的规范，而 zh_CN.UTF-8 则是按照 UTF-8 规范实现的字符集。&lt;/p>
-&lt;p>那问题来了，为什么我之前在终端中查看的字符编码会是 UTF-8 而非 zh_CN.UTF-8 之类呢？结合我之前看到的那篇文章，其实是因为 MacOS 的终端在连接到服务器的时候会把自己的字符编码环境给带到服务器去，MacOS 的字符集是苹果自己实现的一套符合 UTF-8 规范叫做 UTF-8 的字符集，但是 Linux 上并没有这套字符集，虽然 MacOS 终端带到服务器上的编码环境仅在它这个终端会话中有效，但是在这个会话中所有运行的程序都会去调用这个不存在的字符集，所以才出现了 &lt;code>-bash, cannot change locale, No such file or directory&lt;/code> 的问题以及 activemq 中文乱码的现象。&lt;/p>
-&lt;blockquote>
-&lt;p>修改方式：在 MacOS 的 终端(Terminal)-&amp;gt;偏好设置-&amp;gt;高级 中，取消勾选在启动时设置 locale 环境变量。&lt;br>
-另外还可以通过在 &lt;code>/etc/ssh/ssh_config&lt;/code> 中注释掉 &lt;code>SendEnv LANG LC_*&lt;/code>，也可以达到同样的效果。&lt;br>
-如果使用第一种方式可能会导致 MacOS 的终端中文无法显示，所以还是更推荐第二种方式。&lt;/p>&lt;/blockquote>
-&lt;p>最后简单说一下 Linux 字符编码相关的内容：&lt;/p>
-&lt;p>Linux 的字符编码环境是通过多个 LC_* 环境变量来定义的，比如 LC_CTYPE(Linux 的字符显示方式)，LC_TIME(时间和日期的格式)&amp;hellip;&lt;/p>
-&lt;p>既然是变量，那都是可以随意修改的，即使是系统中不存在的那在设置的当时也不会报错，除非在某些显式调用时，比如使用 &lt;code>locale&lt;/code> 命令查看系统的各种字符编码的格式时，如果你定义了错误的字符格式环境，那 &lt;code>locale&lt;/code> 就会提示类似 &lt;code>Cannot set LC_CTYPE to default, No such file or directory&lt;/code> 的错误。不过其他一些隐式的调用，比如 activemq 执行时就不会自动检查这些变量的正确与否。&lt;/p>
-&lt;p>所以希望大家不要忽视遇到的任何一个 warning 以及 error，指不定就是以后某个的 bug 突破口。&lt;/p>
-&lt;p>参考链接：&lt;br>
-[1]: &lt;a href="https://wiki.archlinux.org/index.php/Locale">Arch Wiki &amp;ndash; locale&lt;/a>&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Macos on 点半九</title><link>https://blog.djangozane.com/tags/macos/</link><description>Recent content in Macos on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 30 Jul 2020 22:38:35 +0800</lastBuildDate><atom:link href="https://blog.djangozane.com/tags/macos/index.xml" rel="self" type="application/rss+xml"/><item><title> Bash, Cannot Set LC_CTYPE to Default, No Such File or Directory</title><link>https://blog.djangozane.com/post/-bash-cannot-set-lc_ctype-to-default-no-such-file-or-directory/</link><pubDate>Thu, 30 Jul 2020 22:38:35 +0800</pubDate><guid>https://blog.djangozane.com/post/-bash-cannot-set-lc_ctype-to-default-no-such-file-or-directory/</guid><description>&lt;p&gt;最近使用 MacOS 的终端通过 ssh 连接 Linux 服务器的过程中，出现了一点问题，每次连接上之后，都会出现 &lt;code&gt;-bash, cannot change locale, No such file or directory&lt;/code&gt;，整段错误代码没记住，但大概就是这么个意思。&lt;/p&gt;
+&lt;p&gt;最开始我以为这是服务器那边的问题，所以就没怎么在意，毕竟登录之后一个 &lt;code&gt;Ctrl-l&lt;/code&gt; 就啥都没了。直到前几天因为 activemq 获取中文信息乱码的时候我才注意到这个问题的重要性。&lt;/p&gt;
+&lt;p&gt;我在服务器上搭建了一个 activemq 的中间件，然后通过本地向 activemq 发送了一些信息，如果信息中包含了中文，那在 activemq 的 Web console 中中文就会显示乱码。&lt;/p&gt;
+&lt;p&gt;可是按理说我服务器的字符编码是 &lt;code&gt;UTF-8&lt;/code&gt;（重点，后面要考），avtivemq 的 webapps 用的编码也是 &lt;code&gt;utf-8&lt;/code&gt;，向 activemq 发送信息的程序是用 golang 写的，golang 默认的编码格式也是 &lt;code&gt;utf-8&lt;/code&gt;，编码格式都是统一的，为什么会出现乱码呢。&lt;/p&gt;
+&lt;p&gt;在尝试过修改代码发送的信息为各种编码格式，以及修改 activemq 的 webapps 编码格式仍旧无果之后，我就怀着死马当活马医的心态修改了 activemq 运行时的字符编码环境为 &lt;code&gt;zh_CN.UTF-8&lt;/code&gt;，然后奇迹发生了，中文乱码消失了，我又试了一下 &lt;code&gt;en_US.UTF-8&lt;/code&gt;，也可以正常显示中文。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ env LC_CTYPE&lt;span style="color:#f92672"&gt;=&lt;/span&gt;zh_CN.UFT-8 activemq start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;后来在网上搜原因的时候无意中看到了一篇文章是教别人如何修改 MacOS 的终端在连接到服务器时不传递自己的 &lt;code&gt;locale&lt;/code&gt;，&lt;a href="https://www.cyberciti.biz/faq/os-x-terminal-bash-warning-setlocale-lc_ctype-cannot-change-locale/"&gt;[原文链接]&lt;/a&gt; ，我就试着改了一下，修改完之后我再登录到服务器，这次没有了之前的 &lt;code&gt;-bash, cannot change locale, No such file or directory&lt;/code&gt; 的错误，查看服务器的字符编码 &lt;code&gt;en_US.UTF-8&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;握了个大草&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;突然就想明白了为什么在 MacOS 下使用终端登录服务器会报 &lt;code&gt;-bash, cannot change locale, No such file or directory&lt;/code&gt; 的那个错误了。&lt;/p&gt;
+&lt;p&gt;在 Linux 下的 UTF-8 字符集有很多，比如 zh_CN.UTF-8、en_US.UTF-8，但唯独没有独立的叫做 UTF-8 的字符集，因为在 Linux 中，UTF-8 是作为一种字符编码的规范，而 zh_CN.UTF-8 则是按照 UTF-8 规范实现的字符集。&lt;/p&gt;
+&lt;p&gt;那问题来了，为什么我之前在终端中查看的字符编码会是 UTF-8 而非 zh_CN.UTF-8 之类呢？结合我之前看到的那篇文章，其实是因为 MacOS 的终端在连接到服务器的时候会把自己的字符编码环境给带到服务器去，MacOS 的字符集是苹果自己实现的一套符合 UTF-8 规范叫做 UTF-8 的字符集，但是 Linux 上并没有这套字符集，虽然 MacOS 终端带到服务器上的编码环境仅在它这个终端会话中有效，但是在这个会话中所有运行的程序都会去调用这个不存在的字符集，所以才出现了 &lt;code&gt;-bash, cannot change locale, No such file or directory&lt;/code&gt; 的问题以及 activemq 中文乱码的现象。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;修改方式：在 MacOS 的 终端(Terminal)-&amp;gt;偏好设置-&amp;gt;高级 中，取消勾选在启动时设置 locale 环境变量。&lt;br&gt;
+另外还可以通过在 &lt;code&gt;/etc/ssh/ssh_config&lt;/code&gt; 中注释掉 &lt;code&gt;SendEnv LANG LC_*&lt;/code&gt;，也可以达到同样的效果。&lt;br&gt;
+如果使用第一种方式可能会导致 MacOS 的终端中文无法显示，所以还是更推荐第二种方式。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;最后简单说一下 Linux 字符编码相关的内容：&lt;/p&gt;
+&lt;p&gt;Linux 的字符编码环境是通过多个 LC_* 环境变量来定义的，比如 LC_CTYPE(Linux 的字符显示方式)，LC_TIME(时间和日期的格式)&amp;hellip;&lt;/p&gt;
+&lt;p&gt;既然是变量，那都是可以随意修改的，即使是系统中不存在的那在设置的当时也不会报错，除非在某些显式调用时，比如使用 &lt;code&gt;locale&lt;/code&gt; 命令查看系统的各种字符编码的格式时，如果你定义了错误的字符格式环境，那 &lt;code&gt;locale&lt;/code&gt; 就会提示类似 &lt;code&gt;Cannot set LC_CTYPE to default, No such file or directory&lt;/code&gt; 的错误。不过其他一些隐式的调用，比如 activemq 执行时就不会自动检查这些变量的正确与否。&lt;/p&gt;
+&lt;p&gt;所以希望大家不要忽视遇到的任何一个 warning 以及 error，指不定就是以后某个的 bug 突破口。&lt;/p&gt;
+&lt;p&gt;参考链接：&lt;br&gt;
+[1]: &lt;a href="https://wiki.archlinux.org/index.php/Locale"&gt;Arch Wiki &amp;ndash; locale&lt;/a&gt;&lt;/p&gt;</description></item></channel></rss>

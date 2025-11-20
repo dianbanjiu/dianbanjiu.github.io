@@ -1,32 +1,33 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Supervisor on 点半九</title><link>https://www.dianbanjiu.com/tags/supervisor/</link><description>Recent content in Supervisor on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 02 Jul 2021 22:29:31 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/supervisor/index.xml" rel="self" type="application/rss+xml"/><item><title>😶‍🌫️在 Supervisor 中调用环境变量</title><link>https://www.dianbanjiu.com/post/%E5%9C%A8-supervisor-%E4%B8%AD%E8%B0%83%E7%94%A8%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/</link><pubDate>Fri, 02 Jul 2021 22:29:31 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E5%9C%A8-supervisor-%E4%B8%AD%E8%B0%83%E7%94%A8%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/</guid><description>&lt;blockquote>
-&lt;p>以前总觉得写东西就得上纲上线，一篇不整个几千字都不敢发出来。现在想想，我又不是奔着出书的目的去的，我只是纯粹的想记录一些东西，又何必限制于篇幅呢&lt;/p>&lt;/blockquote>
-&lt;p>supervisor 调用的环境变量分为两种，一种是在 supervisor 配置文件中使用系统已经定义好的环境变量，另一种为 supervisor 子程序运行过程中使用的环境变量。&lt;/p>
-&lt;h2 id="supervisor-配置文件中调用系统环境变量">supervisor 配置文件中调用系统环境变量&lt;/h2>
-&lt;p>此类环境变量一般用来定义一些预先无法确定的变量，比如可以自定义安装位置的程序，可以将其主目录定义在系统环境变量中，如果程序的安装位置发生了变化，只需要修改一次环境变量中对应的值即可，而无需再对 supervisor 的配置文件进行修改。&lt;/p>
-&lt;p>在 supervisor 的配置文件中调用系统的环境变量时，需要以 &lt;code>%(ENV_xxxx)s&lt;/code> 的格式进行调用。假如我的系统环境变量中有这样一个环境变量 &lt;code>export MY_HOME=/opt/home&lt;/code>，那我在 supervisor 中就要以 &lt;code>%(ENV_MY_HOME)s&lt;/code>进行调用。&lt;/p>
-&lt;h2 id="定义子程序运行的环境变量">定义子程序运行的环境变量&lt;/h2>
-&lt;p>此类环境变量一般用来定义子程序所依赖的一些库文件。&lt;/p>
-&lt;p>子程序的环境变量需要在自己的 &lt;code>[program:x]&lt;/code> 下新增 &lt;code>environment&lt;/code> 字段。如 &lt;code>environment=LD_LIBRARY=/opt/home/lib&lt;/code>。&lt;/p>
-&lt;p>下面是一个带有上面两种环境变量定义的简单例子：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ cat supervisor.conf
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>inet_http_server&lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>port&lt;span style="color:#f92672">=&lt;/span>0.0.0.0:9111
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>program:hello&lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>depends_on&lt;span style="color:#f92672">=&lt;/span>hello
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>command&lt;span style="color:#f92672">=&lt;/span>%&lt;span style="color:#f92672">(&lt;/span>ENV_MY_HOME&lt;span style="color:#f92672">)&lt;/span>s/hello
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>directory&lt;span style="color:#f92672">=&lt;/span>%&lt;span style="color:#f92672">(&lt;/span>ENV_MY_HOME&lt;span style="color:#f92672">)&lt;/span>s/hello
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>autostart&lt;span style="color:#f92672">=&lt;/span>true
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>autorestart&lt;span style="color:#f92672">=&lt;/span>true
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>stopwaitsecs&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">3&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>stdout_logfile&lt;span style="color:#f92672">=&lt;/span>%&lt;span style="color:#f92672">(&lt;/span>ENV_MY_HOME&lt;span style="color:#f92672">)&lt;/span>s/logs/hello.log
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>stderr_logfile&lt;span style="color:#f92672">=&lt;/span>%&lt;span style="color:#f92672">(&lt;/span>ENV_MY_HOME&lt;span style="color:#f92672">)&lt;/span>s/logs/hello.log
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>stdout_logfile_maxbytes&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">10485760&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>stdout_logfile_backups&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">2&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>stderr_logfile_maxbytes&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">10485760&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>stderr_logfile_backups&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">2&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>environment&lt;span style="color:#f92672">=&lt;/span>LD_LIBRARY&lt;span style="color:#f92672">=&lt;/span>%&lt;span style="color:#f92672">(&lt;/span>ENV_MY_HOME&lt;span style="color:#f92672">)&lt;/span>s/lib
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ echo $MY_HOME
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/opt/home
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Supervisor on 点半九</title><link>https://blog.djangozane.com/tags/supervisor/</link><description>Recent content in Supervisor on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 02 Jul 2021 22:29:31 +0800</lastBuildDate><atom:link href="https://blog.djangozane.com/tags/supervisor/index.xml" rel="self" type="application/rss+xml"/><item><title>😶‍🌫️在 Supervisor 中调用环境变量</title><link>https://blog.djangozane.com/post/%E5%9C%A8-supervisor-%E4%B8%AD%E8%B0%83%E7%94%A8%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/</link><pubDate>Fri, 02 Jul 2021 22:29:31 +0800</pubDate><guid>https://blog.djangozane.com/post/%E5%9C%A8-supervisor-%E4%B8%AD%E8%B0%83%E7%94%A8%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;以前总觉得写东西就得上纲上线，一篇不整个几千字都不敢发出来。现在想想，我又不是奔着出书的目的去的，我只是纯粹的想记录一些东西，又何必限制于篇幅呢&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;supervisor 调用的环境变量分为两种，一种是在 supervisor 配置文件中使用系统已经定义好的环境变量，另一种为 supervisor 子程序运行过程中使用的环境变量。&lt;/p&gt;
+&lt;h2 id="supervisor-配置文件中调用系统环境变量"&gt;supervisor 配置文件中调用系统环境变量&lt;/h2&gt;
+&lt;p&gt;此类环境变量一般用来定义一些预先无法确定的变量，比如可以自定义安装位置的程序，可以将其主目录定义在系统环境变量中，如果程序的安装位置发生了变化，只需要修改一次环境变量中对应的值即可，而无需再对 supervisor 的配置文件进行修改。&lt;/p&gt;
+&lt;p&gt;在 supervisor 的配置文件中调用系统的环境变量时，需要以 &lt;code&gt;%(ENV_xxxx)s&lt;/code&gt; 的格式进行调用。假如我的系统环境变量中有这样一个环境变量 &lt;code&gt;export MY_HOME=/opt/home&lt;/code&gt;，那我在 supervisor 中就要以 &lt;code&gt;%(ENV_MY_HOME)s&lt;/code&gt;进行调用。&lt;/p&gt;
+&lt;h2 id="定义子程序运行的环境变量"&gt;定义子程序运行的环境变量&lt;/h2&gt;
+&lt;p&gt;此类环境变量一般用来定义子程序所依赖的一些库文件。&lt;/p&gt;
+&lt;p&gt;子程序的环境变量需要在自己的 &lt;code&gt;[program:x]&lt;/code&gt; 下新增 &lt;code&gt;environment&lt;/code&gt; 字段。如 &lt;code&gt;environment=LD_LIBRARY=/opt/home/lib&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;下面是一个带有上面两种环境变量定义的简单例子：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ cat supervisor.conf
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;[&lt;/span&gt;inet_http_server&lt;span style="color:#f92672"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;port&lt;span style="color:#f92672"&gt;=&lt;/span&gt;0.0.0.0:9111
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;[&lt;/span&gt;program:hello&lt;span style="color:#f92672"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;depends_on&lt;span style="color:#f92672"&gt;=&lt;/span&gt;hello
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;command&lt;span style="color:#f92672"&gt;=&lt;/span&gt;%&lt;span style="color:#f92672"&gt;(&lt;/span&gt;ENV_MY_HOME&lt;span style="color:#f92672"&gt;)&lt;/span&gt;s/hello
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;directory&lt;span style="color:#f92672"&gt;=&lt;/span&gt;%&lt;span style="color:#f92672"&gt;(&lt;/span&gt;ENV_MY_HOME&lt;span style="color:#f92672"&gt;)&lt;/span&gt;s/hello
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;autostart&lt;span style="color:#f92672"&gt;=&lt;/span&gt;true
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;autorestart&lt;span style="color:#f92672"&gt;=&lt;/span&gt;true
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;stopwaitsecs&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;stdout_logfile&lt;span style="color:#f92672"&gt;=&lt;/span&gt;%&lt;span style="color:#f92672"&gt;(&lt;/span&gt;ENV_MY_HOME&lt;span style="color:#f92672"&gt;)&lt;/span&gt;s/logs/hello.log
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;stderr_logfile&lt;span style="color:#f92672"&gt;=&lt;/span&gt;%&lt;span style="color:#f92672"&gt;(&lt;/span&gt;ENV_MY_HOME&lt;span style="color:#f92672"&gt;)&lt;/span&gt;s/logs/hello.log
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;stdout_logfile_maxbytes&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;10485760&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;stdout_logfile_backups&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;stderr_logfile_maxbytes&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;10485760&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;stderr_logfile_backups&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;environment&lt;span style="color:#f92672"&gt;=&lt;/span&gt;LD_LIBRARY&lt;span style="color:#f92672"&gt;=&lt;/span&gt;%&lt;span style="color:#f92672"&gt;(&lt;/span&gt;ENV_MY_HOME&lt;span style="color:#f92672"&gt;)&lt;/span&gt;s/lib
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ echo $MY_HOME
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/opt/home
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item></channel></rss>

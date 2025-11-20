@@ -1,90 +1,91 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Gitlab on 点半九</title><link>https://www.dianbanjiu.com/tags/gitlab/</link><description>Recent content in Gitlab on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 04 Jan 2022 20:31:56 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/gitlab/index.xml" rel="self" type="application/rss+xml"/><item><title>使用 Gitlab Ci 构建 Docker 镜像</title><link>https://www.dianbanjiu.com/post/%E4%BD%BF%E7%94%A8-gitlab-ci-%E6%9E%84%E5%BB%BA-docker-%E9%95%9C%E5%83%8F/</link><pubDate>Tue, 04 Jan 2022 20:31:56 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E4%BD%BF%E7%94%A8-gitlab-ci-%E6%9E%84%E5%BB%BA-docker-%E9%95%9C%E5%83%8F/</guid><description>&lt;p>注意：下面示例的 gitlab-runner 是直接装在物理机器上的，并且对应的镜像仓库使用的是 http 协议&lt;/p>
-&lt;p>1、首先在安装 gitlab runner 的机器上安装 docker&lt;/p>
-&lt;p>2、创建 &lt;code>/etc/docker/daemon.json&lt;/code>，内容如下&lt;br>
-如果你的 gitlab 是使用的 HTTPS 协议，可以跳过这一步&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;insecure-registries&amp;#34;&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;registry_addr&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;0.0.0.0&amp;#34;&lt;/span>]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>3、重启 docker&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>systemctl restart docker.service
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>4、为项目注册 gitlab-runner，其中执行者选择 &lt;code>docker&lt;/code>&lt;/p>
-&lt;p>5、修改项目对应 gitlab-runner 的配置文件，默认情况为 &lt;code>/etc/gitlab-runner/config.toml&lt;/code>，在项目对应 runner 的 &lt;code>volumes&lt;/code> 后新增 &lt;code>&amp;quot;/var/run/docker.sock:/var/run/docker.sock&amp;quot;&lt;/code>的映射&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-toml" data-lang="toml">&lt;span style="display:flex;">&lt;span>[[&lt;span style="color:#a6e22e">runners&lt;/span>]]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">url&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;https://gitlab.com/&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">token&lt;/span> = &lt;span style="color:#a6e22e">TOKEN&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">executor&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;docker&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [&lt;span style="color:#a6e22e">runners&lt;/span>.&lt;span style="color:#a6e22e">docker&lt;/span>]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">tls_verify&lt;/span> = &lt;span style="color:#66d9ef">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">image&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;docker:20.10.12-dind&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">privileged&lt;/span> = &lt;span style="color:#66d9ef">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">disable_cache&lt;/span> = &lt;span style="color:#66d9ef">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">volumes&lt;/span> = [&lt;span style="color:#e6db74">&amp;#34;/cache&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;/var/run/docker.sock:/var/run/docker.sock&amp;#34;&lt;/span>]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [&lt;span style="color:#a6e22e">runners&lt;/span>.&lt;span style="color:#a6e22e">cache&lt;/span>]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [&lt;span style="color:#a6e22e">runners&lt;/span>.&lt;span style="color:#a6e22e">cache&lt;/span>.&lt;span style="color:#a6e22e">s3&lt;/span>]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [&lt;span style="color:#a6e22e">runners&lt;/span>.&lt;span style="color:#a6e22e">cache&lt;/span>.&lt;span style="color:#a6e22e">gcs&lt;/span>]
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>6、更新 &lt;code>.gitlab-ci.yml&lt;/code>，大体内容如下&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">stages&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">docker_build&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">job_docker_build&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">stage&lt;/span>: &lt;span style="color:#ae81ff">docker_build&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">image&lt;/span>: &lt;span style="color:#ae81ff">docker:20.10.12-dind&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">script&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">docker login -u $REGISTRY_USER -p $REGISTER_PASSWORD $REGISTRY_ADDR&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">docker build -t $REGISTRY_ADDR/test/hello:latest .&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">docker push $REGISTRY_ADDR/test/hello:latest&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>上面的 &lt;code>$REGISTRY_USER&lt;/code>、 &lt;code>$REGISTER_PASSWORD&lt;/code>、 &lt;code>$REGISTRY_ADDR&lt;/code> 是定义在对应仓库的环境变量，分别代表镜像仓库的用户名、密码以及镜像仓库的地址。其中地址是不包含协议部分的，一般为： &lt;code>my.registry.com&lt;/code>&lt;/p>
-&lt;p>待 gitlab-runner 的流水线执行完成之后，你应该就可以在镜像仓库看到刚刚构建好的镜像了&lt;/p></description></item><item><title>Gitlab Runner 运行报错（1）</title><link>https://www.dianbanjiu.com/post/gitlab-runner-%E8%BF%90%E8%A1%8C%E6%8A%A5%E9%94%991/</link><pubDate>Mon, 28 Jun 2021 21:42:16 +0800</pubDate><guid>https://www.dianbanjiu.com/post/gitlab-runner-%E8%BF%90%E8%A1%8C%E6%8A%A5%E9%94%991/</guid><description>&lt;blockquote>
-&lt;p>今天在《也谈钱》的公众号看到一个很有意思的观点：&lt;/p>
-&lt;p>你所有的工作都包含两部分：你可以带走的和带不走的，如果你只注意自己带不走的部分，那你就是在为老板工作，注定会很累，如果你将注意力放在你可以提炼带走的部分，那你就是在为自己工作&lt;/p>&lt;/blockquote>
-&lt;h2 id="问题描述及解决方案">问题描述及解决方案&lt;/h2>
-&lt;p>今天在给新项目添加了 Runner 之后，出现了打包失败的情况，下面是基本的情况以及解决方案。&lt;/p>
-&lt;p>项目情况：项目使用 &lt;code>gitlab-runner register&lt;/code> 添加的 Runner，执行者为 Docker，使用的是自定义的 node 镜像，镜像名称为 &lt;code>node:v12&lt;/code>。&lt;/p>
-&lt;p>在将代码提交到 gitlab 之后，自动触发 CI，但是 CI 提示下面的报错：&lt;/p>
-&lt;pre tabindex="0">&lt;code>Running with gitlab-runner 13.0.0 (c127439c)
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Gitlab on 点半九</title><link>https://blog.djangozane.com/tags/gitlab/</link><description>Recent content in Gitlab on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 04 Jan 2022 20:31:56 +0800</lastBuildDate><atom:link href="https://blog.djangozane.com/tags/gitlab/index.xml" rel="self" type="application/rss+xml"/><item><title>使用 Gitlab Ci 构建 Docker 镜像</title><link>https://blog.djangozane.com/post/%E4%BD%BF%E7%94%A8-gitlab-ci-%E6%9E%84%E5%BB%BA-docker-%E9%95%9C%E5%83%8F/</link><pubDate>Tue, 04 Jan 2022 20:31:56 +0800</pubDate><guid>https://blog.djangozane.com/post/%E4%BD%BF%E7%94%A8-gitlab-ci-%E6%9E%84%E5%BB%BA-docker-%E9%95%9C%E5%83%8F/</guid><description>&lt;p&gt;注意：下面示例的 gitlab-runner 是直接装在物理机器上的，并且对应的镜像仓库使用的是 http 协议&lt;/p&gt;
+&lt;p&gt;1、首先在安装 gitlab runner 的机器上安装 docker&lt;/p&gt;
+&lt;p&gt;2、创建 &lt;code&gt;/etc/docker/daemon.json&lt;/code&gt;，内容如下&lt;br&gt;
+如果你的 gitlab 是使用的 HTTPS 协议，可以跳过这一步&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;insecure-registries&amp;#34;&lt;/span&gt;: [&lt;span style="color:#e6db74"&gt;&amp;#34;registry_addr&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;0.0.0.0&amp;#34;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;3、重启 docker&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;systemctl restart docker.service
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;4、为项目注册 gitlab-runner，其中执行者选择 &lt;code&gt;docker&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;5、修改项目对应 gitlab-runner 的配置文件，默认情况为 &lt;code&gt;/etc/gitlab-runner/config.toml&lt;/code&gt;，在项目对应 runner 的 &lt;code&gt;volumes&lt;/code&gt; 后新增 &lt;code&gt;&amp;quot;/var/run/docker.sock:/var/run/docker.sock&amp;quot;&lt;/code&gt;的映射&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-toml" data-lang="toml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[[&lt;span style="color:#a6e22e"&gt;runners&lt;/span&gt;]]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;url&lt;/span&gt; = &lt;span style="color:#e6db74"&gt;&amp;#34;https://gitlab.com/&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;token&lt;/span&gt; = &lt;span style="color:#a6e22e"&gt;TOKEN&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;executor&lt;/span&gt; = &lt;span style="color:#e6db74"&gt;&amp;#34;docker&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; [&lt;span style="color:#a6e22e"&gt;runners&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;docker&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;tls_verify&lt;/span&gt; = &lt;span style="color:#66d9ef"&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;image&lt;/span&gt; = &lt;span style="color:#e6db74"&gt;&amp;#34;docker:20.10.12-dind&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;privileged&lt;/span&gt; = &lt;span style="color:#66d9ef"&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;disable_cache&lt;/span&gt; = &lt;span style="color:#66d9ef"&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;volumes&lt;/span&gt; = [&lt;span style="color:#e6db74"&gt;&amp;#34;/cache&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;/var/run/docker.sock:/var/run/docker.sock&amp;#34;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; [&lt;span style="color:#a6e22e"&gt;runners&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;cache&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; [&lt;span style="color:#a6e22e"&gt;runners&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;cache&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;s3&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; [&lt;span style="color:#a6e22e"&gt;runners&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;cache&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;gcs&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;6、更新 &lt;code&gt;.gitlab-ci.yml&lt;/code&gt;，大体内容如下&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;stages&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#ae81ff"&gt;docker_build&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;job_docker_build&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;stage&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;docker_build&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;image&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;docker:20.10.12-dind&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;script&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#ae81ff"&gt;docker login -u $REGISTRY_USER -p $REGISTER_PASSWORD $REGISTRY_ADDR&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#ae81ff"&gt;docker build -t $REGISTRY_ADDR/test/hello:latest .&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#ae81ff"&gt;docker push $REGISTRY_ADDR/test/hello:latest&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;上面的 &lt;code&gt;$REGISTRY_USER&lt;/code&gt;、 &lt;code&gt;$REGISTER_PASSWORD&lt;/code&gt;、 &lt;code&gt;$REGISTRY_ADDR&lt;/code&gt; 是定义在对应仓库的环境变量，分别代表镜像仓库的用户名、密码以及镜像仓库的地址。其中地址是不包含协议部分的，一般为： &lt;code&gt;my.registry.com&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;待 gitlab-runner 的流水线执行完成之后，你应该就可以在镜像仓库看到刚刚构建好的镜像了&lt;/p&gt;</description></item><item><title>Gitlab Runner 运行报错（1）</title><link>https://blog.djangozane.com/post/gitlab-runner-%E8%BF%90%E8%A1%8C%E6%8A%A5%E9%94%991/</link><pubDate>Mon, 28 Jun 2021 21:42:16 +0800</pubDate><guid>https://blog.djangozane.com/post/gitlab-runner-%E8%BF%90%E8%A1%8C%E6%8A%A5%E9%94%991/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;今天在《也谈钱》的公众号看到一个很有意思的观点：&lt;/p&gt;
+&lt;p&gt;你所有的工作都包含两部分：你可以带走的和带不走的，如果你只注意自己带不走的部分，那你就是在为老板工作，注定会很累，如果你将注意力放在你可以提炼带走的部分，那你就是在为自己工作&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="问题描述及解决方案"&gt;问题描述及解决方案&lt;/h2&gt;
+&lt;p&gt;今天在给新项目添加了 Runner 之后，出现了打包失败的情况，下面是基本的情况以及解决方案。&lt;/p&gt;
+&lt;p&gt;项目情况：项目使用 &lt;code&gt;gitlab-runner register&lt;/code&gt; 添加的 Runner，执行者为 Docker，使用的是自定义的 node 镜像，镜像名称为 &lt;code&gt;node:v12&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;在将代码提交到 gitlab 之后，自动触发 CI，但是 CI 提示下面的报错：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;Running with gitlab-runner 13.0.0 (c127439c)
 on xxx ddd T8Hqqyzz
 Preparing the &amp;#34;docker&amp;#34; executor
 00:07
 Using Docker executor with image node:v12 ...
 Pulling docker image node:v12 ...
 ERROR: Job failed: Error response from daemon: manifest for node:v12 not found: manifest unknown: manifest unknown (docker.go:198:3s)
-&lt;/code>&lt;/pre>&lt;p>可以看到，上面的报错是出现在拉取 Docker 镜像的过程中，提示 Docker 找不到名为 &lt;code>node:v12&lt;/code> 的镜像。但是我在运行 Runner 的机器上已经构建好了 node:v12 的镜像，为什么还是会拉取失败呢？&lt;/p>
-&lt;p>其实是因为 Gitlab Runner 的 Docker 执行者默认是直接从 Docker Hub 拉取你指定的镜像，即使你本地已经有了需要的镜像，所以当它在 Docker Hub 找不到 &lt;code>node:v12&lt;/code> 的镜像时，就会出现上面的报错。&lt;/p>
-&lt;p>要解决这个问题也很简单，就是在 gitlab runner 的配置文件中添加 &lt;code>pull_policy = &amp;quot;if-not-present&amp;quot;&lt;/code> 的参数，添加方式如下：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-toml" data-lang="toml">&lt;span style="display:flex;">&lt;span>[[&lt;span style="color:#a6e22e">runners&lt;/span>]]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">name&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;runner test&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">url&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;http://www.gitlab.com/&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">token&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;T9hppyxxbwN_PZNen1_o&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">executor&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;docker&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [&lt;span style="color:#a6e22e">runners&lt;/span>.&lt;span style="color:#a6e22e">custom_build_dir&lt;/span>]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [&lt;span style="color:#a6e22e">runners&lt;/span>.&lt;span style="color:#a6e22e">cache&lt;/span>]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [&lt;span style="color:#a6e22e">runners&lt;/span>.&lt;span style="color:#a6e22e">cache&lt;/span>.&lt;span style="color:#a6e22e">s3&lt;/span>]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [&lt;span style="color:#a6e22e">runners&lt;/span>.&lt;span style="color:#a6e22e">cache&lt;/span>.&lt;span style="color:#a6e22e">gcs&lt;/span>]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [&lt;span style="color:#a6e22e">runners&lt;/span>.&lt;span style="color:#a6e22e">docker&lt;/span>]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">tls_verify&lt;/span> = &lt;span style="color:#66d9ef">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">image&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;node:v12&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">privileged&lt;/span> = &lt;span style="color:#66d9ef">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">disable_entrypoint_overwrite&lt;/span> = &lt;span style="color:#66d9ef">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">oom_kill_disable&lt;/span> = &lt;span style="color:#66d9ef">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">disable_cache&lt;/span> = &lt;span style="color:#66d9ef">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">volumes&lt;/span> = [&lt;span style="color:#e6db74">&amp;#34;/cache&amp;#34;&lt;/span>]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 在下面设置&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">pull_policy&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;if-not-present&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">shm_size&lt;/span> = &lt;span style="color:#ae81ff">0&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="关于-pull_policy-参数">关于 &lt;code>pull_policy&lt;/code> 参数&lt;/h2>
-&lt;p>&lt;code>pull_policy&lt;/code> 参数是用来指定当你使用 Docker/Docker machine 作为执行者时镜像的拉取策略。该参数共有三个可选项，你可以设置零个或者多个选项作为该参数的值。&lt;/p>
-&lt;ul>
-&lt;li>never：这个选项意味着仅使用本地的 Docker 镜像，任何你需要的镜像都必须先手动拉取到本地，否则在运行 CI 的时候就会出现下面的报错&lt;/li>
-&lt;/ul>
-&lt;pre tabindex="0">&lt;code>Pulling docker image node:latest ...
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;可以看到，上面的报错是出现在拉取 Docker 镜像的过程中，提示 Docker 找不到名为 &lt;code&gt;node:v12&lt;/code&gt; 的镜像。但是我在运行 Runner 的机器上已经构建好了 node:v12 的镜像，为什么还是会拉取失败呢？&lt;/p&gt;
+&lt;p&gt;其实是因为 Gitlab Runner 的 Docker 执行者默认是直接从 Docker Hub 拉取你指定的镜像，即使你本地已经有了需要的镜像，所以当它在 Docker Hub 找不到 &lt;code&gt;node:v12&lt;/code&gt; 的镜像时，就会出现上面的报错。&lt;/p&gt;
+&lt;p&gt;要解决这个问题也很简单，就是在 gitlab runner 的配置文件中添加 &lt;code&gt;pull_policy = &amp;quot;if-not-present&amp;quot;&lt;/code&gt; 的参数，添加方式如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-toml" data-lang="toml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[[&lt;span style="color:#a6e22e"&gt;runners&lt;/span&gt;]]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;name&lt;/span&gt; = &lt;span style="color:#e6db74"&gt;&amp;#34;runner test&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;url&lt;/span&gt; = &lt;span style="color:#e6db74"&gt;&amp;#34;http://www.gitlab.com/&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;token&lt;/span&gt; = &lt;span style="color:#e6db74"&gt;&amp;#34;T9hppyxxbwN_PZNen1_o&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;executor&lt;/span&gt; = &lt;span style="color:#e6db74"&gt;&amp;#34;docker&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; [&lt;span style="color:#a6e22e"&gt;runners&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;custom_build_dir&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; [&lt;span style="color:#a6e22e"&gt;runners&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;cache&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; [&lt;span style="color:#a6e22e"&gt;runners&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;cache&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;s3&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; [&lt;span style="color:#a6e22e"&gt;runners&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;cache&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;gcs&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; [&lt;span style="color:#a6e22e"&gt;runners&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;docker&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;tls_verify&lt;/span&gt; = &lt;span style="color:#66d9ef"&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;image&lt;/span&gt; = &lt;span style="color:#e6db74"&gt;&amp;#34;node:v12&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;privileged&lt;/span&gt; = &lt;span style="color:#66d9ef"&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;disable_entrypoint_overwrite&lt;/span&gt; = &lt;span style="color:#66d9ef"&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;oom_kill_disable&lt;/span&gt; = &lt;span style="color:#66d9ef"&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;disable_cache&lt;/span&gt; = &lt;span style="color:#66d9ef"&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;volumes&lt;/span&gt; = [&lt;span style="color:#e6db74"&gt;&amp;#34;/cache&amp;#34;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# 在下面设置&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;pull_policy&lt;/span&gt; = &lt;span style="color:#e6db74"&gt;&amp;#34;if-not-present&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;shm_size&lt;/span&gt; = &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="关于-pull_policy-参数"&gt;关于 &lt;code&gt;pull_policy&lt;/code&gt; 参数&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;pull_policy&lt;/code&gt; 参数是用来指定当你使用 Docker/Docker machine 作为执行者时镜像的拉取策略。该参数共有三个可选项，你可以设置零个或者多个选项作为该参数的值。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;never：这个选项意味着仅使用本地的 Docker 镜像，任何你需要的镜像都必须先手动拉取到本地，否则在运行 CI 的时候就会出现下面的报错&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;Pulling docker image node:latest ...
 ERROR: Build failed: Error: image local_image:latest not found
-&lt;/code>&lt;/pre>&lt;ul>
-&lt;li>if-not-present：这个选项会先在本地检查是否有指定的镜像，没有的话会在 Docker Hub 拉取。如果你想避免从 Docker Hub 拉取镜像的时间，又有使用自定义镜像的需求，可以使用该选项。&lt;/li>
-&lt;li>always：&lt;code>pull_policy&lt;/code> 的默认值，总是从 Docker Hub 拉取镜像。&lt;/li>
-&lt;/ul>
-&lt;p>&lt;strong>参数的设置方式：&lt;/strong>&lt;/p>
-&lt;ul>
-&lt;li>不设置：在不添加 &lt;code>pull_policy&lt;/code> 字段的情况下，&lt;code>pull_policy&lt;/code> 默认为 always。&lt;/li>
-&lt;li>单值设置： &lt;code>pull_policy = &amp;quot;if-not-present&amp;quot;&lt;/code>。&lt;/li>
-&lt;li>多值设置： &lt;code>pull_policy = [&amp;quot;always&amp;quot;, &amp;quot;if-not-present&amp;quot;]&lt;/code>（暂未遇到过具体的使用场景）。&lt;/li>
-&lt;/ul></description></item></channel></rss>
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;if-not-present：这个选项会先在本地检查是否有指定的镜像，没有的话会在 Docker Hub 拉取。如果你想避免从 Docker Hub 拉取镜像的时间，又有使用自定义镜像的需求，可以使用该选项。&lt;/li&gt;
+&lt;li&gt;always：&lt;code&gt;pull_policy&lt;/code&gt; 的默认值，总是从 Docker Hub 拉取镜像。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;参数的设置方式：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;不设置：在不添加 &lt;code&gt;pull_policy&lt;/code&gt; 字段的情况下，&lt;code&gt;pull_policy&lt;/code&gt; 默认为 always。&lt;/li&gt;
+&lt;li&gt;单值设置： &lt;code&gt;pull_policy = &amp;quot;if-not-present&amp;quot;&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;多值设置： &lt;code&gt;pull_policy = [&amp;quot;always&amp;quot;, &amp;quot;if-not-present&amp;quot;]&lt;/code&gt;（暂未遇到过具体的使用场景）。&lt;/li&gt;
+&lt;/ul&gt;</description></item></channel></rss>

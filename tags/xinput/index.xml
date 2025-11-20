@@ -1,29 +1,29 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Xinput on 点半九</title><link>https://www.dianbanjiu.com/tags/xinput/</link><description>Recent content in Xinput on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 20 Sep 2019 13:05:56 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/xinput/index.xml" rel="self" type="application/rss+xml"/><item><title>禁用笔记本的自带键盘</title><link>https://www.dianbanjiu.com/post/%E7%A6%81%E7%94%A8%E7%AC%94%E8%AE%B0%E6%9C%AC%E7%9A%84%E8%87%AA%E5%B8%A6%E9%94%AE%E7%9B%98/</link><pubDate>Fri, 20 Sep 2019 13:05:56 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E7%A6%81%E7%94%A8%E7%AC%94%E8%AE%B0%E6%9C%AC%E7%9A%84%E8%87%AA%E5%B8%A6%E9%94%AE%E7%9B%98/</guid><description>&lt;p>最近半年笔记本的键盘已经慢慢地开始失灵，经常有些键按不出来，所以就另外买了一把键盘。&lt;/p>
-&lt;p>不过有时候需要带笔记本出去，所以这样一来还需要带着键盘，为了在把键盘放在笔记本的自带键盘上不会误触到就决定禁用掉自带键盘。&lt;/p>
-&lt;p>主要使用的工具是 &lt;strong>xinput&lt;/strong>。&lt;/p>
-&lt;p>xinput 是 Linux 下用来管理输入设备的工具，该程序可以在 &lt;code>xorg-xinput&lt;/code> 包中找到。常用的一些指令，如：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ xinput list &lt;span style="color:#75715e">#列出当前所有的输入设备&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ xinput disable &amp;lt;device id&amp;gt;|&amp;lt;device name&amp;gt; &lt;span style="color:#75715e">#根据指定的 id 或者设备名禁用该设备&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ xinput enable &amp;lt;device id&amp;gt;|&amp;lt;device name&amp;gt; &lt;span style="color:#75715e">#根据指定的 id 或者设备名启用该设备&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ xinput list
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ↳ AT Translated Set &lt;span style="color:#ae81ff">2&lt;/span> keyboard id&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">18&lt;/span> &lt;span style="color:#f92672">[&lt;/span>slave keyboard &lt;span style="color:#f92672">(&lt;/span>3&lt;span style="color:#f92672">)]&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>上面是使用 &lt;code>list&lt;/code> 参数后的一部分片段，其中的 &lt;strong>AT Translated Set 2 keyboard&lt;/strong> 就是自带键盘的设备名，后面的 18 就是设备对应的 id。&lt;/p>
-&lt;p>然后使用 &lt;code>disable&lt;/code> 参数以及 id 或者设备名关掉自带键盘就可以了：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ xinput disable &lt;span style="color:#ae81ff">18&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>or
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ xinput disable &lt;span style="color:#e6db74">&amp;#34;AT Translated Set 2 keyboard&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>不过需要注意的是，在计算机重启之后，设备会被重新启用，为了方便起见，你可以把上面的那条命令写在一个开机脚本里，让它随着计算机启动一同被执行。&lt;/p>
-&lt;p>下面以 &lt;strong>KDE Plasma&lt;/strong> 桌面说明，不同的桌面可能会有不同的方式：&lt;br>
-首先在任意位置创建一个脚本文件，如 &lt;code>~/script/keyboard.sh&lt;/code>，其中包含以下内容：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/bin/bash
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>xinput disable &lt;span style="color:#e6db74">&amp;#34;AT Translated Set 2 keyboard&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后在 &lt;code>~/.config/plasma-workspace/env&lt;/code> 下创建 &lt;code>keyboard.sh&lt;/code> 的软链接。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ cd ~/.config/plasma-workspace/env
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ ln -s ~/script/keyboard.sh keyboard.sh
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在 &lt;code>~/.config/plasma-workspace/env&lt;/code> 下存放的脚本文件会在 Plasma 启动前执行。&lt;/p>
-&lt;p>另外还有一点，&lt;strong>设备的 id 并不是固定的&lt;/strong>，所以在写开机脚本的时候务必使用设备名。&lt;/p>
-&lt;hr>
-&lt;p>如果在添加为开机脚本之后发现开机后键盘依旧可以正常使用，可以检查一下是否给脚本添加了&lt;code>可执行权限&lt;/code>。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ chmod +x keyboard.sh
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Xinput on 点半九</title><link>https://blog.djangozane.com/tags/xinput/</link><description>Recent content in Xinput on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 20 Sep 2019 13:05:56 +0800</lastBuildDate><atom:link href="https://blog.djangozane.com/tags/xinput/index.xml" rel="self" type="application/rss+xml"/><item><title>禁用笔记本的自带键盘</title><link>https://blog.djangozane.com/post/%E7%A6%81%E7%94%A8%E7%AC%94%E8%AE%B0%E6%9C%AC%E7%9A%84%E8%87%AA%E5%B8%A6%E9%94%AE%E7%9B%98/</link><pubDate>Fri, 20 Sep 2019 13:05:56 +0800</pubDate><guid>https://blog.djangozane.com/post/%E7%A6%81%E7%94%A8%E7%AC%94%E8%AE%B0%E6%9C%AC%E7%9A%84%E8%87%AA%E5%B8%A6%E9%94%AE%E7%9B%98/</guid><description>&lt;p&gt;最近半年笔记本的键盘已经慢慢地开始失灵，经常有些键按不出来，所以就另外买了一把键盘。&lt;/p&gt;
+&lt;p&gt;不过有时候需要带笔记本出去，所以这样一来还需要带着键盘，为了在把键盘放在笔记本的自带键盘上不会误触到就决定禁用掉自带键盘。&lt;/p&gt;
+&lt;p&gt;主要使用的工具是 &lt;strong&gt;xinput&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;xinput 是 Linux 下用来管理输入设备的工具，该程序可以在 &lt;code&gt;xorg-xinput&lt;/code&gt; 包中找到。常用的一些指令，如：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ xinput list &lt;span style="color:#75715e"&gt;#列出当前所有的输入设备&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ xinput disable &amp;lt;device id&amp;gt;|&amp;lt;device name&amp;gt; &lt;span style="color:#75715e"&gt;#根据指定的 id 或者设备名禁用该设备&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ xinput enable &amp;lt;device id&amp;gt;|&amp;lt;device name&amp;gt; &lt;span style="color:#75715e"&gt;#根据指定的 id 或者设备名启用该设备&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ xinput list
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ↳ AT Translated Set &lt;span style="color:#ae81ff"&gt;2&lt;/span&gt; keyboard id&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;18&lt;/span&gt; &lt;span style="color:#f92672"&gt;[&lt;/span&gt;slave keyboard &lt;span style="color:#f92672"&gt;(&lt;/span&gt;3&lt;span style="color:#f92672"&gt;)]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;上面是使用 &lt;code&gt;list&lt;/code&gt; 参数后的一部分片段，其中的 &lt;strong&gt;AT Translated Set 2 keyboard&lt;/strong&gt; 就是自带键盘的设备名，后面的 18 就是设备对应的 id。&lt;/p&gt;
+&lt;p&gt;然后使用 &lt;code&gt;disable&lt;/code&gt; 参数以及 id 或者设备名关掉自带键盘就可以了：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ xinput disable &lt;span style="color:#ae81ff"&gt;18&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;or
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ xinput disable &lt;span style="color:#e6db74"&gt;&amp;#34;AT Translated Set 2 keyboard&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;不过需要注意的是，在计算机重启之后，设备会被重新启用，为了方便起见，你可以把上面的那条命令写在一个开机脚本里，让它随着计算机启动一同被执行。&lt;/p&gt;
+&lt;p&gt;下面以 &lt;strong&gt;KDE Plasma&lt;/strong&gt; 桌面说明，不同的桌面可能会有不同的方式：&lt;br&gt;
+首先在任意位置创建一个脚本文件，如 &lt;code&gt;~/script/keyboard.sh&lt;/code&gt;，其中包含以下内容：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;#!/bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;xinput disable &lt;span style="color:#e6db74"&gt;&amp;#34;AT Translated Set 2 keyboard&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后在 &lt;code&gt;~/.config/plasma-workspace/env&lt;/code&gt; 下创建 &lt;code&gt;keyboard.sh&lt;/code&gt; 的软链接。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ cd ~/.config/plasma-workspace/env
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ ln -s ~/script/keyboard.sh keyboard.sh
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在 &lt;code&gt;~/.config/plasma-workspace/env&lt;/code&gt; 下存放的脚本文件会在 Plasma 启动前执行。&lt;/p&gt;
+&lt;p&gt;另外还有一点，&lt;strong&gt;设备的 id 并不是固定的&lt;/strong&gt;，所以在写开机脚本的时候务必使用设备名。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;如果在添加为开机脚本之后发现开机后键盘依旧可以正常使用，可以检查一下是否给脚本添加了&lt;code&gt;可执行权限&lt;/code&gt;。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ chmod +x keyboard.sh
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item></channel></rss>

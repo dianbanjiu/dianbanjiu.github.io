@@ -1,482 +1,482 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pixabay on 点半九</title><link>https://www.dianbanjiu.com/tags/pixabay/</link><description>Recent content in Pixabay on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 19 Feb 2021 14:40:22 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/pixabay/index.xml" rel="self" type="application/rss+xml"/><item><title>[译] Pixabay API</title><link>https://www.dianbanjiu.com/post/pixabay_api/</link><pubDate>Fri, 19 Feb 2021 14:40:22 +0800</pubDate><guid>https://www.dianbanjiu.com/post/pixabay_api/</guid><description>&lt;p>&lt;a href="https://pixabay.com/api/docs/">原文链接&lt;/a>&lt;/p>
-&lt;p>欢迎来到 Pixabay API 文档，我们提供 RESTful 风格的接口，你可以通过这些接口搜索遵循 &lt;a href="https://pixabay.com/service/license/">Pixabay 协议&lt;/a> 的免费图像和视频。&lt;/p>
-&lt;p>当你使用了这些接口，需要在所有搜索结果中向用户展示图片和视频来自何处，其中必须包含 Pixabay 的链接，同时你也可以使用我们的 &lt;a href="https://pixabay.com/service/about/#goodies">logo&lt;/a> 来达到同样的效果。&lt;/p>
-&lt;p>调用这些 API 将会返回 JSON 格式的对象，哈希键值都是区分大小写并且使用 UTF-8 编码。哈希键是无序的，每次调用返回的顺序都可能会不同。我们每次从结果中移除或者添加任何新的哈希键的时候都会尽可能的提醒用户。&lt;/p>
-&lt;h2 id="访问频率限制">访问频率限制&lt;/h2>
-&lt;p>默认情况下，你每小时可以发起 5000 次请求。请求与 API 密钥相关联，与 IP 地址无关。在响应头部会说明所有与当前访问频率限制有关的信息。&lt;/p>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>名称&lt;/th>
-&lt;th>描述&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>X-RateLimit-Limit&lt;/td>
-&lt;td>在 30min 内可以发出的最大请求数&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>X-RateLimit-Remaining&lt;/td>
-&lt;td>在当前访问频率窗口中剩余的请求数&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>X-RateLimit-Reset&lt;/td>
-&lt;td>当前访问频率窗口的重置剩余时间（以秒为单位）&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;p>为了保证 Pixabay API 的访问速度，所有的请求都会被缓存 24小时。这些接口本身是为用户的人为请求所设计的，禁止大量自动化请求。系统不允许一次性进行大量下载，如果你有这方面的需要，我们可以随时增加这个限制 —— 假设你已经实现了这个接口。&lt;/p>
-&lt;h2 id="热链接">热链接&lt;/h2>
-&lt;p>返回图片的 URL 一般用于暂时的图片展示。禁止对图像的永久热链接（应该在你的应用中使用 Pixabay URL）。如果你想要使用这些图片，请先下载它们到你自己的服务器上，视频则可以直接嵌入到你的应用中，当然，我们建议视频也最好存储在你自己的服务器上。&lt;/p>
-&lt;h2 id="错误处理">错误处理&lt;/h2>
-&lt;p>如果请求发生了错误，响应中将会带有对应的错误状态码，响应体中会带有关于错误的描述信息。例如：一旦请求次数超过了请求频率的限制，你将会得到一个 429（请求次数过多）的错误代码以及 &amp;ldquo;API rate limit exceeded&amp;rdquo; 的返回信息。&lt;/p>
-&lt;h2 id="图像搜索">图像搜索&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-http" data-lang="http">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">https://pixabay.com/api/ GET
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="参数">参数&lt;/h3>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>参数&lt;/th>
-&lt;th>类型&lt;/th>
-&lt;th>描述&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>key(必需)&lt;/td>
-&lt;td>str&lt;/td>
-&lt;td>请&lt;a href="https://pixabay.com/accounts/login/?next=/api/docs/">登录&lt;/a>|&lt;a href="https://pixabay.com/accounts/login/?next=/api/docs/">注册&lt;/a>后查看你的 API 密钥&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>q&lt;/td>
-&lt;td>str&lt;/td>
-&lt;td>已经编码的请求项，如果忽略该字段将会返回所有图像，该字段最长为 100 个字符。例如：&amp;ldquo;yellow+flower&amp;rdquo;&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>lang&lt;/td>
-&lt;td>str&lt;/td>
-&lt;td>要搜索语言的语言代码，可接收的值包括：cs、da、de、en、es、fr、id、it、hu、nl、no、pl、pt、ro、sk、fi、sv、tr、vi、th、bg、ru、el、ja、ko、zh，默认值：en&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>id&lt;/td>
-&lt;td>str&lt;/td>
-&lt;td>通过图片 id 检索唯一图片&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>image_type&lt;/td>
-&lt;td>str&lt;/td>
-&lt;td>通过图片类型过滤搜索结果。可接收的值：all、photo、illustration、vector。默认值：all&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>orientation&lt;/td>
-&lt;td>str&lt;/td>
-&lt;td>图像高大于宽还是宽大于高，可接收的值：all、horizontal、vertical，默认值：all&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>category&lt;/td>
-&lt;td>str&lt;/td>
-&lt;td>通过类别过滤结果。可接收的值：backgrounds、 fashion、 nature、 science、 education、 feelings、 health、 people、 religion、 places、 animals、 industry、 computer、 food、 sports、 transportation、 travel、 buildings、 business、 music&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>min_width&lt;/td>
-&lt;td>int&lt;/td>
-&lt;td>图像的最小宽度。默认值：0&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>min_height&lt;/td>
-&lt;td>int&lt;/td>
-&lt;td>图像的最小高度。默认值：0&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>colors&lt;/td>
-&lt;td>str&lt;/td>
-&lt;td>通过颜色属性过滤图片。可以通过半角逗号分割的颜色列表来选择多种颜色属性。可接收的值：grayscale、 transparent、 red、 orange、 yellow、 green、 turquoise、 blue、 lilac、 pink、 white、 gray、 black、 brown&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>editors_choice&lt;/td>
-&lt;td>bool&lt;/td>
-&lt;td>从&lt;a href="https://pixabay.com/editors_choice/">编辑推荐&lt;/a>筛选图片。可接收的值：true、false。默认值：false&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>safesearch&lt;/td>
-&lt;td>bool&lt;/td>
-&lt;td>返回适合所有年龄段的图片。可接收的值：true、false。默认值：false&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>order&lt;/td>
-&lt;td>str&lt;/td>
-&lt;td>结果的排序标准。可接收的值：popular、latest。默认值：popular&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>page&lt;/td>
-&lt;td>int&lt;/td>
-&lt;td>返回结果是分页的，使用此参数选择页号。默认值：1&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>per_page&lt;/td>
-&lt;td>int&lt;/td>
-&lt;td>设定每页的结果数。可接收的值：3-200。默认值：20&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>callback&lt;/td>
-&lt;td>str&lt;/td>
-&lt;td>JSONP 回调函数名&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>pretty&lt;/td>
-&lt;td>bool&lt;/td>
-&lt;td>缩进 JSON 输出，此选项不应该使用在你的产品中。可接收的值：true、false。默认值：false&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;h3 id="实例">实例&lt;/h3>
-&lt;p>检索 &amp;ldquo;yellow flowers&amp;rdquo; 的图片。搜索项 &lt;code>q&lt;/code> 需要进行 URL 编码，{ KEY } 需要替换为你的 API 密钥。&lt;br>
-&lt;code>https://pixabay.com/api/?key={ KEY }&amp;amp;q=yellow+flowers&amp;amp;image_type=photo&lt;/code>&lt;/p>
-&lt;p>该请求的响应结果：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">&amp;#34;total&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">4692&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">&amp;#34;totalHits&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">500&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">&amp;#34;hits&amp;#34;&lt;/span>: [
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;id&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">195893&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;pageURL&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;https://pixabay.com/en/blossom-bloom-flower-195893/&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;photo&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;tags&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;blossom, bloom, flower&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;previewURL&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;https://cdn.pixabay.com/photo/2013/10/15/09/12/flower-195893_150.jpg&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;previewWidth&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">150&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;previewHeight&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">84&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;webformatURL&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;https://pixabay.com/get/35bbf209e13e39d2_640.jpg&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;webformatWidth&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">640&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;webformatHeight&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">360&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;largeImageURL&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;https://pixabay.com/get/ed6a99fd0a76647_1280.jpg&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;fullHDURL&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;https://pixabay.com/get/ed6a9369fd0a76647_1920.jpg&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;imageURL&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;https://pixabay.com/get/ed6a9364a9fd0a76647.jpg&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;imageWidth&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">4000&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;imageHeight&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">2250&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;imageSize&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">4731420&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;views&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">7671&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;downloads&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">6439&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;favorites&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">1&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;likes&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">5&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;comments&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">2&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;user_id&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">48777&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;user&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Josch13&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;userImageURL&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;https://cdn.pixabay.com/user/2013/11/05/02-10-23-764_250x250.jpg&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;id&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">73424&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#960050;background-color:#1e0010">...&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#960050;background-color:#1e0010">...&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>响应项&lt;/th>
-&lt;th>描述&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>total&lt;/td>
-&lt;td>此次请求命中的图片数量&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>totalHits&lt;/td>
-&lt;td>可以通过 API 获取的图片数量。默认情况下，每次请求 API 返回的图片数量的最大值为 500&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>id&lt;/td>
-&lt;td>图片的唯一标识符&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>pageURL&lt;/td>
-&lt;td>Pixabay 的源页面，提供 imageWidth x imageHeight 和文件大小为 imageSize 的原始文件下载&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>previewURL&lt;/td>
-&lt;td>低分辨率图片，最大宽度或最大高度为 150 px&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>webformatURL&lt;/td>
-&lt;td>中等尺寸的图片，宽或高为 640 px。此链接 24 小时内有效。&lt;strong>使用其他尺寸的 webformatURL 替换 &amp;lsquo;_640&amp;rsquo; 可以获取其他尺寸的图片：&lt;/strong> 使用 &amp;lsquo;_180&amp;rsquo; 或 &amp;lsquo;_340&amp;rsquo; 可以获取 180 或者 340px 分辨率的图片，使用 &amp;lsquo;_960&amp;rsquo; 则可以获取 960x720px 的高分辨率图片&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>largeImageURL&lt;/td>
-&lt;td>大尺寸图片，宽或高为 1280px&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>views&lt;/td>
-&lt;td>图片被查看的次数&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>downloads&lt;/td>
-&lt;td>图片被下载的次数&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>faverites&lt;/td>
-&lt;td>图片被收藏的次数&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>likes&lt;/td>
-&lt;td>图片被喜欢的数量&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>comments&lt;/td>
-&lt;td>图片的总评论数&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>user_id, user&lt;/td>
-&lt;td>贡献者的 ID 和用户名。个人资料链接：&lt;code>https://pixabay.com/users/{ USERNAME }-{ ID }/&lt;/code>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>userImageURL&lt;/td>
-&lt;td>个人资料头像链接（250x250 px）&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;p>&lt;strong>下面的这些响应项只有当你的账户&lt;a href="https://pixabay.com/api/docs/">获得完全 API 访问权限&lt;/a>之后才会出现&lt;/strong>。这些地址可以让你以全分辨率和矢量格式（如果可用）访问原始图片。&lt;/p>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>响应项&lt;/th>
-&lt;th>描述&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>fullHDURL&lt;/td>
-&lt;td>全高清图片，最大宽/高为 1920 px&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>imageURL&lt;/td>
-&lt;td>原始图像地址&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>vectorURL&lt;/td>
-&lt;td>矢量资源地址，如果存在则显示，否则忽略&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;h2 id="视频搜索">视频搜索&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-http" data-lang="http">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">https://pixabay.com/api/videos/ GET
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="请求参数">请求参数&lt;/h3>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>参数&lt;/th>
-&lt;th>类型&lt;/th>
-&lt;th>说明&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>key(必须)&lt;/td>
-&lt;td>str&lt;/td>
-&lt;td>请&lt;a href="https://pixabay.com/accounts/login/?next=/api/docs/">登录&lt;/a>|&lt;a href="https://pixabay.com/accounts/login/?next=/api/docs/">注册&lt;/a>后查看你的 API 密钥&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>q&lt;/td>
-&lt;td>str&lt;/td>
-&lt;td>已经编码的请求项，如果忽略该字段将会返回所有视频，该字段最长为 100 个字符。例如：&amp;ldquo;yellow+flower&amp;rdquo;&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>lang&lt;/td>
-&lt;td>str&lt;/td>
-&lt;td>要搜索语言的语言代码，可接收的值包括：cs、da、de、en、es、fr、id、it、hu、nl、no、pl、pt、ro、sk、fi、sv、tr、vi、th、bg、ru、el、ja、ko、zh，默认值：en&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>id&lt;/td>
-&lt;td>str&lt;/td>
-&lt;td>通过 id 检索单独的视频&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>video_type&lt;/td>
-&lt;td>str&lt;/td>
-&lt;td>通过视频类型过滤结果。可接收的值：all、film、animation。默认值：all&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>category&lt;/td>
-&lt;td>str&lt;/td>
-&lt;td>通过类别过滤结果。可接收的值：backgrounds、 fashion、nature、science、education、feelings、health、people、religion、places、animals、industry、computer、food、sports、transportation、travel、buildings、business、music&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>min_width&lt;/td>
-&lt;td>int&lt;/td>
-&lt;td>视频的最小宽度。默认值：0&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>min_height&lt;/td>
-&lt;td>int&lt;/td>
-&lt;td>视频的最小高度。默认值：0&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>editors_choice&lt;/td>
-&lt;td>bool&lt;/td>
-&lt;td>从&lt;a href="https://pixabay.com/editors_choice/">编辑推荐&lt;/a>选择视频。可接收的值：true、false。默认值：false&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>safesearch&lt;/td>
-&lt;td>bool&lt;/td>
-&lt;td>返回适合所有年龄段的视频。可接收的值：true、false。默认值：false&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>order&lt;/td>
-&lt;td>str&lt;/td>
-&lt;td>结果的排序标准。可接收的值：popular、latest。默认值：popular&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>page&lt;/td>
-&lt;td>int&lt;/td>
-&lt;td>返回结果是分页的，使用此参数选择页号。默认值：1&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>per_page&lt;/td>
-&lt;td>int&lt;/td>
-&lt;td>设定每页的结果数。可接收的值：3-200。默认值：20&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>callback&lt;/td>
-&lt;td>str&lt;/td>
-&lt;td>JSONP 回调函数名&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>pretty&lt;/td>
-&lt;td>bool&lt;/td>
-&lt;td>缩进 JSON 输出，此选项不应该使用在你的产品中。可接收的值：true、false。默认值：false&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;h3 id="实例-1">实例&lt;/h3>
-&lt;p>检索 &amp;ldquo;yellow flowers&amp;rdquo; 的视频。搜索项 &lt;code>q&lt;/code> 需要进行 URL 编码，{ KEY } 需要替换为你的 API 密钥。&lt;br>
-&lt;code>https://pixabay.com/api/videos/?key={ KEY }&amp;amp;q=yellow+flowers&lt;/code>&lt;/p>
-&lt;p>该请求的响应结果：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">&amp;#34;total&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">42&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">&amp;#34;totalHits&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">42&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">&amp;#34;hits&amp;#34;&lt;/span>: [
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;id&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">125&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;pageURL&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;https://pixabay.com/videos/id-125/&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;film&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;tags&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;flowers, yellow, blossom&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;duration&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">12&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;picture_id&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;529927645&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;videos&amp;#34;&lt;/span>: {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;large&amp;#34;&lt;/span>: {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;url&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;https://player.vimeo.com/external/135736646.hd.mp4?s=ed02d71c92dd0df7d1110045e6eb65a6&amp;amp;profile_id=119&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;width&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">1920&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;height&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">1080&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;size&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">6615235&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;medium&amp;#34;&lt;/span>: {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;url&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;https://player.vimeo.com/external/135736646.hd.mp4?s=ed02d71c92dd0df7d1110045e6eb65a6&amp;amp;profile_id=174&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;width&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">1280&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;height&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">720&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;size&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">3562083&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;small&amp;#34;&lt;/span>: {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;url&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;https://player.vimeo.com/external/135736646.sd.mp4?s=db2924c48ef91f17fc05da74603d5f89&amp;amp;profile_id=165&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;width&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">950&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;height&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">540&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;size&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">2030736&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;tiny&amp;#34;&lt;/span>: {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;url&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;https://player.vimeo.com/external/135736646.sd.mp4?s=db2924c48ef91f17fc05da74603d5f89&amp;amp;profile_id=164&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;width&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">640&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;height&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">360&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;size&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">1030736&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;views&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">169&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;downloads&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">66&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;favorites&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">7&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;likes&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">3&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;comments&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">2&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;user_id&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">1281706&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;user&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;CoverrFreeFootage&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;userImageURL&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;https://cdn.pixabay.com/user/2015/10/16/09-28-45-303_250x250.png&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;id&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">473&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#960050;background-color:#1e0010">...&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#960050;background-color:#1e0010">...&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>响应项&lt;/th>
-&lt;th>描述&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>total&lt;/td>
-&lt;td>此次请求命中的视频数量&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>totalHits&lt;/td>
-&lt;td>可以通过 API 获取的视频数量。默认情况下，API 会限制每次请求返回的视频数量的最大值为 500&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>id&lt;/td>
-&lt;td>视频的唯一标识符&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>pageURL&lt;/td>
-&lt;td>Pixabay 的源页面&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>picture_id&lt;/td>
-&lt;td>这个值可以用于检索视频多种尺寸的静态预览图：&lt;code>https://i.vimeocdn.com/video/{ PICTURE_ID }_{ SIZE }.jpg&lt;/code>。可接收的尺寸：100x75, 200x150, 295x166, 640x360, 960x540, 1920x1080。例如： &lt;code>https://i.vimeocdn.com/video/529927645_295x166.jpg&lt;/code>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>videos&lt;/td>
-&lt;td>一系列不同尺寸的视频流：&amp;ldquo;large&amp;rdquo; 的分辨率通常为 1920x1080px，如果没有 large 尺寸的视频，large 对象的 URL 将会标为空，size 设置为 0。&amp;ldquo;medium&amp;rdquo; 的分辨率通常为 1280x720px，这个分辨率适用于所有视频。&amp;ldquo;small&amp;rdquo; 的分辨率通常为 960x540px，老视频还有 640x360px 的分辨率，这个分辨率适用于所有视频。&amp;ldquo;tiny&amp;rdquo; 的分辨率通常为 640x360px，老视频还有 480x270px 的分辨率，此分辨率适用于所有视频。在任何视频流的 URL 的 GET 请求后添加 download=1 都可将视频下载至自己的服务器&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>views&lt;/td>
-&lt;td>视频被查看的次数&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>downloads&lt;/td>
-&lt;td>视频被下载的次数&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>faverites&lt;/td>
-&lt;td>视频被收藏的次数&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>likes&lt;/td>
-&lt;td>视频被喜欢的数量&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>comments&lt;/td>
-&lt;td>视频的总评论数&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>user_id, user&lt;/td>
-&lt;td>贡献者的 ID 和用户名。个人资料链接：&lt;code>https://pixabay.com/users/{ USERNAME }-{ ID }/&lt;/code>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>userImageURL&lt;/td>
-&lt;td>个人资料头像链接（250x250 px）&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;h2 id="javascript-实例">JavaScript 实例&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-js" data-lang="js">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">API_KEY&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;YOUR_API_KEY&amp;#39;&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">URL&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;https://pixabay.com/api/?key=&amp;#34;&lt;/span>&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#a6e22e">API_KEY&lt;/span>&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&amp;amp;q=&amp;#34;&lt;/span>&lt;span style="color:#f92672">+&lt;/span>encodeURIComponent(&lt;span style="color:#e6db74">&amp;#39;red roses&amp;#39;&lt;/span>);
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">$&lt;/span>.&lt;span style="color:#a6e22e">getJSON&lt;/span>(&lt;span style="color:#a6e22e">URL&lt;/span>, &lt;span style="color:#66d9ef">function&lt;/span>(&lt;span style="color:#a6e22e">data&lt;/span>){
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> (parseInt(&lt;span style="color:#a6e22e">data&lt;/span>.&lt;span style="color:#a6e22e">totalHits&lt;/span>) &lt;span style="color:#f92672">&amp;gt;&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">$&lt;/span>.&lt;span style="color:#a6e22e">each&lt;/span>(&lt;span style="color:#a6e22e">data&lt;/span>.&lt;span style="color:#a6e22e">hits&lt;/span>, &lt;span style="color:#66d9ef">function&lt;/span>(&lt;span style="color:#a6e22e">i&lt;/span>, &lt;span style="color:#a6e22e">hit&lt;/span>){ &lt;span style="color:#a6e22e">console&lt;/span>.&lt;span style="color:#a6e22e">log&lt;/span>(&lt;span style="color:#a6e22e">hit&lt;/span>.&lt;span style="color:#a6e22e">pageURL&lt;/span>); });
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">else&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">console&lt;/span>.&lt;span style="color:#a6e22e">log&lt;/span>(&lt;span style="color:#e6db74">&amp;#39;No hits&amp;#39;&lt;/span>);
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>});
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="支持">支持&lt;/h2>
-&lt;p>获取 &lt;a href="https://pixabay.com/api/docs/">API 完全请求权限&lt;/a> 以检索高质量图片。&lt;br>
-如果你有关于 API 的任何问题请&lt;a href="https://pixabay.com/service/contact/">联系我们&lt;/a>&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pixabay on 点半九</title><link>https://blog.djangozane.com/tags/pixabay/</link><description>Recent content in Pixabay on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 19 Feb 2021 14:40:22 +0800</lastBuildDate><atom:link href="https://blog.djangozane.com/tags/pixabay/index.xml" rel="self" type="application/rss+xml"/><item><title>[译] Pixabay API</title><link>https://blog.djangozane.com/post/pixabay_api/</link><pubDate>Fri, 19 Feb 2021 14:40:22 +0800</pubDate><guid>https://blog.djangozane.com/post/pixabay_api/</guid><description>&lt;p&gt;&lt;a href="https://pixabay.com/api/docs/"&gt;原文链接&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;欢迎来到 Pixabay API 文档，我们提供 RESTful 风格的接口，你可以通过这些接口搜索遵循 &lt;a href="https://pixabay.com/service/license/"&gt;Pixabay 协议&lt;/a&gt; 的免费图像和视频。&lt;/p&gt;
+&lt;p&gt;当你使用了这些接口，需要在所有搜索结果中向用户展示图片和视频来自何处，其中必须包含 Pixabay 的链接，同时你也可以使用我们的 &lt;a href="https://pixabay.com/service/about/#goodies"&gt;logo&lt;/a&gt; 来达到同样的效果。&lt;/p&gt;
+&lt;p&gt;调用这些 API 将会返回 JSON 格式的对象，哈希键值都是区分大小写并且使用 UTF-8 编码。哈希键是无序的，每次调用返回的顺序都可能会不同。我们每次从结果中移除或者添加任何新的哈希键的时候都会尽可能的提醒用户。&lt;/p&gt;
+&lt;h2 id="访问频率限制"&gt;访问频率限制&lt;/h2&gt;
+&lt;p&gt;默认情况下，你每小时可以发起 5000 次请求。请求与 API 密钥相关联，与 IP 地址无关。在响应头部会说明所有与当前访问频率限制有关的信息。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;名称&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;X-RateLimit-Limit&lt;/td&gt;
+&lt;td&gt;在 30min 内可以发出的最大请求数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;X-RateLimit-Remaining&lt;/td&gt;
+&lt;td&gt;在当前访问频率窗口中剩余的请求数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;X-RateLimit-Reset&lt;/td&gt;
+&lt;td&gt;当前访问频率窗口的重置剩余时间（以秒为单位）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;为了保证 Pixabay API 的访问速度，所有的请求都会被缓存 24小时。这些接口本身是为用户的人为请求所设计的，禁止大量自动化请求。系统不允许一次性进行大量下载，如果你有这方面的需要，我们可以随时增加这个限制 —— 假设你已经实现了这个接口。&lt;/p&gt;
+&lt;h2 id="热链接"&gt;热链接&lt;/h2&gt;
+&lt;p&gt;返回图片的 URL 一般用于暂时的图片展示。禁止对图像的永久热链接（应该在你的应用中使用 Pixabay URL）。如果你想要使用这些图片，请先下载它们到你自己的服务器上，视频则可以直接嵌入到你的应用中，当然，我们建议视频也最好存储在你自己的服务器上。&lt;/p&gt;
+&lt;h2 id="错误处理"&gt;错误处理&lt;/h2&gt;
+&lt;p&gt;如果请求发生了错误，响应中将会带有对应的错误状态码，响应体中会带有关于错误的描述信息。例如：一旦请求次数超过了请求频率的限制，你将会得到一个 429（请求次数过多）的错误代码以及 &amp;ldquo;API rate limit exceeded&amp;rdquo; 的返回信息。&lt;/p&gt;
+&lt;h2 id="图像搜索"&gt;图像搜索&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-http" data-lang="http"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;https://pixabay.com/api/ GET
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="参数"&gt;参数&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;参数&lt;/th&gt;
+&lt;th&gt;类型&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;key(必需)&lt;/td&gt;
+&lt;td&gt;str&lt;/td&gt;
+&lt;td&gt;请&lt;a href="https://pixabay.com/accounts/login/?next=/api/docs/"&gt;登录&lt;/a&gt;|&lt;a href="https://pixabay.com/accounts/login/?next=/api/docs/"&gt;注册&lt;/a&gt;后查看你的 API 密钥&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;q&lt;/td&gt;
+&lt;td&gt;str&lt;/td&gt;
+&lt;td&gt;已经编码的请求项，如果忽略该字段将会返回所有图像，该字段最长为 100 个字符。例如：&amp;ldquo;yellow+flower&amp;rdquo;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;lang&lt;/td&gt;
+&lt;td&gt;str&lt;/td&gt;
+&lt;td&gt;要搜索语言的语言代码，可接收的值包括：cs、da、de、en、es、fr、id、it、hu、nl、no、pl、pt、ro、sk、fi、sv、tr、vi、th、bg、ru、el、ja、ko、zh，默认值：en&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;id&lt;/td&gt;
+&lt;td&gt;str&lt;/td&gt;
+&lt;td&gt;通过图片 id 检索唯一图片&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;image_type&lt;/td&gt;
+&lt;td&gt;str&lt;/td&gt;
+&lt;td&gt;通过图片类型过滤搜索结果。可接收的值：all、photo、illustration、vector。默认值：all&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;orientation&lt;/td&gt;
+&lt;td&gt;str&lt;/td&gt;
+&lt;td&gt;图像高大于宽还是宽大于高，可接收的值：all、horizontal、vertical，默认值：all&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;category&lt;/td&gt;
+&lt;td&gt;str&lt;/td&gt;
+&lt;td&gt;通过类别过滤结果。可接收的值：backgrounds、 fashion、 nature、 science、 education、 feelings、 health、 people、 religion、 places、 animals、 industry、 computer、 food、 sports、 transportation、 travel、 buildings、 business、 music&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;min_width&lt;/td&gt;
+&lt;td&gt;int&lt;/td&gt;
+&lt;td&gt;图像的最小宽度。默认值：0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;min_height&lt;/td&gt;
+&lt;td&gt;int&lt;/td&gt;
+&lt;td&gt;图像的最小高度。默认值：0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;colors&lt;/td&gt;
+&lt;td&gt;str&lt;/td&gt;
+&lt;td&gt;通过颜色属性过滤图片。可以通过半角逗号分割的颜色列表来选择多种颜色属性。可接收的值：grayscale、 transparent、 red、 orange、 yellow、 green、 turquoise、 blue、 lilac、 pink、 white、 gray、 black、 brown&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;editors_choice&lt;/td&gt;
+&lt;td&gt;bool&lt;/td&gt;
+&lt;td&gt;从&lt;a href="https://pixabay.com/editors_choice/"&gt;编辑推荐&lt;/a&gt;筛选图片。可接收的值：true、false。默认值：false&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;safesearch&lt;/td&gt;
+&lt;td&gt;bool&lt;/td&gt;
+&lt;td&gt;返回适合所有年龄段的图片。可接收的值：true、false。默认值：false&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;order&lt;/td&gt;
+&lt;td&gt;str&lt;/td&gt;
+&lt;td&gt;结果的排序标准。可接收的值：popular、latest。默认值：popular&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;page&lt;/td&gt;
+&lt;td&gt;int&lt;/td&gt;
+&lt;td&gt;返回结果是分页的，使用此参数选择页号。默认值：1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;per_page&lt;/td&gt;
+&lt;td&gt;int&lt;/td&gt;
+&lt;td&gt;设定每页的结果数。可接收的值：3-200。默认值：20&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;callback&lt;/td&gt;
+&lt;td&gt;str&lt;/td&gt;
+&lt;td&gt;JSONP 回调函数名&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;pretty&lt;/td&gt;
+&lt;td&gt;bool&lt;/td&gt;
+&lt;td&gt;缩进 JSON 输出，此选项不应该使用在你的产品中。可接收的值：true、false。默认值：false&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="实例"&gt;实例&lt;/h3&gt;
+&lt;p&gt;检索 &amp;ldquo;yellow flowers&amp;rdquo; 的图片。搜索项 &lt;code&gt;q&lt;/code&gt; 需要进行 URL 编码，{ KEY } 需要替换为你的 API 密钥。&lt;br&gt;
+&lt;code&gt;https://pixabay.com/api/?key={ KEY }&amp;amp;q=yellow+flowers&amp;amp;image_type=photo&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;该请求的响应结果：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;&amp;#34;total&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;4692&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;&amp;#34;totalHits&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;500&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;&amp;#34;hits&amp;#34;&lt;/span&gt;: [
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;id&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;195893&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;pageURL&amp;#34;&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;https://pixabay.com/en/blossom-bloom-flower-195893/&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;type&amp;#34;&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;photo&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;tags&amp;#34;&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;blossom, bloom, flower&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;previewURL&amp;#34;&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;https://cdn.pixabay.com/photo/2013/10/15/09/12/flower-195893_150.jpg&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;previewWidth&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;150&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;previewHeight&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;84&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;webformatURL&amp;#34;&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;https://pixabay.com/get/35bbf209e13e39d2_640.jpg&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;webformatWidth&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;640&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;webformatHeight&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;360&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;largeImageURL&amp;#34;&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;https://pixabay.com/get/ed6a99fd0a76647_1280.jpg&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;fullHDURL&amp;#34;&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;https://pixabay.com/get/ed6a9369fd0a76647_1920.jpg&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;imageURL&amp;#34;&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;https://pixabay.com/get/ed6a9364a9fd0a76647.jpg&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;imageWidth&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;4000&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;imageHeight&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;2250&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;imageSize&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;4731420&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;views&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;7671&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;downloads&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;6439&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;favorites&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;likes&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;5&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;comments&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;2&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;user_id&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;48777&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;user&amp;#34;&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;Josch13&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;userImageURL&amp;#34;&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;https://cdn.pixabay.com/user/2013/11/05/02-10-23-764_250x250.jpg&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; },
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;id&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;73424&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#960050;background-color:#1e0010"&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; },
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#960050;background-color:#1e0010"&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;响应项&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;total&lt;/td&gt;
+&lt;td&gt;此次请求命中的图片数量&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;totalHits&lt;/td&gt;
+&lt;td&gt;可以通过 API 获取的图片数量。默认情况下，每次请求 API 返回的图片数量的最大值为 500&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;id&lt;/td&gt;
+&lt;td&gt;图片的唯一标识符&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;pageURL&lt;/td&gt;
+&lt;td&gt;Pixabay 的源页面，提供 imageWidth x imageHeight 和文件大小为 imageSize 的原始文件下载&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;previewURL&lt;/td&gt;
+&lt;td&gt;低分辨率图片，最大宽度或最大高度为 150 px&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;webformatURL&lt;/td&gt;
+&lt;td&gt;中等尺寸的图片，宽或高为 640 px。此链接 24 小时内有效。&lt;strong&gt;使用其他尺寸的 webformatURL 替换 &amp;lsquo;_640&amp;rsquo; 可以获取其他尺寸的图片：&lt;/strong&gt; 使用 &amp;lsquo;_180&amp;rsquo; 或 &amp;lsquo;_340&amp;rsquo; 可以获取 180 或者 340px 分辨率的图片，使用 &amp;lsquo;_960&amp;rsquo; 则可以获取 960x720px 的高分辨率图片&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;largeImageURL&lt;/td&gt;
+&lt;td&gt;大尺寸图片，宽或高为 1280px&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;views&lt;/td&gt;
+&lt;td&gt;图片被查看的次数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;downloads&lt;/td&gt;
+&lt;td&gt;图片被下载的次数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;faverites&lt;/td&gt;
+&lt;td&gt;图片被收藏的次数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;likes&lt;/td&gt;
+&lt;td&gt;图片被喜欢的数量&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;comments&lt;/td&gt;
+&lt;td&gt;图片的总评论数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;user_id, user&lt;/td&gt;
+&lt;td&gt;贡献者的 ID 和用户名。个人资料链接：&lt;code&gt;https://pixabay.com/users/{ USERNAME }-{ ID }/&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;userImageURL&lt;/td&gt;
+&lt;td&gt;个人资料头像链接（250x250 px）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;下面的这些响应项只有当你的账户&lt;a href="https://pixabay.com/api/docs/"&gt;获得完全 API 访问权限&lt;/a&gt;之后才会出现&lt;/strong&gt;。这些地址可以让你以全分辨率和矢量格式（如果可用）访问原始图片。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;响应项&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;fullHDURL&lt;/td&gt;
+&lt;td&gt;全高清图片，最大宽/高为 1920 px&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;imageURL&lt;/td&gt;
+&lt;td&gt;原始图像地址&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;vectorURL&lt;/td&gt;
+&lt;td&gt;矢量资源地址，如果存在则显示，否则忽略&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id="视频搜索"&gt;视频搜索&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-http" data-lang="http"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;https://pixabay.com/api/videos/ GET
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="请求参数"&gt;请求参数&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;参数&lt;/th&gt;
+&lt;th&gt;类型&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;key(必须)&lt;/td&gt;
+&lt;td&gt;str&lt;/td&gt;
+&lt;td&gt;请&lt;a href="https://pixabay.com/accounts/login/?next=/api/docs/"&gt;登录&lt;/a&gt;|&lt;a href="https://pixabay.com/accounts/login/?next=/api/docs/"&gt;注册&lt;/a&gt;后查看你的 API 密钥&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;q&lt;/td&gt;
+&lt;td&gt;str&lt;/td&gt;
+&lt;td&gt;已经编码的请求项，如果忽略该字段将会返回所有视频，该字段最长为 100 个字符。例如：&amp;ldquo;yellow+flower&amp;rdquo;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;lang&lt;/td&gt;
+&lt;td&gt;str&lt;/td&gt;
+&lt;td&gt;要搜索语言的语言代码，可接收的值包括：cs、da、de、en、es、fr、id、it、hu、nl、no、pl、pt、ro、sk、fi、sv、tr、vi、th、bg、ru、el、ja、ko、zh，默认值：en&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;id&lt;/td&gt;
+&lt;td&gt;str&lt;/td&gt;
+&lt;td&gt;通过 id 检索单独的视频&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;video_type&lt;/td&gt;
+&lt;td&gt;str&lt;/td&gt;
+&lt;td&gt;通过视频类型过滤结果。可接收的值：all、film、animation。默认值：all&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;category&lt;/td&gt;
+&lt;td&gt;str&lt;/td&gt;
+&lt;td&gt;通过类别过滤结果。可接收的值：backgrounds、 fashion、nature、science、education、feelings、health、people、religion、places、animals、industry、computer、food、sports、transportation、travel、buildings、business、music&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;min_width&lt;/td&gt;
+&lt;td&gt;int&lt;/td&gt;
+&lt;td&gt;视频的最小宽度。默认值：0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;min_height&lt;/td&gt;
+&lt;td&gt;int&lt;/td&gt;
+&lt;td&gt;视频的最小高度。默认值：0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;editors_choice&lt;/td&gt;
+&lt;td&gt;bool&lt;/td&gt;
+&lt;td&gt;从&lt;a href="https://pixabay.com/editors_choice/"&gt;编辑推荐&lt;/a&gt;选择视频。可接收的值：true、false。默认值：false&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;safesearch&lt;/td&gt;
+&lt;td&gt;bool&lt;/td&gt;
+&lt;td&gt;返回适合所有年龄段的视频。可接收的值：true、false。默认值：false&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;order&lt;/td&gt;
+&lt;td&gt;str&lt;/td&gt;
+&lt;td&gt;结果的排序标准。可接收的值：popular、latest。默认值：popular&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;page&lt;/td&gt;
+&lt;td&gt;int&lt;/td&gt;
+&lt;td&gt;返回结果是分页的，使用此参数选择页号。默认值：1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;per_page&lt;/td&gt;
+&lt;td&gt;int&lt;/td&gt;
+&lt;td&gt;设定每页的结果数。可接收的值：3-200。默认值：20&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;callback&lt;/td&gt;
+&lt;td&gt;str&lt;/td&gt;
+&lt;td&gt;JSONP 回调函数名&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;pretty&lt;/td&gt;
+&lt;td&gt;bool&lt;/td&gt;
+&lt;td&gt;缩进 JSON 输出，此选项不应该使用在你的产品中。可接收的值：true、false。默认值：false&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="实例-1"&gt;实例&lt;/h3&gt;
+&lt;p&gt;检索 &amp;ldquo;yellow flowers&amp;rdquo; 的视频。搜索项 &lt;code&gt;q&lt;/code&gt; 需要进行 URL 编码，{ KEY } 需要替换为你的 API 密钥。&lt;br&gt;
+&lt;code&gt;https://pixabay.com/api/videos/?key={ KEY }&amp;amp;q=yellow+flowers&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;该请求的响应结果：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;&amp;#34;total&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;42&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;&amp;#34;totalHits&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;42&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;&amp;#34;hits&amp;#34;&lt;/span&gt;: [
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;id&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;125&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;pageURL&amp;#34;&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;https://pixabay.com/videos/id-125/&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;type&amp;#34;&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;film&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;tags&amp;#34;&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;flowers, yellow, blossom&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;duration&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;12&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;picture_id&amp;#34;&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;529927645&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;videos&amp;#34;&lt;/span&gt;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;large&amp;#34;&lt;/span&gt;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;url&amp;#34;&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;https://player.vimeo.com/external/135736646.hd.mp4?s=ed02d71c92dd0df7d1110045e6eb65a6&amp;amp;profile_id=119&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;width&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;1920&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;height&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;1080&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;size&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;6615235&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; },
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;medium&amp;#34;&lt;/span&gt;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;url&amp;#34;&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;https://player.vimeo.com/external/135736646.hd.mp4?s=ed02d71c92dd0df7d1110045e6eb65a6&amp;amp;profile_id=174&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;width&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;1280&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;height&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;720&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;size&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;3562083&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; },
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;small&amp;#34;&lt;/span&gt;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;url&amp;#34;&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;https://player.vimeo.com/external/135736646.sd.mp4?s=db2924c48ef91f17fc05da74603d5f89&amp;amp;profile_id=165&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;width&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;950&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;height&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;540&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;size&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;2030736&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; },
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;tiny&amp;#34;&lt;/span&gt;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;url&amp;#34;&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;https://player.vimeo.com/external/135736646.sd.mp4?s=db2924c48ef91f17fc05da74603d5f89&amp;amp;profile_id=164&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;width&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;640&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;height&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;360&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;size&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;1030736&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; },
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;views&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;169&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;downloads&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;66&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;favorites&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;7&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;likes&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;3&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;comments&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;2&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;user_id&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;1281706&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;user&amp;#34;&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;CoverrFreeFootage&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;userImageURL&amp;#34;&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;https://cdn.pixabay.com/user/2015/10/16/09-28-45-303_250x250.png&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; },
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;id&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;473&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#960050;background-color:#1e0010"&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; },
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#960050;background-color:#1e0010"&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;响应项&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;total&lt;/td&gt;
+&lt;td&gt;此次请求命中的视频数量&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;totalHits&lt;/td&gt;
+&lt;td&gt;可以通过 API 获取的视频数量。默认情况下，API 会限制每次请求返回的视频数量的最大值为 500&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;id&lt;/td&gt;
+&lt;td&gt;视频的唯一标识符&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;pageURL&lt;/td&gt;
+&lt;td&gt;Pixabay 的源页面&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;picture_id&lt;/td&gt;
+&lt;td&gt;这个值可以用于检索视频多种尺寸的静态预览图：&lt;code&gt;https://i.vimeocdn.com/video/{ PICTURE_ID }_{ SIZE }.jpg&lt;/code&gt;。可接收的尺寸：100x75, 200x150, 295x166, 640x360, 960x540, 1920x1080。例如： &lt;code&gt;https://i.vimeocdn.com/video/529927645_295x166.jpg&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;videos&lt;/td&gt;
+&lt;td&gt;一系列不同尺寸的视频流：&amp;ldquo;large&amp;rdquo; 的分辨率通常为 1920x1080px，如果没有 large 尺寸的视频，large 对象的 URL 将会标为空，size 设置为 0。&amp;ldquo;medium&amp;rdquo; 的分辨率通常为 1280x720px，这个分辨率适用于所有视频。&amp;ldquo;small&amp;rdquo; 的分辨率通常为 960x540px，老视频还有 640x360px 的分辨率，这个分辨率适用于所有视频。&amp;ldquo;tiny&amp;rdquo; 的分辨率通常为 640x360px，老视频还有 480x270px 的分辨率，此分辨率适用于所有视频。在任何视频流的 URL 的 GET 请求后添加 download=1 都可将视频下载至自己的服务器&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;views&lt;/td&gt;
+&lt;td&gt;视频被查看的次数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;downloads&lt;/td&gt;
+&lt;td&gt;视频被下载的次数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;faverites&lt;/td&gt;
+&lt;td&gt;视频被收藏的次数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;likes&lt;/td&gt;
+&lt;td&gt;视频被喜欢的数量&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;comments&lt;/td&gt;
+&lt;td&gt;视频的总评论数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;user_id, user&lt;/td&gt;
+&lt;td&gt;贡献者的 ID 和用户名。个人资料链接：&lt;code&gt;https://pixabay.com/users/{ USERNAME }-{ ID }/&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;userImageURL&lt;/td&gt;
+&lt;td&gt;个人资料头像链接（250x250 px）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id="javascript-实例"&gt;JavaScript 实例&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;var&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;API_KEY&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;YOUR_API_KEY&amp;#39;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;var&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;URL&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;https://pixabay.com/api/?key=&amp;#34;&lt;/span&gt;&lt;span style="color:#f92672"&gt;+&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;API_KEY&lt;/span&gt;&lt;span style="color:#f92672"&gt;+&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&amp;amp;q=&amp;#34;&lt;/span&gt;&lt;span style="color:#f92672"&gt;+&lt;/span&gt;encodeURIComponent(&lt;span style="color:#e6db74"&gt;&amp;#39;red roses&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;$&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;getJSON&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;URL&lt;/span&gt;, &lt;span style="color:#66d9ef"&gt;function&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;data&lt;/span&gt;){
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; (parseInt(&lt;span style="color:#a6e22e"&gt;data&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;totalHits&lt;/span&gt;) &lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;$&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;each&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;data&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;hits&lt;/span&gt;, &lt;span style="color:#66d9ef"&gt;function&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;i&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;hit&lt;/span&gt;){ &lt;span style="color:#a6e22e"&gt;console&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;log&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;hit&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;pageURL&lt;/span&gt;); });
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;else&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;console&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;log&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;No hits&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;});
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="支持"&gt;支持&lt;/h2&gt;
+&lt;p&gt;获取 &lt;a href="https://pixabay.com/api/docs/"&gt;API 完全请求权限&lt;/a&gt; 以检索高质量图片。&lt;br&gt;
+如果你有关于 API 的任何问题请&lt;a href="https://pixabay.com/service/contact/"&gt;联系我们&lt;/a&gt;&lt;/p&gt;</description></item></channel></rss>

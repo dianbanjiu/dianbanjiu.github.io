@@ -1,50 +1,50 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>动态规划 on 点半九</title><link>https://www.dianbanjiu.com/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</link><description>Recent content in 动态规划 on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 22 Aug 2021 14:55:33 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/index.xml" rel="self" type="application/rss+xml"/><item><title>自动生成 Excel 列标</title><link>https://www.dianbanjiu.com/post/%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90-excel-%E5%88%97%E6%A0%87/</link><pubDate>Sun, 22 Aug 2021 14:55:33 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90-excel-%E5%88%97%E6%A0%87/</guid><description>&lt;p>最近开发中涉及到将结果导出到 Excel 文件的功能，我看了一下现有的这些操作 Excel 的开源项目，无论是 Golang 还是 Python，基本上都不支持一次性插入一行数据，只能通过指定 cell 位置来一个个插入，而一个 cell 的位置基本包含这三项（sheet 名，列标，行号），sheet 名好说，毕竟是我自己生成的名字；行号也比较方便拿到；但是列标就有一丢丢蛋疼了，都是由字母拼成的，既然没有现成的实现，就只能自己实时计算了。&lt;/p>
-&lt;p>&lt;img src="https://imgur.com/6aEufje.png" alt="excel 界面示意图">&lt;/p>
-&lt;p>观察了一下 Excel 的列标发现，Excel 的列标完全由 26 个英文字母按顺序全排列组合而成，大体规律如下&lt;/p>
-&lt;ul>
-&lt;li>1 个字母：A,B,C&amp;hellip;Z&lt;/li>
-&lt;li>2 个字母：AA,AB&amp;hellip;BA,BB&amp;hellip;CA,CB&amp;hellip;ZY,ZZ&lt;/li>
-&lt;li>3 个字母：AAA,AAB&amp;hellip;BAA,BAB&amp;hellip;CAA,CAB&amp;hellip;ZZY,ZZZ&lt;/li>
-&lt;li>n 个字母：&amp;hellip;.&lt;/li>
-&lt;/ul>
-&lt;p>如果想要计算给定列数 n 对应的列标，可以通过让 n 不断与 26 进行取余操作来实现（&lt;strong>类似计算一个数值对应二进制数的方式，不过此处将 0 和 1 替换为了 26 个英文字母&lt;/strong>）。比如：&lt;/p>
-&lt;ul>
-&lt;li>&lt;strong>23&lt;/strong>：23%26=0&amp;hellip;23，f[n] = letters[23] = &amp;ldquo;W&amp;rdquo;&lt;/li>
-&lt;li>&lt;strong>56&lt;/strong>：56%26=2&amp;hellip;4，f[n] = letters[2]+letters[4] = &amp;ldquo;BD&amp;rdquo;&lt;/li>
-&lt;li>&lt;strong>1998&lt;/strong>：1998%26=76&amp;hellip;22，76%26=2&amp;hellip;24，f[n] = result[76] + letters[22] = letters[2]+letters[24]+letters[22] = &amp;ldquo;BXV&amp;rdquo;&lt;/li>
-&lt;li>&amp;hellip;&lt;/li>
-&lt;/ul>
-&lt;p>通过上面的归纳，可以看出，这其实是一个动态规划的问题，每一个 n 对应的列标值为 &lt;strong>n/26 + n%26&lt;/strong>，前 26 个列标均为单个字母，它们不需要与其他字母进行组合。所以根据这个逻辑可以得到下面的公式：&lt;/p>
-&lt;ul>
-&lt;li>n&amp;lt;=26：result[n] = letters[n]&lt;/li>
-&lt;li>n&amp;gt;26：result[n] = result[n/26]+result[n%26]&lt;/li>
-&lt;/ul>
-&lt;p>动态规划的问题一般来说只要能归纳出上的计算公式，那对应的代码逻辑其实就比较简单了，上代码：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">GetExcelColList&lt;/span>(&lt;span style="color:#a6e22e">n&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span>) []&lt;span style="color:#66d9ef">string&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// Excel 的列标是由 26 个英文字母按照顺序组合而成的&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// 此处通过一个数组先保存基础的 26 个列标&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">baseList&lt;/span> = []&lt;span style="color:#66d9ef">string&lt;/span>{&lt;span style="color:#e6db74">&amp;#34;A&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;B&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;C&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;D&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;E&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;F&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;G&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;H&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;I&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;J&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;K&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;L&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;M&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;N&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;O&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;P&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;Q&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;R&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;S&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;T&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;U&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;V&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;W&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;X&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;Y&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;Z&amp;#34;&lt;/span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// 为了方便后面生成，此处将列数调整为 26 的整数倍&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">count&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">n&lt;/span> &lt;span style="color:#f92672">/&lt;/span> &lt;span style="color:#ae81ff">26&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">n&lt;/span>&lt;span style="color:#f92672">%&lt;/span>&lt;span style="color:#ae81ff">26&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">count&lt;/span> &lt;span style="color:#f92672">+=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// 根据上面计算出的列数提前创建好一个数组用来存储列标&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">result&lt;/span> = make([]&lt;span style="color:#66d9ef">string&lt;/span>, &lt;span style="color:#a6e22e">count&lt;/span>&lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#ae81ff">26&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// 无论列数的大小，默认填充前 26 个列标&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// 因为前 26 个列标均未单个字母，不是组合而成的元素，所以此处单独生成&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> copy(&lt;span style="color:#a6e22e">result&lt;/span>, &lt;span style="color:#a6e22e">baseList&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// 从第 n = 26 开始，列标生成规则为：result[n] = result[n/26 -1] + result[n%26]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// 因为数组的下标是从 0 开始的，所以上面需要 -1&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#a6e22e">i&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#ae81ff">26&lt;/span>; &lt;span style="color:#a6e22e">i&lt;/span> &amp;lt; &lt;span style="color:#a6e22e">n&lt;/span>; &lt;span style="color:#a6e22e">i&lt;/span>&lt;span style="color:#f92672">++&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">result&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>] = &lt;span style="color:#a6e22e">result&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>&lt;span style="color:#f92672">/&lt;/span>&lt;span style="color:#ae81ff">26&lt;/span> &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>] &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#a6e22e">result&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>&lt;span style="color:#f92672">%&lt;/span>&lt;span style="color:#ae81ff">26&lt;/span>]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// 根据列数返回所需的数据&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">result&lt;/span>[:&lt;span style="color:#a6e22e">n&lt;/span>]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>动态规划 on 点半九</title><link>https://blog.djangozane.com/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</link><description>Recent content in 动态规划 on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 22 Aug 2021 14:55:33 +0800</lastBuildDate><atom:link href="https://blog.djangozane.com/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/index.xml" rel="self" type="application/rss+xml"/><item><title>自动生成 Excel 列标</title><link>https://blog.djangozane.com/post/%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90-excel-%E5%88%97%E6%A0%87/</link><pubDate>Sun, 22 Aug 2021 14:55:33 +0800</pubDate><guid>https://blog.djangozane.com/post/%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90-excel-%E5%88%97%E6%A0%87/</guid><description>&lt;p&gt;最近开发中涉及到将结果导出到 Excel 文件的功能，我看了一下现有的这些操作 Excel 的开源项目，无论是 Golang 还是 Python，基本上都不支持一次性插入一行数据，只能通过指定 cell 位置来一个个插入，而一个 cell 的位置基本包含这三项（sheet 名，列标，行号），sheet 名好说，毕竟是我自己生成的名字；行号也比较方便拿到；但是列标就有一丢丢蛋疼了，都是由字母拼成的，既然没有现成的实现，就只能自己实时计算了。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://imgur.com/6aEufje.png" alt="excel 界面示意图"&gt;&lt;/p&gt;
+&lt;p&gt;观察了一下 Excel 的列标发现，Excel 的列标完全由 26 个英文字母按顺序全排列组合而成，大体规律如下&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;1 个字母：A,B,C&amp;hellip;Z&lt;/li&gt;
+&lt;li&gt;2 个字母：AA,AB&amp;hellip;BA,BB&amp;hellip;CA,CB&amp;hellip;ZY,ZZ&lt;/li&gt;
+&lt;li&gt;3 个字母：AAA,AAB&amp;hellip;BAA,BAB&amp;hellip;CAA,CAB&amp;hellip;ZZY,ZZZ&lt;/li&gt;
+&lt;li&gt;n 个字母：&amp;hellip;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果想要计算给定列数 n 对应的列标，可以通过让 n 不断与 26 进行取余操作来实现（&lt;strong&gt;类似计算一个数值对应二进制数的方式，不过此处将 0 和 1 替换为了 26 个英文字母&lt;/strong&gt;）。比如：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;23&lt;/strong&gt;：23%26=0&amp;hellip;23，f[n] = letters[23] = &amp;ldquo;W&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;56&lt;/strong&gt;：56%26=2&amp;hellip;4，f[n] = letters[2]+letters[4] = &amp;ldquo;BD&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;1998&lt;/strong&gt;：1998%26=76&amp;hellip;22，76%26=2&amp;hellip;24，f[n] = result[76] + letters[22] = letters[2]+letters[24]+letters[22] = &amp;ldquo;BXV&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;&amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;通过上面的归纳，可以看出，这其实是一个动态规划的问题，每一个 n 对应的列标值为 &lt;strong&gt;n/26 + n%26&lt;/strong&gt;，前 26 个列标均为单个字母，它们不需要与其他字母进行组合。所以根据这个逻辑可以得到下面的公式：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;n&amp;lt;=26：result[n] = letters[n]&lt;/li&gt;
+&lt;li&gt;n&amp;gt;26：result[n] = result[n/26]+result[n%26]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;动态规划的问题一般来说只要能归纳出上的计算公式，那对应的代码逻辑其实就比较简单了，上代码：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;func&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;GetExcelColList&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;n&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;int&lt;/span&gt;) []&lt;span style="color:#66d9ef"&gt;string&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// Excel 的列标是由 26 个英文字母按照顺序组合而成的&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// 此处通过一个数组先保存基础的 26 个列标&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;var&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;baseList&lt;/span&gt; = []&lt;span style="color:#66d9ef"&gt;string&lt;/span&gt;{&lt;span style="color:#e6db74"&gt;&amp;#34;A&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;B&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;C&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;D&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;E&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;F&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;G&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;H&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;I&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;J&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;K&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;L&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;M&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;N&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;O&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;P&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;Q&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;R&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;S&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;T&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;U&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;V&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;W&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;X&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;Y&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;Z&amp;#34;&lt;/span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// 为了方便后面生成，此处将列数调整为 26 的整数倍&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;count&lt;/span&gt; &lt;span style="color:#f92672"&gt;:=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;n&lt;/span&gt; &lt;span style="color:#f92672"&gt;/&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;26&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;n&lt;/span&gt;&lt;span style="color:#f92672"&gt;%&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;26&lt;/span&gt; &lt;span style="color:#f92672"&gt;!=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;count&lt;/span&gt; &lt;span style="color:#f92672"&gt;+=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// 根据上面计算出的列数提前创建好一个数组用来存储列标&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;var&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;result&lt;/span&gt; = make([]&lt;span style="color:#66d9ef"&gt;string&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;count&lt;/span&gt;&lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;26&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// 无论列数的大小，默认填充前 26 个列标&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// 因为前 26 个列标均未单个字母，不是组合而成的元素，所以此处单独生成&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; copy(&lt;span style="color:#a6e22e"&gt;result&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;baseList&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// 从第 n = 26 开始，列标生成规则为：result[n] = result[n/26 -1] + result[n%26]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// 因为数组的下标是从 0 开始的，所以上面需要 -1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;i&lt;/span&gt; &lt;span style="color:#f92672"&gt;:=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;26&lt;/span&gt;; &lt;span style="color:#a6e22e"&gt;i&lt;/span&gt; &amp;lt; &lt;span style="color:#a6e22e"&gt;n&lt;/span&gt;; &lt;span style="color:#a6e22e"&gt;i&lt;/span&gt;&lt;span style="color:#f92672"&gt;++&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;result&lt;/span&gt;[&lt;span style="color:#a6e22e"&gt;i&lt;/span&gt;] = &lt;span style="color:#a6e22e"&gt;result&lt;/span&gt;[&lt;span style="color:#a6e22e"&gt;i&lt;/span&gt;&lt;span style="color:#f92672"&gt;/&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;26&lt;/span&gt; &lt;span style="color:#f92672"&gt;-&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;] &lt;span style="color:#f92672"&gt;+&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;result&lt;/span&gt;[&lt;span style="color:#a6e22e"&gt;i&lt;/span&gt;&lt;span style="color:#f92672"&gt;%&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;26&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// 根据列数返回所需的数据&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;result&lt;/span&gt;[:&lt;span style="color:#a6e22e"&gt;n&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item></channel></rss>

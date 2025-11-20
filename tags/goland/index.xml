@@ -1,115 +1,115 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Goland on 点半九</title><link>https://www.dianbanjiu.com/tags/goland/</link><description>Recent content in Goland on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 22 Apr 2020 22:50:05 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/goland/index.xml" rel="self" type="application/rss+xml"/><item><title>从零开始配置 Go 开发环境</title><link>https://www.dianbanjiu.com/post/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E9%85%8D%E7%BD%AE-go-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</link><pubDate>Wed, 22 Apr 2020 22:50:05 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E9%85%8D%E7%BD%AE-go-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</guid><description>&lt;h1 id="安装-go">安装 go&lt;/h1>
-&lt;p>关于详细的安装教程，可以参考 &lt;a href="https://go.dev/doc/install">官方安装文档&lt;/a>&lt;/p>
-&lt;p>官网提供了各个操作系统下的安装包以及源码，你也可以尝试通过包管理器进行安装，更加简单而且方便后面的升级&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo pacman -S go &lt;span style="color:#75715e">#Arch Linux&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo zypper in go &lt;span style="color:#75715e">#OpenSuse&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>brew install go &lt;span style="color:#75715e">#MacOS&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>scoop install go &lt;span style="color:#75715e">#Windows&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>通过包管理器安装的 go，只需要定期运行对应的更新命令，就可以将本地的 go 更新到当前比较新的版本（这个主要取决于包管理对于包的更新策略）&lt;/p>
-&lt;p>当然你也可以使用官方的 &lt;a href="https://www.dianbanjiu.com/post/go-%E5%A4%9A%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85/">多版本管理方式进行安装&lt;/a>&lt;/p>
-&lt;h2 id="测试">测试&lt;/h2>
-&lt;p>安装完成之后，可以使用下面的命令看是否安装成功了&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ go version
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>go version go1.14.2 linux/amd64
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>我当前 go 的版本是 1.14.2 linxu/amd64 架构的&lt;/p>
-&lt;h1 id="gomodule">gomodule&lt;/h1>
-&lt;p>gomodule 现在是 go 默认的包管理工具，用来解决 go 项目的依赖问题&lt;/p>
-&lt;h2 id="配置">配置&lt;/h2>
-&lt;p>下面来配置一下 gomodule 的环境，在终端执行下面的两条命令&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>go env -w GO111MODULE&lt;span style="color:#f92672">=&lt;/span>on &lt;span style="color:#75715e"># 如果你使用 1.13 之后的版本，可以忽略这一条命令&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>go env -w GOPROXY&lt;span style="color:#f92672">=&lt;/span>https://goproxy.cn &lt;span style="color:#75715e"># 你可以使用其他的代理，比如 https://goproxy.io 等&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>goproxy 是 go 的模块代理，以前一些 &lt;code>golang.org/&lt;/code> 下的包下载可能会比较慢，有了 goproxy 之后就不用再担心这个了。&lt;code>goproxy.cn&lt;/code> 使用的是七牛的 CDN 进行分发的，实测速度很可以，当然还有一些其他的代理服务，你可以自行查找自己喜欢的&lt;/p>
-&lt;h2 id="简单使用">简单使用&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ mkdir ~/GoProject
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ cd ~/GoProject
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ go mod init hello &lt;span style="color:#75715e"># 初始化 go 模块&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>上面就创建了一个名为 &lt;code>demo&lt;/code> 的模块，模块名可以根据自己的需要修改&lt;br>
-执行完上面的命令之后，会在项目根目录下生成一个 &lt;code>go.mod&lt;/code> 文件，看一下里面的内容&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ cat go.mod
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>module demo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>go 1.14
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>一开始里面只有一个模块名和你当前的 go 版本&lt;/p>
-&lt;p>安装模块的时候跟之前一样，在项目根目录下执行：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ go get -u https://github.com/gin-gonic/gin
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>再看一下里面的内容：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ cat go.mod
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>module leetcode
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>go 1.14
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>require &lt;span style="color:#f92672">(&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> github.com/gin-gonic/gin v1.6.2 // indirect
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> github.com/golang/protobuf v1.4.0 // indirect
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> github.com/modern-go/reflect2 v1.0.1 // indirect
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> golang.org/x/sys v0.0.0-20200420163511-1957bb5e6d1f // indirect
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">)&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>可以看到，gin 框架及其依赖都已经被添加进来了&lt;/p>
-&lt;p>项目构建完成之后，可以使用 &lt;code>go mod tidy&lt;/code> 将项目中从未用到过的模块移除&lt;/p>
-&lt;h1 id="编辑器ide">编辑器/IDE&lt;/h1>
-&lt;p>推荐的编辑器是 VSCode，多平台、插件丰富。推荐的 IDE 是 Goland，功能齐全&lt;/p>
-&lt;h2 id="vscode">VSCode&lt;/h2>
-&lt;p>1、安装 VSCode&lt;br>
-2、扩展市场搜索并安装 &lt;code>golang.go&lt;/code>&lt;br>
-3、按 &lt;code>Ctrl+Shift+p&lt;/code>，输入 &lt;code>go: install/update tools&lt;/code>，全选依赖项，点击确定安装开发 go 用到的一些依赖。在开始之前请先配置好 go 的 &lt;code>GOPROXY&lt;/code> 变量&lt;br>
-4、（可选）安装&lt;code>formulahendry.code-runner&lt;/code> 插件用于直接运行一些代码片段&lt;br>
-5、（可选）安装 &lt;code>maxnatchanon.go-struct-tag-autogen&lt;/code> 用于自动补全结构体多种风格的 tag。具体的配置可以参考 &lt;a href="https://github.com/maxnatchanon/vscode-go-struct-tag-autogen">https://github.com/maxnatchanon/vscode-go-struct-tag-autogen&lt;/a>，下面是我的配置&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-JSON" data-lang="JSON">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#34;goStructTagAutogen.tagSuggestion&amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">:&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;json&amp;#34;&lt;/span>: {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;cases&amp;#34;&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;camel&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;snake&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;uppersnake&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;pascal&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;none&amp;#34;&lt;/span>],
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;options&amp;#34;&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;-&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;omitempty&amp;#34;&lt;/span>]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;form&amp;#34;&lt;/span>: {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;cases&amp;#34;&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;camel&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;snake&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;uppersnake&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;pascal&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;none&amp;#34;&lt;/span>],
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;options&amp;#34;&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;-&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;omitempty&amp;#34;&lt;/span>]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;bson&amp;#34;&lt;/span>: {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;cases&amp;#34;&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;snake&amp;#34;&lt;/span>],
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;options&amp;#34;&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;-&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;omitempty&amp;#34;&lt;/span>]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;binding&amp;#34;&lt;/span>: {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;options&amp;#34;&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;required&amp;#34;&lt;/span>]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>注意，如果自动补全不生效，你需要在你 VSCode 的配置文件中新增下面的内容&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-JSON" data-lang="JSON">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#34;editor.quickSuggestions&amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">:&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;strings&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;on&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>6、（可选）安装 &lt;code>doggy8088.quicktype-refresh&lt;/code>，可以转换 JSON 数据为对应的结构体&lt;br>
-7、（可选）安装 &lt;code>mishkinf.goto-next-previous-member&lt;/code>，使用 Ctrl+Arrow Up/Down 在同一个文件相邻的方法间进行跳转&lt;br>
-8、（可选）在 VSCode 的配置文件中新增下面的内容，启用由 gopls 支持的语法高亮，具体说明可以参见 &lt;a href="https://code.visualstudio.com/api/language-extensions/semantic-highlight-guide">https://code.visualstudio.com/api/language-extensions/semantic-highlight-guide&lt;/a>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-JSON" data-lang="JSON">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#34;gopls&amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">:&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;ui.semanticTokens&amp;#34;&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>接着就可以使用 VSCode 开始你愉快的 go 开发了&lt;/p>
-&lt;h2 id="goland">Goland&lt;/h2>
-&lt;p>Goland 是 Jetbrains 开发的 Go IDE，它的配置在我的 &lt;a href="https://www.dianbanjiu.com/post/goalnd-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/">Goalnd 基础配置&lt;/a> 有介绍，需要的话可以翻看一下，这里就不赘述了&lt;/p>
-&lt;p>Enjoy Yourself.&lt;/p></description></item><item><title>Goalnd 基础配置</title><link>https://www.dianbanjiu.com/post/goalnd-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/</link><pubDate>Wed, 30 Oct 2019 10:22:53 +0800</pubDate><guid>https://www.dianbanjiu.com/post/goalnd-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/</guid><description>&lt;p>首先先设置一下 goproxy 和 go module。在系统的环境变量当中添加以下两句（zsh 的配置环境在 ~/.zshrc，bash 的在 ~/.bashrc）:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>export GO111MODULE&lt;span style="color:#f92672">=&lt;/span>on
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export GOPROXY&lt;span style="color:#f92672">=&lt;/span>https://goproxy.cn
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export PATH&lt;span style="color:#f92672">=&lt;/span>$PATH:$HOME:/go/bin
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在 goland - settings - go - go modules，中，选中 &lt;code>Enable go Module&lt;/code>，并在 Proxy 中填入代理站点，如 &lt;code>https://goproxy.io&lt;/code> 或者 &lt;code>https://goproxy.cn&lt;/code>。&lt;/p>
-&lt;p>&lt;img src="https://i.imgur.com/H2hB8nA.png" alt="">&lt;/p>
-&lt;p>之前我在 goland 中开启了 go module 之后就再也不能自动补全包中的设置了，究其原因还是因为我虽然开启了 go module，但是每次创建新项目的时候都是手动创建文件夹，然后再手动创建 go 文件，所以我只是开启了 go module，但是并未实际使用。&lt;/p>
-&lt;p>所以在之后使用 goland 创建新项目的时候，最好直接选择 vgo 来创建，在导入一个外部包之后，在这个包上使用 &lt;code>Alt+Enter&lt;/code> 组合键，然后选中 &lt;code>Sync packages of &amp;lt;Project name&amp;gt;&lt;/code>，goland 就会自动将依赖添加至 go.mod 文件当中，这时你再使用外部包中的相关函数的时候，就可以触发自动补全了。&lt;/p>
-&lt;p>除此之外，goland 还为我们提供了一些其他的工具，需要手动开启。&lt;/p>
-&lt;p>在 Settings - Tools - File Watchers 中，可以依次添加 &lt;code>go fmt&lt;/code>，&lt;code>goimports&lt;/code> 还有 &lt;code>golangci-lint&lt;/code>，全部使用默认配置即可。&lt;/p>
-&lt;p>gofmt 一般在安装 go 的时候就已经预装了，goimports 在 golang.org/x/tools/cmd/goimports 当中，如果系统上之前没有装，现在就需要手动安装。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ go get -u golang.org/x/tools/cmd/goimports
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ cd ~/go/pkg/mod/golang.org/x/tools@2019xxxx/cmd/goimports
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ go install
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果你添加了 archlinuxcn 的源，那你可以直接通过 pacman 来安装 golangci-lint，或者你也可以通过 aur 来安装，当然，你也可以从 golangci-lint 源码安装：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ sudo pacman -S golangci-lint &lt;span style="color:#75715e"># Arch Linux 用户&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ yay golangci-lint &lt;span style="color:#75715e"># Arch Linux Aur&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ curl -sfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh| sh -s -- -b &lt;span style="color:#66d9ef">$(&lt;/span>go env GOPATH&lt;span style="color:#66d9ef">)&lt;/span>/bin v1.21.0 &lt;span style="color:#75715e"># 源码安装，将安装至 go/bin 下&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>最后是 &lt;code>golint&lt;/code>，在 Settings - Tools - File Watchers 中，复制 &lt;code>go fmt&lt;/code> 的内容，将 Name 修改为 &lt;code>golint&lt;/code>，Program 改为 &lt;code>golint&lt;/code>，在 Arguments 前添加 &lt;code>-set_exit_status&lt;/code>：&lt;/p>
-&lt;p>&lt;img src="https://i.imgur.com/VCnfW2A.png" alt="">&lt;/p>
-&lt;p>假如你的系统上之前没有安装 &lt;code>golint&lt;/code>，可以通过下面的方法来安装。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ go get -u golang.org/x/tools/lint/golint
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>一般情况下，go 会自动安装 golint 到 go/bin 下。如果没有的话可以进入 golint 包，手动安装。&lt;/p>
-&lt;hr>
-&lt;p>&lt;strong>参考文章：&lt;/strong> &lt;a href="https://goframe.org/prepare/gomodule">https://goframe.org/prepare/gomodule&lt;/a>&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Goland on 点半九</title><link>https://blog.djangozane.com/tags/goland/</link><description>Recent content in Goland on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 22 Apr 2020 22:50:05 +0800</lastBuildDate><atom:link href="https://blog.djangozane.com/tags/goland/index.xml" rel="self" type="application/rss+xml"/><item><title>从零开始配置 Go 开发环境</title><link>https://blog.djangozane.com/post/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E9%85%8D%E7%BD%AE-go-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</link><pubDate>Wed, 22 Apr 2020 22:50:05 +0800</pubDate><guid>https://blog.djangozane.com/post/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E9%85%8D%E7%BD%AE-go-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</guid><description>&lt;h1 id="安装-go"&gt;安装 go&lt;/h1&gt;
+&lt;p&gt;关于详细的安装教程，可以参考 &lt;a href="https://go.dev/doc/install"&gt;官方安装文档&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;官网提供了各个操作系统下的安装包以及源码，你也可以尝试通过包管理器进行安装，更加简单而且方便后面的升级&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo pacman -S go &lt;span style="color:#75715e"&gt;#Arch Linux&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo zypper in go &lt;span style="color:#75715e"&gt;#OpenSuse&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;brew install go &lt;span style="color:#75715e"&gt;#MacOS&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;scoop install go &lt;span style="color:#75715e"&gt;#Windows&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;通过包管理器安装的 go，只需要定期运行对应的更新命令，就可以将本地的 go 更新到当前比较新的版本（这个主要取决于包管理对于包的更新策略）&lt;/p&gt;
+&lt;p&gt;当然你也可以使用官方的 &lt;a href="https://blog.djangozane.com/post/go-%E5%A4%9A%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85/"&gt;多版本管理方式进行安装&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="测试"&gt;测试&lt;/h2&gt;
+&lt;p&gt;安装完成之后，可以使用下面的命令看是否安装成功了&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ go version
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;go version go1.14.2 linux/amd64
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;我当前 go 的版本是 1.14.2 linxu/amd64 架构的&lt;/p&gt;
+&lt;h1 id="gomodule"&gt;gomodule&lt;/h1&gt;
+&lt;p&gt;gomodule 现在是 go 默认的包管理工具，用来解决 go 项目的依赖问题&lt;/p&gt;
+&lt;h2 id="配置"&gt;配置&lt;/h2&gt;
+&lt;p&gt;下面来配置一下 gomodule 的环境，在终端执行下面的两条命令&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;go env -w GO111MODULE&lt;span style="color:#f92672"&gt;=&lt;/span&gt;on &lt;span style="color:#75715e"&gt;# 如果你使用 1.13 之后的版本，可以忽略这一条命令&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;go env -w GOPROXY&lt;span style="color:#f92672"&gt;=&lt;/span&gt;https://goproxy.cn &lt;span style="color:#75715e"&gt;# 你可以使用其他的代理，比如 https://goproxy.io 等&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;goproxy 是 go 的模块代理，以前一些 &lt;code&gt;golang.org/&lt;/code&gt; 下的包下载可能会比较慢，有了 goproxy 之后就不用再担心这个了。&lt;code&gt;goproxy.cn&lt;/code&gt; 使用的是七牛的 CDN 进行分发的，实测速度很可以，当然还有一些其他的代理服务，你可以自行查找自己喜欢的&lt;/p&gt;
+&lt;h2 id="简单使用"&gt;简单使用&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ mkdir ~/GoProject
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ cd ~/GoProject
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ go mod init hello &lt;span style="color:#75715e"&gt;# 初始化 go 模块&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;上面就创建了一个名为 &lt;code&gt;demo&lt;/code&gt; 的模块，模块名可以根据自己的需要修改&lt;br&gt;
+执行完上面的命令之后，会在项目根目录下生成一个 &lt;code&gt;go.mod&lt;/code&gt; 文件，看一下里面的内容&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ cat go.mod
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;module demo
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;go 1.14
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;一开始里面只有一个模块名和你当前的 go 版本&lt;/p&gt;
+&lt;p&gt;安装模块的时候跟之前一样，在项目根目录下执行：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ go get -u https://github.com/gin-gonic/gin
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;再看一下里面的内容：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ cat go.mod
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;module leetcode
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;go 1.14
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;require &lt;span style="color:#f92672"&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; github.com/gin-gonic/gin v1.6.2 // indirect
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; github.com/golang/protobuf v1.4.0 // indirect
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; github.com/modern-go/reflect2 v1.0.1 // indirect
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; golang.org/x/sys v0.0.0-20200420163511-1957bb5e6d1f // indirect
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;可以看到，gin 框架及其依赖都已经被添加进来了&lt;/p&gt;
+&lt;p&gt;项目构建完成之后，可以使用 &lt;code&gt;go mod tidy&lt;/code&gt; 将项目中从未用到过的模块移除&lt;/p&gt;
+&lt;h1 id="编辑器ide"&gt;编辑器/IDE&lt;/h1&gt;
+&lt;p&gt;推荐的编辑器是 VSCode，多平台、插件丰富。推荐的 IDE 是 Goland，功能齐全&lt;/p&gt;
+&lt;h2 id="vscode"&gt;VSCode&lt;/h2&gt;
+&lt;p&gt;1、安装 VSCode&lt;br&gt;
+2、扩展市场搜索并安装 &lt;code&gt;golang.go&lt;/code&gt;&lt;br&gt;
+3、按 &lt;code&gt;Ctrl+Shift+p&lt;/code&gt;，输入 &lt;code&gt;go: install/update tools&lt;/code&gt;，全选依赖项，点击确定安装开发 go 用到的一些依赖。在开始之前请先配置好 go 的 &lt;code&gt;GOPROXY&lt;/code&gt; 变量&lt;br&gt;
+4、（可选）安装&lt;code&gt;formulahendry.code-runner&lt;/code&gt; 插件用于直接运行一些代码片段&lt;br&gt;
+5、（可选）安装 &lt;code&gt;maxnatchanon.go-struct-tag-autogen&lt;/code&gt; 用于自动补全结构体多种风格的 tag。具体的配置可以参考 &lt;a href="https://github.com/maxnatchanon/vscode-go-struct-tag-autogen"&gt;https://github.com/maxnatchanon/vscode-go-struct-tag-autogen&lt;/a&gt;，下面是我的配置&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-JSON" data-lang="JSON"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;goStructTagAutogen.tagSuggestion&amp;#34;&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;:&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;json&amp;#34;&lt;/span&gt;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;cases&amp;#34;&lt;/span&gt;: [&lt;span style="color:#e6db74"&gt;&amp;#34;camel&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;snake&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;uppersnake&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;pascal&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;none&amp;#34;&lt;/span&gt;],
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;options&amp;#34;&lt;/span&gt;: [&lt;span style="color:#e6db74"&gt;&amp;#34;-&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;omitempty&amp;#34;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; },
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;form&amp;#34;&lt;/span&gt;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;cases&amp;#34;&lt;/span&gt;: [&lt;span style="color:#e6db74"&gt;&amp;#34;camel&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;snake&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;uppersnake&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;pascal&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;none&amp;#34;&lt;/span&gt;],
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;options&amp;#34;&lt;/span&gt;: [&lt;span style="color:#e6db74"&gt;&amp;#34;-&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;omitempty&amp;#34;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; },
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;bson&amp;#34;&lt;/span&gt;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;cases&amp;#34;&lt;/span&gt;: [&lt;span style="color:#e6db74"&gt;&amp;#34;snake&amp;#34;&lt;/span&gt;],
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;options&amp;#34;&lt;/span&gt;: [&lt;span style="color:#e6db74"&gt;&amp;#34;-&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;omitempty&amp;#34;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; },
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;binding&amp;#34;&lt;/span&gt;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;options&amp;#34;&lt;/span&gt;: [&lt;span style="color:#e6db74"&gt;&amp;#34;required&amp;#34;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;注意，如果自动补全不生效，你需要在你 VSCode 的配置文件中新增下面的内容&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-JSON" data-lang="JSON"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;editor.quickSuggestions&amp;#34;&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;:&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;strings&amp;#34;&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;on&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;6、（可选）安装 &lt;code&gt;doggy8088.quicktype-refresh&lt;/code&gt;，可以转换 JSON 数据为对应的结构体&lt;br&gt;
+7、（可选）安装 &lt;code&gt;mishkinf.goto-next-previous-member&lt;/code&gt;，使用 Ctrl+Arrow Up/Down 在同一个文件相邻的方法间进行跳转&lt;br&gt;
+8、（可选）在 VSCode 的配置文件中新增下面的内容，启用由 gopls 支持的语法高亮，具体说明可以参见 &lt;a href="https://code.visualstudio.com/api/language-extensions/semantic-highlight-guide"&gt;https://code.visualstudio.com/api/language-extensions/semantic-highlight-guide&lt;/a&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-JSON" data-lang="JSON"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;gopls&amp;#34;&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;:&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;ui.semanticTokens&amp;#34;&lt;/span&gt;: &lt;span style="color:#66d9ef"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接着就可以使用 VSCode 开始你愉快的 go 开发了&lt;/p&gt;
+&lt;h2 id="goland"&gt;Goland&lt;/h2&gt;
+&lt;p&gt;Goland 是 Jetbrains 开发的 Go IDE，它的配置在我的 &lt;a href="https://www.dianbanjiu.com/post/goalnd-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/"&gt;Goalnd 基础配置&lt;/a&gt; 有介绍，需要的话可以翻看一下，这里就不赘述了&lt;/p&gt;
+&lt;p&gt;Enjoy Yourself.&lt;/p&gt;</description></item><item><title>Goalnd 基础配置</title><link>https://blog.djangozane.com/post/goalnd-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/</link><pubDate>Wed, 30 Oct 2019 10:22:53 +0800</pubDate><guid>https://blog.djangozane.com/post/goalnd-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/</guid><description>&lt;p&gt;首先先设置一下 goproxy 和 go module。在系统的环境变量当中添加以下两句（zsh 的配置环境在 ~/.zshrc，bash 的在 ~/.bashrc）:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;export GO111MODULE&lt;span style="color:#f92672"&gt;=&lt;/span&gt;on
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;export GOPROXY&lt;span style="color:#f92672"&gt;=&lt;/span&gt;https://goproxy.cn
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;export PATH&lt;span style="color:#f92672"&gt;=&lt;/span&gt;$PATH:$HOME:/go/bin
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在 goland - settings - go - go modules，中，选中 &lt;code&gt;Enable go Module&lt;/code&gt;，并在 Proxy 中填入代理站点，如 &lt;code&gt;https://goproxy.io&lt;/code&gt; 或者 &lt;code&gt;https://goproxy.cn&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://i.imgur.com/H2hB8nA.png" alt=""&gt;&lt;/p&gt;
+&lt;p&gt;之前我在 goland 中开启了 go module 之后就再也不能自动补全包中的设置了，究其原因还是因为我虽然开启了 go module，但是每次创建新项目的时候都是手动创建文件夹，然后再手动创建 go 文件，所以我只是开启了 go module，但是并未实际使用。&lt;/p&gt;
+&lt;p&gt;所以在之后使用 goland 创建新项目的时候，最好直接选择 vgo 来创建，在导入一个外部包之后，在这个包上使用 &lt;code&gt;Alt+Enter&lt;/code&gt; 组合键，然后选中 &lt;code&gt;Sync packages of &amp;lt;Project name&amp;gt;&lt;/code&gt;，goland 就会自动将依赖添加至 go.mod 文件当中，这时你再使用外部包中的相关函数的时候，就可以触发自动补全了。&lt;/p&gt;
+&lt;p&gt;除此之外，goland 还为我们提供了一些其他的工具，需要手动开启。&lt;/p&gt;
+&lt;p&gt;在 Settings - Tools - File Watchers 中，可以依次添加 &lt;code&gt;go fmt&lt;/code&gt;，&lt;code&gt;goimports&lt;/code&gt; 还有 &lt;code&gt;golangci-lint&lt;/code&gt;，全部使用默认配置即可。&lt;/p&gt;
+&lt;p&gt;gofmt 一般在安装 go 的时候就已经预装了，goimports 在 golang.org/x/tools/cmd/goimports 当中，如果系统上之前没有装，现在就需要手动安装。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ go get -u golang.org/x/tools/cmd/goimports
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ cd ~/go/pkg/mod/golang.org/x/tools@2019xxxx/cmd/goimports
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ go install
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果你添加了 archlinuxcn 的源，那你可以直接通过 pacman 来安装 golangci-lint，或者你也可以通过 aur 来安装，当然，你也可以从 golangci-lint 源码安装：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ sudo pacman -S golangci-lint &lt;span style="color:#75715e"&gt;# Arch Linux 用户&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ yay golangci-lint &lt;span style="color:#75715e"&gt;# Arch Linux Aur&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ curl -sfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh| sh -s -- -b &lt;span style="color:#66d9ef"&gt;$(&lt;/span&gt;go env GOPATH&lt;span style="color:#66d9ef"&gt;)&lt;/span&gt;/bin v1.21.0 &lt;span style="color:#75715e"&gt;# 源码安装，将安装至 go/bin 下&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;最后是 &lt;code&gt;golint&lt;/code&gt;，在 Settings - Tools - File Watchers 中，复制 &lt;code&gt;go fmt&lt;/code&gt; 的内容，将 Name 修改为 &lt;code&gt;golint&lt;/code&gt;，Program 改为 &lt;code&gt;golint&lt;/code&gt;，在 Arguments 前添加 &lt;code&gt;-set_exit_status&lt;/code&gt;：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://i.imgur.com/VCnfW2A.png" alt=""&gt;&lt;/p&gt;
+&lt;p&gt;假如你的系统上之前没有安装 &lt;code&gt;golint&lt;/code&gt;，可以通过下面的方法来安装。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ go get -u golang.org/x/tools/lint/golint
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;一般情况下，go 会自动安装 golint 到 go/bin 下。如果没有的话可以进入 golint 包，手动安装。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;参考文章：&lt;/strong&gt; &lt;a href="https://goframe.org/prepare/gomodule"&gt;https://goframe.org/prepare/gomodule&lt;/a&gt;&lt;/p&gt;</description></item></channel></rss>

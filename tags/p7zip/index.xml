@@ -1,35 +1,35 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>P7zip on 点半九</title><link>https://www.dianbanjiu.com/tags/p7zip/</link><description>Recent content in P7zip on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 06 Oct 2019 08:26:21 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/p7zip/index.xml" rel="self" type="application/rss+xml"/><item><title>压缩/解压缩</title><link>https://www.dianbanjiu.com/post/linux-%E4%B8%8B%E7%9A%84%E8%A7%A3%E5%8E%8B%E7%BC%A9%E5%B7%A5%E5%85%B7/</link><pubDate>Sun, 06 Oct 2019 08:26:21 +0800</pubDate><guid>https://www.dianbanjiu.com/post/linux-%E4%B8%8B%E7%9A%84%E8%A7%A3%E5%8E%8B%E7%BC%A9%E5%B7%A5%E5%85%B7/</guid><description>&lt;p>在 Linux 下，除了最常用的 tar 归档命令之外，还有两个很好用的压缩/解压缩的工具，一个是 &lt;code>unarchiver&lt;/code>，另一个是 &lt;code>p7zip&lt;/code>。&lt;/p>
-&lt;h2 id="unarchiver">Unarchiver&lt;/h2>
-&lt;p>unarchiver 实际上是一个解压工具，其中包含了 &lt;code>unar&lt;/code> 和 &lt;code>lsar&lt;/code> 两个命令行程序。&lt;/p>
-&lt;p>在 Arch Linux 下可以直接通过 pacman 命令安装 unarchiver 这个程序包，在其他的 Linux 发行版，如 Ubuntu 下，可以通过 apt 直接安装 unar 程序包。&lt;/p>
-&lt;p>其中 &lt;code>lsar&lt;/code> 是用来列出压缩包中的文件，&lt;code>unar&lt;/code> 则负责把文件从压缩包中提取出来，两个命令的用法都很简单：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ lsar &amp;lt;archive name&amp;gt;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ unar &amp;lt;archive name&amp;gt;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>因为 zip 压缩包并不会包含有关系统编码的信息，所以在 Linux（系统编码一般为 utf-8）下解压一些非 utf-8（如 gbk 之类）的 zip 压缩包的时候经常会出现乱码的情况。而 unarchiver 的强大之处就在于&lt;strong>即使该压缩包的编码格式不是 utf-8,在解压后也不会出现任何乱码的情况&lt;/strong>。&lt;/p>
-&lt;h2 id="p7zip">p7zip&lt;/h2>
-&lt;p>p7zip 其实就是 7zip 在 Linux 下的命令行版本。&lt;/p>
-&lt;p>在 Linux 下其实有很多好用的压缩工具，但是随之而来的一个问题就是：工具多了，涉及的命令也多了。选择 p7zip 的原因还是它支持更多的压缩格式。&lt;/p>
-&lt;p>p7zip 中一般会包含三个命令，分别是 &lt;code>7z&lt;/code>、&lt;code>7za&lt;/code>、&lt;code>7zr&lt;/code>，这三个命令的主要区别就是处理的范围：&lt;/p>
-&lt;ul>
-&lt;li>7z 支持 p7zip 范围内所有的压缩格式；&lt;/li>
-&lt;li>7za 支持的格式略少于 7z；&lt;/li>
-&lt;li>7zr 则只支持 7z 类型的压缩格式，且无法处理加密文件。&lt;/li>
-&lt;/ul>
-&lt;p>所以下面就只介绍 7z 相关的几个常用命令。&lt;/p>
-&lt;p>创建压缩文件&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ 7z a &amp;lt;archive name&amp;gt; &amp;lt;file name&amp;gt;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>创建压缩包的同时加密，-p 选项用来指定密码。切勿在 -p 选项后直接跟随密码，上面这种格式回车之后会提示你设置密码的&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ 7z a &amp;lt;archive name&amp;gt; &amp;lt;file name&amp;gt; -p
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>更新压缩文件&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ 7z u &amp;lt;archive name&amp;gt; &amp;lt;file name&amp;gt;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>列出压缩文件中包含的文件&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ 7z l &amp;lt;archive name&amp;gt;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>直接将压缩包中的内容提取到当前目录&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ 7z e &amp;lt;archive name&amp;gt;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>全路径提取（不建议使用，可能会覆盖掉系统原有的一些文件）&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ 7z x &amp;lt;archive name&amp;gt;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>提取文件到一个新的目录当中&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ 7z x -o&amp;lt;floader name&amp;gt; &amp;lt;archive name&amp;gt;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>检查压缩包的完整性&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ 7z t &amp;lt;archive name&amp;gt;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>P7zip on 点半九</title><link>https://blog.djangozane.com/tags/p7zip/</link><description>Recent content in P7zip on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 06 Oct 2019 08:26:21 +0800</lastBuildDate><atom:link href="https://blog.djangozane.com/tags/p7zip/index.xml" rel="self" type="application/rss+xml"/><item><title>压缩/解压缩</title><link>https://blog.djangozane.com/post/linux-%E4%B8%8B%E7%9A%84%E8%A7%A3%E5%8E%8B%E7%BC%A9%E5%B7%A5%E5%85%B7/</link><pubDate>Sun, 06 Oct 2019 08:26:21 +0800</pubDate><guid>https://blog.djangozane.com/post/linux-%E4%B8%8B%E7%9A%84%E8%A7%A3%E5%8E%8B%E7%BC%A9%E5%B7%A5%E5%85%B7/</guid><description>&lt;p&gt;在 Linux 下，除了最常用的 tar 归档命令之外，还有两个很好用的压缩/解压缩的工具，一个是 &lt;code&gt;unarchiver&lt;/code&gt;，另一个是 &lt;code&gt;p7zip&lt;/code&gt;。&lt;/p&gt;
+&lt;h2 id="unarchiver"&gt;Unarchiver&lt;/h2&gt;
+&lt;p&gt;unarchiver 实际上是一个解压工具，其中包含了 &lt;code&gt;unar&lt;/code&gt; 和 &lt;code&gt;lsar&lt;/code&gt; 两个命令行程序。&lt;/p&gt;
+&lt;p&gt;在 Arch Linux 下可以直接通过 pacman 命令安装 unarchiver 这个程序包，在其他的 Linux 发行版，如 Ubuntu 下，可以通过 apt 直接安装 unar 程序包。&lt;/p&gt;
+&lt;p&gt;其中 &lt;code&gt;lsar&lt;/code&gt; 是用来列出压缩包中的文件，&lt;code&gt;unar&lt;/code&gt; 则负责把文件从压缩包中提取出来，两个命令的用法都很简单：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ lsar &amp;lt;archive name&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ unar &amp;lt;archive name&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;因为 zip 压缩包并不会包含有关系统编码的信息，所以在 Linux（系统编码一般为 utf-8）下解压一些非 utf-8（如 gbk 之类）的 zip 压缩包的时候经常会出现乱码的情况。而 unarchiver 的强大之处就在于&lt;strong&gt;即使该压缩包的编码格式不是 utf-8,在解压后也不会出现任何乱码的情况&lt;/strong&gt;。&lt;/p&gt;
+&lt;h2 id="p7zip"&gt;p7zip&lt;/h2&gt;
+&lt;p&gt;p7zip 其实就是 7zip 在 Linux 下的命令行版本。&lt;/p&gt;
+&lt;p&gt;在 Linux 下其实有很多好用的压缩工具，但是随之而来的一个问题就是：工具多了，涉及的命令也多了。选择 p7zip 的原因还是它支持更多的压缩格式。&lt;/p&gt;
+&lt;p&gt;p7zip 中一般会包含三个命令，分别是 &lt;code&gt;7z&lt;/code&gt;、&lt;code&gt;7za&lt;/code&gt;、&lt;code&gt;7zr&lt;/code&gt;，这三个命令的主要区别就是处理的范围：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;7z 支持 p7zip 范围内所有的压缩格式；&lt;/li&gt;
+&lt;li&gt;7za 支持的格式略少于 7z；&lt;/li&gt;
+&lt;li&gt;7zr 则只支持 7z 类型的压缩格式，且无法处理加密文件。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;所以下面就只介绍 7z 相关的几个常用命令。&lt;/p&gt;
+&lt;p&gt;创建压缩文件&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ 7z a &amp;lt;archive name&amp;gt; &amp;lt;file name&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;创建压缩包的同时加密，-p 选项用来指定密码。切勿在 -p 选项后直接跟随密码，上面这种格式回车之后会提示你设置密码的&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ 7z a &amp;lt;archive name&amp;gt; &amp;lt;file name&amp;gt; -p
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;更新压缩文件&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ 7z u &amp;lt;archive name&amp;gt; &amp;lt;file name&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;列出压缩文件中包含的文件&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ 7z l &amp;lt;archive name&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;直接将压缩包中的内容提取到当前目录&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ 7z e &amp;lt;archive name&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;全路径提取（不建议使用，可能会覆盖掉系统原有的一些文件）&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ 7z x &amp;lt;archive name&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;提取文件到一个新的目录当中&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ 7z x -o&amp;lt;floader name&amp;gt; &amp;lt;archive name&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;检查压缩包的完整性&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ 7z t &amp;lt;archive name&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item></channel></rss>

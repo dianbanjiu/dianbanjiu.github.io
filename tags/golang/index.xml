@@ -1,295 +1,296 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Golang on 点半九</title><link>https://www.dianbanjiu.com/tags/golang/</link><description>Recent content in Golang on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 22 Aug 2021 14:55:33 +0800</lastBuildDate><atom:link href="https://www.dianbanjiu.com/tags/golang/index.xml" rel="self" type="application/rss+xml"/><item><title>自动生成 Excel 列标</title><link>https://www.dianbanjiu.com/post/%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90-excel-%E5%88%97%E6%A0%87/</link><pubDate>Sun, 22 Aug 2021 14:55:33 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90-excel-%E5%88%97%E6%A0%87/</guid><description>&lt;p>最近开发中涉及到将结果导出到 Excel 文件的功能，我看了一下现有的这些操作 Excel 的开源项目，无论是 Golang 还是 Python，基本上都不支持一次性插入一行数据，只能通过指定 cell 位置来一个个插入，而一个 cell 的位置基本包含这三项（sheet 名，列标，行号），sheet 名好说，毕竟是我自己生成的名字；行号也比较方便拿到；但是列标就有一丢丢蛋疼了，都是由字母拼成的，既然没有现成的实现，就只能自己实时计算了。&lt;/p>
-&lt;p>&lt;img src="https://imgur.com/6aEufje.png" alt="excel 界面示意图">&lt;/p>
-&lt;p>观察了一下 Excel 的列标发现，Excel 的列标完全由 26 个英文字母按顺序全排列组合而成，大体规律如下&lt;/p>
-&lt;ul>
-&lt;li>1 个字母：A,B,C&amp;hellip;Z&lt;/li>
-&lt;li>2 个字母：AA,AB&amp;hellip;BA,BB&amp;hellip;CA,CB&amp;hellip;ZY,ZZ&lt;/li>
-&lt;li>3 个字母：AAA,AAB&amp;hellip;BAA,BAB&amp;hellip;CAA,CAB&amp;hellip;ZZY,ZZZ&lt;/li>
-&lt;li>n 个字母：&amp;hellip;.&lt;/li>
-&lt;/ul>
-&lt;p>如果想要计算给定列数 n 对应的列标，可以通过让 n 不断与 26 进行取余操作来实现（&lt;strong>类似计算一个数值对应二进制数的方式，不过此处将 0 和 1 替换为了 26 个英文字母&lt;/strong>）。比如：&lt;/p>
-&lt;ul>
-&lt;li>&lt;strong>23&lt;/strong>：23%26=0&amp;hellip;23，f[n] = letters[23] = &amp;ldquo;W&amp;rdquo;&lt;/li>
-&lt;li>&lt;strong>56&lt;/strong>：56%26=2&amp;hellip;4，f[n] = letters[2]+letters[4] = &amp;ldquo;BD&amp;rdquo;&lt;/li>
-&lt;li>&lt;strong>1998&lt;/strong>：1998%26=76&amp;hellip;22，76%26=2&amp;hellip;24，f[n] = result[76] + letters[22] = letters[2]+letters[24]+letters[22] = &amp;ldquo;BXV&amp;rdquo;&lt;/li>
-&lt;li>&amp;hellip;&lt;/li>
-&lt;/ul>
-&lt;p>通过上面的归纳，可以看出，这其实是一个动态规划的问题，每一个 n 对应的列标值为 &lt;strong>n/26 + n%26&lt;/strong>，前 26 个列标均为单个字母，它们不需要与其他字母进行组合。所以根据这个逻辑可以得到下面的公式：&lt;/p>
-&lt;ul>
-&lt;li>n&amp;lt;=26：result[n] = letters[n]&lt;/li>
-&lt;li>n&amp;gt;26：result[n] = result[n/26]+result[n%26]&lt;/li>
-&lt;/ul>
-&lt;p>动态规划的问题一般来说只要能归纳出上的计算公式，那对应的代码逻辑其实就比较简单了，上代码：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">GetExcelColList&lt;/span>(&lt;span style="color:#a6e22e">n&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span>) []&lt;span style="color:#66d9ef">string&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// Excel 的列标是由 26 个英文字母按照顺序组合而成的&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// 此处通过一个数组先保存基础的 26 个列标&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">baseList&lt;/span> = []&lt;span style="color:#66d9ef">string&lt;/span>{&lt;span style="color:#e6db74">&amp;#34;A&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;B&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;C&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;D&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;E&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;F&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;G&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;H&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;I&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;J&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;K&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;L&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;M&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;N&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;O&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;P&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;Q&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;R&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;S&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;T&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;U&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;V&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;W&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;X&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;Y&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;Z&amp;#34;&lt;/span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// 为了方便后面生成，此处将列数调整为 26 的整数倍&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">count&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">n&lt;/span> &lt;span style="color:#f92672">/&lt;/span> &lt;span style="color:#ae81ff">26&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">n&lt;/span>&lt;span style="color:#f92672">%&lt;/span>&lt;span style="color:#ae81ff">26&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">count&lt;/span> &lt;span style="color:#f92672">+=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// 根据上面计算出的列数提前创建好一个数组用来存储列标&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">result&lt;/span> = make([]&lt;span style="color:#66d9ef">string&lt;/span>, &lt;span style="color:#a6e22e">count&lt;/span>&lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#ae81ff">26&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// 无论列数的大小，默认填充前 26 个列标&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// 因为前 26 个列标均未单个字母，不是组合而成的元素，所以此处单独生成&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> copy(&lt;span style="color:#a6e22e">result&lt;/span>, &lt;span style="color:#a6e22e">baseList&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// 从第 n = 26 开始，列标生成规则为：result[n] = result[n/26 -1] + result[n%26]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// 因为数组的下标是从 0 开始的，所以上面需要 -1&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#a6e22e">i&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#ae81ff">26&lt;/span>; &lt;span style="color:#a6e22e">i&lt;/span> &amp;lt; &lt;span style="color:#a6e22e">n&lt;/span>; &lt;span style="color:#a6e22e">i&lt;/span>&lt;span style="color:#f92672">++&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">result&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>] = &lt;span style="color:#a6e22e">result&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>&lt;span style="color:#f92672">/&lt;/span>&lt;span style="color:#ae81ff">26&lt;/span> &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>] &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#a6e22e">result&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>&lt;span style="color:#f92672">%&lt;/span>&lt;span style="color:#ae81ff">26&lt;/span>]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// 根据列数返回所需的数据&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">result&lt;/span>[:&lt;span style="color:#a6e22e">n&lt;/span>]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Golang 切片</title><link>https://www.dianbanjiu.com/post/golang-%E5%88%87%E7%89%87/</link><pubDate>Sun, 15 Mar 2020 11:59:22 +0800</pubDate><guid>https://www.dianbanjiu.com/post/golang-%E5%88%87%E7%89%87/</guid><description>&lt;p>最近在使用 golang 创建子集的时候，遇到了一些问题，下面是代码：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-golang" data-lang="golang">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">Subsets&lt;/span>(&lt;span style="color:#a6e22e">nums&lt;/span> []&lt;span style="color:#66d9ef">int&lt;/span>) [][]&lt;span style="color:#66d9ef">int&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">sets&lt;/span> = make([][]&lt;span style="color:#66d9ef">int&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">t&lt;/span> = make([]&lt;span style="color:#66d9ef">int&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">sets&lt;/span> = append(&lt;span style="color:#a6e22e">sets&lt;/span>, &lt;span style="color:#a6e22e">t&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#a6e22e">i&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>; &lt;span style="color:#a6e22e">i&lt;/span> &amp;lt; len(&lt;span style="color:#a6e22e">nums&lt;/span>); &lt;span style="color:#a6e22e">i&lt;/span>&lt;span style="color:#f92672">++&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#a6e22e">_&lt;/span>, &lt;span style="color:#a6e22e">v&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#66d9ef">range&lt;/span> &lt;span style="color:#a6e22e">sets&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">t&lt;/span> = append(&lt;span style="color:#a6e22e">v&lt;/span>, &lt;span style="color:#a6e22e">nums&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>])
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">sets&lt;/span> = append(&lt;span style="color:#a6e22e">sets&lt;/span>, &lt;span style="color:#a6e22e">t&lt;/span>) }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">sets&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>当测试切片的长度不大于 4，比如 []int{1,2,3,4} 的时候，程序输出正常，结果也是正确的。&lt;br>
-不过当切片长度大于 4 的时候，比如 []int{1,2,3,4,5}，程序输出的二维切片的长度虽然正确，但是期中有一些数据就会有问题。在 debug 的时候发现，当计算完 sets[21]，开始计算 sets[22] 的时候，sets[15] 会从 []int{1,2,3,4}，变成 []int{1,2,3,5}。&lt;/p>
-&lt;p>在查询之后发现，因为 sets 的元素每次引用的都是同样的切片，所以可能会导致这个问题。最好的解决办法就是为 sets 的每个元素创建新的切片，下面是修改后的代码。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-golang" data-lang="golang">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">Subsets&lt;/span>(&lt;span style="color:#a6e22e">nums&lt;/span> []&lt;span style="color:#66d9ef">int&lt;/span>) [][]&lt;span style="color:#66d9ef">int&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">sets&lt;/span> = make([][]&lt;span style="color:#66d9ef">int&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">t&lt;/span> = make([]&lt;span style="color:#66d9ef">int&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">sets&lt;/span> = append(&lt;span style="color:#a6e22e">sets&lt;/span>, &lt;span style="color:#a6e22e">t&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#a6e22e">i&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>; &lt;span style="color:#a6e22e">i&lt;/span> &amp;lt; len(&lt;span style="color:#a6e22e">nums&lt;/span>); &lt;span style="color:#a6e22e">i&lt;/span>&lt;span style="color:#f92672">++&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#a6e22e">_&lt;/span>, &lt;span style="color:#a6e22e">v&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#66d9ef">range&lt;/span> &lt;span style="color:#a6e22e">sets&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">t&lt;/span> = append([]&lt;span style="color:#66d9ef">int&lt;/span>{}, &lt;span style="color:#a6e22e">v&lt;/span>&lt;span style="color:#f92672">...&lt;/span>) &lt;span style="color:#75715e">// 将 v 中的元素逐个复制到 t 中&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">t&lt;/span> = append(&lt;span style="color:#a6e22e">t&lt;/span>, &lt;span style="color:#a6e22e">nums&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>]) &lt;span style="color:#75715e">// 将新的元素再添加到 t 中&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">sets&lt;/span> = append(&lt;span style="color:#a6e22e">sets&lt;/span>, &lt;span style="color:#a6e22e">t&lt;/span>) }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">sets&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Golang 对指定关键词进行排序</title><link>https://www.dianbanjiu.com/post/golang-%E5%AF%B9%E6%8C%87%E5%AE%9A%E5%85%B3%E9%94%AE%E8%AF%8D%E8%BF%9B%E8%A1%8C%E6%8E%92%E5%BA%8F/</link><pubDate>Fri, 20 Dec 2019 16:14:03 +0800</pubDate><guid>https://www.dianbanjiu.com/post/golang-%E5%AF%B9%E6%8C%87%E5%AE%9A%E5%85%B3%E9%94%AE%E8%AF%8D%E8%BF%9B%E8%A1%8C%E6%8E%92%E5%BA%8F/</guid><description>&lt;p>之前在处理以结构体作为切片类型的问题里，如果可以对切片进行排序，则可以使问题简化许多。因为结构体有很多字段，既有字符字段又有数值字段，可以考虑通过实现 golang sort.Sort 的接口对结构体切片进行排序。&lt;/p>
-&lt;p>假设结构体切片如下：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">type&lt;/span> &lt;span style="color:#a6e22e">Node&lt;/span> &lt;span style="color:#66d9ef">struct&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Data&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Weight&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Length&lt;/span> &lt;span style="color:#66d9ef">float64&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">type&lt;/span> &lt;span style="color:#a6e22e">NodeSlice&lt;/span> []&lt;span style="color:#a6e22e">Node&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">node&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> make(&lt;span style="color:#a6e22e">NodeSlice&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">a&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">Node&lt;/span>{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Data&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;A&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Weight&lt;/span>: &lt;span style="color:#ae81ff">12&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Length&lt;/span>: &lt;span style="color:#ae81ff">90&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">b&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">Node&lt;/span>{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Data&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;B&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Weight&lt;/span>: &lt;span style="color:#ae81ff">17&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Length&lt;/span>: &lt;span style="color:#ae81ff">26.2&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">c&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">Node&lt;/span>{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Data&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;C&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Weight&lt;/span>: &lt;span style="color:#ae81ff">5&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Length&lt;/span>: &lt;span style="color:#ae81ff">1.2&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">d&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">Node&lt;/span>{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Data&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;D&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Weight&lt;/span>: &lt;span style="color:#ae81ff">8&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Length&lt;/span>: &lt;span style="color:#ae81ff">22&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">node&lt;/span> = append(&lt;span style="color:#a6e22e">node&lt;/span>, &lt;span style="color:#a6e22e">a&lt;/span>, &lt;span style="color:#a6e22e">b&lt;/span>, &lt;span style="color:#a6e22e">c&lt;/span>, &lt;span style="color:#a6e22e">d&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>现在以 Weight 作为关键词来对 node 进行排序。&lt;/p>
-&lt;p>首先需要导入 sort 包，并且需要以 NodeSlice 类型作为接收者 (reciver) 实现 &lt;code>Len()&lt;/code>，&lt;code>Swap(i, j int)&lt;/code>，&lt;code>Less(i,j int)&lt;/code> 三个方法。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">ns&lt;/span> &lt;span style="color:#a6e22e">NodeSlice&lt;/span>) &lt;span style="color:#a6e22e">Len&lt;/span>() &lt;span style="color:#66d9ef">int&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> len(&lt;span style="color:#a6e22e">ns&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">ns&lt;/span> &lt;span style="color:#a6e22e">NodeSlice&lt;/span>) &lt;span style="color:#a6e22e">Swap&lt;/span>(&lt;span style="color:#a6e22e">i&lt;/span>, &lt;span style="color:#a6e22e">j&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span>) {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">ns&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>], &lt;span style="color:#a6e22e">ns&lt;/span>[&lt;span style="color:#a6e22e">j&lt;/span>] = &lt;span style="color:#a6e22e">ns&lt;/span>[&lt;span style="color:#a6e22e">j&lt;/span>], &lt;span style="color:#a6e22e">ns&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">ns&lt;/span> &lt;span style="color:#a6e22e">NodeSlice&lt;/span>) &lt;span style="color:#a6e22e">Less&lt;/span>(&lt;span style="color:#a6e22e">i&lt;/span>, &lt;span style="color:#a6e22e">j&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span>) &lt;span style="color:#66d9ef">bool&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">ns&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>].&lt;span style="color:#a6e22e">Weight&lt;/span> &amp;lt; &lt;span style="color:#a6e22e">ns&lt;/span>[&lt;span style="color:#a6e22e">j&lt;/span>].&lt;span style="color:#a6e22e">Weight&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后你就可以调用 sort.Sort 来对该类型的切片进行排序了，默认是从小到大：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#a6e22e">node&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">sort&lt;/span>.&lt;span style="color:#a6e22e">Sort&lt;/span>(&lt;span style="color:#a6e22e">node&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#a6e22e">node&lt;/span>)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>打印结果如下：&lt;/p>
-&lt;blockquote>
-&lt;p>[{A 12 90} {B 17 26.2} {C 5 1.2} {D 8 22}]&lt;br>
-[{C 5 1.2} {D 8 22} {A 12 90} {B 17 26.2}]&lt;/p>&lt;/blockquote>
-&lt;p>如果需要从大到小进行打印，只需要将 &lt;code>sort.Sort(node)&lt;/code> 替换为 &lt;code>sort.Sort(sort.Reverse(node))&lt;/code>。&lt;/p>
-&lt;p>如果需要以其他参数作为关键词进行排序，只需要调整实现的 &lt;code>Less&lt;/code> 方法的关键词即可。&lt;/p></description></item><item><title>使用 Go 从键盘获取带有空格的字符串</title><link>https://www.dianbanjiu.com/post/%E4%BD%BF%E7%94%A8-go-%E4%BB%8E%E9%94%AE%E7%9B%98%E8%8E%B7%E5%8F%96%E5%B8%A6%E6%9C%89%E7%A9%BA%E6%A0%BC%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2/</link><pubDate>Sun, 17 Nov 2019 21:09:05 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E4%BD%BF%E7%94%A8-go-%E4%BB%8E%E9%94%AE%E7%9B%98%E8%8E%B7%E5%8F%96%E5%B8%A6%E6%9C%89%E7%A9%BA%E6%A0%BC%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2/</guid><description>&lt;p>最近在使用 golang 从键盘获取输入的时候，发现无论使用 &lt;code>fmt.Scan()&lt;/code>，&lt;code>fmt.Scanf()&lt;/code> 还是 &lt;code>fmt.Scanln()&lt;/code> 获取一个字符串的时候，只要字符串里含有空格，就只能获取到空格以前的数据。&lt;/p>
-&lt;p>可以使用 bufio 包来解决这个问题：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">input&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">bufio&lt;/span>.&lt;span style="color:#a6e22e">NewReader&lt;/span>(&lt;span style="color:#a6e22e">os&lt;/span>.&lt;span style="color:#a6e22e">Stdin&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">str&lt;/span>, &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">input&lt;/span>.&lt;span style="color:#a6e22e">ReadString&lt;/span>(&lt;span style="color:#e6db74">&amp;#39;\n&amp;#39;&lt;/span>)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这样的话可以从键盘获取一些字符串，直到遇见换行符。也可以将 &lt;code>\n&lt;/code> 换为需要的终止符来定制自己的需求。&lt;/p></description></item><item><title>Goalnd 基础配置</title><link>https://www.dianbanjiu.com/post/goalnd-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/</link><pubDate>Wed, 30 Oct 2019 10:22:53 +0800</pubDate><guid>https://www.dianbanjiu.com/post/goalnd-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/</guid><description>&lt;p>首先先设置一下 goproxy 和 go module。在系统的环境变量当中添加以下两句（zsh 的配置环境在 ~/.zshrc，bash 的在 ~/.bashrc）:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>export GO111MODULE&lt;span style="color:#f92672">=&lt;/span>on
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export GOPROXY&lt;span style="color:#f92672">=&lt;/span>https://goproxy.cn
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export PATH&lt;span style="color:#f92672">=&lt;/span>$PATH:$HOME:/go/bin
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在 goland - settings - go - go modules，中，选中 &lt;code>Enable go Module&lt;/code>，并在 Proxy 中填入代理站点，如 &lt;code>https://goproxy.io&lt;/code> 或者 &lt;code>https://goproxy.cn&lt;/code>。&lt;/p>
-&lt;p>&lt;img src="https://i.imgur.com/H2hB8nA.png" alt="">&lt;/p>
-&lt;p>之前我在 goland 中开启了 go module 之后就再也不能自动补全包中的设置了，究其原因还是因为我虽然开启了 go module，但是每次创建新项目的时候都是手动创建文件夹，然后再手动创建 go 文件，所以我只是开启了 go module，但是并未实际使用。&lt;/p>
-&lt;p>所以在之后使用 goland 创建新项目的时候，最好直接选择 vgo 来创建，在导入一个外部包之后，在这个包上使用 &lt;code>Alt+Enter&lt;/code> 组合键，然后选中 &lt;code>Sync packages of &amp;lt;Project name&amp;gt;&lt;/code>，goland 就会自动将依赖添加至 go.mod 文件当中，这时你再使用外部包中的相关函数的时候，就可以触发自动补全了。&lt;/p>
-&lt;p>除此之外，goland 还为我们提供了一些其他的工具，需要手动开启。&lt;/p>
-&lt;p>在 Settings - Tools - File Watchers 中，可以依次添加 &lt;code>go fmt&lt;/code>，&lt;code>goimports&lt;/code> 还有 &lt;code>golangci-lint&lt;/code>，全部使用默认配置即可。&lt;/p>
-&lt;p>gofmt 一般在安装 go 的时候就已经预装了，goimports 在 golang.org/x/tools/cmd/goimports 当中，如果系统上之前没有装，现在就需要手动安装。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ go get -u golang.org/x/tools/cmd/goimports
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ cd ~/go/pkg/mod/golang.org/x/tools@2019xxxx/cmd/goimports
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ go install
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果你添加了 archlinuxcn 的源，那你可以直接通过 pacman 来安装 golangci-lint，或者你也可以通过 aur 来安装，当然，你也可以从 golangci-lint 源码安装：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ sudo pacman -S golangci-lint &lt;span style="color:#75715e"># Arch Linux 用户&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ yay golangci-lint &lt;span style="color:#75715e"># Arch Linux Aur&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ curl -sfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh| sh -s -- -b &lt;span style="color:#66d9ef">$(&lt;/span>go env GOPATH&lt;span style="color:#66d9ef">)&lt;/span>/bin v1.21.0 &lt;span style="color:#75715e"># 源码安装，将安装至 go/bin 下&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>最后是 &lt;code>golint&lt;/code>，在 Settings - Tools - File Watchers 中，复制 &lt;code>go fmt&lt;/code> 的内容，将 Name 修改为 &lt;code>golint&lt;/code>，Program 改为 &lt;code>golint&lt;/code>，在 Arguments 前添加 &lt;code>-set_exit_status&lt;/code>：&lt;/p>
-&lt;p>&lt;img src="https://i.imgur.com/VCnfW2A.png" alt="">&lt;/p>
-&lt;p>假如你的系统上之前没有安装 &lt;code>golint&lt;/code>，可以通过下面的方法来安装。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ go get -u golang.org/x/tools/lint/golint
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>一般情况下，go 会自动安装 golint 到 go/bin 下。如果没有的话可以进入 golint 包，手动安装。&lt;/p>
-&lt;hr>
-&lt;p>&lt;strong>参考文章：&lt;/strong> &lt;a href="https://goframe.org/prepare/gomodule">https://goframe.org/prepare/gomodule&lt;/a>&lt;/p></description></item><item><title>链表</title><link>https://www.dianbanjiu.com/post/%E9%93%BE%E8%A1%A8/</link><pubDate>Fri, 18 Oct 2019 03:38:42 +0800</pubDate><guid>https://www.dianbanjiu.com/post/%E9%93%BE%E8%A1%A8/</guid><description>&lt;p>链表通常是由大于等于零个具有相同属性的节点连接而成的一串数据，每个节点一般都会包含数据域跟指针域两部分。&lt;/p>
-&lt;p>比较常用的链表有三种，分别是单(向)链表，双(向)链表和循环链表。&lt;/p>
-&lt;h2 id="单链表">单链表&lt;/h2>
-&lt;p>单链表的特点是其中的每个节点的指针域仅指向它的直接后继节点。&lt;/p>
-&lt;p>所谓直接后继节点，也就是紧挨着当前节点的下一个节点；对应的还有一个直接前驱节点的概念，指的是该节点紧挨着的前一个节点。单链表的每个节点除头节点外，都有且仅有一个直接前驱，除最后一个节点外的所有节点都有且仅有一个直接后继。&lt;/p>
-&lt;p>由单链表的结构可以知道，单链表的每个节点仅知道下一个节点的位置，却不知道上一个节点的情况。&lt;/p>
-&lt;p>&lt;img src="https://i.imgur.com/dymCnVC.png" alt="Imgur">&lt;/p>
-&lt;p>单链表中 p 点之后添加新节点的操作：&lt;/p>
-&lt;ol>
-&lt;li>先遍历链表到 p 节点&lt;/li>
-&lt;li>将 p 的指向直接后继存储到另一个变量 t 当中&lt;/li>
-&lt;li>将 p.Next 指向新的节点，将新节点的 Next 指向 t&lt;/li>
-&lt;/ol>
-&lt;p>单链表删除索引为 i 的节点：&lt;/p>
-&lt;ol>
-&lt;li>遍历链表到 i-1 所在的节点 p&lt;/li>
-&lt;li>将 p.Next 指向 p.Next.Next&lt;/li>
-&lt;/ol>
-&lt;p>下面来使用 go 创建一个简单的单链表：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">type&lt;/span> &lt;span style="color:#a6e22e">LList&lt;/span> &lt;span style="color:#66d9ef">struct&lt;/span>{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Data&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Next&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">LList&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">InitList&lt;/span>() &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">LList&lt;/span>{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#f92672">&amp;amp;&lt;/span>&lt;span style="color:#a6e22e">LList&lt;/span>{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Data&lt;/span>: &lt;span style="color:#ae81ff">0&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Next&lt;/span>: &lt;span style="color:#66d9ef">nil&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">l&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">LList&lt;/span>)&lt;span style="color:#a6e22e">Append&lt;/span>(&lt;span style="color:#a6e22e">e&lt;/span>, &lt;span style="color:#a6e22e">index&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span>){
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">l&lt;/span>.&lt;span style="color:#a6e22e">Len&lt;/span>() &amp;lt; &lt;span style="color:#a6e22e">index&lt;/span>{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">index&lt;/span> &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">l&lt;/span> = &lt;span style="color:#f92672">&amp;amp;&lt;/span>&lt;span style="color:#a6e22e">LList&lt;/span>{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Data&lt;/span>: &lt;span style="color:#a6e22e">e&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Next&lt;/span>: &lt;span style="color:#a6e22e">l&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">p&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">l&lt;/span>.&lt;span style="color:#a6e22e">Next&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#a6e22e">i&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>; &lt;span style="color:#a6e22e">i&lt;/span> &amp;lt; &lt;span style="color:#a6e22e">index&lt;/span>; &lt;span style="color:#a6e22e">i&lt;/span>&lt;span style="color:#f92672">++&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">p&lt;/span> = &lt;span style="color:#a6e22e">p&lt;/span>.&lt;span style="color:#a6e22e">Next&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">p&lt;/span>.&lt;span style="color:#a6e22e">Next&lt;/span> = &lt;span style="color:#f92672">&amp;amp;&lt;/span>&lt;span style="color:#a6e22e">LList&lt;/span>{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Data&lt;/span>: &lt;span style="color:#a6e22e">e&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Next&lt;/span>: &lt;span style="color:#a6e22e">p&lt;/span>.&lt;span style="color:#a6e22e">Next&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">l&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">LList&lt;/span>)&lt;span style="color:#a6e22e">Delete&lt;/span>(&lt;span style="color:#a6e22e">index&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span>)&lt;span style="color:#66d9ef">int&lt;/span>{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">l&lt;/span>.&lt;span style="color:#a6e22e">Len&lt;/span>() &amp;lt; &lt;span style="color:#a6e22e">index&lt;/span>{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">e&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">index&lt;/span> &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">e&lt;/span> = &lt;span style="color:#a6e22e">l&lt;/span>.&lt;span style="color:#a6e22e">Data&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">l&lt;/span> = &lt;span style="color:#a6e22e">l&lt;/span>.&lt;span style="color:#a6e22e">Next&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">e&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">p&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">l&lt;/span>.&lt;span style="color:#a6e22e">Next&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#a6e22e">i&lt;/span>&lt;span style="color:#f92672">:=&lt;/span>&lt;span style="color:#ae81ff">0&lt;/span>; &lt;span style="color:#a6e22e">i&lt;/span>&amp;lt;&lt;span style="color:#a6e22e">index&lt;/span>; &lt;span style="color:#a6e22e">i&lt;/span>&lt;span style="color:#f92672">++&lt;/span>{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">p&lt;/span> = &lt;span style="color:#a6e22e">p&lt;/span>.&lt;span style="color:#a6e22e">Next&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">e&lt;/span> = &lt;span style="color:#a6e22e">p&lt;/span>.&lt;span style="color:#a6e22e">Next&lt;/span>.&lt;span style="color:#a6e22e">Data&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">p&lt;/span>.&lt;span style="color:#a6e22e">Next&lt;/span> = &lt;span style="color:#a6e22e">p&lt;/span>.&lt;span style="color:#a6e22e">Next&lt;/span>.&lt;span style="color:#a6e22e">Next&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">e&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">l&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">LList&lt;/span>)&lt;span style="color:#a6e22e">Len&lt;/span>()&lt;span style="color:#66d9ef">int&lt;/span>{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">i&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">p&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">l&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#a6e22e">p&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span>{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">i&lt;/span>&lt;span style="color:#f92672">+=&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">p&lt;/span> = &lt;span style="color:#a6e22e">p&lt;/span>.&lt;span style="color:#a6e22e">Next&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">i&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>go 会在声明一个变量的同时对其进行初始化，结构体的零值为 &lt;code>nil&lt;/code>。如果你在声明一个节点的时候使用的是 &lt;code>var p *LList&lt;/code>，那么在下面任何对 p 结构体内单个条目的操作都会引发空指针的引用错误。&lt;/p>
-&lt;h2 id="双链表">双链表&lt;/h2>
-&lt;p>双链表跟单链表的区别是，双链表比单链表的节点多了一个指针域，指向它的直接前驱。&lt;/p>
-&lt;p>双链表的每个节点除头节点外，都有且仅有一个直接前驱，除最后一个节点外的所有节点都有且仅有一个直接后继。&lt;/p>
-&lt;p>&lt;img src="https://i.imgur.com/AaYzcRX.png" alt="Imgur">&lt;/p>
-&lt;p>双链表的节点结构：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">type&lt;/span> &lt;span style="color:#a6e22e">DList&lt;/span> &lt;span style="color:#66d9ef">struct&lt;/span>{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Data&lt;/span> &lt;span style="color:#a6e22e">ElemenType&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Pre&lt;/span>, &lt;span style="color:#a6e22e">Next&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">DList&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>因为双链表相较单链表多了一个指针，所以在进行添加删除等操作时需要同时考虑到两个指针的变化。&lt;/p>
-&lt;p>在双链表的 p 节点后添加新的节点操作：&lt;/p>
-&lt;ol>
-&lt;li>遍历链表到 p 节点&lt;/li>
-&lt;li>先将新节点的 Pre 指针指向 p，并将新节点的 Next 指针指向 p 的直接后继&lt;/li>
-&lt;li>将 p 直接后继的 Pre 指针指向新的节点，并将 p 的 Next 指针指向新的节点&lt;/li>
-&lt;/ol>
-&lt;p>删除索引为 i 的节点：&lt;/p>
-&lt;ol>
-&lt;li>遍历链表至 i-1&lt;/li>
-&lt;li>将索引为 i+1 的节点的 Pre 指针指向 索引为 i-1 的节点&lt;/li>
-&lt;li>将索引为 i-1 的节点的 Next 指针指向索引为 i+1 的节点&lt;/li>
-&lt;/ol>
-&lt;p>双向链表在 go 标准库的 container/list 包中已经实现，可以直接导入使用，此处就不重复说明：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">type&lt;/span> &lt;span style="color:#a6e22e">Element&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">e&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">Element&lt;/span>) &lt;span style="color:#a6e22e">Next&lt;/span>() &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">Element&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">e&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">Element&lt;/span>) &lt;span style="color:#a6e22e">Prev&lt;/span>() &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">Element&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">type&lt;/span> &lt;span style="color:#a6e22e">List&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">New&lt;/span>() &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">List&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">l&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">List&lt;/span>) &lt;span style="color:#a6e22e">Back&lt;/span>() &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">Element&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">l&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">List&lt;/span>) &lt;span style="color:#a6e22e">Front&lt;/span>() &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">Element&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">l&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">List&lt;/span>) &lt;span style="color:#a6e22e">Init&lt;/span>() &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">List&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">l&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">List&lt;/span>) &lt;span style="color:#a6e22e">InsertAfter&lt;/span>(&lt;span style="color:#a6e22e">v&lt;/span> &lt;span style="color:#66d9ef">interface&lt;/span>{}, &lt;span style="color:#a6e22e">mark&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">Element&lt;/span>) &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">Element&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">l&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">List&lt;/span>) &lt;span style="color:#a6e22e">InsertBefore&lt;/span>(&lt;span style="color:#a6e22e">v&lt;/span> &lt;span style="color:#66d9ef">interface&lt;/span>{}, &lt;span style="color:#a6e22e">mark&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">Element&lt;/span>) &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">Element&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">l&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">List&lt;/span>) &lt;span style="color:#a6e22e">Len&lt;/span>() &lt;span style="color:#66d9ef">int&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">l&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">List&lt;/span>) &lt;span style="color:#a6e22e">MoveAfter&lt;/span>(&lt;span style="color:#a6e22e">e&lt;/span>, &lt;span style="color:#a6e22e">mark&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">Element&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">l&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">List&lt;/span>) &lt;span style="color:#a6e22e">MoveBefore&lt;/span>(&lt;span style="color:#a6e22e">e&lt;/span>, &lt;span style="color:#a6e22e">mark&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">Element&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">l&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">List&lt;/span>) &lt;span style="color:#a6e22e">MoveToBack&lt;/span>(&lt;span style="color:#a6e22e">e&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">Element&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">l&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">List&lt;/span>) &lt;span style="color:#a6e22e">MoveToFront&lt;/span>(&lt;span style="color:#a6e22e">e&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">Element&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">l&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">List&lt;/span>) &lt;span style="color:#a6e22e">PushBack&lt;/span>(&lt;span style="color:#a6e22e">v&lt;/span> &lt;span style="color:#66d9ef">interface&lt;/span>{}) &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">Element&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">l&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">List&lt;/span>) &lt;span style="color:#a6e22e">PushBackList&lt;/span>(&lt;span style="color:#a6e22e">other&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">List&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">l&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">List&lt;/span>) &lt;span style="color:#a6e22e">PushFront&lt;/span>(&lt;span style="color:#a6e22e">v&lt;/span> &lt;span style="color:#66d9ef">interface&lt;/span>{}) &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">Element&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">l&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">List&lt;/span>) &lt;span style="color:#a6e22e">PushFrontList&lt;/span>(&lt;span style="color:#a6e22e">other&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">List&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">l&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">List&lt;/span>) &lt;span style="color:#a6e22e">Remove&lt;/span>(&lt;span style="color:#a6e22e">e&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">Element&lt;/span>) &lt;span style="color:#66d9ef">interface&lt;/span>{}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="循环链表">循环链表&lt;/h2>
-&lt;p>循环链表又分为循环单链表或者循环双链表，它们与上面两种链表的区别在于：循环链表将头节点与最后一个节点以单双链表各自的形式形成了直接前驱后继的关系。&lt;/p>
-&lt;p>所以在循环链表中的每个节点都有一个直接前驱与直接后继。&lt;/p>
-&lt;p>&lt;img src="https://i.imgur.com/vMXrmei.png" alt="Imgur">&lt;br>
-&lt;img src="https://i.imgur.com/yErfKGJ.png" alt="Imgur">&lt;/p>
-&lt;p>因为首尾相接的缘故，循环链表其实可以不必严格区分头节点跟尾节点，因为无论从哪个节点开始都可以遍历整个链表。&lt;/p>
-&lt;p>除这些区别外，其他的操作与单双链表也基本相同。&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Golang on 点半九</title><link>https://blog.djangozane.com/tags/golang/</link><description>Recent content in Golang on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 22 Aug 2021 14:55:33 +0800</lastBuildDate><atom:link href="https://blog.djangozane.com/tags/golang/index.xml" rel="self" type="application/rss+xml"/><item><title>自动生成 Excel 列标</title><link>https://blog.djangozane.com/post/%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90-excel-%E5%88%97%E6%A0%87/</link><pubDate>Sun, 22 Aug 2021 14:55:33 +0800</pubDate><guid>https://blog.djangozane.com/post/%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90-excel-%E5%88%97%E6%A0%87/</guid><description>&lt;p&gt;最近开发中涉及到将结果导出到 Excel 文件的功能，我看了一下现有的这些操作 Excel 的开源项目，无论是 Golang 还是 Python，基本上都不支持一次性插入一行数据，只能通过指定 cell 位置来一个个插入，而一个 cell 的位置基本包含这三项（sheet 名，列标，行号），sheet 名好说，毕竟是我自己生成的名字；行号也比较方便拿到；但是列标就有一丢丢蛋疼了，都是由字母拼成的，既然没有现成的实现，就只能自己实时计算了。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://imgur.com/6aEufje.png" alt="excel 界面示意图"&gt;&lt;/p&gt;
+&lt;p&gt;观察了一下 Excel 的列标发现，Excel 的列标完全由 26 个英文字母按顺序全排列组合而成，大体规律如下&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;1 个字母：A,B,C&amp;hellip;Z&lt;/li&gt;
+&lt;li&gt;2 个字母：AA,AB&amp;hellip;BA,BB&amp;hellip;CA,CB&amp;hellip;ZY,ZZ&lt;/li&gt;
+&lt;li&gt;3 个字母：AAA,AAB&amp;hellip;BAA,BAB&amp;hellip;CAA,CAB&amp;hellip;ZZY,ZZZ&lt;/li&gt;
+&lt;li&gt;n 个字母：&amp;hellip;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果想要计算给定列数 n 对应的列标，可以通过让 n 不断与 26 进行取余操作来实现（&lt;strong&gt;类似计算一个数值对应二进制数的方式，不过此处将 0 和 1 替换为了 26 个英文字母&lt;/strong&gt;）。比如：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;23&lt;/strong&gt;：23%26=0&amp;hellip;23，f[n] = letters[23] = &amp;ldquo;W&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;56&lt;/strong&gt;：56%26=2&amp;hellip;4，f[n] = letters[2]+letters[4] = &amp;ldquo;BD&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;1998&lt;/strong&gt;：1998%26=76&amp;hellip;22，76%26=2&amp;hellip;24，f[n] = result[76] + letters[22] = letters[2]+letters[24]+letters[22] = &amp;ldquo;BXV&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;&amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;通过上面的归纳，可以看出，这其实是一个动态规划的问题，每一个 n 对应的列标值为 &lt;strong&gt;n/26 + n%26&lt;/strong&gt;，前 26 个列标均为单个字母，它们不需要与其他字母进行组合。所以根据这个逻辑可以得到下面的公式：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;n&amp;lt;=26：result[n] = letters[n]&lt;/li&gt;
+&lt;li&gt;n&amp;gt;26：result[n] = result[n/26]+result[n%26]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;动态规划的问题一般来说只要能归纳出上的计算公式，那对应的代码逻辑其实就比较简单了，上代码：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;func&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;GetExcelColList&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;n&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;int&lt;/span&gt;) []&lt;span style="color:#66d9ef"&gt;string&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// Excel 的列标是由 26 个英文字母按照顺序组合而成的&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// 此处通过一个数组先保存基础的 26 个列标&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;var&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;baseList&lt;/span&gt; = []&lt;span style="color:#66d9ef"&gt;string&lt;/span&gt;{&lt;span style="color:#e6db74"&gt;&amp;#34;A&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;B&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;C&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;D&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;E&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;F&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;G&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;H&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;I&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;J&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;K&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;L&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;M&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;N&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;O&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;P&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;Q&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;R&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;S&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;T&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;U&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;V&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;W&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;X&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;Y&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;Z&amp;#34;&lt;/span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// 为了方便后面生成，此处将列数调整为 26 的整数倍&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;count&lt;/span&gt; &lt;span style="color:#f92672"&gt;:=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;n&lt;/span&gt; &lt;span style="color:#f92672"&gt;/&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;26&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;n&lt;/span&gt;&lt;span style="color:#f92672"&gt;%&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;26&lt;/span&gt; &lt;span style="color:#f92672"&gt;!=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;count&lt;/span&gt; &lt;span style="color:#f92672"&gt;+=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// 根据上面计算出的列数提前创建好一个数组用来存储列标&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;var&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;result&lt;/span&gt; = make([]&lt;span style="color:#66d9ef"&gt;string&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;count&lt;/span&gt;&lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;26&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// 无论列数的大小，默认填充前 26 个列标&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// 因为前 26 个列标均未单个字母，不是组合而成的元素，所以此处单独生成&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; copy(&lt;span style="color:#a6e22e"&gt;result&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;baseList&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// 从第 n = 26 开始，列标生成规则为：result[n] = result[n/26 -1] + result[n%26]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// 因为数组的下标是从 0 开始的，所以上面需要 -1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;i&lt;/span&gt; &lt;span style="color:#f92672"&gt;:=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;26&lt;/span&gt;; &lt;span style="color:#a6e22e"&gt;i&lt;/span&gt; &amp;lt; &lt;span style="color:#a6e22e"&gt;n&lt;/span&gt;; &lt;span style="color:#a6e22e"&gt;i&lt;/span&gt;&lt;span style="color:#f92672"&gt;++&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;result&lt;/span&gt;[&lt;span style="color:#a6e22e"&gt;i&lt;/span&gt;] = &lt;span style="color:#a6e22e"&gt;result&lt;/span&gt;[&lt;span style="color:#a6e22e"&gt;i&lt;/span&gt;&lt;span style="color:#f92672"&gt;/&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;26&lt;/span&gt; &lt;span style="color:#f92672"&gt;-&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;] &lt;span style="color:#f92672"&gt;+&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;result&lt;/span&gt;[&lt;span style="color:#a6e22e"&gt;i&lt;/span&gt;&lt;span style="color:#f92672"&gt;%&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;26&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// 根据列数返回所需的数据&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;result&lt;/span&gt;[:&lt;span style="color:#a6e22e"&gt;n&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>Golang 切片</title><link>https://blog.djangozane.com/post/golang-%E5%88%87%E7%89%87/</link><pubDate>Sun, 15 Mar 2020 11:59:22 +0800</pubDate><guid>https://blog.djangozane.com/post/golang-%E5%88%87%E7%89%87/</guid><description>&lt;p&gt;最近在使用 golang 创建子集的时候，遇到了一些问题，下面是代码：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-golang" data-lang="golang"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;func&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Subsets&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;nums&lt;/span&gt; []&lt;span style="color:#66d9ef"&gt;int&lt;/span&gt;) [][]&lt;span style="color:#66d9ef"&gt;int&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;var&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;sets&lt;/span&gt; = make([][]&lt;span style="color:#66d9ef"&gt;int&lt;/span&gt;, &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;var&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;t&lt;/span&gt; = make([]&lt;span style="color:#66d9ef"&gt;int&lt;/span&gt;, &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;sets&lt;/span&gt; = append(&lt;span style="color:#a6e22e"&gt;sets&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;t&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;i&lt;/span&gt; &lt;span style="color:#f92672"&gt;:=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;; &lt;span style="color:#a6e22e"&gt;i&lt;/span&gt; &amp;lt; len(&lt;span style="color:#a6e22e"&gt;nums&lt;/span&gt;); &lt;span style="color:#a6e22e"&gt;i&lt;/span&gt;&lt;span style="color:#f92672"&gt;++&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;_&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;v&lt;/span&gt; &lt;span style="color:#f92672"&gt;:=&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;range&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;sets&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;t&lt;/span&gt; = append(&lt;span style="color:#a6e22e"&gt;v&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;nums&lt;/span&gt;[&lt;span style="color:#a6e22e"&gt;i&lt;/span&gt;])
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;sets&lt;/span&gt; = append(&lt;span style="color:#a6e22e"&gt;sets&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;t&lt;/span&gt;) }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;sets&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;当测试切片的长度不大于 4，比如 []int{1,2,3,4} 的时候，程序输出正常，结果也是正确的。&lt;br&gt;
+不过当切片长度大于 4 的时候，比如 []int{1,2,3,4,5}，程序输出的二维切片的长度虽然正确，但是期中有一些数据就会有问题。在 debug 的时候发现，当计算完 sets[21]，开始计算 sets[22] 的时候，sets[15] 会从 []int{1,2,3,4}，变成 []int{1,2,3,5}。&lt;/p&gt;
+&lt;p&gt;在查询之后发现，因为 sets 的元素每次引用的都是同样的切片，所以可能会导致这个问题。最好的解决办法就是为 sets 的每个元素创建新的切片，下面是修改后的代码。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-golang" data-lang="golang"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;func&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Subsets&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;nums&lt;/span&gt; []&lt;span style="color:#66d9ef"&gt;int&lt;/span&gt;) [][]&lt;span style="color:#66d9ef"&gt;int&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;var&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;sets&lt;/span&gt; = make([][]&lt;span style="color:#66d9ef"&gt;int&lt;/span&gt;, &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;var&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;t&lt;/span&gt; = make([]&lt;span style="color:#66d9ef"&gt;int&lt;/span&gt;, &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;sets&lt;/span&gt; = append(&lt;span style="color:#a6e22e"&gt;sets&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;t&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;i&lt;/span&gt; &lt;span style="color:#f92672"&gt;:=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;; &lt;span style="color:#a6e22e"&gt;i&lt;/span&gt; &amp;lt; len(&lt;span style="color:#a6e22e"&gt;nums&lt;/span&gt;); &lt;span style="color:#a6e22e"&gt;i&lt;/span&gt;&lt;span style="color:#f92672"&gt;++&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;_&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;v&lt;/span&gt; &lt;span style="color:#f92672"&gt;:=&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;range&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;sets&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;t&lt;/span&gt; = append([]&lt;span style="color:#66d9ef"&gt;int&lt;/span&gt;{}, &lt;span style="color:#a6e22e"&gt;v&lt;/span&gt;&lt;span style="color:#f92672"&gt;...&lt;/span&gt;) &lt;span style="color:#75715e"&gt;// 将 v 中的元素逐个复制到 t 中&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;t&lt;/span&gt; = append(&lt;span style="color:#a6e22e"&gt;t&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;nums&lt;/span&gt;[&lt;span style="color:#a6e22e"&gt;i&lt;/span&gt;]) &lt;span style="color:#75715e"&gt;// 将新的元素再添加到 t 中&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;sets&lt;/span&gt; = append(&lt;span style="color:#a6e22e"&gt;sets&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;t&lt;/span&gt;) }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;sets&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>Golang 对指定关键词进行排序</title><link>https://blog.djangozane.com/post/golang-%E5%AF%B9%E6%8C%87%E5%AE%9A%E5%85%B3%E9%94%AE%E8%AF%8D%E8%BF%9B%E8%A1%8C%E6%8E%92%E5%BA%8F/</link><pubDate>Fri, 20 Dec 2019 16:14:03 +0800</pubDate><guid>https://blog.djangozane.com/post/golang-%E5%AF%B9%E6%8C%87%E5%AE%9A%E5%85%B3%E9%94%AE%E8%AF%8D%E8%BF%9B%E8%A1%8C%E6%8E%92%E5%BA%8F/</guid><description>&lt;p&gt;之前在处理以结构体作为切片类型的问题里，如果可以对切片进行排序，则可以使问题简化许多。因为结构体有很多字段，既有字符字段又有数值字段，可以考虑通过实现 golang sort.Sort 的接口对结构体切片进行排序。&lt;/p&gt;
+&lt;p&gt;假设结构体切片如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;type&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Node&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;struct&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;Data&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;string&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;Weight&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;int&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;Length&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;float64&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;type&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;NodeSlice&lt;/span&gt; []&lt;span style="color:#a6e22e"&gt;Node&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;func&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;main&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;node&lt;/span&gt; &lt;span style="color:#f92672"&gt;:=&lt;/span&gt; make(&lt;span style="color:#a6e22e"&gt;NodeSlice&lt;/span&gt;, &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;a&lt;/span&gt; &lt;span style="color:#f92672"&gt;:=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Node&lt;/span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;Data&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;A&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;Weight&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;12&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;Length&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;90&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;b&lt;/span&gt; &lt;span style="color:#f92672"&gt;:=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Node&lt;/span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;Data&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;B&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;Weight&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;17&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;Length&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;26.2&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;c&lt;/span&gt; &lt;span style="color:#f92672"&gt;:=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Node&lt;/span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;Data&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;C&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;Weight&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;5&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;Length&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;1.2&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;d&lt;/span&gt; &lt;span style="color:#f92672"&gt;:=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Node&lt;/span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;Data&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;D&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;Weight&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;8&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;Length&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;22&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;node&lt;/span&gt; = append(&lt;span style="color:#a6e22e"&gt;node&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;a&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;b&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;c&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;d&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;现在以 Weight 作为关键词来对 node 进行排序。&lt;/p&gt;
+&lt;p&gt;首先需要导入 sort 包，并且需要以 NodeSlice 类型作为接收者 (reciver) 实现 &lt;code&gt;Len()&lt;/code&gt;，&lt;code&gt;Swap(i, j int)&lt;/code&gt;，&lt;code&gt;Less(i,j int)&lt;/code&gt; 三个方法。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;func&lt;/span&gt; (&lt;span style="color:#a6e22e"&gt;ns&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;NodeSlice&lt;/span&gt;) &lt;span style="color:#a6e22e"&gt;Len&lt;/span&gt;() &lt;span style="color:#66d9ef"&gt;int&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; len(&lt;span style="color:#a6e22e"&gt;ns&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;func&lt;/span&gt; (&lt;span style="color:#a6e22e"&gt;ns&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;NodeSlice&lt;/span&gt;) &lt;span style="color:#a6e22e"&gt;Swap&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;i&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;j&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;int&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;ns&lt;/span&gt;[&lt;span style="color:#a6e22e"&gt;i&lt;/span&gt;], &lt;span style="color:#a6e22e"&gt;ns&lt;/span&gt;[&lt;span style="color:#a6e22e"&gt;j&lt;/span&gt;] = &lt;span style="color:#a6e22e"&gt;ns&lt;/span&gt;[&lt;span style="color:#a6e22e"&gt;j&lt;/span&gt;], &lt;span style="color:#a6e22e"&gt;ns&lt;/span&gt;[&lt;span style="color:#a6e22e"&gt;i&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;func&lt;/span&gt; (&lt;span style="color:#a6e22e"&gt;ns&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;NodeSlice&lt;/span&gt;) &lt;span style="color:#a6e22e"&gt;Less&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;i&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;j&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;int&lt;/span&gt;) &lt;span style="color:#66d9ef"&gt;bool&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;ns&lt;/span&gt;[&lt;span style="color:#a6e22e"&gt;i&lt;/span&gt;].&lt;span style="color:#a6e22e"&gt;Weight&lt;/span&gt; &amp;lt; &lt;span style="color:#a6e22e"&gt;ns&lt;/span&gt;[&lt;span style="color:#a6e22e"&gt;j&lt;/span&gt;].&lt;span style="color:#a6e22e"&gt;Weight&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后你就可以调用 sort.Sort 来对该类型的切片进行排序了，默认是从小到大：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;fmt&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;Println&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;node&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;sort&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;Sort&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;node&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;fmt&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;Println&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;node&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;打印结果如下：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[{A 12 90} {B 17 26.2} {C 5 1.2} {D 8 22}]&lt;br&gt;
+[{C 5 1.2} {D 8 22} {A 12 90} {B 17 26.2}]&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;如果需要从大到小进行打印，只需要将 &lt;code&gt;sort.Sort(node)&lt;/code&gt; 替换为 &lt;code&gt;sort.Sort(sort.Reverse(node))&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;如果需要以其他参数作为关键词进行排序，只需要调整实现的 &lt;code&gt;Less&lt;/code&gt; 方法的关键词即可。&lt;/p&gt;</description></item><item><title>使用 Go 从键盘获取带有空格的字符串</title><link>https://blog.djangozane.com/post/%E4%BD%BF%E7%94%A8-go-%E4%BB%8E%E9%94%AE%E7%9B%98%E8%8E%B7%E5%8F%96%E5%B8%A6%E6%9C%89%E7%A9%BA%E6%A0%BC%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2/</link><pubDate>Sun, 17 Nov 2019 21:09:05 +0800</pubDate><guid>https://blog.djangozane.com/post/%E4%BD%BF%E7%94%A8-go-%E4%BB%8E%E9%94%AE%E7%9B%98%E8%8E%B7%E5%8F%96%E5%B8%A6%E6%9C%89%E7%A9%BA%E6%A0%BC%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2/</guid><description>&lt;p&gt;最近在使用 golang 从键盘获取输入的时候，发现无论使用 &lt;code&gt;fmt.Scan()&lt;/code&gt;，&lt;code&gt;fmt.Scanf()&lt;/code&gt; 还是 &lt;code&gt;fmt.Scanln()&lt;/code&gt; 获取一个字符串的时候，只要字符串里含有空格，就只能获取到空格以前的数据。&lt;/p&gt;
+&lt;p&gt;可以使用 bufio 包来解决这个问题：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;input&lt;/span&gt; &lt;span style="color:#f92672"&gt;:=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;bufio&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;NewReader&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;os&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;Stdin&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;str&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;err&lt;/span&gt; &lt;span style="color:#f92672"&gt;:=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;input&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;ReadString&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;\n&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这样的话可以从键盘获取一些字符串，直到遇见换行符。也可以将 &lt;code&gt;\n&lt;/code&gt; 换为需要的终止符来定制自己的需求。&lt;/p&gt;</description></item><item><title>Goalnd 基础配置</title><link>https://blog.djangozane.com/post/goalnd-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/</link><pubDate>Wed, 30 Oct 2019 10:22:53 +0800</pubDate><guid>https://blog.djangozane.com/post/goalnd-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/</guid><description>&lt;p&gt;首先先设置一下 goproxy 和 go module。在系统的环境变量当中添加以下两句（zsh 的配置环境在 ~/.zshrc，bash 的在 ~/.bashrc）:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;export GO111MODULE&lt;span style="color:#f92672"&gt;=&lt;/span&gt;on
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;export GOPROXY&lt;span style="color:#f92672"&gt;=&lt;/span&gt;https://goproxy.cn
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;export PATH&lt;span style="color:#f92672"&gt;=&lt;/span&gt;$PATH:$HOME:/go/bin
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在 goland - settings - go - go modules，中，选中 &lt;code&gt;Enable go Module&lt;/code&gt;，并在 Proxy 中填入代理站点，如 &lt;code&gt;https://goproxy.io&lt;/code&gt; 或者 &lt;code&gt;https://goproxy.cn&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://i.imgur.com/H2hB8nA.png" alt=""&gt;&lt;/p&gt;
+&lt;p&gt;之前我在 goland 中开启了 go module 之后就再也不能自动补全包中的设置了，究其原因还是因为我虽然开启了 go module，但是每次创建新项目的时候都是手动创建文件夹，然后再手动创建 go 文件，所以我只是开启了 go module，但是并未实际使用。&lt;/p&gt;
+&lt;p&gt;所以在之后使用 goland 创建新项目的时候，最好直接选择 vgo 来创建，在导入一个外部包之后，在这个包上使用 &lt;code&gt;Alt+Enter&lt;/code&gt; 组合键，然后选中 &lt;code&gt;Sync packages of &amp;lt;Project name&amp;gt;&lt;/code&gt;，goland 就会自动将依赖添加至 go.mod 文件当中，这时你再使用外部包中的相关函数的时候，就可以触发自动补全了。&lt;/p&gt;
+&lt;p&gt;除此之外，goland 还为我们提供了一些其他的工具，需要手动开启。&lt;/p&gt;
+&lt;p&gt;在 Settings - Tools - File Watchers 中，可以依次添加 &lt;code&gt;go fmt&lt;/code&gt;，&lt;code&gt;goimports&lt;/code&gt; 还有 &lt;code&gt;golangci-lint&lt;/code&gt;，全部使用默认配置即可。&lt;/p&gt;
+&lt;p&gt;gofmt 一般在安装 go 的时候就已经预装了，goimports 在 golang.org/x/tools/cmd/goimports 当中，如果系统上之前没有装，现在就需要手动安装。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ go get -u golang.org/x/tools/cmd/goimports
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ cd ~/go/pkg/mod/golang.org/x/tools@2019xxxx/cmd/goimports
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ go install
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果你添加了 archlinuxcn 的源，那你可以直接通过 pacman 来安装 golangci-lint，或者你也可以通过 aur 来安装，当然，你也可以从 golangci-lint 源码安装：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ sudo pacman -S golangci-lint &lt;span style="color:#75715e"&gt;# Arch Linux 用户&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ yay golangci-lint &lt;span style="color:#75715e"&gt;# Arch Linux Aur&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ curl -sfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh| sh -s -- -b &lt;span style="color:#66d9ef"&gt;$(&lt;/span&gt;go env GOPATH&lt;span style="color:#66d9ef"&gt;)&lt;/span&gt;/bin v1.21.0 &lt;span style="color:#75715e"&gt;# 源码安装，将安装至 go/bin 下&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;最后是 &lt;code&gt;golint&lt;/code&gt;，在 Settings - Tools - File Watchers 中，复制 &lt;code&gt;go fmt&lt;/code&gt; 的内容，将 Name 修改为 &lt;code&gt;golint&lt;/code&gt;，Program 改为 &lt;code&gt;golint&lt;/code&gt;，在 Arguments 前添加 &lt;code&gt;-set_exit_status&lt;/code&gt;：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://i.imgur.com/VCnfW2A.png" alt=""&gt;&lt;/p&gt;
+&lt;p&gt;假如你的系统上之前没有安装 &lt;code&gt;golint&lt;/code&gt;，可以通过下面的方法来安装。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ go get -u golang.org/x/tools/lint/golint
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;一般情况下，go 会自动安装 golint 到 go/bin 下。如果没有的话可以进入 golint 包，手动安装。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;参考文章：&lt;/strong&gt; &lt;a href="https://goframe.org/prepare/gomodule"&gt;https://goframe.org/prepare/gomodule&lt;/a&gt;&lt;/p&gt;</description></item><item><title>链表</title><link>https://blog.djangozane.com/post/%E9%93%BE%E8%A1%A8/</link><pubDate>Fri, 18 Oct 2019 03:38:42 +0800</pubDate><guid>https://blog.djangozane.com/post/%E9%93%BE%E8%A1%A8/</guid><description>&lt;p&gt;链表通常是由大于等于零个具有相同属性的节点连接而成的一串数据，每个节点一般都会包含数据域跟指针域两部分。&lt;/p&gt;
+&lt;p&gt;比较常用的链表有三种，分别是单(向)链表，双(向)链表和循环链表。&lt;/p&gt;
+&lt;h2 id="单链表"&gt;单链表&lt;/h2&gt;
+&lt;p&gt;单链表的特点是其中的每个节点的指针域仅指向它的直接后继节点。&lt;/p&gt;
+&lt;p&gt;所谓直接后继节点，也就是紧挨着当前节点的下一个节点；对应的还有一个直接前驱节点的概念，指的是该节点紧挨着的前一个节点。单链表的每个节点除头节点外，都有且仅有一个直接前驱，除最后一个节点外的所有节点都有且仅有一个直接后继。&lt;/p&gt;
+&lt;p&gt;由单链表的结构可以知道，单链表的每个节点仅知道下一个节点的位置，却不知道上一个节点的情况。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://i.imgur.com/dymCnVC.png" alt="Imgur"&gt;&lt;/p&gt;
+&lt;p&gt;单链表中 p 点之后添加新节点的操作：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;先遍历链表到 p 节点&lt;/li&gt;
+&lt;li&gt;将 p 的指向直接后继存储到另一个变量 t 当中&lt;/li&gt;
+&lt;li&gt;将 p.Next 指向新的节点，将新节点的 Next 指向 t&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;单链表删除索引为 i 的节点：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;遍历链表到 i-1 所在的节点 p&lt;/li&gt;
+&lt;li&gt;将 p.Next 指向 p.Next.Next&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;下面来使用 go 创建一个简单的单链表：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;type&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;LList&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;struct&lt;/span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;Data&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;int&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;Next&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;LList&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;func&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;InitList&lt;/span&gt;() &lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;LList&lt;/span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; &lt;span style="color:#f92672"&gt;&amp;amp;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;LList&lt;/span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;Data&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;Next&lt;/span&gt;: &lt;span style="color:#66d9ef"&gt;nil&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;func&lt;/span&gt; (&lt;span style="color:#a6e22e"&gt;l&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;LList&lt;/span&gt;)&lt;span style="color:#a6e22e"&gt;Append&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;e&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;index&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;int&lt;/span&gt;){
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;l&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;Len&lt;/span&gt;() &amp;lt; &lt;span style="color:#a6e22e"&gt;index&lt;/span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;index&lt;/span&gt; &lt;span style="color:#f92672"&gt;==&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;l&lt;/span&gt; = &lt;span style="color:#f92672"&gt;&amp;amp;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;LList&lt;/span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;Data&lt;/span&gt;: &lt;span style="color:#a6e22e"&gt;e&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;Next&lt;/span&gt;: &lt;span style="color:#a6e22e"&gt;l&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;p&lt;/span&gt; &lt;span style="color:#f92672"&gt;:=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;l&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;Next&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;i&lt;/span&gt; &lt;span style="color:#f92672"&gt;:=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;; &lt;span style="color:#a6e22e"&gt;i&lt;/span&gt; &amp;lt; &lt;span style="color:#a6e22e"&gt;index&lt;/span&gt;; &lt;span style="color:#a6e22e"&gt;i&lt;/span&gt;&lt;span style="color:#f92672"&gt;++&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;p&lt;/span&gt; = &lt;span style="color:#a6e22e"&gt;p&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;Next&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;p&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;Next&lt;/span&gt; = &lt;span style="color:#f92672"&gt;&amp;amp;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;LList&lt;/span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;Data&lt;/span&gt;: &lt;span style="color:#a6e22e"&gt;e&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;Next&lt;/span&gt;: &lt;span style="color:#a6e22e"&gt;p&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;Next&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;func&lt;/span&gt; (&lt;span style="color:#a6e22e"&gt;l&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;LList&lt;/span&gt;)&lt;span style="color:#a6e22e"&gt;Delete&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;index&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;int&lt;/span&gt;)&lt;span style="color:#66d9ef"&gt;int&lt;/span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;l&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;Len&lt;/span&gt;() &amp;lt; &lt;span style="color:#a6e22e"&gt;index&lt;/span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; &lt;span style="color:#f92672"&gt;-&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;e&lt;/span&gt; &lt;span style="color:#f92672"&gt;:=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;index&lt;/span&gt; &lt;span style="color:#f92672"&gt;==&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;e&lt;/span&gt; = &lt;span style="color:#a6e22e"&gt;l&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;Data&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;l&lt;/span&gt; = &lt;span style="color:#a6e22e"&gt;l&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;Next&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;e&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;p&lt;/span&gt; &lt;span style="color:#f92672"&gt;:=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;l&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;Next&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;i&lt;/span&gt;&lt;span style="color:#f92672"&gt;:=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;; &lt;span style="color:#a6e22e"&gt;i&lt;/span&gt;&amp;lt;&lt;span style="color:#a6e22e"&gt;index&lt;/span&gt;; &lt;span style="color:#a6e22e"&gt;i&lt;/span&gt;&lt;span style="color:#f92672"&gt;++&lt;/span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;p&lt;/span&gt; = &lt;span style="color:#a6e22e"&gt;p&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;Next&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;e&lt;/span&gt; = &lt;span style="color:#a6e22e"&gt;p&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;Next&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;Data&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;p&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;Next&lt;/span&gt; = &lt;span style="color:#a6e22e"&gt;p&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;Next&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;Next&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;e&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;func&lt;/span&gt; (&lt;span style="color:#a6e22e"&gt;l&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;LList&lt;/span&gt;)&lt;span style="color:#a6e22e"&gt;Len&lt;/span&gt;()&lt;span style="color:#66d9ef"&gt;int&lt;/span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;i&lt;/span&gt; &lt;span style="color:#f92672"&gt;:=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;p&lt;/span&gt; &lt;span style="color:#f92672"&gt;:=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;l&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;p&lt;/span&gt; &lt;span style="color:#f92672"&gt;!=&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;nil&lt;/span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;i&lt;/span&gt;&lt;span style="color:#f92672"&gt;+=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;p&lt;/span&gt; = &lt;span style="color:#a6e22e"&gt;p&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;Next&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;i&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;go 会在声明一个变量的同时对其进行初始化，结构体的零值为 &lt;code&gt;nil&lt;/code&gt;。如果你在声明一个节点的时候使用的是 &lt;code&gt;var p *LList&lt;/code&gt;，那么在下面任何对 p 结构体内单个条目的操作都会引发空指针的引用错误。&lt;/p&gt;
+&lt;h2 id="双链表"&gt;双链表&lt;/h2&gt;
+&lt;p&gt;双链表跟单链表的区别是，双链表比单链表的节点多了一个指针域，指向它的直接前驱。&lt;/p&gt;
+&lt;p&gt;双链表的每个节点除头节点外，都有且仅有一个直接前驱，除最后一个节点外的所有节点都有且仅有一个直接后继。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://i.imgur.com/AaYzcRX.png" alt="Imgur"&gt;&lt;/p&gt;
+&lt;p&gt;双链表的节点结构：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;type&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;DList&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;struct&lt;/span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;Data&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;ElemenType&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;Pre&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;Next&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;DList&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;因为双链表相较单链表多了一个指针，所以在进行添加删除等操作时需要同时考虑到两个指针的变化。&lt;/p&gt;
+&lt;p&gt;在双链表的 p 节点后添加新的节点操作：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;遍历链表到 p 节点&lt;/li&gt;
+&lt;li&gt;先将新节点的 Pre 指针指向 p，并将新节点的 Next 指针指向 p 的直接后继&lt;/li&gt;
+&lt;li&gt;将 p 直接后继的 Pre 指针指向新的节点，并将 p 的 Next 指针指向新的节点&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;删除索引为 i 的节点：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;遍历链表至 i-1&lt;/li&gt;
+&lt;li&gt;将索引为 i+1 的节点的 Pre 指针指向 索引为 i-1 的节点&lt;/li&gt;
+&lt;li&gt;将索引为 i-1 的节点的 Next 指针指向索引为 i+1 的节点&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;双向链表在 go 标准库的 container/list 包中已经实现，可以直接导入使用，此处就不重复说明：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;type&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Element&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;func&lt;/span&gt; (&lt;span style="color:#a6e22e"&gt;e&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;Element&lt;/span&gt;) &lt;span style="color:#a6e22e"&gt;Next&lt;/span&gt;() &lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;Element&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;func&lt;/span&gt; (&lt;span style="color:#a6e22e"&gt;e&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;Element&lt;/span&gt;) &lt;span style="color:#a6e22e"&gt;Prev&lt;/span&gt;() &lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;Element&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;type&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;List&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;func&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;New&lt;/span&gt;() &lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;List&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;func&lt;/span&gt; (&lt;span style="color:#a6e22e"&gt;l&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;List&lt;/span&gt;) &lt;span style="color:#a6e22e"&gt;Back&lt;/span&gt;() &lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;Element&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;func&lt;/span&gt; (&lt;span style="color:#a6e22e"&gt;l&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;List&lt;/span&gt;) &lt;span style="color:#a6e22e"&gt;Front&lt;/span&gt;() &lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;Element&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;func&lt;/span&gt; (&lt;span style="color:#a6e22e"&gt;l&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;List&lt;/span&gt;) &lt;span style="color:#a6e22e"&gt;Init&lt;/span&gt;() &lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;List&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;func&lt;/span&gt; (&lt;span style="color:#a6e22e"&gt;l&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;List&lt;/span&gt;) &lt;span style="color:#a6e22e"&gt;InsertAfter&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;v&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;interface&lt;/span&gt;{}, &lt;span style="color:#a6e22e"&gt;mark&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;Element&lt;/span&gt;) &lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;Element&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;func&lt;/span&gt; (&lt;span style="color:#a6e22e"&gt;l&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;List&lt;/span&gt;) &lt;span style="color:#a6e22e"&gt;InsertBefore&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;v&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;interface&lt;/span&gt;{}, &lt;span style="color:#a6e22e"&gt;mark&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;Element&lt;/span&gt;) &lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;Element&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;func&lt;/span&gt; (&lt;span style="color:#a6e22e"&gt;l&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;List&lt;/span&gt;) &lt;span style="color:#a6e22e"&gt;Len&lt;/span&gt;() &lt;span style="color:#66d9ef"&gt;int&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;func&lt;/span&gt; (&lt;span style="color:#a6e22e"&gt;l&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;List&lt;/span&gt;) &lt;span style="color:#a6e22e"&gt;MoveAfter&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;e&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;mark&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;Element&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;func&lt;/span&gt; (&lt;span style="color:#a6e22e"&gt;l&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;List&lt;/span&gt;) &lt;span style="color:#a6e22e"&gt;MoveBefore&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;e&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;mark&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;Element&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;func&lt;/span&gt; (&lt;span style="color:#a6e22e"&gt;l&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;List&lt;/span&gt;) &lt;span style="color:#a6e22e"&gt;MoveToBack&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;e&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;Element&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;func&lt;/span&gt; (&lt;span style="color:#a6e22e"&gt;l&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;List&lt;/span&gt;) &lt;span style="color:#a6e22e"&gt;MoveToFront&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;e&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;Element&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;func&lt;/span&gt; (&lt;span style="color:#a6e22e"&gt;l&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;List&lt;/span&gt;) &lt;span style="color:#a6e22e"&gt;PushBack&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;v&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;interface&lt;/span&gt;{}) &lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;Element&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;func&lt;/span&gt; (&lt;span style="color:#a6e22e"&gt;l&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;List&lt;/span&gt;) &lt;span style="color:#a6e22e"&gt;PushBackList&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;other&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;List&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;func&lt;/span&gt; (&lt;span style="color:#a6e22e"&gt;l&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;List&lt;/span&gt;) &lt;span style="color:#a6e22e"&gt;PushFront&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;v&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;interface&lt;/span&gt;{}) &lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;Element&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;func&lt;/span&gt; (&lt;span style="color:#a6e22e"&gt;l&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;List&lt;/span&gt;) &lt;span style="color:#a6e22e"&gt;PushFrontList&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;other&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;List&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;func&lt;/span&gt; (&lt;span style="color:#a6e22e"&gt;l&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;List&lt;/span&gt;) &lt;span style="color:#a6e22e"&gt;Remove&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;e&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;Element&lt;/span&gt;) &lt;span style="color:#66d9ef"&gt;interface&lt;/span&gt;{}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="循环链表"&gt;循环链表&lt;/h2&gt;
+&lt;p&gt;循环链表又分为循环单链表或者循环双链表，它们与上面两种链表的区别在于：循环链表将头节点与最后一个节点以单双链表各自的形式形成了直接前驱后继的关系。&lt;/p&gt;
+&lt;p&gt;所以在循环链表中的每个节点都有一个直接前驱与直接后继。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://i.imgur.com/vMXrmei.png" alt="Imgur"&gt;&lt;br&gt;
+&lt;img src="https://i.imgur.com/yErfKGJ.png" alt="Imgur"&gt;&lt;/p&gt;
+&lt;p&gt;因为首尾相接的缘故，循环链表其实可以不必严格区分头节点跟尾节点，因为无论从哪个节点开始都可以遍历整个链表。&lt;/p&gt;
+&lt;p&gt;除这些区别外，其他的操作与单双链表也基本相同。&lt;/p&gt;</description></item></channel></rss>
