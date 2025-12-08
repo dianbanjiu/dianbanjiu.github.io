@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Syncthing on 点半九</title><link>https://blog.djangozane.com/tags/syncthing/</link><description>Recent content in Syncthing on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 08 Dec 2025 17:38:50 +0800</lastBuildDate><atom:link href="https://blog.djangozane.com/tags/syncthing/index.xml" rel="self" type="application/rss+xml"/><item><title>创建Windows服务</title><link>https://blog.djangozane.com/post/%E5%88%9B%E5%BB%BAwindows%E6%9C%8D%E5%8A%A1/</link><pubDate>Mon, 08 Dec 2025 17:38:50 +0800</pubDate><guid>https://blog.djangozane.com/post/%E5%88%9B%E5%BB%BAwindows%E6%9C%8D%E5%8A%A1/</guid><description>&lt;h2 id="安装配置"&gt;安装配置&lt;/h2&gt;
+&lt;p&gt;最近在折腾内网的文件同步，选用了 Syncthing 的方案，Syncthing 本身的基础安装配置比较简单&lt;/p&gt;
+&lt;p&gt;我是通过 scoop 管理一些没有 GUI 的程序或者工具的，Syncthing 已经位于 scoop 的主库中，可以通过下面的命令直接安装&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code class="language-poershell" data-lang="poershell"&gt;scoop install syncthing
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;顺便我还安装了一个提供 Syncthing 在 Windows 任务栏图标的工具，也可以通过 scoop 安装&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;scoop install syncthingtray
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;安装完成之后，直接在终端执行 &lt;code&gt;syncthing.exe&lt;/code&gt; 启动服务器模式，接着打开 http://127.0.0.1:8384 进行一些简单的设置即可，8384 是 Syncthing 的默认端口，也可以在配置文件中进行指定（scoop安装的配置文件位于 &lt;code&gt;scoop\apps\syncthing\current\config\config.xml&lt;/code&gt; 中，直接搜索 8384 修改为自己需要的端口）&lt;/p&gt;
+&lt;h2 id="创建-windows-服务"&gt;创建 Windows 服务&lt;/h2&gt;
+&lt;p&gt;因为 Syncthing 本身是一个后台服务，我本来是想创建一个任务计划程序的，这种方式虽然可以在电脑启动之后成功启动 Syncthing，但是会启动一个终端窗口，如果关闭这个终端窗口 Syncthing 也会停止运行，虽然可以通过 CMD 或者 PWSH 脚本再包装一层，不过我还是想再找找有没有什么更加稍微优雅一点的方案&lt;/p&gt;
+&lt;p&gt;Syncthing 关于 &lt;a href="https://docs.syncthing.net/users/autostart.html#windows"&gt;Windows 服务&lt;/a&gt; 部分推荐的是 nssm，研究了一下 nssm 虽然可以使用，但是已经很久没有更新了，官网稳定版下载地址是 2014 年的版本，预览版是 2017 年的版本，所以找了一下还在稳定更新的替代品，最后找到了 &lt;a href="https://github.com/winsw/winsw"&gt;WinSW&lt;/a&gt; 这个工具&lt;/p&gt;
+&lt;p&gt;下面是关于 WinSW 的使用方式&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1. 从 &lt;a href="https://github.com/winsw/winsw"&gt;GitHub Releases&lt;/a&gt; 下载需要的可执行文件&lt;/strong&gt;&lt;br&gt;
+&lt;strong&gt;2. 在任意目录创建需要的 Windows 服务配置，比如 Syncthing.xml。&lt;/strong&gt; &lt;em&gt;(有需要可以参考文尾我的服务配置)&lt;/em&gt;&lt;br&gt;
+&lt;strong&gt;3. 然后把之前下载好的 WinSW.exe 复制到当前目录，并将其重命名为 Syncthing.exe。&lt;/strong&gt;（因为 WinSW 在自行的时候不需要指定 xml 配置文件，而是直接通过文件名匹配同名的 xml 配置文件）&lt;br&gt;
+4. 接着就可以通过下面的命令创建并启动 Windows 服务了&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 安装服务&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;./Syncthing.exe install
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 启动服务&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;./Syncthing.exe start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Windows 服务是开机自启的，所以下次电脑启动的时候 Syncthing 服务也会一起运行&lt;/p&gt;
+&lt;h2 id="安卓端同步"&gt;安卓端同步&lt;/h2&gt;
+&lt;p&gt;因为官方的 syncthing 程序已经停止维护了，所以安卓端目前推荐的软件是一个三方的软件 syncthing-fork，可以在 &lt;a href="https://play.google.com/store/apps/details?id=com.github.catfriend1.syncthingandroid"&gt;Google play&lt;/a&gt; 下载到它&lt;/p&gt;
+&lt;p&gt;安装好之后，在设备页面，点击右上角的添加设备按钮扫描并添加 Windows 的设备标识二维码，然后需要在两端的 WebGUI 里面分别同意添加设备，最后就可以设置需要进行同步的文件夹了&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.djangozane.com/img/Syncthing-fork-add-device-icon.jpg" alt=""&gt;&lt;/p&gt;
+&lt;h2 id="相关资料"&gt;相关资料&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://syncthing.net/"&gt;Syncthing 官网地址&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://docs.syncthing.net/"&gt;Syncthing 官方文档&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/winsw/winsw"&gt;WinSW Github地址&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/dianbanjiu/WindowsServices"&gt;我的Windows服务配置&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item></channel></rss>
