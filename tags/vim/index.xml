@@ -26,7 +26,7 @@
 &lt;p&gt;markdown 编辑器最重要的一点就是得有预览支持，而 vim 本身并不支持这个功能，不过可以通过安装插件来添加预览功能。&lt;/p&gt;
 &lt;p&gt;在安装插件之前你可能还需要一个 vim 的插件管理器，我使用的是 &lt;a href="https://github.com/junegunn/vim-plug"&gt;vim-plug&lt;/a&gt;，你可以通过下面的命令来安装 vim-plug：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ curl -fLo ~/.vim/autoload/plug.vim --create-dirs &lt;span style="color:#ae81ff"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;&lt;/span&gt; https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;不过由于种种原因，从 github 下载文件可能会很慢，甚至无法下载。别担心，只要你还能访问 github，那就可以很容易解决这个问题。&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;首先在主目录下新建一个 .vim 目录&lt;/li&gt;

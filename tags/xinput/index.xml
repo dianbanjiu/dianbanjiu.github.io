@@ -17,7 +17,7 @@
 &lt;p&gt;下面以 &lt;strong&gt;KDE Plasma&lt;/strong&gt; 桌面说明，不同的桌面可能会有不同的方式：&lt;br&gt;
 首先在任意位置创建一个脚本文件，如 &lt;code&gt;~/script/keyboard.sh&lt;/code&gt;，其中包含以下内容：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;#!/bin/bash
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;xinput disable &lt;span style="color:#e6db74"&gt;&amp;#34;AT Translated Set 2 keyboard&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;xinput disable &lt;span style="color:#e6db74"&gt;&amp;#34;AT Translated Set 2 keyboard&amp;#34;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后在 &lt;code&gt;~/.config/plasma-workspace/env&lt;/code&gt; 下创建 &lt;code&gt;keyboard.sh&lt;/code&gt; 的软链接。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ cd ~/.config/plasma-workspace/env
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ ln -s ~/script/keyboard.sh keyboard.sh

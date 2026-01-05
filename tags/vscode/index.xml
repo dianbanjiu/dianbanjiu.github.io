@@ -3,7 +3,7 @@
 &lt;p&gt;下面是 httpyac 的一些简单的使用示例，也是我在日常使用中最主要的几个点&lt;/p&gt;
 &lt;h2 id="发起请求"&gt;发起请求&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-http" data-lang="http"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;### 获取用户信息
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;GET&lt;/span&gt; https://www.dianbanjiu.com/user/info?name=John &lt;span style="color:#66d9ef"&gt;HTTP&lt;/span&gt;&lt;span style="color:#f92672"&gt;/&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;GET&lt;/span&gt; https://www.dianbanjiu.com/user/info?name=John &lt;span style="color:#66d9ef"&gt;HTTP&lt;/span&gt;&lt;span style="color:#f92672"&gt;/&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1.1&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;### 新增用户
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;POST https://www.dianbanjiu.com/user HTTP/1.1
@@ -70,7 +70,7 @@ pass=123456
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt; exports.authentcation = `Basic ${signatureBase64}`;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;}}
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;GET&lt;/span&gt; https://www.dianbanjiu.com/user/info?name={{name}} &lt;span style="color:#66d9ef"&gt;HTTP&lt;/span&gt;&lt;span style="color:#f92672"&gt;/&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;GET&lt;/span&gt; https://www.dianbanjiu.com/user/info?name={{name}} &lt;span style="color:#66d9ef"&gt;HTTP&lt;/span&gt;&lt;span style="color:#f92672"&gt;/&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1.1&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Date&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;{{authDate}}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Authentication&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;{{authentcation}}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果你的接口需要统一设置请求头也可以通过脚本实现，&lt;code&gt;{{+&lt;/code&gt; 开头的脚本会在所有请求之前执行，请求的具体执行流程可以参照下图&lt;/p&gt;
@@ -84,7 +84,7 @@ pass=123456
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt; request.headers.authentcation = `Basic ${signatureBase64}`;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;}}
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;GET&lt;/span&gt; https://www.dianbanjiu.com/user/info?name={{name}} &lt;span style="color:#66d9ef"&gt;HTTP&lt;/span&gt;&lt;span style="color:#f92672"&gt;/&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;GET&lt;/span&gt; https://www.dianbanjiu.com/user/info?name={{name}} &lt;span style="color:#66d9ef"&gt;HTTP&lt;/span&gt;&lt;span style="color:#f92672"&gt;/&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1.1&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src="https://httpyac.github.io/assets/scripting.8a515e08.svg" alt="httpyac接口执行流程"&gt;&lt;/p&gt;
 &lt;p&gt;一些需要把整个请求体都作为加密字段的接口，也可以通过脚本实现&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-http" data-lang="http"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;{{
@@ -96,7 +96,7 @@ pass=123456
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt; exports.authentcation = `Basic ${signatureBase64}`;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;}}
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;GET&lt;/span&gt; https://www.dianbanjiu.com/user/info?name={{name}}&amp;amp;sign={{authentcation}}&amp;amp;time={{authDate}} &lt;span style="color:#66d9ef"&gt;HTTP&lt;/span&gt;&lt;span style="color:#f92672"&gt;/&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;GET&lt;/span&gt; https://www.dianbanjiu.com/user/info?name={{name}}&amp;amp;sign={{authentcation}}&amp;amp;time={{authDate}} &lt;span style="color:#66d9ef"&gt;HTTP&lt;/span&gt;&lt;span style="color:#f92672"&gt;/&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1.1&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;目前还有一个不大不小的痛点，就是 httpyac 尚不支持导入 curl 或者 postman 导出的文件来转换为 .http/.rest 文件，需要自己一个个接口再从 postman 换过来也是一个不小的工作量&lt;/p&gt;
 &lt;p&gt;至此我在 postman 中会用的 99% 的功能 httpyac 都提供了，此外 httpyac 也提供了断言、hook、debug 等一些其他的高级功能，但是我都未使用过，这里就不多说明了，具体的说明可以参照 &lt;a href="https://httpyac.github.io/"&gt;httpyac官网&lt;/a&gt; 了解。还有一些语法糖官网其实也没有说明的很清楚，可能需要去 &lt;a href="https://github.com/AnWeber/vscode-httpyac"&gt;httpyac代码仓库的issue&lt;/a&gt; 自行搜索了&lt;/p&gt;</description></item><item><title>Vscode中一些好用的小tips</title><link>https://blog.djangozane.com/post/vscode%E4%B8%AD%E4%B8%80%E4%BA%9B%E5%A5%BD%E7%94%A8%E7%9A%84%E5%B0%8Ftips/</link><pubDate>Thu, 23 Nov 2023 17:07:40 +0800</pubDate><guid>https://blog.djangozane.com/post/vscode%E4%B8%AD%E4%B8%80%E4%BA%9B%E5%A5%BD%E7%94%A8%E7%9A%84%E5%B0%8Ftips/</guid><description>&lt;p&gt;vscode 目前是我的主力编辑器，日常的一些文字记录/开发都是通过他来完成的。此文会记录一些能够帮助我更舒服使用 vscode 的内容，可能会包含插件、设置、快捷方式等各方面，后续会根据使用情况逐渐进行补全&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;1、补全注释中的方法名&lt;/strong&gt;&lt;br&gt;
@@ -174,9 +174,9 @@ go 的注释风格是以方法名开头的，比如&lt;/p&gt;
 4、上一步会创建并打开 .vscode/launch.json 文件，文件内容如下&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-JSON" data-lang="JSON"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// 使用 IntelliSense 了解相关属性。
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt; &lt;span style="color:#75715e"&gt;// 悬停以查看现有属性的描述。
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt; &lt;span style="color:#75715e"&gt;// 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;version&amp;#34;&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;0.2.0&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// 悬停以查看现有属性的描述。
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;version&amp;#34;&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;0.2.0&amp;#34;&lt;/span&gt;,
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;configurations&amp;#34;&lt;/span&gt;: [
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;name&amp;#34;&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;Launch Package&amp;#34;&lt;/span&gt;,
