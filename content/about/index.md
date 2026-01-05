@@ -14,7 +14,10 @@ contentCopyright: false
 
 ## 我的作品
 
-[FlipSwitcher](https://github.com/dianbanjiu/FlipSwitcher)：Windows 下 Alt-Tab 的替代品
+### [FlipSwitcher](https://github.com/dianbanjiu/FlipSwitcher)
+
+> Windows 下 Alt-Tab 的替代品
+
 ![flipswitcher screenshot](/img/flipswitcher.png)
 
 - 核心的窗口切换
@@ -22,8 +25,10 @@ contentCopyright: false
 - 支持通过快捷键直接关闭选定窗口
 - 支持通过快捷键直接退出选定窗口对应的进程
 - 支持聚合同一个应用程序的窗口
-cnam
-[进击的 RSS](https://github.com/dianbanjiu/rss_everyday)：使用 github action 定时推送你喜欢的内容到 telegram channel。
+
+### [进击的 RSS](https://github.com/dianbanjiu/rss_everyday)
+
+> 使用 github action 定时推送你喜欢的内容到 telegram channel。
 
 ## 🌚 关于 Blog
 
