@@ -2,17 +2,22 @@
 &lt;p&gt;我就是我，不一样的花火。&lt;/p&gt;
 &lt;p&gt;一个后端工程师，主要技术栈是 Go，偶尔用 Python 或者 Shell 写点小脚本，最喜欢 Linux&lt;/p&gt;
 &lt;h2 id="我的作品"&gt;我的作品&lt;/h2&gt;
-&lt;p&gt;&lt;a href="https://github.com/dianbanjiu/FlipSwitcher"&gt;FlipSwitcher&lt;/a&gt;：Windows 下 Alt-Tab 的替代品
-&lt;img src="https://blog.djangozane.com/img/flipswitcher.png" alt="flipswitcher screenshot"&gt;&lt;/p&gt;
+&lt;h3 id="flipswitcher"&gt;&lt;a href="https://github.com/dianbanjiu/FlipSwitcher"&gt;FlipSwitcher&lt;/a&gt;&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Windows 下 Alt-Tab 的替代品&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src="https://blog.djangozane.com/img/flipswitcher.png" alt="flipswitcher screenshot"&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;核心的窗口切换&lt;/li&gt;
 &lt;li&gt;支持搜索，支持拼音搜索&lt;/li&gt;
 &lt;li&gt;支持通过快捷键直接关闭选定窗口&lt;/li&gt;
 &lt;li&gt;支持通过快捷键直接退出选定窗口对应的进程&lt;/li&gt;
-&lt;li&gt;支持聚合同一个应用程序的窗口
-cnam
-&lt;a href="https://github.com/dianbanjiu/rss_everyday"&gt;进击的 RSS&lt;/a&gt;：使用 github action 定时推送你喜欢的内容到 telegram channel。&lt;/li&gt;
+&lt;li&gt;支持聚合同一个应用程序的窗口&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h3 id="进击的-rss"&gt;&lt;a href="https://github.com/dianbanjiu/rss_everyday"&gt;进击的 RSS&lt;/a&gt;&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;使用 github action 定时推送你喜欢的内容到 telegram channel。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id="-关于-blog"&gt;🌚 关于 Blog&lt;/h2&gt;
 &lt;p&gt;本博客使用 &lt;a href="https://gohugo.io/"&gt;hugo&lt;/a&gt; 进行驱动，主题是 &lt;a href="https://github.com/xianmin/hugo-theme-jane"&gt;hugo-theme-jane&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;这个博客算是一个我的公开的笔记本，基本上就是我想到什么就写什么&lt;del&gt;虽然大多数时候都想不到什么&lt;/del&gt;&lt;/p&gt;
