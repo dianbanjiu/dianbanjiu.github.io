@@ -1,18 +1,12 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Submodule on 点半九</title><link>https://blog.djangozane.com/tags/submodule/</link><description>Recent content in Submodule on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 04 Jan 2021 23:10:33 +0800</lastBuildDate><atom:link href="https://blog.djangozane.com/tags/submodule/index.xml" rel="self" type="application/rss+xml"/><item><title>Git 子模块管理</title><link>https://blog.djangozane.com/post/git-%E5%AD%90%E6%A8%A1%E5%9D%97%E7%AE%A1%E7%90%86/</link><pubDate>Mon, 04 Jan 2021 23:10:33 +0800</pubDate><guid>https://blog.djangozane.com/post/git-%E5%AD%90%E6%A8%A1%E5%9D%97%E7%AE%A1%E7%90%86/</guid><description>&lt;h2 id="子模块的创建"&gt;子模块的创建&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Submodule on DjangoZane</title><link>https://blog.djangozane.com/tags/submodule/</link><description>Recent content in Submodule on DjangoZane</description><generator>Hugo</generator><language>zh-Hans</language><lastBuildDate>Mon, 04 Jan 2021 23:10:33 +0800</lastBuildDate><atom:link href="https://blog.djangozane.com/tags/submodule/index.xml" rel="self" type="application/rss+xml"/><item><title>Git 子模块管理</title><link>https://blog.djangozane.com/post/git-%E5%AD%90%E6%A8%A1%E5%9D%97%E7%AE%A1%E7%90%86/</link><pubDate>Mon, 04 Jan 2021 23:10:33 +0800</pubDate><guid>https://blog.djangozane.com/post/git-%E5%AD%90%E6%A8%A1%E5%9D%97%E7%AE%A1%E7%90%86/</guid><description>&lt;h2 id="子模块的创建"&gt;子模块的创建&lt;/h2&gt;
 &lt;p&gt;子模块的创建很简单，通过下面的命令就可以将 &lt;code&gt;xxx&lt;/code&gt; 仓库注册到当前目录的 &lt;code&gt;xxx&lt;/code&gt; 路径下。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git submodule add https://github.com/xxx/xxx.git ./xxx
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="子模块的更新"&gt;子模块的更新&lt;/h2&gt;
-&lt;p&gt;如果需要在 clone 项目时将子模块也 clone 下来，可以使用 &lt;code&gt;--recurse-submodules&lt;/code&gt; 参数。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git clone --recurse-submodules https://github.com/xxx/xxx.git
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果 clone 项目的时候忘记使用 &lt;code&gt;--recurse-submodules&lt;/code&gt; 参数，也可以在项目 clone 完成之后依次执行下面的命令来获取子模块。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git submodule --init
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git submodule update --recursive
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="子模块的删除"&gt;子模块的删除&lt;/h2&gt;
-&lt;p&gt;相比于子模块的创建和更新，子模块的删除相对比较麻烦一些。首先需要从注册路径删除对应子模块&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ rm -rf ./xxx
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ rm -rf .git/modules/xxx
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接着需要从 .gitmodules 中删除对应注册项 &lt;br&gt;
-然后从 .git/config 中删除对应注册项 &lt;br&gt;
-最后使用下面的命令删除缓存&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git rm --cached xxx
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item></channel></rss>
+&lt;div class="code-block has-lang"&gt;
+ &lt;div class="code-header"&gt;&lt;span class="code-lang"&gt;shell&lt;/span&gt;&lt;button class="copy-btn" aria-label="Copy code" title="Copy"&gt;
+ &lt;svg class="icon-copy" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;rect x="9" y="9" width="13" height="13" rx="2"/&gt;&lt;path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/&gt;&lt;/svg&gt;
+ &lt;svg class="icon-check" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;polyline points="20 6 9 17 4 12"/&gt;&lt;/svg&gt;
+ &lt;/button&gt;
+ &lt;/div&gt;
+ &lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ git submodule add https://github.com/xxx/xxx.git ./xxx&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;h2 id="子模块的更新"&gt;子模块的更新&lt;/h2&gt;
+&lt;p&gt;如果需要在 clone 项目时将子模块也 clone 下来，可以使用 &lt;code&gt;--recurse-submodules&lt;/code&gt; 参数。&lt;/p&gt;</description></item></channel></rss>

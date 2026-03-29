@@ -1,2 +1,1 @@
 User-agent: *
-Sitemap: https://blog.djangozane.com/sitemap.xml

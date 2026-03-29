@@ -1,109 +1,15 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Git on 点半九</title><link>https://blog.djangozane.com/tags/git/</link><description>Recent content in Git on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 20 Mar 2022 14:38:24 +0800</lastBuildDate><atom:link href="https://blog.djangozane.com/tags/git/index.xml" rel="self" type="application/rss+xml"/><item><title>Git 以中文展示修改路径</title><link>https://blog.djangozane.com/post/git-%E4%BB%A5%E4%B8%AD%E6%96%87%E5%B1%95%E7%A4%BA%E4%BF%AE%E6%94%B9%E8%B7%AF%E5%BE%84/</link><pubDate>Sun, 20 Mar 2022 14:38:24 +0800</pubDate><guid>https://blog.djangozane.com/post/git-%E4%BB%A5%E4%B8%AD%E6%96%87%E5%B1%95%E7%A4%BA%E4%BF%AE%E6%94%B9%E8%B7%AF%E5%BE%84/</guid><description>&lt;p&gt;默认情况下，使用 &lt;code&gt;git status&lt;/code&gt; 来查看更改文件时，如果路径中包含有空格或者一些中文字符时，对应的文件路径会用引号括起来，并且其中的中文字符会以反斜杠 &lt;code&gt;\&lt;/code&gt; 进行转义，就像下面这样：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git status
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;On branch blog
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Your branch is up to date with &lt;span style="color:#e6db74"&gt;&amp;#39;origin/blog&amp;#39;&lt;/span&gt;.
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Untracked files:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;(&lt;/span&gt;use &lt;span style="color:#e6db74"&gt;&amp;#34;git add &amp;lt;file&amp;gt;...&amp;#34;&lt;/span&gt; to include in what will be committed&lt;span style="color:#f92672"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;content/post/git \344\273\245\344\270\255\346\226\207\345\261\225\347\244\272\344\277\256\346\224\271\350\267\257\345\276\204.md&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;nothing added to commit but untracked files present &lt;span style="color:#f92672"&gt;(&lt;/span&gt;use &lt;span style="color:#e6db74"&gt;&amp;#34;git add&amp;#34;&lt;/span&gt; to track&lt;span style="color:#f92672"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;虽然这种配置在你的文件名中含有换行回车之类字符的时候可能比较有用（这种文件数量应该很少吧😑），但是在修改文件比较多的情况下就很难知道对应的是哪些文件，想要正常打印出这些中文字符的话可以通过下面的配置项来解决&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git config core.quotePath false
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;上面的设置是仅对单个项目设置，如果需要针对全局所有的项目关闭这个特性，可以添加 &lt;code&gt;--global&lt;/code&gt; 参数&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git config --global core.quotePath false
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;参数的一些具体说明可以参考此处： &lt;a href="https://git-scm.com/docs/git-config#Documentation/git-config.txt-corequotePath"&gt;https://git-scm.com/docs/git-config#Documentation/git-config.txt-corequotePath&lt;/a&gt;&lt;/p&gt;</description></item><item><title>What's the Difference Between Git Merge and Git Rebase</title><link>https://blog.djangozane.com/post/whats-the-difference-between-git-merge-and-git-rebase/</link><pubDate>Sat, 10 Jul 2021 14:07:01 +0800</pubDate><guid>https://blog.djangozane.com/post/whats-the-difference-between-git-merge-and-git-rebase/</guid><description>&lt;p&gt;git merge 与 git rebase 是我们平常协同开发过程中最常见，但是也是最容易让人迷惑的两个合并操作。下面是我对这两种合并方式的理解以及一些使用建议。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Git on DjangoZane</title><link>https://blog.djangozane.com/tags/git/</link><description>Recent content in Git on DjangoZane</description><generator>Hugo</generator><language>zh-Hans</language><lastBuildDate>Sun, 20 Mar 2022 14:38:24 +0800</lastBuildDate><atom:link href="https://blog.djangozane.com/tags/git/index.xml" rel="self" type="application/rss+xml"/><item><title>Git 以中文展示修改路径</title><link>https://blog.djangozane.com/post/git-%E4%BB%A5%E4%B8%AD%E6%96%87%E5%B1%95%E7%A4%BA%E4%BF%AE%E6%94%B9%E8%B7%AF%E5%BE%84/</link><pubDate>Sun, 20 Mar 2022 14:38:24 +0800</pubDate><guid>https://blog.djangozane.com/post/git-%E4%BB%A5%E4%B8%AD%E6%96%87%E5%B1%95%E7%A4%BA%E4%BF%AE%E6%94%B9%E8%B7%AF%E5%BE%84/</guid><description>&lt;p&gt;默认情况下，使用 &lt;code&gt;git status&lt;/code&gt; 来查看更改文件时，如果路径中包含有空格或者一些中文字符时，对应的文件路径会用引号括起来，并且其中的中文字符会以反斜杠 &lt;code&gt;\&lt;/code&gt; 进行转义，就像下面这样：&lt;/p&gt;</description></item><item><title>What's the Difference Between Git Merge and Git Rebase</title><link>https://blog.djangozane.com/post/whats-the-difference-between-git-merge-and-git-rebase/</link><pubDate>Sat, 10 Jul 2021 14:07:01 +0800</pubDate><guid>https://blog.djangozane.com/post/whats-the-difference-between-git-merge-and-git-rebase/</guid><description>&lt;p&gt;git merge 与 git rebase 是我们平常协同开发过程中最常见，但是也是最容易让人迷惑的两个合并操作。下面是我对这两种合并方式的理解以及一些使用建议。&lt;/p&gt;
 &lt;h2 id="git-merge"&gt;git merge&lt;/h2&gt;
-&lt;p&gt;git merge 相对来说比较好理解，他会将待 merge 的分支上所有不存在于当前分支的提交按照时间顺序插入到当前分支上，最后再生成一个 &lt;code&gt;Merge branch 'xxx'&lt;/code&gt; 的 commit。&lt;/p&gt;
-&lt;p&gt;基础语法：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# git merge other-branch&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git checkout master
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git merge feature
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;下面是 merge 操作的基本图例。&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://i.imgur.com/KerogMC.png" alt="git merge"&gt;&lt;/p&gt;
-&lt;p&gt;merge 操作不会对每个提交节点本身做任何修改，也就是说在提交前后每个节点的提交信息、sha256 等信息都是一致的。&lt;/p&gt;
-&lt;p&gt;最后生成的合并节点 M 中一般会包含待提交分支与当前分支的所有差异代码，代码合并过程中的冲突修正也是在 M 节点中。一次 merge 操作最多只需要解决一次代码冲突。&lt;/p&gt;
-&lt;h2 id="git-rebase"&gt;git rebase&lt;/h2&gt;
-&lt;p&gt;rebase 操作会移动当前分支的基点（创建当前分支时基于的节点）为上游分支的最新提交，然后重写当前分支基点后的所有提交。&lt;/p&gt;
-&lt;p&gt;基础语法：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# git rebase upstream branch&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git checkout feature
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git rebase master feature
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;下面是 rebase 的基础图例：&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://i.imgur.com/PC8iDcZ.png" alt="git rebase"&gt;&lt;/p&gt;
-&lt;p&gt;rebase 操作会把 feature 的基点从 C 移到 D，然后重写 C、E，虽然表面上看 C、E 的提交信息没有任何变化，但是这两个点的 sha256 值其实已经不同了，相当于是两个新的提交。&lt;/p&gt;
-&lt;p&gt;rebase 过程中如果出现冲突，则需要针对冲突节点进行修改，修改完成后使用 &lt;code&gt;git rebase --continue&lt;/code&gt; 继续 rebase，整个过程中不会产生类似 &lt;code&gt;Merge branch xxx&lt;/code&gt; 的额外提交。&lt;/p&gt;
-&lt;p&gt;rebase 与 merge 相比，虽然可以减少一些无用的合并提交，但是因为 rebase 会基于上游分支重写当前分支，所以一般情况下不建议在主分支上进行 rebase 操作。&lt;/p&gt;
-&lt;h2 id="使用建议"&gt;使用建议&lt;/h2&gt;
-&lt;p&gt;因为现在公司的合并检查都是通过 CI 来做的，所以你提的 merge 请求至少不能与主版本发生任何冲突，这样才能通过检查。下面是我在日常工作流中两种合并操作的使用方式。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;在非主版本上进行开发时，定期（一般是每次提交后）将主分支的更新 rebase 到当前分支，有冲突及早解决&lt;/li&gt;
-&lt;li&gt;在主版本上只使用 merge 操作合并其他分支的代码&lt;/li&gt;
-&lt;/ol&gt;</description></item><item><title>Git 子模块管理</title><link>https://blog.djangozane.com/post/git-%E5%AD%90%E6%A8%A1%E5%9D%97%E7%AE%A1%E7%90%86/</link><pubDate>Mon, 04 Jan 2021 23:10:33 +0800</pubDate><guid>https://blog.djangozane.com/post/git-%E5%AD%90%E6%A8%A1%E5%9D%97%E7%AE%A1%E7%90%86/</guid><description>&lt;h2 id="子模块的创建"&gt;子模块的创建&lt;/h2&gt;
+&lt;p&gt;git merge 相对来说比较好理解，他会将待 merge 的分支上所有不存在于当前分支的提交按照时间顺序插入到当前分支上，最后再生成一个 &lt;code&gt;Merge branch 'xxx'&lt;/code&gt; 的 commit。&lt;/p&gt;</description></item><item><title>Git 子模块管理</title><link>https://blog.djangozane.com/post/git-%E5%AD%90%E6%A8%A1%E5%9D%97%E7%AE%A1%E7%90%86/</link><pubDate>Mon, 04 Jan 2021 23:10:33 +0800</pubDate><guid>https://blog.djangozane.com/post/git-%E5%AD%90%E6%A8%A1%E5%9D%97%E7%AE%A1%E7%90%86/</guid><description>&lt;h2 id="子模块的创建"&gt;子模块的创建&lt;/h2&gt;
 &lt;p&gt;子模块的创建很简单，通过下面的命令就可以将 &lt;code&gt;xxx&lt;/code&gt; 仓库注册到当前目录的 &lt;code&gt;xxx&lt;/code&gt; 路径下。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git submodule add https://github.com/xxx/xxx.git ./xxx
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="子模块的更新"&gt;子模块的更新&lt;/h2&gt;
-&lt;p&gt;如果需要在 clone 项目时将子模块也 clone 下来，可以使用 &lt;code&gt;--recurse-submodules&lt;/code&gt; 参数。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git clone --recurse-submodules https://github.com/xxx/xxx.git
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果 clone 项目的时候忘记使用 &lt;code&gt;--recurse-submodules&lt;/code&gt; 参数，也可以在项目 clone 完成之后依次执行下面的命令来获取子模块。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git submodule --init
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git submodule update --recursive
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="子模块的删除"&gt;子模块的删除&lt;/h2&gt;
-&lt;p&gt;相比于子模块的创建和更新，子模块的删除相对比较麻烦一些。首先需要从注册路径删除对应子模块&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ rm -rf ./xxx
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ rm -rf .git/modules/xxx
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接着需要从 .gitmodules 中删除对应注册项 &lt;br&gt;
-然后从 .git/config 中删除对应注册项 &lt;br&gt;
-最后使用下面的命令删除缓存&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git rm --cached xxx
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>Git 提交多行 Commit 信息</title><link>https://blog.djangozane.com/post/git-%E6%8F%90%E4%BA%A4%E5%A4%9A%E8%A1%8C-commit-%E4%BF%A1%E6%81%AF/</link><pubDate>Sun, 19 Jul 2020 22:46:28 +0800</pubDate><guid>https://blog.djangozane.com/post/git-%E6%8F%90%E4%BA%A4%E5%A4%9A%E8%A1%8C-commit-%E4%BF%A1%E6%81%AF/</guid><description>&lt;p&gt;git 提交信息 commit 在项目中追踪代码改动原因非常有用，特别是在团队合作中，一个简洁有效的 commit 可以帮助进行 merge 的人快速了解本次代码改动的必要性。为了保证提交信息的可读性，多行 commit 几乎是不可避免的。下面就来说一下如何实现多行 commit。&lt;/p&gt;
-&lt;p&gt;我平时的习惯是使用命令行进行 git 的各种操作，命令行进行 commit 的时候使用的命令是 &lt;code&gt;git commit -m messgae&lt;/code&gt;，这里面的 message 就是我们要为本次提交添加的 commit，至于实现多行 commit 其实很简单，就是给提交的 commit 内容加上引号。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git status
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;位于分支 master
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;尚无提交
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;要提交的变更：
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; （使用 &lt;span style="color:#e6db74"&gt;&amp;#34;git rm --cached &amp;lt;文件&amp;gt;...&amp;#34;&lt;/span&gt; 以取消暂存）
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 新文件： readme
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git add .
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git commit -m &lt;span style="color:#e6db74"&gt;&amp;#34;这是项目的第一提交，
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;dquote&amp;gt; 进行了项目的初始化，
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;dquote&amp;gt; 并添加了 readme 文件。&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;[&lt;/span&gt;master（根提交） f647981&lt;span style="color:#f92672"&gt;]&lt;/span&gt; 这是项目的第一提交， 进行了项目的初始化， 并添加了 readme 文件。
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt; file changed, &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt; insertions&lt;span style="color:#f92672"&gt;(&lt;/span&gt;+&lt;span style="color:#f92672"&gt;)&lt;/span&gt;, &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt; deletions&lt;span style="color:#f92672"&gt;(&lt;/span&gt;-&lt;span style="color:#f92672"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; create mode &lt;span style="color:#ae81ff"&gt;100644&lt;/span&gt; readme
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git log
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;commit f6479814f196ab818abcc9ed9b33c8aeffc43b5d &lt;span style="color:#f92672"&gt;(&lt;/span&gt;HEAD -&amp;gt; master&lt;span style="color:#f92672"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Author: dianbanjiu &amp;lt;dianbanjiu@gmail.com&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Date: Sun Jul &lt;span style="color:#ae81ff"&gt;19&lt;/span&gt; 22:59:07 &lt;span style="color:#ae81ff"&gt;2020&lt;/span&gt; +0800
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 这是项目的第一提交，
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 进行了项目的初始化，
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 并添加了 readme 文件。
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;可以看到，在对 commit 信息的开始添加了第一个引号之后，输入一些信息键入回车，git 会自动转到下一行，并且以 &lt;code&gt;dquote&amp;gt;&lt;/code&gt; 表示 git 在继续等你输入 commit 信息，直到检测到第二个引号为止。&lt;/p&gt;
-&lt;p&gt;如果的 commit 信息中也包含了英文的半角引号，可以通过 &lt;code&gt;\&lt;/code&gt; 来进行转义。&lt;/p&gt;</description></item><item><title>Github 开启两步验证后，git 推送鉴权失败</title><link>https://blog.djangozane.com/post/github-%E5%BC%80%E5%90%AF%E4%B8%A4%E6%AD%A5%E9%AA%8C%E8%AF%81%E5%90%8Egit-%E6%8E%A8%E9%80%81%E9%89%B4%E6%9D%83%E5%A4%B1%E8%B4%A5/</link><pubDate>Thu, 03 Oct 2019 11:05:02 +0800</pubDate><guid>https://blog.djangozane.com/post/github-%E5%BC%80%E5%90%AF%E4%B8%A4%E6%AD%A5%E9%AA%8C%E8%AF%81%E5%90%8Egit-%E6%8E%A8%E9%80%81%E9%89%B4%E6%9D%83%E5%A4%B1%E8%B4%A5/</guid><description>&lt;p&gt;最近开启了 Github 的两步验证，然后在桌面上使用 git 向 Github 推送文件的时候总是出现&lt;code&gt;鉴权失败&lt;/code&gt;的问题，在排除了密码错误的原因之后，觉得应该就是两步验证的锅了。&lt;/p&gt;
-&lt;p&gt;下面是解决办法：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;打开 Github 的 「&lt;a href="https://github.com/settings/profile"&gt;Settings&lt;/a&gt;」&lt;/li&gt;
-&lt;li&gt;进入 「&lt;a href="https://github.com/settings/apps"&gt;Developer settings&lt;/a&gt;」&lt;/li&gt;
-&lt;li&gt;打开 「&lt;a href="https://github.com/settings/tokens"&gt;Personal access tokens&lt;/a&gt;」&lt;/li&gt;
-&lt;li&gt;点击 「Generate new token」，生成一个新的 token&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;strong&gt;生成 token 之后千万记得把 token 复制并保存好，因为 github 为了安全起见，这个 token 只会出现一次，也就是说如果你以后忘记了这个 token，只能重新创建一个。&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;push 之前记得先要配置好用户名跟密码：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git config --global user.name &lt;span style="color:#e6db74"&gt;&amp;#34;username&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git config --global user.email &lt;span style="color:#e6db74"&gt;&amp;#34;email@example.com&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;之后再 push 的时候将密码替换为上面生成的 &lt;code&gt;access token&lt;/code&gt; 就可以了。&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;你还可以创建一个 &lt;code&gt;.git-credentials&lt;/code&gt; 文件 (文件名可以任意，这里只是为了表义)，其中的内容（依规则替换掉其中的用户名和密码/access token）：&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;https://{username}:{password}@github.com
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;在终端输入下面的命令：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git config --global credential.helper store --file ~/.git-credentials
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;credential&lt;/code&gt; 是用来配置 git 的凭证存储的参数。&lt;br&gt;
-&lt;code&gt;--file&lt;/code&gt; 后面指定的是凭证存放的位置。&lt;/p&gt;
-&lt;p&gt;这种方式可以避免每次 push 的时候都需要输入密码，但是因为密码是&lt;code&gt;明文&lt;/code&gt;存储在本地，可能不是很安全。&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;不过貌似这个文件并不是强制的，我在使用 access token push 完之后，直接执行：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git config --global credential.helper store
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在之后的推送中也不再需要输入用户名和密码了。&lt;/p&gt;</description></item></channel></rss>
+&lt;div class="code-block has-lang"&gt;
+ &lt;div class="code-header"&gt;&lt;span class="code-lang"&gt;shell&lt;/span&gt;&lt;button class="copy-btn" aria-label="Copy code" title="Copy"&gt;
+ &lt;svg class="icon-copy" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;rect x="9" y="9" width="13" height="13" rx="2"/&gt;&lt;path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/&gt;&lt;/svg&gt;
+ &lt;svg class="icon-check" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;polyline points="20 6 9 17 4 12"/&gt;&lt;/svg&gt;
+ &lt;/button&gt;
+ &lt;/div&gt;
+ &lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ git submodule add https://github.com/xxx/xxx.git ./xxx&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;h2 id="子模块的更新"&gt;子模块的更新&lt;/h2&gt;
+&lt;p&gt;如果需要在 clone 项目时将子模块也 clone 下来，可以使用 &lt;code&gt;--recurse-submodules&lt;/code&gt; 参数。&lt;/p&gt;</description></item><item><title>Git 提交多行 Commit 信息</title><link>https://blog.djangozane.com/post/git-%E6%8F%90%E4%BA%A4%E5%A4%9A%E8%A1%8C-commit-%E4%BF%A1%E6%81%AF/</link><pubDate>Sun, 19 Jul 2020 22:46:28 +0800</pubDate><guid>https://blog.djangozane.com/post/git-%E6%8F%90%E4%BA%A4%E5%A4%9A%E8%A1%8C-commit-%E4%BF%A1%E6%81%AF/</guid><description>&lt;p&gt;git 提交信息 commit 在项目中追踪代码改动原因非常有用，特别是在团队合作中，一个简洁有效的 commit 可以帮助进行 merge 的人快速了解本次代码改动的必要性。为了保证提交信息的可读性，多行 commit 几乎是不可避免的。下面就来说一下如何实现多行 commit。&lt;/p&gt;</description></item><item><title>Github 开启两步验证后，git 推送鉴权失败</title><link>https://blog.djangozane.com/post/github-%E5%BC%80%E5%90%AF%E4%B8%A4%E6%AD%A5%E9%AA%8C%E8%AF%81%E5%90%8Egit-%E6%8E%A8%E9%80%81%E9%89%B4%E6%9D%83%E5%A4%B1%E8%B4%A5/</link><pubDate>Thu, 03 Oct 2019 11:05:02 +0800</pubDate><guid>https://blog.djangozane.com/post/github-%E5%BC%80%E5%90%AF%E4%B8%A4%E6%AD%A5%E9%AA%8C%E8%AF%81%E5%90%8Egit-%E6%8E%A8%E9%80%81%E9%89%B4%E6%9D%83%E5%A4%B1%E8%B4%A5/</guid><description>&lt;p&gt;最近开启了 Github 的两步验证，然后在桌面上使用 git 向 Github 推送文件的时候总是出现&lt;code&gt;鉴权失败&lt;/code&gt;的问题，在排除了密码错误的原因之后，觉得应该就是两步验证的锅了。&lt;/p&gt;
+&lt;p&gt;下面是解决办法：&lt;/p&gt;</description></item></channel></rss>

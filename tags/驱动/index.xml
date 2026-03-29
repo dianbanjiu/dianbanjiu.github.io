@@ -1,14 +1,3 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>驱动 on 点半九</title><link>https://blog.djangozane.com/tags/%E9%A9%B1%E5%8A%A8/</link><description>Recent content in 驱动 on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 06 Nov 2021 13:38:04 +0800</lastBuildDate><atom:link href="https://blog.djangozane.com/tags/%E9%A9%B1%E5%8A%A8/index.xml" rel="self" type="application/rss+xml"/><item><title>关于 Windows10 无法加载硬盘</title><link>https://blog.djangozane.com/post/%E5%85%B3%E4%BA%8E-windows10-%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD%E7%A1%AC%E7%9B%98/</link><pubDate>Sat, 06 Nov 2021 13:38:04 +0800</pubDate><guid>https://blog.djangozane.com/post/%E5%85%B3%E4%BA%8E-windows10-%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD%E7%A1%AC%E7%9B%98/</guid><description>&lt;p&gt;今天装好 Windows 之后，发现我的 WD Passport Ultra 硬盘无法被系统正常加载。最初的报错忘记截图了，但是在设备管理器中可以看到磁盘的驱动状态是有问题的。&lt;br&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>驱动 on DjangoZane</title><link>https://blog.djangozane.com/tags/%E9%A9%B1%E5%8A%A8/</link><description>Recent content in 驱动 on DjangoZane</description><generator>Hugo</generator><language>zh-Hans</language><lastBuildDate>Sat, 06 Nov 2021 13:38:04 +0800</lastBuildDate><atom:link href="https://blog.djangozane.com/tags/%E9%A9%B1%E5%8A%A8/index.xml" rel="self" type="application/rss+xml"/><item><title>关于 Windows10 无法加载硬盘</title><link>https://blog.djangozane.com/post/%E5%85%B3%E4%BA%8E-windows10-%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD%E7%A1%AC%E7%9B%98/</link><pubDate>Sat, 06 Nov 2021 13:38:04 +0800</pubDate><guid>https://blog.djangozane.com/post/%E5%85%B3%E4%BA%8E-windows10-%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD%E7%A1%AC%E7%9B%98/</guid><description>&lt;p&gt;今天装好 Windows 之后，发现我的 WD Passport Ultra 硬盘无法被系统正常加载。最初的报错忘记截图了，但是在设备管理器中可以看到磁盘的驱动状态是有问题的。&lt;br&gt;
 &lt;img src="https://i.imgur.com/BXgY2LS.png" alt=""&gt;
-我的硬盘是 NTFS 格式的，虽然是在 Linux 下做的格式化，但是理论上 Windows 是可以识别的，而且我把硬盘接到手机上，手机是可以正常读取的。&lt;/p&gt;
-&lt;p&gt;我去网上查了一下，说的最多的方案就是在设备管理器中，先删除该设备的驱动，然后重新插入硬盘就可以了。我尝试了一下，还是一样无法识别。&lt;/p&gt;
-&lt;p&gt;我注意到在设备管理器中，除了没被挂载之外，磁盘其他的信息及状态都是正常的。后来想到 Windows 下面一般是根据盘符，比如 C、D 盘来区分磁盘的，既然它没被自动挂载，那我就手动给个盘符好了。&lt;/p&gt;
-&lt;p&gt;然后，啊，然后它就好了😲，就可以正常被 Windows 挂载了。&lt;/p&gt;
-&lt;p&gt;具体做法：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;打开资源管理器，在【&lt;strong&gt;此电脑&lt;/strong&gt;】上右键，选择【&lt;strong&gt;管理&lt;/strong&gt;】&lt;/li&gt;
-&lt;li&gt;在打开的【&lt;strong&gt;计算机管理&lt;/strong&gt;】左侧选择【&lt;strong&gt;磁盘管理&lt;/strong&gt;】&lt;/li&gt;
-&lt;li&gt;找到你之前无法被自动挂载的磁盘，在磁盘上面右键选择【&lt;strong&gt;更改驱动器号和路径&lt;/strong&gt;】&lt;/li&gt;
-&lt;li&gt;给这个磁盘添加一个盘符就可以了&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;需要注意的是，这个时候如果你再回到设备管理器中，你会惊奇的发现，磁盘的驱动状态还是异常的😂，不过问题不大，你这时候再重新插拔磁盘，磁盘应该已经可以被自动挂载了。&lt;/p&gt;</description></item></channel></rss>
+我的硬盘是 NTFS 格式的，虽然是在 Linux 下做的格式化，但是理论上 Windows 是可以识别的，而且我把硬盘接到手机上，手机是可以正常读取的。&lt;/p&gt;</description></item></channel></rss>

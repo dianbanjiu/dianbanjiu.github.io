@@ -1,12 +1,21 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Nginx on 点半九</title><link>https://blog.djangozane.com/tags/nginx/</link><description>Recent content in Nginx on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 13 Jun 2024 00:45:35 +0800</lastBuildDate><atom:link href="https://blog.djangozane.com/tags/nginx/index.xml" rel="self" type="application/rss+xml"/><item><title>Windows配置nginx</title><link>https://blog.djangozane.com/post/windows%E9%85%8D%E7%BD%AEnginx/</link><pubDate>Thu, 13 Jun 2024 00:45:35 +0800</pubDate><guid>https://blog.djangozane.com/post/windows%E9%85%8D%E7%BD%AEnginx/</guid><description>&lt;p&gt;1、安装 nginx&lt;br&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Nginx on DjangoZane</title><link>https://blog.djangozane.com/tags/nginx/</link><description>Recent content in Nginx on DjangoZane</description><generator>Hugo</generator><language>zh-Hans</language><lastBuildDate>Thu, 13 Jun 2024 00:45:35 +0800</lastBuildDate><atom:link href="https://blog.djangozane.com/tags/nginx/index.xml" rel="self" type="application/rss+xml"/><item><title>Windows配置nginx</title><link>https://blog.djangozane.com/post/windows%E9%85%8D%E7%BD%AEnginx/</link><pubDate>Thu, 13 Jun 2024 00:45:35 +0800</pubDate><guid>https://blog.djangozane.com/post/windows%E9%85%8D%E7%BD%AEnginx/</guid><description>&lt;p&gt;1、安装 nginx&lt;br&gt;
 我是通过 scoop 安装的 nginx&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;scoop update
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;scoop install nginx
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;2、测试 nginx&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;nginx -p &lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;$env&lt;span style="color:#e6db74"&gt;:NGINX_HOME&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;命令执行成功之后，在浏览器输入 http://127.0.0.1:80 就可以看到 nginx 的输出信息了&lt;/p&gt;
-&lt;p&gt;3、以后台进程的方式启动 nginx&lt;br&gt;
-通过上面的命令启动 nginx 后可以发现，nginx 进程会占用当前的终端，可以通过 pwsh 的命令将 nginx 作为后台进程启动&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;start -WindowStyle Hidden nginx -ArgumentList &lt;span style="color:#e6db74"&gt;&amp;#34;-p &lt;/span&gt;$env&lt;span style="color:#e6db74"&gt;:NGINX_HOME&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;因为是通过 scoop 安装的，对应的配置文件也是位于 scoop 的目录下，所以启动 nginx 的时候也需要通过&lt;code&gt;-p&lt;/code&gt;指定配置对应的目录&lt;/p&gt;
-&lt;p&gt;nginx 的配置目录默认位于 &lt;code&gt;$HOME\scoop\persist\nginx&lt;/code&gt;，如果需要增加新的 server 配置，也需要配置在这个目录下&lt;/p&gt;</description></item></channel></rss>
+&lt;div class="code-block has-lang"&gt;
+ &lt;div class="code-header"&gt;&lt;span class="code-lang"&gt;shell&lt;/span&gt;&lt;button class="copy-btn" aria-label="Copy code" title="Copy"&gt;
+ &lt;svg class="icon-copy" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;rect x="9" y="9" width="13" height="13" rx="2"/&gt;&lt;path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/&gt;&lt;/svg&gt;
+ &lt;svg class="icon-check" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;polyline points="20 6 9 17 4 12"/&gt;&lt;/svg&gt;
+ &lt;/button&gt;
+ &lt;/div&gt;
+ &lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;scoop update
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;scoop install nginx&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;2、测试 nginx&lt;/p&gt;
+&lt;div class="code-block has-lang"&gt;
+ &lt;div class="code-header"&gt;&lt;span class="code-lang"&gt;shell&lt;/span&gt;&lt;button class="copy-btn" aria-label="Copy code" title="Copy"&gt;
+ &lt;svg class="icon-copy" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;rect x="9" y="9" width="13" height="13" rx="2"/&gt;&lt;path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/&gt;&lt;/svg&gt;
+ &lt;svg class="icon-check" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;polyline points="20 6 9 17 4 12"/&gt;&lt;/svg&gt;
+ &lt;/button&gt;
+ &lt;/div&gt;
+ &lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;nginx -p &lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="nv"&gt;$env&lt;/span&gt;&lt;span class="s2"&gt;:NGINX_HOME&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;命令执行成功之后，在浏览器输入 http://127.0.0.1:80 就可以看到 nginx 的输出信息了&lt;/p&gt;</description></item></channel></rss>

@@ -1,257 +1,46 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Windows on 点半九</title><link>https://blog.djangozane.com/tags/windows/</link><description>Recent content in Windows on 点半九</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 08 Dec 2025 17:38:50 +0800</lastBuildDate><atom:link href="https://blog.djangozane.com/tags/windows/index.xml" rel="self" type="application/rss+xml"/><item><title>创建Windows服务</title><link>https://blog.djangozane.com/post/%E5%88%9B%E5%BB%BAwindows%E6%9C%8D%E5%8A%A1/</link><pubDate>Mon, 08 Dec 2025 17:38:50 +0800</pubDate><guid>https://blog.djangozane.com/post/%E5%88%9B%E5%BB%BAwindows%E6%9C%8D%E5%8A%A1/</guid><description>&lt;h2 id="安装配置"&gt;安装配置&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Windows on DjangoZane</title><link>https://blog.djangozane.com/tags/windows/</link><description>Recent content in Windows on DjangoZane</description><generator>Hugo</generator><language>zh-Hans</language><lastBuildDate>Mon, 08 Dec 2025 17:38:50 +0800</lastBuildDate><atom:link href="https://blog.djangozane.com/tags/windows/index.xml" rel="self" type="application/rss+xml"/><item><title>创建Windows服务</title><link>https://blog.djangozane.com/post/%E5%88%9B%E5%BB%BAwindows%E6%9C%8D%E5%8A%A1/</link><pubDate>Mon, 08 Dec 2025 17:38:50 +0800</pubDate><guid>https://blog.djangozane.com/post/%E5%88%9B%E5%BB%BAwindows%E6%9C%8D%E5%8A%A1/</guid><description>&lt;h2 id="安装配置"&gt;安装配置&lt;/h2&gt;
 &lt;p&gt;最近在折腾内网的文件同步，选用了 Syncthing 的方案，Syncthing 本身的基础安装配置比较简单&lt;/p&gt;
-&lt;p&gt;我是通过 scoop 管理一些没有 GUI 的程序或者工具的，Syncthing 已经位于 scoop 的主库中，可以通过下面的命令直接安装&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code class="language-poershell" data-lang="poershell"&gt;scoop install syncthing
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;顺便我还安装了一个提供 Syncthing 在 Windows 任务栏图标的工具，也可以通过 scoop 安装&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;scoop install syncthingtray
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;安装完成之后，直接在终端执行 &lt;code&gt;syncthing.exe&lt;/code&gt; 启动服务器模式，接着打开 http://127.0.0.1:8384 进行一些简单的设置即可，8384 是 Syncthing 的默认端口，也可以在配置文件中进行指定（scoop安装的配置文件位于 &lt;code&gt;scoop\apps\syncthing\current\config\config.xml&lt;/code&gt; 中，直接搜索 8384 修改为自己需要的端口）&lt;/p&gt;
-&lt;h2 id="创建-windows-服务"&gt;创建 Windows 服务&lt;/h2&gt;
-&lt;p&gt;因为 Syncthing 本身是一个后台服务，我本来是想创建一个任务计划程序的，这种方式虽然可以在电脑启动之后成功启动 Syncthing，但是会启动一个终端窗口，如果关闭这个终端窗口 Syncthing 也会停止运行，虽然可以通过 CMD 或者 PWSH 脚本再包装一层，不过我还是想再找找有没有什么更加稍微优雅一点的方案&lt;/p&gt;
-&lt;p&gt;Syncthing 关于 &lt;a href="https://docs.syncthing.net/users/autostart.html#windows"&gt;Windows 服务&lt;/a&gt; 部分推荐的是 nssm，研究了一下 nssm 虽然可以使用，但是已经很久没有更新了，官网稳定版下载地址是 2014 年的版本，预览版是 2017 年的版本，所以找了一下还在稳定更新的替代品，最后找到了 &lt;a href="https://github.com/winsw/winsw"&gt;WinSW&lt;/a&gt; 这个工具&lt;/p&gt;
-&lt;p&gt;下面是关于 WinSW 的使用方式&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;1. 从 &lt;a href="https://github.com/winsw/winsw"&gt;GitHub Releases&lt;/a&gt; 下载需要的可执行文件&lt;/strong&gt;&lt;br&gt;
-&lt;strong&gt;2. 在任意目录创建需要的 Windows 服务配置，比如 Syncthing.xml。&lt;/strong&gt; &lt;em&gt;(有需要可以参考文尾我的服务配置)&lt;/em&gt;&lt;br&gt;
-&lt;strong&gt;3. 然后把之前下载好的 WinSW.exe 复制到当前目录，并将其重命名为 Syncthing.exe。&lt;/strong&gt;（因为 WinSW 在自行的时候不需要指定 xml 配置文件，而是直接通过文件名匹配同名的 xml 配置文件）&lt;br&gt;
-4. 接着就可以通过下面的命令创建并启动 Windows 服务了&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 安装服务&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;./Syncthing.exe install
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 启动服务&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;./Syncthing.exe start
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Windows 服务是开机自启的，所以下次电脑启动的时候 Syncthing 服务也会一起运行&lt;/p&gt;
-&lt;h2 id="安卓端同步"&gt;安卓端同步&lt;/h2&gt;
-&lt;p&gt;因为官方的 syncthing 程序已经停止维护了，所以安卓端目前推荐的软件是一个三方的软件 syncthing-fork，可以在 &lt;a href="https://play.google.com/store/apps/details?id=com.github.catfriend1.syncthingandroid"&gt;Google play&lt;/a&gt; 下载到它&lt;/p&gt;
-&lt;p&gt;安装好之后，在设备页面，点击右上角的添加设备按钮扫描并添加 Windows 的设备标识二维码，然后需要在两端的 WebGUI 里面分别同意添加设备，最后就可以设置需要进行同步的文件夹了&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://blog.djangozane.com/img/Syncthing-fork-add-device-icon.jpg" alt=""&gt;&lt;/p&gt;
-&lt;h2 id="相关资料"&gt;相关资料&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://syncthing.net/"&gt;Syncthing 官网地址&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://docs.syncthing.net/"&gt;Syncthing 官方文档&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/winsw/winsw"&gt;WinSW Github地址&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/dianbanjiu/WindowsServices"&gt;我的Windows服务配置&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title>Windows开机启动脚本</title><link>https://blog.djangozane.com/post/windows%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC/</link><pubDate>Sun, 07 Jul 2024 13:32:04 +0800</pubDate><guid>https://blog.djangozane.com/post/windows%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC/</guid><description>&lt;p&gt;目前手上有一台主力设备是 Windows，每次开机都需要手动启动一些服务，虽然之前也有写过一个脚本用来一键启动，但是还是有点麻烦，所以研究了一下如何在开机时自启动&lt;/p&gt;
-&lt;p&gt;我的脚本是通过 PowerShell 写的，所以先将自己的脚本封装到一个 .ps1 结尾的文件中。接着&lt;strong&gt;将文件的打开方式设置为 PowerShell&lt;/strong&gt;&lt;br&gt;
-注意：如果你之前有设置过 ps1 文件为其他的打开方式，比如记事本，那在下面的操作完成，电脑重启之后，默认就会通过记事本打开脚本，而不是直接运行。&lt;/p&gt;
-&lt;p&gt;具体操作，在文件上右键，选择打开方式，找到并选择 pwsh.exe，比如我是通过 scoop 安装的 PowerShell，对应的可执行文件的位置是在 &lt;code&gt;$HOME\scoop\shims\pwsh.exe&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;将脚本放在 &lt;code&gt;$HOME\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup&lt;/code&gt; 下即可&lt;/p&gt;
-&lt;p&gt;这个自启操作也适用于其他非脚本的应用程序，不过操作更简单，直接创建一个应用的快捷方式，然后将快捷方式放到 &lt;code&gt;$HOME\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup&lt;/code&gt; 下即可&lt;/p&gt;
-&lt;p&gt;下面是一个关于脚本的示例&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-pwsh" data-lang="pwsh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ErrorActionPreference=&lt;span style="color:#e6db74"&gt;&amp;#39;SilentlyContinue&amp;#39;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Get-Process -Name hello | Stop-Process
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Start-Process -WindowStyle Hidden -FilePath hello &lt;span style="color:#e6db74"&gt;&amp;#34;-c &lt;/span&gt;$HOME&lt;span style="color:#e6db74"&gt;/hello/conf.yaml&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;ErrorActionPreference&lt;/code&gt; 变量是设置脚本如何响应非终止错误，SilentlyContine 代表不显示错误并在不会中断的情况下继续执行，其他可选参数可自行参考pwsh文档&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Get-Process -Name hello | Stop-Process&lt;/code&gt; 尝试获取名字为 hello 的进程，并通过管道传递给 Stop-Process 进程结束它&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Start-Process&lt;/code&gt; 用来启动一个新的进程
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;WindowStyle Hidden&lt;/code&gt; 隐藏窗口执行，即作为一个后台进程启动。默认情况下会以一个终端窗口启动执行脚本，执行完成之后也不会自动关闭窗口&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;FilePath&lt;/code&gt; 可以指定可执行文件的路径，如果此命令在环境变量中，可以省略前面的路径信息，直接指定命令名称即可&lt;/li&gt;
-&lt;li&gt;如果命令本身还有一些其他的启动参数，可以跟在最后，如果是带空格的参数，可以用双引号括起来，否则脚本会将其识别为 Start-Process 的参数&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title>Windows配置nginx</title><link>https://blog.djangozane.com/post/windows%E9%85%8D%E7%BD%AEnginx/</link><pubDate>Thu, 13 Jun 2024 00:45:35 +0800</pubDate><guid>https://blog.djangozane.com/post/windows%E9%85%8D%E7%BD%AEnginx/</guid><description>&lt;p&gt;1、安装 nginx&lt;br&gt;
+&lt;p&gt;我是通过 scoop 管理一些没有 GUI 的程序或者工具的，Syncthing 已经位于 scoop 的主库中，可以通过下面的命令直接安装&lt;/p&gt;</description></item><item><title>Windows开机启动脚本</title><link>https://blog.djangozane.com/post/windows%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC/</link><pubDate>Sun, 07 Jul 2024 13:32:04 +0800</pubDate><guid>https://blog.djangozane.com/post/windows%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC/</guid><description>&lt;p&gt;目前手上有一台主力设备是 Windows，每次开机都需要手动启动一些服务，虽然之前也有写过一个脚本用来一键启动，但是还是有点麻烦，所以研究了一下如何在开机时自启动&lt;/p&gt;</description></item><item><title>Windows配置nginx</title><link>https://blog.djangozane.com/post/windows%E9%85%8D%E7%BD%AEnginx/</link><pubDate>Thu, 13 Jun 2024 00:45:35 +0800</pubDate><guid>https://blog.djangozane.com/post/windows%E9%85%8D%E7%BD%AEnginx/</guid><description>&lt;p&gt;1、安装 nginx&lt;br&gt;
 我是通过 scoop 安装的 nginx&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;scoop update
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;scoop install nginx
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;2、测试 nginx&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;nginx -p &lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;$env&lt;span style="color:#e6db74"&gt;:NGINX_HOME&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;命令执行成功之后，在浏览器输入 http://127.0.0.1:80 就可以看到 nginx 的输出信息了&lt;/p&gt;
-&lt;p&gt;3、以后台进程的方式启动 nginx&lt;br&gt;
-通过上面的命令启动 nginx 后可以发现，nginx 进程会占用当前的终端，可以通过 pwsh 的命令将 nginx 作为后台进程启动&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;start -WindowStyle Hidden nginx -ArgumentList &lt;span style="color:#e6db74"&gt;&amp;#34;-p &lt;/span&gt;$env&lt;span style="color:#e6db74"&gt;:NGINX_HOME&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;因为是通过 scoop 安装的，对应的配置文件也是位于 scoop 的目录下，所以启动 nginx 的时候也需要通过&lt;code&gt;-p&lt;/code&gt;指定配置对应的目录&lt;/p&gt;
-&lt;p&gt;nginx 的配置目录默认位于 &lt;code&gt;$HOME\scoop\persist\nginx&lt;/code&gt;，如果需要增加新的 server 配置，也需要配置在这个目录下&lt;/p&gt;</description></item><item><title>移除默认的 Win+` 快捷键</title><link>https://blog.djangozane.com/post/%E7%A7%BB%E9%99%A4%E9%BB%98%E8%AE%A4%E7%9A%84-win+-%E5%BF%AB%E6%8D%B7%E9%94%AE/</link><pubDate>Sat, 17 Sep 2022 02:00:26 +0800</pubDate><guid>https://blog.djangozane.com/post/%E7%A7%BB%E9%99%A4%E9%BB%98%E8%AE%A4%E7%9A%84-win+-%E5%BF%AB%E6%8D%B7%E9%94%AE/</guid><description>&lt;p&gt;在 Windows 上安装 &lt;code&gt;终端&lt;/code&gt; 之后，&lt;strong&gt;Win+`&lt;/strong&gt; 快捷键会以聚焦模式打开终端（下拉式终端的样子）。这个快捷键可以通过下面的方式来移除&lt;/p&gt;
+&lt;div class="code-block has-lang"&gt;
+ &lt;div class="code-header"&gt;&lt;span class="code-lang"&gt;shell&lt;/span&gt;&lt;button class="copy-btn" aria-label="Copy code" title="Copy"&gt;
+ &lt;svg class="icon-copy" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;rect x="9" y="9" width="13" height="13" rx="2"/&gt;&lt;path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/&gt;&lt;/svg&gt;
+ &lt;svg class="icon-check" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;polyline points="20 6 9 17 4 12"/&gt;&lt;/svg&gt;
+ &lt;/button&gt;
+ &lt;/div&gt;
+ &lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;scoop update
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;scoop install nginx&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;2、测试 nginx&lt;/p&gt;
+&lt;div class="code-block has-lang"&gt;
+ &lt;div class="code-header"&gt;&lt;span class="code-lang"&gt;shell&lt;/span&gt;&lt;button class="copy-btn" aria-label="Copy code" title="Copy"&gt;
+ &lt;svg class="icon-copy" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;rect x="9" y="9" width="13" height="13" rx="2"/&gt;&lt;path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/&gt;&lt;/svg&gt;
+ &lt;svg class="icon-check" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;polyline points="20 6 9 17 4 12"/&gt;&lt;/svg&gt;
+ &lt;/button&gt;
+ &lt;/div&gt;
+ &lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;nginx -p &lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="nv"&gt;$env&lt;/span&gt;&lt;span class="s2"&gt;:NGINX_HOME&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;命令执行成功之后，在浏览器输入 http://127.0.0.1:80 就可以看到 nginx 的输出信息了&lt;/p&gt;</description></item><item><title>移除默认的 Win+` 快捷键</title><link>https://blog.djangozane.com/post/%E7%A7%BB%E9%99%A4%E9%BB%98%E8%AE%A4%E7%9A%84-win+-%E5%BF%AB%E6%8D%B7%E9%94%AE/</link><pubDate>Sat, 17 Sep 2022 02:00:26 +0800</pubDate><guid>https://blog.djangozane.com/post/%E7%A7%BB%E9%99%A4%E9%BB%98%E8%AE%A4%E7%9A%84-win+-%E5%BF%AB%E6%8D%B7%E9%94%AE/</guid><description>&lt;p&gt;在 Windows 上安装 &lt;code&gt;终端&lt;/code&gt; 之后，&lt;strong&gt;Win+`&lt;/strong&gt; 快捷键会以聚焦模式打开终端（下拉式终端的样子）。这个快捷键可以通过下面的方式来移除&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;打开终端的设置界面，点击左下角的 &lt;strong&gt;打开 JSON 文件&lt;/strong&gt;&lt;br&gt;
 &lt;img src="https://s2.loli.net/2022/09/17/b2GDLoEchN4wknK.png" alt="terminal_setting_interface.png"&gt;&lt;/li&gt;
 &lt;li&gt;在 &lt;code&gt;actions&lt;/code&gt; 数组中新增下面的内容&lt;br&gt;
 &lt;img src="https://s2.loli.net/2022/09/17/k3luvNfP5pa2rjx.png" alt="terminal_setting_file.png"&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;command&amp;#34;&lt;/span&gt;: &lt;span style="color:#66d9ef"&gt;null&lt;/span&gt;,
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;keys&amp;#34;&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;win+`&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;最后重启 &lt;code&gt;终端&lt;/code&gt; 即可&lt;/p&gt;</description></item><item><title>Windows 包管理器 —— Scoop</title><link>https://blog.djangozane.com/post/windows-%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8--scoop/</link><pubDate>Thu, 21 Apr 2022 00:08:16 +0800</pubDate><guid>https://blog.djangozane.com/post/windows-%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8--scoop/</guid><description>&lt;p&gt;我很喜欢 Linux 软件的安装方式，如果一个软件存在于软件源中，只需一行命令就可以安装好这个软件，而且大多数时候也不用担心下到什么流氓程序。所以当我有了一台 Windows 的电脑之后，我也尝试去寻找 Windows 下是否也有类似的工具，最终，我找到了 Scoop&lt;/p&gt;
-&lt;h2 id="安装"&gt;安装&lt;/h2&gt;
-&lt;p&gt;官网地址： &lt;a href="https://scoop.sh/"&gt;https://scoop.sh/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;首先确保系统已经安装好下面两个程序：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;PowerShell 的版本 &amp;gt;= 5&lt;/li&gt;
-&lt;li&gt;.NET Framework 的版本 &amp;gt;=4.5&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;通过管理员身份启动一个终端窗口，依次执行下面的命令&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Set-ExecutionPolicy RemoteSigned -scope CurrentUser
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iwr -useb get.scoop.sh | iex
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="常用操作"&gt;常用操作&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;查看帮助信息&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;scoop help
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;查看某个子命令的帮助信息，如 update&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;scoop help update
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;查询软件包，如 aria2&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;scoop search aria2
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;查看某一个软件包的主页，如 aria2&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;scoop home aria2
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;安装软件包，如 aria2&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;scoop install aria2
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;更新某个软件包，如 aria2&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;scoop update aria2
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;更新软件源&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;scoop update
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;更新所有已安装的软件包&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;scoop update -a
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;展示软件包状态以及可更新的软件包&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;scoop status
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;清除历史包缓存&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;scoop cache rm *
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;移除历史旧版本&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;scoop cleanup *
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;启用 extras 软件源&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;主软件源中包含的软件比较有限，可以通过下面的命令来启用 extras 软件源。main 和 extras 软件源都是由 scoop 官方维护的，由其他用户维护的软件源可以通过类似的方式进行添加，只需要把 extras 替换为对应软件源的链接即可&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;scoop bucket add extras
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;移除某个软件源，如 extras&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;scoop bucket rm extras
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="进阶操作"&gt;进阶操作&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;设置代理&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;scoop config proxy &lt;span style="color:#ae81ff"&gt;127.0&lt;/span&gt;.0.&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;:&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;8889&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;通过 aria2c 启用多线程下载&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;aria2 安装之后，Scoop 默认就会启用 aria2 的多线程下载&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;scoop install aria2
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;启用 aria2 之后，scoop 默认会打印一些警告信息，虽然很有道理，但是我选择关闭提示&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://i.imgur.com/1pJJ51V.png" alt="https://i.imgur.com/1pJJ51V.png"&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;scoop config aria2-warning-enabled false
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;关闭 aria2 多线程下载&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;scoop config aria2-enabled false
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="常见问题"&gt;常见问题&lt;/h2&gt;
-&lt;h3 id="在更新下载程序包的时候出现类似-invoke-webrequest--无法连接到远程服务器-的报错"&gt;在更新/下载程序包的时候出现类似 &lt;code&gt;Invoke-WebRequest : 无法连接到远程服务器&lt;/code&gt; 的报错&lt;/h3&gt;
-&lt;p&gt;&lt;img src="https://i.imgur.com/psX044t.png" alt="https://i.imgur.com/psX044t.png"&gt;&lt;/p&gt;
-&lt;p&gt;这很有可能是 scoop 对一些系统目录没有访问权限，而这些程序包的安装又需要对一些系统目录进行操作，这个时候可以 &lt;code&gt;管理员身份&lt;/code&gt; 运行终端，然后重新执行安装/更新命令&lt;/p&gt;
-&lt;h3 id="scoop-安装程序失败之后在-status-命令里面会一直输出错误信息"&gt;scoop 安装程序失败之后，在 status 命令里面会一直输出错误信息&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;PS &amp;gt; scoop status
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Scoop is up to date.
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Name Installed Version Latest Version Missing Dependencies Info
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;---- ----------------- -------------- -------------------- ----
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;snipaste Install failedManifest removed
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;可以通过 uninstall 这个软件包来移除这个提示&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;PS &amp;gt; scoop uninstall snipaste
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ERROR &lt;span style="color:#e6db74"&gt;&amp;#39;snipaste&amp;#39;&lt;/span&gt; isn&lt;span style="color:#e6db74"&gt;&amp;#39;t installed correctly.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;Removing older version (1.16.2).
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;&lt;/span&gt;snipaste&lt;span style="color:#960050;background-color:#1e0010"&gt;&amp;#39;&lt;/span&gt; was uninstalled.
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;PS &amp;gt; scoop status
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Scoop is up to date.
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Everything is ok!
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>Linux 访问 Windows 共享目录</title><link>https://blog.djangozane.com/post/linux-%E8%AE%BF%E9%97%AE-windows-%E5%85%B1%E4%BA%AB%E7%9B%AE%E5%BD%95/</link><pubDate>Thu, 14 Apr 2022 16:36:33 +0800</pubDate><guid>https://blog.djangozane.com/post/linux-%E8%AE%BF%E9%97%AE-windows-%E5%85%B1%E4%BA%AB%E7%9B%AE%E5%BD%95/</guid><description>&lt;p&gt;因为工作需要，需要在电脑上安装一个 VPN 程序，但是官方并没有提供 Linux 版本，通过 wine 虽然能安装成功，但是界面总是显示不出来。实在不想折腾了，就直接装了一个 Windows 的虚拟机，有一些需要编辑的文件就通过共享的方式在宿主机上进行编辑&lt;/p&gt;
-&lt;p&gt;Linux 上 samba 的安装以及 Windows 文件共享的设置倒是一帆风顺，没出现什么问题，不过在 Linux 下获取 Windows 共享目录的时候却出现了异常&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 正常打印出了 users 目录下的内容&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ smbclient -c &lt;span style="color:#e6db74"&gt;&amp;#34;dir&amp;#34;&lt;/span&gt; //ip/users -U user%passwd
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;. DR &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt; Wed Apr &lt;span style="color:#ae81ff"&gt;13&lt;/span&gt; 17:52:49 &lt;span style="color:#ae81ff"&gt;2022&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;.. DR &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt; Wed Apr &lt;span style="color:#ae81ff"&gt;13&lt;/span&gt; 17:52:49 &lt;span style="color:#ae81ff"&gt;2022&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Default DHR &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt; Wed Apr &lt;span style="color:#ae81ff"&gt;13&lt;/span&gt; 17:52:49 &lt;span style="color:#ae81ff"&gt;2022&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 继续打印用户目录下的内容时出现异常&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ smbclient -c &lt;span style="color:#e6db74"&gt;&amp;#34;dir&amp;#34;&lt;/span&gt; //ip/users/test -U user%passwd
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;tree connect failed: NT_STATUS_BAD_NETWORK_NAME
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;经过一番冲浪之后大概确定原因是 Windows 使用的 samba 版本是 v1，而 Linux 下的 samba 版本是 v4，v4 并不直接向下兼容，&lt;code&gt;smbclient&lt;/code&gt; 又不支持指定 samba 版本，不指定 samba 版本就无法直接打印出共享目录中的文件，死循环&lt;/p&gt;
-&lt;p&gt;不过通过 mount 使用 cifs 格式挂载共享目录的时候是可以指定 samba 版本的，修改命令，通过下面的方式可以将共享目录挂载到本地&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo mount -t cifs -o username&lt;span style="color:#f92672"&gt;=&lt;/span&gt;windows_user,password&lt;span style="color:#f92672"&gt;=&lt;/span&gt;windows_user_password,vers&lt;span style="color:#f92672"&gt;=&lt;/span&gt;1.0,gid&lt;span style="color:#f92672"&gt;=&lt;/span&gt;$GID,uid&lt;span style="color:#f92672"&gt;=&lt;/span&gt;$UID //ip/共享路径 /home/test/samba_mount_path
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;这里注意把 windows_user、windows_user_password、ip、共享路径修改为 Windows 对应的信息，/home/test/samba_mount_path 是在 Linux 下的挂载点&lt;/li&gt;
-&lt;li&gt;vers=1.0 指定的是 samba 的协议版本&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;因为一般情况下都是由 root 用户来进行 mount 操作的，挂载到本地的目录所属用户及用户组也是 root，对其中的文件进行操作时需要添加 sudo 前缀命令，为了让普通用户能直接操作，此处需要指定 gid=$GID,uid=$UID 两个参数，分别代表当前用户所属用户组的 ID 和当前用户的 ID&lt;/p&gt;</description></item><item><title>关于 Windows10 无法加载硬盘</title><link>https://blog.djangozane.com/post/%E5%85%B3%E4%BA%8E-windows10-%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD%E7%A1%AC%E7%9B%98/</link><pubDate>Sat, 06 Nov 2021 13:38:04 +0800</pubDate><guid>https://blog.djangozane.com/post/%E5%85%B3%E4%BA%8E-windows10-%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD%E7%A1%AC%E7%9B%98/</guid><description>&lt;p&gt;今天装好 Windows 之后，发现我的 WD Passport Ultra 硬盘无法被系统正常加载。最初的报错忘记截图了，但是在设备管理器中可以看到磁盘的驱动状态是有问题的。&lt;br&gt;
+&lt;div class="code-block has-lang"&gt;
+ &lt;div class="code-header"&gt;&lt;span class="code-lang"&gt;json&lt;/span&gt;&lt;button class="copy-btn" aria-label="Copy code" title="Copy"&gt;
+ &lt;svg class="icon-copy" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;rect x="9" y="9" width="13" height="13" rx="2"/&gt;&lt;path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/&gt;&lt;/svg&gt;
+ &lt;svg class="icon-check" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;polyline points="20 6 9 17 4 12"/&gt;&lt;/svg&gt;
+ &lt;/button&gt;
+ &lt;/div&gt;
+ &lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;command&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;keys&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;win+`&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;最后重启 &lt;code&gt;终端&lt;/code&gt; 即可&lt;/p&gt;</description></item><item><title>Windows 包管理器 —— Scoop</title><link>https://blog.djangozane.com/post/windows-%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8--scoop/</link><pubDate>Thu, 21 Apr 2022 00:08:16 +0800</pubDate><guid>https://blog.djangozane.com/post/windows-%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8--scoop/</guid><description>&lt;p&gt;我很喜欢 Linux 软件的安装方式，如果一个软件存在于软件源中，只需一行命令就可以安装好这个软件，而且大多数时候也不用担心下到什么流氓程序。所以当我有了一台 Windows 的电脑之后，我也尝试去寻找 Windows 下是否也有类似的工具，最终，我找到了 Scoop&lt;/p&gt;</description></item><item><title>Linux 访问 Windows 共享目录</title><link>https://blog.djangozane.com/post/linux-%E8%AE%BF%E9%97%AE-windows-%E5%85%B1%E4%BA%AB%E7%9B%AE%E5%BD%95/</link><pubDate>Thu, 14 Apr 2022 16:36:33 +0800</pubDate><guid>https://blog.djangozane.com/post/linux-%E8%AE%BF%E9%97%AE-windows-%E5%85%B1%E4%BA%AB%E7%9B%AE%E5%BD%95/</guid><description>&lt;p&gt;因为工作需要，需要在电脑上安装一个 VPN 程序，但是官方并没有提供 Linux 版本，通过 wine 虽然能安装成功，但是界面总是显示不出来。实在不想折腾了，就直接装了一个 Windows 的虚拟机，有一些需要编辑的文件就通过共享的方式在宿主机上进行编辑&lt;/p&gt;</description></item><item><title>关于 Windows10 无法加载硬盘</title><link>https://blog.djangozane.com/post/%E5%85%B3%E4%BA%8E-windows10-%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD%E7%A1%AC%E7%9B%98/</link><pubDate>Sat, 06 Nov 2021 13:38:04 +0800</pubDate><guid>https://blog.djangozane.com/post/%E5%85%B3%E4%BA%8E-windows10-%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD%E7%A1%AC%E7%9B%98/</guid><description>&lt;p&gt;今天装好 Windows 之后，发现我的 WD Passport Ultra 硬盘无法被系统正常加载。最初的报错忘记截图了，但是在设备管理器中可以看到磁盘的驱动状态是有问题的。&lt;br&gt;
 &lt;img src="https://i.imgur.com/BXgY2LS.png" alt=""&gt;
-我的硬盘是 NTFS 格式的，虽然是在 Linux 下做的格式化，但是理论上 Windows 是可以识别的，而且我把硬盘接到手机上，手机是可以正常读取的。&lt;/p&gt;
-&lt;p&gt;我去网上查了一下，说的最多的方案就是在设备管理器中，先删除该设备的驱动，然后重新插入硬盘就可以了。我尝试了一下，还是一样无法识别。&lt;/p&gt;
-&lt;p&gt;我注意到在设备管理器中，除了没被挂载之外，磁盘其他的信息及状态都是正常的。后来想到 Windows 下面一般是根据盘符，比如 C、D 盘来区分磁盘的，既然它没被自动挂载，那我就手动给个盘符好了。&lt;/p&gt;
-&lt;p&gt;然后，啊，然后它就好了😲，就可以正常被 Windows 挂载了。&lt;/p&gt;
-&lt;p&gt;具体做法：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;打开资源管理器，在【&lt;strong&gt;此电脑&lt;/strong&gt;】上右键，选择【&lt;strong&gt;管理&lt;/strong&gt;】&lt;/li&gt;
-&lt;li&gt;在打开的【&lt;strong&gt;计算机管理&lt;/strong&gt;】左侧选择【&lt;strong&gt;磁盘管理&lt;/strong&gt;】&lt;/li&gt;
-&lt;li&gt;找到你之前无法被自动挂载的磁盘，在磁盘上面右键选择【&lt;strong&gt;更改驱动器号和路径&lt;/strong&gt;】&lt;/li&gt;
-&lt;li&gt;给这个磁盘添加一个盘符就可以了&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;需要注意的是，这个时候如果你再回到设备管理器中，你会惊奇的发现，磁盘的驱动状态还是异常的😂，不过问题不大，你这时候再重新插拔磁盘，磁盘应该已经可以被自动挂载了。&lt;/p&gt;</description></item><item><title>如何在 Linux 下制作 Windows 启动器</title><link>https://blog.djangozane.com/post/%E5%A6%82%E4%BD%95%E5%9C%A8-linux-%E4%B8%8B%E5%88%B6%E4%BD%9C-windows-%E5%90%AF%E5%8A%A8%E5%99%A8/</link><pubDate>Sat, 06 Nov 2021 12:24:27 +0800</pubDate><guid>https://blog.djangozane.com/post/%E5%A6%82%E4%BD%95%E5%9C%A8-linux-%E4%B8%8B%E5%88%B6%E4%BD%9C-windows-%E5%90%AF%E5%8A%A8%E5%99%A8/</guid><description>&lt;p&gt;在 Linux 下制作 Windows 启动盘，有三种常用的方式：dd、WoeUSB、Ventoy。&lt;/p&gt;
+我的硬盘是 NTFS 格式的，虽然是在 Linux 下做的格式化，但是理论上 Windows 是可以识别的，而且我把硬盘接到手机上，手机是可以正常读取的。&lt;/p&gt;</description></item><item><title>如何在 Linux 下制作 Windows 启动器</title><link>https://blog.djangozane.com/post/%E5%A6%82%E4%BD%95%E5%9C%A8-linux-%E4%B8%8B%E5%88%B6%E4%BD%9C-windows-%E5%90%AF%E5%8A%A8%E5%99%A8/</link><pubDate>Sat, 06 Nov 2021 12:24:27 +0800</pubDate><guid>https://blog.djangozane.com/post/%E5%A6%82%E4%BD%95%E5%9C%A8-linux-%E4%B8%8B%E5%88%B6%E4%BD%9C-windows-%E5%90%AF%E5%8A%A8%E5%99%A8/</guid><description>&lt;p&gt;在 Linux 下制作 Windows 启动盘，有三种常用的方式：dd、WoeUSB、Ventoy。&lt;/p&gt;
 &lt;h2 id="woeusb"&gt;WoeUSB&lt;/h2&gt;
 &lt;p&gt;WoeUSB 可以使用 &lt;code&gt;pip3 install WoeUsb-ng&lt;/code&gt; 进行安装。&lt;/p&gt;
-&lt;p&gt;WoeUSB 我以前用的时候还可以，但是这次也不知道为什么，虽然可以正常写入镜像，但是做的启动盘始终不能进入 Windows 引导界面，换了好几个版本的 Windows10 镜像都是一样的。&lt;/p&gt;
-&lt;h2 id="ventoy"&gt;Ventoy&lt;/h2&gt;
-&lt;p&gt;Ventoy 的话，用起来比较简单，首先去 &lt;a href="https://www.ventoy.net/en/download.html"&gt;Ventoy 官方下载页面&lt;/a&gt; 下载压缩包，解压后在终端执行 &lt;code&gt;sudo bash /path/to/VentoyWeb.sh&lt;/code&gt; 启动服务，接着访问启动信息中展示的本地端口，像我这里就是 24680 端口。在页面上选择你用来做启动盘的设备，然后点击安装即可。
-&lt;img src="https://i.imgur.com/cH5zfZ3.png" alt=""&gt;&lt;br&gt;
-&lt;img src="https://i.imgur.com/F0b0m9S.png" alt=""&gt;
-上面之所以需要使用 sudo 来运行，一方面是因为 Ventoy 需要获取你的 PC 上现在都有哪些存储设备，另一方面是因为安装的过程中需要对设备进行格式化。&lt;/p&gt;
-&lt;p&gt;安装好 Ventoy 之后，你只需要把各种 ISO 镜像文件扔到安装 Ventoy 的 U 盘中即可。&lt;/p&gt;
-&lt;p&gt;如果你现在看一下这个 U 盘的分区结构你可以发现 U 盘上会有两个分区，一大一小，后面很小的那个分区放的就是 Ventoy 的引导文件，前面这个分区是用来放你的镜像文件的，理论上你把前面这个分区用来存放其他文件也是完全没问题的。&lt;/p&gt;
-&lt;p&gt;这次电脑成功进入了 Ventoy 的引导界面，但是在我选择了 ISO 文件之后，Ventoy 提示我缺少一些东西 Windows 引导失败（我裂开了）我又重新下载了最新的 Windows10 镜像，还是会出现同样的问题，可能是需要安装一些其他的 Ventoy 插件或者是 Ventoy 对于 AMD 的支持不太好？但是我没有继续折腾了。&lt;/p&gt;
-&lt;h2 id="dd"&gt;dd&lt;/h2&gt;
-&lt;p&gt;这一 Part 的标题虽然是 dd，但是你也可以直接使用复制粘贴来完成，这个方案相比上面两个稍微麻烦一点，但是并不复杂，而且这也是我唯一测试成功的方案😭&lt;/p&gt;
-&lt;p&gt;下面涉及到对磁盘的分区操作，熟悉终端工具的可以直接用 fdisk 跟 mkfs 完成，习惯 GUI 的可以使用 gparted 完成。&lt;/p&gt;
-&lt;p&gt;下面是使用 dd 创建 Windows 启动盘的步骤：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;备份好 U 盘中的数据&lt;/li&gt;
-&lt;li&gt;删除 U 盘中所有的分区&lt;/li&gt;
-&lt;li&gt;创建 GPT 分区表&lt;/li&gt;
-&lt;li&gt;在 U 盘上创建两个分区，其中第二个分区只需要留 300MB 的空间即可，剩下的可以全部给第一个分区（&lt;strong&gt;注意：大的分区在前面，里面会存放 Windows 镜像中的文件，小的分区在后面，里面会放引导文件，两个分区的顺序一定不可以错：前大后小&lt;/strong&gt;）
-&lt;ol&gt;
-&lt;li&gt;第一个分区格式化为 NTFS 格式&lt;/li&gt;
-&lt;li&gt;第二个分区格式化为 Fat32 格式&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;直接复制或者使用 dd 将 Windows 镜像中的文件写入到 U 盘的第一个分区&lt;/li&gt;
-&lt;li&gt;下载由 Rufus 提供的 &lt;a href="https://github.com/pbatard/rufus/blob/master/res/uefi/uefi-ntfs.img"&gt;uefi-ntfs.img&lt;/a&gt; UEFI 引导镜像&lt;/li&gt;
-&lt;li&gt;复制 uefi-utfs.img 中的所有文件到 U 盘的第二个分区中&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;待所有文件都写入完成之后，在 BIOS 中将 U 盘移动到启动顺序的第一个，然后启动电脑，应该就可以看到 Windows 的引导界面了。&lt;/p&gt;</description></item><item><title>Linux 添加 Windows 字体库</title><link>https://blog.djangozane.com/post/linux-%E6%B7%BB%E5%8A%A0-windows-%E5%AD%97%E4%BD%93%E5%BA%93/</link><pubDate>Wed, 27 May 2020 23:02:52 +0800</pubDate><guid>https://blog.djangozane.com/post/linux-%E6%B7%BB%E5%8A%A0-windows-%E5%AD%97%E4%BD%93%E5%BA%93/</guid><description>&lt;p&gt;如果你有尝试过在 Linux 下打开 Windows 制作的 word 文档，或者在 Windows 下打开 Linux 制作的 word 文档，你可能会惊喜的发现在两个平台下同一个 word 文件的样式截然不同，这对于一些对格式要求比较严格的情况还是比较麻烦的。不过在 Linux 下还是有很简单的解决办法的。&lt;/p&gt;
-&lt;p&gt;测试平台及工具：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Manjaro Linux&lt;/li&gt;
-&lt;li&gt;WPS&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="way-1复制粘贴推荐"&gt;way 1：复制粘贴（推荐）&lt;/h2&gt;
-&lt;p&gt;首先你需要一台装有 Windows 的电脑或者一个装有 Windows 的虚拟机，从 C 盘的 &lt;code&gt;windows/Fonts&lt;/code&gt; 中复制出你需要的字体，或者干脆直接复制整个 &lt;code&gt;Fonts&lt;/code&gt; 目录；&lt;/p&gt;
-&lt;p&gt;然后在你的 Linux 的 &lt;code&gt;/usr/share/fonts/&lt;/code&gt; 目录下新建一个目录，比如 WinFonts 之类的，名字可以随意，只要你知道它是干啥的就好；&lt;/p&gt;
-&lt;p&gt;接着把你第一步复制出来的字体放到第二步新建的目录中；&lt;/p&gt;
-&lt;p&gt;最后执行下面的指令刷新字体：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ sudo fc-cache -fv
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这下再打开你之前格式显示有问题的 word 文档，应该就可以正常显示了。&lt;/p&gt;
-&lt;h2 id="way-2从-aur-安装"&gt;way 2：从 AUR 安装&lt;/h2&gt;
-&lt;p&gt;万能的 AUR 里基本只有你想不到的，安装 win 下的字体也同样是小菜一碟，而且后续如果有新的字体，通过 AUR 安装的字体还可以无感更新。&lt;/p&gt;
-&lt;p&gt;AUR 里有很多 win 的字体包，甚至还分为不同的 win 系统，比如 win10、win7，这里你可以只安装一个 &lt;code&gt;ttf-ms-fonts&lt;/code&gt; 包，这个包基本上就包含的比较全了。&lt;/p&gt;
-&lt;p&gt;最后同样需要执行一下上面提到的那条命令刷新一下字体。&lt;/p&gt;
-&lt;p&gt;这里推荐第一个方法，因为第二个方法涉及到的字体都要在线下载，速度上自然比不过本地拷贝，而且常用的字体其实并不会很多，而且这些常用的字体通常也都比较稳定更新不会很多。&lt;/p&gt;
-&lt;h2 id="额外补充"&gt;额外补充&lt;/h2&gt;
-&lt;p&gt;我在从使用命令刷新完字体后，感觉整个系统的字体都变得“锐利”起来了，大概就是变成了 Windows 字体的那个样子，我虽然是完整拷贝了 Windows 的字体库，但是我并没有设置本地的字体为 Windows 的字体，这个问题还得后面再看看是什么原因导致的。&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;WoeUSB 我以前用的时候还可以，但是这次也不知道为什么，虽然可以正常写入镜像，但是做的启动盘始终不能进入 Windows 引导界面，换了好几个版本的 Windows10 镜像都是一样的。&lt;/p&gt;</description></item><item><title>Linux 添加 Windows 字体库</title><link>https://blog.djangozane.com/post/linux-%E6%B7%BB%E5%8A%A0-windows-%E5%AD%97%E4%BD%93%E5%BA%93/</link><pubDate>Wed, 27 May 2020 23:02:52 +0800</pubDate><guid>https://blog.djangozane.com/post/linux-%E6%B7%BB%E5%8A%A0-windows-%E5%AD%97%E4%BD%93%E5%BA%93/</guid><description>&lt;p&gt;如果你有尝试过在 Linux 下打开 Windows 制作的 word 文档，或者在 Windows 下打开 Linux 制作的 word 文档，你可能会惊喜的发现在两个平台下同一个 word 文件的样式截然不同，这对于一些对格式要求比较严格的情况还是比较麻烦的。不过在 Linux 下还是有很简单的解决办法的。&lt;/p&gt;</description></item></channel></rss>
