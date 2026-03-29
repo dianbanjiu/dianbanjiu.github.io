@@ -32,7 +32,7 @@ contentCopyright: false
 
 ## 🌚 关于 Blog
 
-本博客使用 [hugo](https://gohugo.io/) 进行驱动，主题是 [hugo-theme-jane](https://github.com/xianmin/hugo-theme-jane)
+本博客使用 [hugo](https://gohugo.io/) 进行驱动，主题是 [djangozane-clean](https://github.com/dianbanjiu/djangozane-clean)
 
 这个博客算是一个我的公开的笔记本，基本上就是我想到什么就写什么~~虽然大多数时候都想不到什么~~
 

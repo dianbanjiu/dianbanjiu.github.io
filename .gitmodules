@@ -1,0 +1,3 @@
+[submodule "themes/djangozane-clean"]
+	path = themes/djangozane-clean
+	url = https://github.com/dianbanjiu/djangozane-clean.git
