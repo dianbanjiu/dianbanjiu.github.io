@@ -33,6 +33,7 @@ pageRef = "/about"
 weight = 40
 
 [params]
+favicon = "/favicon.svg"
 [params.search]
 enabled = true
 [params.photoswipe]
