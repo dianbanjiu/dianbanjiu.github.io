@@ -34,6 +34,7 @@ weight = 40
 
 [params]
 favicon = "/favicon.svg"
+backgroundImage = 'img/bg.webp'
 [params.search]
 enabled = true
 [params.photoswipe]

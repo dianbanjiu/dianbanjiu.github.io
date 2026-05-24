@@ -32,7 +32,8 @@ contentCopyright: false
 
 ## 🌚 关于 Blog
 
-本博客使用 [hugo](https://gohugo.io/) 进行驱动，主题是 [djangozane-clean](https://github.com/dianbanjiu/djangozane-clean)
+本博客使用 [hugo](https://gohugo.io/) 进行驱动，主题是 [djangozane-clean](https://github.com/dianbanjiu/djangozane-clean)  
+背景图来源 Image by <a href="https://pixabay.com/users/elisabetta_miele-1886792/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=10277364">Elisabetta Miele</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=10277364">Pixabay</a>
 
 这个博客算是一个我的公开的笔记本，基本上就是我想到什么就写什么~~虽然大多数时候都想不到什么~~
 
