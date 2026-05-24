@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Guide on DjangoZane</title><link>https://blog.djangozane.com/tags/guide/</link><description>Recent content in Guide on DjangoZane</description><generator>Hugo</generator><language>zh-Hans</language><lastBuildDate>Sun, 15 Jan 2023 09:00:00 -0700</lastBuildDate><atom:link href="https://blog.djangozane.com/tags/guide/index.xml" rel="self" type="application/rss+xml"/><item><title>Markdown 常用语法说明</title><link>https://blog.djangozane.com/posts/post-1/</link><pubDate>Sun, 15 Jan 2023 09:00:00 -0700</pubDate><guid>https://blog.djangozane.com/posts/post-1/</guid><description>&lt;p&gt;Markdown 是一种轻量级标记语言，适合写文档、博客和笔记。下面是常用语法速查。&lt;/p&gt;
+&lt;h2 id="1-标题"&gt;1. 标题&lt;/h2&gt;
+&lt;p&gt;使用 &lt;code&gt;#&lt;/code&gt; 表示标题，&lt;code&gt;#&lt;/code&gt; 的数量代表级别：&lt;/p&gt;
+&lt;h1 id="一级标题"&gt;一级标题&lt;/h1&gt;
+&lt;h2 id="二级标题"&gt;二级标题&lt;/h2&gt;
+&lt;h3 id="三级标题"&gt;三级标题&lt;/h3&gt;
+&lt;h2 id="2-段落与换行"&gt;2. 段落与换行&lt;/h2&gt;
+&lt;p&gt;普通文本直接书写就是段落。&lt;br&gt;
+行尾加两个空格可以强制换行。&lt;/p&gt;</description></item></channel></rss>
