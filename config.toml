@@ -1,6 +1,6 @@
 baseURL = "https://blog.djangozane.com"
 title = "DjangoZane"
-languageCode = "zh-Hans"
+locale = "zh-Hans"
 enableRobotsTXT = true
 enableEmoji = true
 theme = "djangozane-clean"
