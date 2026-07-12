@@ -42,7 +42,7 @@ enabled = true
 [[params.featuredProjects]]
 title = "FlipSwitcher"
 description = "Windows窗口切换器"
-image = "/img/flipswitcher.png"
+image = "/img/flipswitcher.webp"
 url = "https://github.com/dianbanjiu/FlipSwitcher"
 [[params.featuredProjects]]
 title = "Djangozane Clean"
