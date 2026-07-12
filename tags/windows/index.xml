@@ -23,9 +23,9 @@
 &lt;p&gt;命令执行成功之后，在浏览器输入 http://127.0.0.1:80 就可以看到 nginx 的输出信息了&lt;/p&gt;</description></item><item><title>移除默认的 Win+` 快捷键</title><link>https://blog.djangozane.com/post/%E7%A7%BB%E9%99%A4%E9%BB%98%E8%AE%A4%E7%9A%84-win+-%E5%BF%AB%E6%8D%B7%E9%94%AE/</link><pubDate>Sat, 17 Sep 2022 02:00:26 +0800</pubDate><guid>https://blog.djangozane.com/post/%E7%A7%BB%E9%99%A4%E9%BB%98%E8%AE%A4%E7%9A%84-win+-%E5%BF%AB%E6%8D%B7%E9%94%AE/</guid><description>&lt;p&gt;在 Windows 上安装 &lt;code&gt;终端&lt;/code&gt; 之后，&lt;strong&gt;Win+`&lt;/strong&gt; 快捷键会以聚焦模式打开终端（下拉式终端的样子）。这个快捷键可以通过下面的方式来移除&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;打开终端的设置界面，点击左下角的 &lt;strong&gt;打开 JSON 文件&lt;/strong&gt;&lt;br&gt;
-&lt;img src="https://s2.loli.net/2022/09/17/b2GDLoEchN4wknK.png" alt="terminal_setting_interface.png"&gt;&lt;/li&gt;
+&lt;img src="https://s2.loli.net/2022/09/17/b2GDLoEchN4wknK.png" alt="terminal_setting_interface.png" loading="lazy" decoding="async"&gt;&lt;/li&gt;
 &lt;li&gt;在 &lt;code&gt;actions&lt;/code&gt; 数组中新增下面的内容&lt;br&gt;
-&lt;img src="https://s2.loli.net/2022/09/17/k3luvNfP5pa2rjx.png" alt="terminal_setting_file.png"&gt;&lt;/li&gt;
+&lt;img src="https://s2.loli.net/2022/09/17/k3luvNfP5pa2rjx.png" alt="terminal_setting_file.png" loading="lazy" decoding="async"&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;div class="code-block has-lang"&gt;
  &lt;div class="code-header"&gt;&lt;span class="code-lang"&gt;json&lt;/span&gt;&lt;button class="copy-btn" aria-label="Copy code" title="Copy"&gt;
@@ -39,7 +39,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;p&gt;最后重启 &lt;code&gt;终端&lt;/code&gt; 即可&lt;/p&gt;</description></item><item><title>Windows 包管理器 —— Scoop</title><link>https://blog.djangozane.com/post/windows-%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8--scoop/</link><pubDate>Thu, 21 Apr 2022 00:08:16 +0800</pubDate><guid>https://blog.djangozane.com/post/windows-%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8--scoop/</guid><description>&lt;p&gt;我很喜欢 Linux 软件的安装方式，如果一个软件存在于软件源中，只需一行命令就可以安装好这个软件，而且大多数时候也不用担心下到什么流氓程序。所以当我有了一台 Windows 的电脑之后，我也尝试去寻找 Windows 下是否也有类似的工具，最终，我找到了 Scoop&lt;/p&gt;</description></item><item><title>Linux 访问 Windows 共享目录</title><link>https://blog.djangozane.com/post/linux-%E8%AE%BF%E9%97%AE-windows-%E5%85%B1%E4%BA%AB%E7%9B%AE%E5%BD%95/</link><pubDate>Thu, 14 Apr 2022 16:36:33 +0800</pubDate><guid>https://blog.djangozane.com/post/linux-%E8%AE%BF%E9%97%AE-windows-%E5%85%B1%E4%BA%AB%E7%9B%AE%E5%BD%95/</guid><description>&lt;p&gt;因为工作需要，需要在电脑上安装一个 VPN 程序，但是官方并没有提供 Linux 版本，通过 wine 虽然能安装成功，但是界面总是显示不出来。实在不想折腾了，就直接装了一个 Windows 的虚拟机，有一些需要编辑的文件就通过共享的方式在宿主机上进行编辑&lt;/p&gt;</description></item><item><title>关于 Windows10 无法加载硬盘</title><link>https://blog.djangozane.com/post/%E5%85%B3%E4%BA%8E-windows10-%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD%E7%A1%AC%E7%9B%98/</link><pubDate>Sat, 06 Nov 2021 13:38:04 +0800</pubDate><guid>https://blog.djangozane.com/post/%E5%85%B3%E4%BA%8E-windows10-%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD%E7%A1%AC%E7%9B%98/</guid><description>&lt;p&gt;今天装好 Windows 之后，发现我的 WD Passport Ultra 硬盘无法被系统正常加载。最初的报错忘记截图了，但是在设备管理器中可以看到磁盘的驱动状态是有问题的。&lt;br&gt;
-&lt;img src="https://i.imgur.com/BXgY2LS.png" alt=""&gt;
+&lt;img src="https://i.imgur.com/BXgY2LS.png" alt="" loading="lazy" decoding="async"&gt;
 我的硬盘是 NTFS 格式的，虽然是在 Linux 下做的格式化，但是理论上 Windows 是可以识别的，而且我把硬盘接到手机上，手机是可以正常读取的。&lt;/p&gt;</description></item><item><title>如何在 Linux 下制作 Windows 启动器</title><link>https://blog.djangozane.com/post/%E5%A6%82%E4%BD%95%E5%9C%A8-linux-%E4%B8%8B%E5%88%B6%E4%BD%9C-windows-%E5%90%AF%E5%8A%A8%E5%99%A8/</link><pubDate>Sat, 06 Nov 2021 12:24:27 +0800</pubDate><guid>https://blog.djangozane.com/post/%E5%A6%82%E4%BD%95%E5%9C%A8-linux-%E4%B8%8B%E5%88%B6%E4%BD%9C-windows-%E5%90%AF%E5%8A%A8%E5%99%A8/</guid><description>&lt;p&gt;在 Linux 下制作 Windows 启动盘，有三种常用的方式：dd、WoeUSB、Ventoy。&lt;/p&gt;
 &lt;h2 id="woeusb"&gt;WoeUSB&lt;/h2&gt;
 &lt;p&gt;WoeUSB 可以使用 &lt;code&gt;pip3 install WoeUsb-ng&lt;/code&gt; 进行安装。&lt;/p&gt;
