@@ -39,6 +39,16 @@ backgroundImage = 'img/bg.webp'
 enabled = true
 [params.photoswipe]
 enabled = true
+[[params.featuredProjects]]
+title = "FlipSwitcher"
+description = "Windows窗口切换器"
+image = "/img/flipswitcher.png"
+url = "https://github.com/dianbanjiu/FlipSwitcher"
+[[params.featuredProjects]]
+title = "Djangozane Clean"
+description = "简洁美观的hugo主题"
+image = "/img/bg.webp"
+url = "https://github.com/dianbanjiu/djangozane-clean"
 
 [markup]
 [markup.highlight]
