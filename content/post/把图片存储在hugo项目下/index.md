@@ -19,6 +19,6 @@ headPic: ""
 
 比如我放了一张名为 doge.png 的图片到 static/img 下面，那就可以通过 `![](/img/doge.png)` 来引用这张图片  
 
-![](/img/doge.png)  
+![](doge.png)  
 
 我现在的域名是配置了 Cloudflare 加速的，把图片也放在博客目录下之后，相当于也顺便给图片也开了加速，可以说是一举两得了😂

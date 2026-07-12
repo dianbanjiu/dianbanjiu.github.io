@@ -16,7 +16,7 @@ headPic: ""
 - 支持通过插件扩展更多功能
 
 因为平时不喜欢使用悬浮窗，所以现在仅启用了任务栏模式，展示了上传下载、CPU、内存使用率，显卡使用率和显卡温度。显示效果是这样子的  
-![实际效果](/img/trafficmonitor-on-taskbar.png)  
+![实际效果](trafficmonitor-on-taskbar.png)  
 
 ### 关于安装 
 可以选择直接从项目的 [Github release](https://github.com/zhongyang219/TrafficMonitor/releases/latest) 进行下载  
@@ -27,4 +27,4 @@ headPic: ""
 
 ### 关于如何启用显卡监控
 默认情况下工具只会显示网速、CPU、内存，如果需要添加显卡的支持，需要在工具的 **设置（或者叫选项）->常规设置->硬件监控**中启用更多的监控选项  
-![启用更多硬件设置](/img/trafficmonitor-options.png)
+![启用更多硬件设置](trafficmonitor-options.png)

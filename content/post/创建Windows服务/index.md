@@ -51,7 +51,7 @@ Windows 服务是开机自启的，所以下次电脑启动的时候 Syncthing �
 
 安装好之后，在设备页面，点击右上角的添加设备按钮扫描并添加 Windows 的设备标识二维码，然后需要在两端的 WebGUI 里面分别同意添加设备，最后就可以设置需要进行同步的文件夹了  
 
-![](/img/Syncthing-fork-add-device-icon.jpg)
+![](Syncthing-fork-add-device-icon.jpg)
 
 ## 相关资料
 - [Syncthing 官网地址](https://syncthing.net/#)

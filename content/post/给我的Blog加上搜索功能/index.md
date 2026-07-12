@@ -88,7 +88,7 @@ $ npx -y pagefind --serve
 ```
 
 等索引完成之后，打开浏览器访问 http://localhost:1414/search 就可以看到效果了  
-![](/img/pagefind_search_show.png)  
+![](pagefind_search_show.png)  
 
 6、为了保证之后的可用性，我实际使用的是 pagefind 提供的二进制文件，这些预构建的文件在 GitHub 的 [release 页面](https://github.com/CloudCannon/pagefind/releases) 可以下载到，需要下载带 _extended 的文件，因为它扩展了对中文的索引。二进制文件和 npx 的使用方式类似
 ```shell
