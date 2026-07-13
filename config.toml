@@ -39,6 +39,11 @@ backgroundImage = 'img/bg.webp'
 enabled = true
 [params.photoswipe]
 enabled = true
+[params.comments]
+enabled = true
+provider = "waline"
+[params.comments.waline]
+serverURL = "https://blog-comment.djangozane.com"
 [[params.featuredProjects]]
 title = "FlipSwitcher"
 description = "Windows窗口切换器"
