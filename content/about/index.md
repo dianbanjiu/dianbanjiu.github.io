@@ -18,7 +18,7 @@ contentCopyright: false
 
 > Windows 下 Alt-Tab 的替代品
 
-![flipswitcher screenshot](/img/flipswitcher.png)
+![flipswitcher screenshot](/img/flipswitcher.webp)
 
 - 核心的窗口切换
 - 支持搜索，支持拼音搜索
