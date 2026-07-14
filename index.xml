@@ -179,7 +179,7 @@
 &lt;p&gt;Windows 下 Alt-Tab 的替代品&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;figure class="image-figure"&gt;
- &lt;img src="https://blog.djangozane.com/img/flipswitcher.png" alt="flipswitcher screenshot" loading="lazy" decoding="async"&gt;
+ &lt;img src="https://blog.djangozane.com/img/flipswitcher.webp" alt="flipswitcher screenshot" loading="lazy" decoding="async"&gt;
  &lt;/figure&gt;&lt;ul&gt;
 &lt;li&gt;核心的窗口切换&lt;/li&gt;
 &lt;li&gt;支持搜索，支持拼音搜索&lt;/li&gt;
