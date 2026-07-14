@@ -5,7 +5,9 @@ enableRobotsTXT = true
 enableEmoji = true
 theme = "djangozane-clean"
 hasCJKLanguage = true
-paginate = 10
+
+[pagination]
+  pagerSize = 5
 
 [menus]
 [[menus.main]]
