@@ -23,6 +23,12 @@ pageRef = "/post"
 weight = 20
 
 [[menus.main]]
+identifier = "memos"
+name = "动态"
+url = "https://memos.djangozane.com/"
+weight = 25
+
+[[menus.main]]
 identifier = "tags"
 name = "标签"
 pageRef = "/tags"
